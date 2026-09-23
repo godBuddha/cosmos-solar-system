@@ -358,6 +358,7 @@ for (const p of PLANETS) {
 // ======================================================================
 let saturnRing = null;      // (khai báo trước để tránh TDZ)
 let asteroidBelt = null;
+let kuiperBelt = null;
 const MOONS = [
   { parent: "Earth",   r: 0.24, dist: 1.7,  T: 27.3,  tilt: 0.09, col: 0x9a9a94 },
   { parent: "Jupiter", r: 0.18, dist: 3.4,  T: 1.77,  tilt: 0.03, col: 0xd8c078 },  // Io
@@ -597,6 +598,43 @@ let meteorUpdater = null;
 }
 
 // ======================================================================
+//  VÀNH ĐAI KUIPER — 8.000 thiên thể nhỏ 30–50 AU (ngoài Neptune),
+//  vùng của Pluto/Eris. Points cho rẻ draw call, Kepler per-object,
+//  nghiêng lan tỏa dày hơn mặt phẳng hoàng đạo (đúng đặc trưng Belt)
+// ======================================================================
+{
+  const N_K = 8000;
+  const kPos = new Float32Array(N_K * 3), kCol = new Float32Array(N_K * 3);
+  const kData = [];
+  let s = 733331;
+  const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
+  const cIce = new THREE.Color(0x9fb8cc), cDim = new THREE.Color(0x4a5a6e);
+  for (let i = 0; i < N_K; i++) {
+    // a 32–48 AU, dày hơn gần biên trong (32–38 chiếm ~70%)
+    const u = rnd();
+    const a = u < 0.7 ? 32 + u / 0.7 * 6 : 38 + (u - 0.7) / 0.3 * 10;
+    const e = rnd() * 0.12;
+    const inc = (rnd() - 0.5) * 0.35;          // lan tỏa ±10° — dày hơn asteroid belt
+    const M0 = rnd() * 6.283;
+    const T = 365.25 * Math.pow(a, 1.5);       // định luật III Kepler
+    kData.push({ a, e, inc, M0, T });
+    const c = cIce.clone().lerp(cDim, rnd() * 0.8);
+    const b = 0.35 + rnd() * 0.5;
+    kCol[i * 3] = c.r * b; kCol[i * 3 + 1] = c.g * b; kCol[i * 3 + 2] = c.b * b;
+  }
+  const kg = new THREE.BufferGeometry();
+  kg.setAttribute("position", new THREE.BufferAttribute(kPos, 3));
+  kg.setAttribute("color", new THREE.BufferAttribute(kCol, 3));
+  const kuiper = new THREE.Points(kg, new THREE.PointsMaterial({
+    size: 0.11, map: makeGlowTexture(), vertexColors: true,
+    transparent: true, opacity: 0.75, blending: THREE.AdditiveBlending,
+    depthWrite: false, sizeAttenuation: true,
+  }));
+  scene.add(kuiper);
+  kuiperBelt = { geo: kg, data: kData, n: N_K };
+}
+
+// ======================================================================
 //  SAO NỀN
 // ======================================================================
 {
@@ -827,6 +865,23 @@ function animate() {
         ST.tourPhase = "approach"; ST.tourTimer = 0;
       }
     }
+  }
+
+  // ---- Vành đai Kuiper: vị trí Kepler per-object ----
+  if (kuiperBelt && !ST.paused) {
+    const pos = kuiperBelt.geo.attributes.position.array;
+    for (let i = 0; i < kuiperBelt.n; i++) {
+      const d = kuiperBelt.data[i];
+      const M = d.M0 + 2 * Math.PI * (ST.days / d.T);
+      const E = solveKepler(((M % 6.283185) + 6.283185) % 6.283185, d.e);
+      const xO = d.a * (Math.cos(E) - d.e);
+      const yO = d.a * Math.sqrt(1 - d.e * d.e) * Math.sin(E);
+      const s = distScale(d.a) / d.a;
+      pos[i * 3] = xO * s;
+      pos[i * 3 + 1] = yO * Math.cos(d.inc) * s;
+      pos[i * 3 + 2] = yO * Math.sin(d.inc) * s;
+    }
+    kuiperBelt.geo.attributes.position.needsUpdate = true;
   }
 
   // ---- Sao chổi + mưa sao băng ----
