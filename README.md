@@ -1,5 +1,14 @@
 # COSMOS — Hệ Mặt Trời 3D Self-Hosted
 
+![Overview](screenshots/01_overview.png)
+
+*Hệ mặt trời đầy đủ: 8 hành tinh quỹ đạo Kepler, asteroid belt, vành Sao Thổ particle*
+
+| | |
+|---|---|
+| ![Inner](screenshots/02_inner_system.png) | ![Sun](screenshots/05_sun_closeup.png) |
+| *Hệ trong + asteroid belt* | *Mặt Trời shader FBM + moons Galilean* |
+
 Hệ mặt trời Three.js với quỹ đạo Kepler nghiêm ngặt, chạy trong Docker, sẵn sàng gắn tên miền + HTTPS.
 
 ## Cấu trúc
