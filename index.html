@@ -67,6 +67,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
+import { CSS2DRenderer, CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
 
 // ======================================================================
 //  DỮ LIỆU THIÊN VĂN (số liệu thật, tỷ lệ hiển thị nén theo luỹ thừa)
@@ -85,6 +86,10 @@ const PLANETS = [ // info: mass(×E), temp(K), moons, đường kính km
   { name:"Saturn",  a:9.537, e:0.054, i:2.49, T:10759,  rot:0.44, tilt:26.7, r:2.05, col:"#e0c896", col2:"#b09860", M0:3.9, info:{mass:95.2, temp:134, moons:146, dia:120536} },
   { name:"Uranus",  a:19.19, e:0.047, i:0.77, T:30687,  rot:-0.72,tilt:97.8, r:1.4,  col:"#9fdde8", col2:"#6ba8b8", M0:5.5, info:{mass:14.5, temp:76, moons:28, dia:51118} },
   { name:"Neptune", a:30.07, e:0.009, i:1.77, T:60190,  rot:0.67, tilt:28.3, r:1.35, col:"#4a6fe0", col2:"#2a45a8", M0:2.1, info:{mass:17.1, temp:72, moons:16, dia:49528} },
+  // ---- Dwarf planets (IAU 2006): Pluto bị hạ bậc 24/8/2006 ----
+  { name:"Ceres",  a:2.77,  e:0.076, i:10.6, T:1682,   rot:0.38, tilt:4,    r:0.30, col:"#a8a29a", col2:"#7a756d", M0:5.1, dwarf:true, info:{mass:0.00016, temp:168, moons:0, dia:940} },
+  { name:"Pluto",   a:39.48, e:0.249, i:17.2, T:90560,  rot:-6.39, tilt:119.6,r:0.42, col:"#d8c0a8", col2:"#a08878", M0:4.2, dwarf:true, info:{mass:0.0022, temp:44, moons:5, dia:2377} },
+  { name:"Eris",    a:67.78, e:0.44,  i:44.2, T:203830, rot:15.8/24,tilt:78, r:0.40, col:"#cfd8dc", col2:"#9aa4ab", M0:3.3, dwarf:true, info:{mass:0.0027, temp:30, moons:1, dia:2326} },
 ];
 
 // NÉN KHOẢNG CÁCH: d_scene = C * a^0.55 (Neptune chỉ ~6.6x Earth thay vì 30x)
@@ -125,6 +130,7 @@ addEventListener("resize", () => {
   camera.updateProjectionMatrix();
   renderer.setSize(innerWidth, innerHeight);
   composer.setSize(innerWidth, innerHeight);
+  labelRenderer.setSize(innerWidth, innerHeight);
 });
 
 // ======================================================================
@@ -283,6 +289,14 @@ function orbitalPosition(p, days) {
 const GAS = new Set(["Jupiter", "Saturn", "Uranus", "Neptune"]);
 const planetObjs = [];
 
+// CSS2D renderer cho nhãn tên hành tinh
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(innerWidth, innerHeight);
+labelRenderer.domElement.style.position = "absolute";
+labelRenderer.domElement.style.top = "0";
+labelRenderer.domElement.style.pointerEvents = "none";
+document.body.appendChild(labelRenderer.domElement);
+
 for (const p of PLANETS) {
   const grp = new THREE.Group();                    // nghiêng trục
   const spin = new THREE.Group();                   // tự quay
@@ -297,7 +311,15 @@ for (const p of PLANETS) {
   spin.add(mesh);
   grp.rotation.z = p.tilt * Math.PI / 180;          // nghiêng trục quay
   scene.add(grp);
-  planetObjs.push({ data: p, grp, spin, mesh });
+  // nhãn tên (CSS2D, nhỏ hơn + mờ hơn cho dwarf planet)
+  const lbl = document.createElement("div");
+  lbl.textContent = p.name + (p.dwarf ? " (dwarf)" : "");
+  lbl.style.cssText = "font:11px ui-sans-serif; color:" +
+    (p.dwarf ? "#7a95b5" : "#cfe2ff") + "; text-shadow:0 0 6px rgba(0,20,50,.9); pointer-events:none;";
+  const lblObj = new CSS2DObject(lbl);
+  lblObj.position.set(0, p.r + 0.5, 0);
+  grp.add(lblObj);
+  planetObjs.push({ data: p, grp, spin, mesh, lblObj });
 
   // đường quỹ đạo ellipse (mẫu quỹ đạo thật, có tính e + i)
   const pts = [];
@@ -577,6 +599,7 @@ function animate() {
     camera.position.add(delta);
   }
   composer.render();
+  labelRenderer.render(scene, camera);          // Phase 3.5: nhãn CSS2D
 }
 animate();
 </script>
