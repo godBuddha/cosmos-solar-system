@@ -427,6 +427,129 @@ function makeGlowTexture() {
   }
 }
 
+let cometUpdater = null;
+let meteorUpdater = null;
+
+// ======================================================================
+//  SAO CHỖI — quỹ đạo ellipse lệch tâm cao (e=0.85), đuôi particle luôn
+//  hướng ra xa Mặt Trời (đuôi ion vật lý thật)
+// ======================================================================
+{
+  // quỹ đạo comet: a=18 AU, e=0.85 (như Halley e=0.967), nghiêng 25°
+  const CA = 18, CE = 0.85, CT = 365.25 * Math.pow(18, 1.5);   // định luật III Kepler
+  const cometHead = new THREE.Mesh(
+    new THREE.SphereGeometry(0.28, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0xcfefff })
+  );
+  scene.add(cometHead);
+
+  // đuôi: 900 hạt trail, mỗi hạt có tuổi — đầu mới sáng, đuôi cũ mờ
+  const CN = 900;
+  const cPos = new Float32Array(CN * 3), cCol = new Float32Array(CN * 3);
+  const cAge = new Float32Array(CN);
+  const cg = new THREE.BufferGeometry();
+  cg.setAttribute("position", new THREE.BufferAttribute(cPos, 3));
+  cg.setAttribute("color", new THREE.BufferAttribute(cCol, 3));
+  const cometTail = new THREE.Points(cg, new THREE.PointsMaterial({
+    size: 0.16, map: makeGlowTexture(), vertexColors: true,
+    transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending,
+    depthWrite: false, sizeAttenuation: true,
+  }));
+  scene.add(cometTail);
+
+  // lưu hàm cập nhật để gọi trong animate
+  cometUpdater = (days) => {
+    // vị trí Kepler trên ellipse e=0.85
+    const M = 2 * Math.PI * (days / CT);
+    const E = solveKepler(((M % 6.283185) + 6.283185) % 6.283185, CE);
+    const xO = CA * (Math.cos(E) - CE);
+    const yO = CA * Math.sqrt(1 - CE * CE) * Math.sin(E);
+    const s = distScale(CA) / CA;
+    const inc = 25 * Math.PI / 180;
+    const hx = xO * s, hy = yO * Math.cos(inc), hz = yO * Math.sin(inc);
+    cometHead.position.set(hx, hy, hz);
+
+    // hướng đuôi: ra xa Mặt Trời (0,0,0) — vector từ Mặt Trời qua đầu sao chổi
+    const away = new THREE.Vector3(hx, hy, hz).normalize();
+    // re-seed trail: mỗi frame dịch các hạt theo hướng 'away' + lệch ngẫu nhiên
+    for (let i = CN - 1; i > 0; i--) {
+      // hạt i kế thừa vị trí hạt i-1 + drift dọc 'away' (mở rộng đuôi)
+      cAge[i] = cAge[i - 1] + 1;
+    }
+    // hạt 0 = đầu comet
+    cPos[0] = hx; cPos[1] = hy; cPos[2] = hz; cAge[0] = 0;
+    for (let i = 1; i < CN; i++) {
+      const t = i / CN;
+      const dist = t * 5.5;                                   // dài đuôi 5.5 units
+      const wob = Math.sin(i * 0.15 + ST.days * 0.02) * 0.25 * t;  // lượn sóng nhẹ
+      cPos[i * 3] = hx + away.x * dist + wob * 0.6;
+      cPos[i * 3 + 1] = hy + away.y * dist + wob;
+      cPos[i * 3 + 2] = hz + away.z * dist + wob * 0.4;
+      const bright = (1 - t) * (0.5 + 0.5 * Math.sin(i * 0.05 + ST.days * 0.05));
+      cCol[i * 3] = 0.75 * bright;                            // xanh băng
+      cCol[i * 3 + 1] = 0.85 * bright;
+      cCol[i * 3 + 2] = 1.0 * bright;
+    }
+    cg.attributes.position.needsUpdate = 1;
+    cg.attributes.color.needsUpdate = 1;
+  };
+}
+
+// ======================================================================
+//  MƯA SAO BĂNG — vệt sáng ngẫu nhiên chéo qua cảnh, tái sinh định kỳ
+// ======================================================================
+{
+  const MN = 40;                    // tối đa 40 meteor đồng thời
+  const mPos = new Float32Array(MN * 6);   // LineSegments: 2 điểm/vệt
+  const mCol = new Float32Array(MN * 6);
+  const mg = new THREE.BufferGeometry();
+  mg.setAttribute("position", new THREE.BufferAttribute(mPos, 3));
+  mg.setAttribute("color", new THREE.BufferAttribute(mCol, 3));
+  const meteors = new THREE.LineSegments(mg, new THREE.LineBasicMaterial({
+    vertexColors: true, transparent: true, opacity: 0.9,
+    blending: THREE.AdditiveBlending, depthWrite: false,
+  }));
+  scene.add(meteors);
+  // trạng thái từng meteor: active, pos, vel, life
+  const mState = [];
+  for (let i = 0; i < MN; i++) mState.push({ active: false, pos: new THREE.Vector3(), vel: new THREE.Vector3(), life: 0 });
+  let spawnTimer = 0.4;
+
+  meteorUpdater = (dt, tSec) => {
+    spawnTimer -= dt;
+    if (spawnTimer <= 0) {
+      // kích hoạt 1 meteor tại vị trí ngẫu nhiên trong sphere bán kính 60
+      const m = mState.find(x => !x.active);
+      if (m) {
+        m.active = true;
+        m.pos.set((Math.random() - 0.5) * 90, 20 + Math.random() * 30, (Math.random() - 0.5) * 90);
+        const dir = new THREE.Vector3(Math.random() - 0.5, -(0.4 + Math.random() * 0.4), Math.random() - 0.5).normalize();
+        m.vel.copy(dir).multiplyScalar(55 + Math.random() * 35);     // 55-90 units/s
+        m.life = 1.0;
+      }
+      spawnTimer = 0.25 + Math.random() * 0.8;      // spawn dày tạo cơn mưa
+    }
+    for (let i = 0; i < MN; i++) {
+      const m = mState[i];
+      if (!m.active) { mPos[i * 6 + 3] = 0; continue; }
+      m.pos.addScaledVector(m.vel, dt);
+      m.life -= dt * 0.7;
+      if (m.life <= 0) { m.active = false; continue; }
+      const tail = m.vel.clone().normalize().multiplyScalar(2.8);   // vệt dài 2.8
+      mPos[i * 6] = m.pos.x; mPos[i * 6 + 1] = m.pos.y; mPos[i * 6 + 2] = m.pos.z;
+      mPos[i * 6 + 3] = m.pos.x - tail.x;
+      mPos[i * 6 + 4] = m.pos.y - tail.y;
+      mPos[i * 6 + 5] = m.pos.z - tail.z;
+      const br = Math.min(1, m.life) * 0.9;
+      // màu: đầu trắng-vàng, đuôi mờ
+      mCol[i * 6] = 1.0 * br; mCol[i * 6 + 1] = 0.95 * br; mCol[i * 6 + 2] = 0.8 * br;
+      mCol[i * 6 + 3] = br * 0.1; mCol[i * 6 + 4] = br * 0.1; mCol[i * 6 + 5] = br * 0.15;
+    }
+    mg.attributes.position.needsUpdate = true;
+    mg.attributes.color.needsUpdate = true;
+  };
+}
+
 // ======================================================================
 //  PHASE 2c: ASTEROID BELT — InstancedMesh giữa Mars–Jupiter
 //  (logic Kepler per-asteroid, mượn ý tưởng KeplerParticles của spacekit)
@@ -682,6 +805,10 @@ function animate() {
       }
     }
   }
+
+  // ---- Sao chổi + mưa sao băng ----
+  if (cometUpdater) cometUpdater(ST.days);
+  if (meteorUpdater) meteorUpdater(dt, clock.elapsedTime);
 
   // ---- fade nhãn theo khoảng cách camera: gần hiện rõ, xa mờ dần, rất xa ẩn ----
   const camDist = camera.position.distanceTo(controls.target);
