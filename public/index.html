@@ -48,7 +48,8 @@
   Tốc độ <input type="range" id="speed" min="-2" max="3" step="0.05" value="0.7">
   (<span id="speedLabel">x</span>)<br>
   <button id="pause">⏸</button>
-  <button id="orbits">Đường quỹ đạo: BẬT</button><br>
+  <button id="orbits">Đường quỹ đạo: BẬT</button>
+  <button id="labels">Nhãn: BẬT</button><br>
   Ngày mô phỏng: <span id="date">0</span>
 </div>
 
@@ -484,7 +485,7 @@ function makeGlowTexture() {
 //  UI + VÒNG LẶP THỜI GIAN
 //  speed slider: 10^v ngày/giây (v từ -2..3 => 0.01 .. 1000 ngày/s)
 // ======================================================================
-const ST = { days: 0, speedExp: 0.7, paused: false, showOrbits: true };
+const ST = { days: 0, speedExp: 0.7, paused: false, showOrbits: true, showLabels: true };
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 let downXY = null;
@@ -536,6 +537,11 @@ $("orbits").addEventListener("click", () => {
   ST.showOrbits = !ST.showOrbits;
   PLANETS.forEach(p => p._orbitLine.visible = ST.showOrbits);
   $("orbits").textContent = "Đường quỹ đạo: " + (ST.showOrbits ? "BẬT" : "TẮT");
+});
+$("labels").addEventListener("click", () => {
+  ST.showLabels = !ST.showLabels;
+  $("labels").textContent = "Nhãn: " + (ST.showLabels ? "BẬT" : "TẮT");
+  planetObjs.forEach(o => o.lblObj.visible = ST.showLabels);
 });
 
 const clock = new THREE.Clock();
@@ -598,6 +604,17 @@ function animate() {
     controls.target.add(delta);
     camera.position.add(delta);
   }
+  // ---- fade nhãn theo khoảng cách camera: gần hiện rõ, xa mờ dần, rất xa ẩn ----
+  const camDist = camera.position.distanceTo(controls.target);
+  for (const o of planetObjs) {
+    if (!ST.showLabels) break;
+    const d = camera.position.distanceTo(o.grp.position);
+    // visible trong 260 đơn vị, fade 160->260, ngoài ẩn (tiết kiệm render)
+    const opacity = Math.max(0, Math.min(1, (260 - d) / 100));
+    o.lblObj.visible = opacity > 0.02;
+    if (o.lblObj.visible) o.lblObj.element.style.opacity = opacity.toFixed(2);
+  }
+
   composer.render();
   labelRenderer.render(scene, camera);          // Phase 3.5: nhãn CSS2D
 }
