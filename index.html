@@ -49,7 +49,9 @@
   (<span id="speedLabel">x</span>)<br>
   <button id="pause">⏸</button>
   <button id="orbits">Đường quỹ đạo: BẬT</button>
-  <button id="labels">Nhãn: BẬT</button><br>
+  <button id="labels">Nhãn: BẬT</button>
+  <button id="tour">🎬 Tour: OFF</button>
+  <button id="ambient">🎵 Âm thanh: OFF</button><br>
   Ngày mô phỏng: <span id="date">0</span>
 </div>
 
@@ -485,7 +487,8 @@ function makeGlowTexture() {
 //  UI + VÒNG LẶP THỜI GIAN
 //  speed slider: 10^v ngày/giây (v từ -2..3 => 0.01 .. 1000 ngày/s)
 // ======================================================================
-const ST = { days: 0, speedExp: 0.7, paused: false, showOrbits: true, showLabels: true };
+const ST = { days: 0, speedExp: 0.7, paused: false, showOrbits: true, showLabels: true,
+             tourOn: false, tourIdx: 0, tourPhase: "approach", tourTimer: 0 };
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 let downXY = null;
@@ -542,6 +545,57 @@ $("labels").addEventListener("click", () => {
   ST.showLabels = !ST.showLabels;
   $("labels").textContent = "Nhãn: " + (ST.showLabels ? "BẬT" : "TẮT");
   planetObjs.forEach(o => o.lblObj.visible = ST.showLabels);
+});
+
+// ---- Tour tự động: camera bay qua các hành tinh theo thứ tự ----
+$("tour").addEventListener("click", () => {
+  ST.tourOn = !ST.tourOn;
+  $("tour").textContent = "🎬 Tour: " + (ST.tourOn ? "ON" : "OFF");
+  if (ST.tourOn) {
+    followTarget = null;                      // tour đè lên follow
+    document.getElementById("infopanel").style.display = "none";
+    ST.tourIdx = 0;
+    ST.tourPhase = "approach";                // approach -> dwell -> next
+    ST.tourTimer = 0;
+  }
+});
+
+// ---- Âm thanh ambient: Web Audio API, drone pad procedural (không file ngoài) ----
+let audioCtx = null, ambientNodes = null;
+$("ambient").addEventListener("click", () => {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (!ambientNodes) {
+    // 3 oscillator detune nhẹ tạo drone pad + LFO điều biến gain cho "thở"
+    const master = audioCtx.createGain();
+    master.gain.value = 0;                     // fade-in bằng setTargetAtTime
+    master.connect(audioCtx.destination);
+    const lfo = audioCtx.createOscillator();
+    const lfoGain = audioCtx.createGain();
+    lfo.frequency.value = 0.07;                // chu kỳ thở ~14s
+    lfoGain.gain.value = 0.035;
+    lfo.connect(lfoGain);
+    const oscs = [];
+    [[55, "sine"], [110.5, "sine"], [164.8, "triangle"]].forEach(([f, type], i) => {
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = type; o.frequency.value = f;
+      g.gain.value = i === 2 ? 0.04 : 0.09;    // гармон higher nhỏ hơn
+      o.connect(g); g.connect(master);
+      o.start();
+      oscs.push(o);
+    });
+    lfo.connect(oscs[0].frequency);            // vibrato nhẹ tầng nền
+    lfo.start();
+    master.gain.setTargetAtTime(0.22, audioCtx.currentTime, 1.5);   // fade-in 1.5s
+    ambientNodes = { master, oscs, lfo };
+  } else {
+    const on = ambientNodes.master.gain.value > 0.01;
+    ambientNodes.master.gain.setTargetAtTime(on ? 0 : 0.22, audioCtx.currentTime, 0.8);
+  }
+  const on = ambientNodes.master.gain.value > 0.01;
+  $("ambient").textContent = "🎵 Âm thanh: " + (on ? "OFF" : "ON");
 });
 
 const clock = new THREE.Clock();
@@ -604,6 +658,31 @@ function animate() {
     controls.target.add(delta);
     camera.position.add(delta);
   }
+  // ---- Tour tự động: camera bay giữa các hành tinh ----
+  if (ST.tourOn && planetObjs.length) {
+    const target = planetObjs[ST.tourIdx % planetObjs.length];
+    const p = target.grp.position;
+    // điểm ngắm: lệch lên và ra ngoài hành tinh một khoảng theo bán kính hiển thị
+    const offset = target.data.r * 6 + 2.5;
+    const desired = new THREE.Vector3(p.x + offset, p.y + offset * 0.55, p.z + offset * 0.8);
+    ST.tourTimer += dt;
+    if (ST.tourPhase === "approach") {
+      // lerp mượt theo exp-decay — tốc độ không phụ thuộc framerate
+      camera.position.lerp(desired, 1 - Math.exp(-1.6 * dt));
+      controls.target.lerp(p, 1 - Math.exp(-2.2 * dt));
+      if (camera.position.distanceTo(desired) < 0.6 && ST.tourTimer > 2.2) {
+        ST.tourPhase = "dwell"; ST.tourTimer = 0;
+      }
+    } else {   // dwell: đứng xem hành tinh 4s (vẫn bám theo khi nó di chuyển)
+      camera.position.lerp(desired, 1 - Math.exp(-0.5 * dt));
+      controls.target.lerp(p, 1 - Math.exp(-0.8 * dt));
+      if (ST.tourTimer > 4.0) {
+        ST.tourIdx = (ST.tourIdx + 1) % planetObjs.length;
+        ST.tourPhase = "approach"; ST.tourTimer = 0;
+      }
+    }
+  }
+
   // ---- fade nhãn theo khoảng cách camera: gần hiện rõ, xa mờ dần, rất xa ẩn ----
   const camDist = camera.position.distanceTo(controls.target);
   for (const o of planetObjs) {
