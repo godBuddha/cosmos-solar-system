@@ -185,6 +185,11 @@
         <option value="100000">100.000</option>
       </select></div>
     <p style="opacity:.6; font-size:11px" class="s-reload">Số hạt Kuiper áp dụng sau khi tải lại trang.</p>
+    <div class="srow"><span>🌌 Thiên hà nền (nặng)</span>
+      <select id="setGalaxy" style="width:90px">
+        <option value="off">Tắt</option>
+        <option value="on">Bật</option>
+      </select></div>
     <h4 class="s-ai">AI (OpenAI-compatible)</h4>
     <label class="s-aiurl">Base URL</label>
     <input id="setAiUrl" placeholder="http://localhost:11434/v1">
@@ -1303,6 +1308,58 @@ function renderPresets() {
 renderPresets();
 
 // ======================================================================
+//  MULTI-GALAXY — 4 thiên hà xoắn ốc nền (Points, mặc định OFF qua Settings)
+// ======================================================================
+let galaxyGroup = null;
+function toggleGalaxies(on) {
+  if (on && !galaxyGroup) buildGalaxies();
+  if (galaxyGroup) galaxyGroup.visible = on;
+}
+function buildGalaxies() {
+  galaxyGroup = new THREE.Group();
+  scene.add(galaxyGroup);
+  const defs = [
+    { pos: [-420, 60, -520], yaw: 0.4, tilt: 0.9, size: 240 },
+    { pos: [520, -40, -380], yaw: 2.2, tilt: 1.2, size: 200 },
+    { pos: [-260, -80, 560], yaw: 4.0, tilt: 0.6, size: 180 },
+    { pos: [480, 90, 470], yaw: 5.3, tilt: 1.0, size: 210 },
+  ];
+  for (const d of defs) {
+    const N = 30000;
+    const pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
+    let s = 12345 + Math.floor(d.yaw * 1000);
+    const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
+    const warm = [1.0, 0.88, 0.62], cool = [0.55, 0.66, 1.0];
+    for (let i = 0; i < N; i++) {
+      const r = 0.03 + Math.pow(rnd(), 0.55) * 0.97;
+      const arm = rnd() < 0.5 ? 0 : Math.PI;
+      const spread = (rnd() - 0.5) * (0.35 + 0.25 * r);
+      const ang = Math.log(r / 0.04 + 1) / 0.3 + arm + spread;
+      const h = (rnd() - 0.5) * 0.06 * (1 + 2 * Math.exp(-r / 0.25));
+      pos[i*3] = r * Math.cos(ang) * d.size;
+      pos[i*3+1] = h * d.size;
+      pos[i*3+2] = r * Math.sin(ang) * d.size;
+      const t = Math.min(1, Math.max(0, (r - 0.15) / 0.85));
+      const b = (rnd() ** 2 * 0.8 + 0.2) * 2.2;
+      col[i*3] = (warm[0]*(1-t)+cool[0]*t) * b;
+      col[i*3+1] = (warm[1]*(1-t)+cool[1]*t) * b;
+      col[i*3+2] = (warm[2]*(1-t)+cool[2]*t) * b;
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    g.setAttribute("color", new THREE.BufferAttribute(col, 3));
+    const pts = new THREE.Points(g, new THREE.PointsMaterial({
+      size: 1.6, vertexColors: true, transparent: true, opacity: 0.85,
+      blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true,
+    }));
+    pts.position.set(d.pos[0], d.pos[1], d.pos[2]);
+    pts.rotation.set(d.tilt, d.yaw, 0.2);
+    galaxyGroup.add(pts);
+  }
+  console.info("galaxies built: 4 x 30000 pts");
+}
+
+// ======================================================================
 //  G2: SETTINGS — hiệu năng + AI key (localStorage, không hard-code)
 // ======================================================================
 const $s = id => document.getElementById(id);
@@ -1318,6 +1375,7 @@ function applySettingsUI() {
   $s("setAiUrl").value = s.aiUrl ?? "";
   $s("setAiKey").value = s.aiKey ?? "";
   $s("setAiModel").value = s.aiModel ?? "";
+  $s("setGalaxy").value = s.galaxy ?? "off";
 }
 $s("btnSettings").addEventListener("click", () => { applySettingsUI(); $s("settingsModal").classList.add("open"); });
 $s("setClose").addEventListener("click", () => $s("settingsModal").classList.remove("open"));
@@ -1337,17 +1395,24 @@ $s("setSave").addEventListener("click", () => {
     aiUrl: $s("setAiUrl").value.trim(),
     aiKey: $s("setAiKey").value.trim(),                  // localStorage máy user — không vào repo
     aiModel: $s("setAiModel").value.trim(),
+    galaxy: $s("setGalaxy").value,
   };
+  const galaxyChanged = $s("setGalaxy").value !== (loadSettings().galaxy ?? "off");
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
   const needReload = String(s.kuiper) !== oldKuiper;    // so với giá trị cũ thật
   $s("settingsModal").classList.remove("open");
+  if (galaxyChanged) { toggleGalaxies($s("setGalaxy").value === "on"); }
   if (needReload) location.reload();                    // Kuiper đổi số hạt cần rebuild geometry
 });
 function loadSettingsKuiper() {
   const s = loadSettings();
   return String(s.kuiper ?? "50000");
 }
-// áp bloom đã lưu lúc mở trang
+// áp bloom + galaxies đã lưu lúc mở trang
+(() => {
+  const st = loadSettings();
+  if (st.galaxy === "on") toggleGalaxies(true);
+})();
 (() => {
   const s = loadSettings();
   if (s.bloom != null) bloomPass.strength = s.bloom;
