@@ -10,9 +10,10 @@ services:
     container_name: cosmos-web
     restart: unless-stopped
     ports:
-      - "8090:80"           # đổi cổng tùy ý
+      - "127.0.0.1:8090:80"   # chỉ lắng nghe localhost — truy cập thật qua proxy/SSH tunnel [2]
     depends_on:
-      - api
+      api:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
       interval: 30s
@@ -32,6 +33,19 @@ services:
       - SETUP_TOKEN=${SETUP_TOKEN:-}
     volumes:
       - api_data:/app/data
+    # hardening (đề xuất đánh giá): không nâng quyền, bỏ capabilities
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     networks:
       - webnet
 

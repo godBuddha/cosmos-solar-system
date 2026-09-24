@@ -1,0 +1,12 @@
+# .dockerignore — giảm context build, tránh leak file nhạy cảm vào image
+node_modules
+server/node_modules
+server/data.json
+.env
+*.log
+.git
+screenshots
+docs
+oss_reference
+*.md
+!README.md
