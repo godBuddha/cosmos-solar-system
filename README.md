@@ -101,3 +101,30 @@ docker compose run --rm certbot renew --dry-run   # test gia hạn
 - **Quỹ đạo Kepler**: giải `M = E − e·sin E` bằng Newton-Raphson — dữ liệu NASA fact sheet
 - **Performance**: 60 FPS trên máy phổ thông; asteroid belt dùng InstancedMesh (1 draw call)
 - **Security**: security headers đã bật trong nginx conf; chỉ mở cổng 80/443/8090 cần thiết
+
+## Kiến trúc (sau G1-G4)
+
+```
+cosmos-app/
+├── docs/bodies/*.md        # 21 thiên thể — single source of truth (tên 3 ngôn ngữ + elements + mô tả)
+├── build_catalog.py        # .md -> public/data/catalog.json
+├── public/
+│   ├── index.html          # app chính (Three.js, GPU particles, search, tour, AI panel)
+│   ├── admin.html          # one-time admin setup + AI gateway config (self-host only)
+│   └── vendor/three/       # Three.js self-hosted
+├── server/                 # API (Express + JWT + AI proxy) — self-host only
+└── docker-compose.yml      # cosmos (nginx) + api (node)
+```
+
+### Nguồn dữ liệu thiên thể
+Mỗi file `.md` chứa frontmatter meta (Keplerian elements J2000 + vật lý) + mô tả VI/EN/ZH.
+**Thêm thiên thể mới**: viết file .md theo template → `python3 build_catalog.py` → commit. App tự nạp.
+
+### AI (OpenAI-compatible)
+- **GitHub Pages**: người dùng tự nhập Base URL + API Key + Model trong ⚙️ Settings (lưu localStorage máy họ)
+- **Self-host**: admin cấu hình tại `/admin.html` — key nằm trên server, browser không bao giờ thấy
+- Ưu tiên server gateway nếu đăng nhập; fallback về key user
+
+### Hiệu năng
+Toàn bộ particle systems tính Kepler trên GPU (vertex shader): Kuiper 50k, asteroid belt 6k,
+vành Saturn 9k, comet trail 900, mưa sao băng 40 vệt — CPU chỉ set uniform thời gian mỗi frame.
