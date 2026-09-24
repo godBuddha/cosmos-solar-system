@@ -63,5 +63,16 @@ ok("admin.html: chỉ <script src> (không inline)",
 // ---- 5. index shell nạp main.mjs ----
 ok("index.html nạp ./js/main.mjs", idx.includes('<script type="module" src="./js/main.mjs">'));
 
+// ---- 6. clean view: nút toggle + CSS + marker AI busy ----
+ok("index.html có nút #uiToggle", idx.includes('id="uiToggle"'));
+ok("CSS có body.ui-clean (clean view)", /body\.ui-clean #panel/.test(idx) && /body\.ui-clean #aiPanel\[data-busy/.test(idx));
+ok("ui.mjs có logic clean view", fs.readFileSync(path.join(PUB, "js", "ui.mjs"), "utf8").includes("cosmos_clean_view"));
+ok("ai.mjs đánh dấu data-busy khi stream",
+   /dataset\.busy = "1"/.test(fs.readFileSync(path.join(PUB, "js", "ai.mjs"), "utf8")));
+for (const lang of ["vi", "en", "zh"]) {
+  ok(`i18n[${lang}] có key clean view`,
+     fs.readFileSync(path.join(PUB, "js", "i18n.mjs"), "utf8").includes("cleanHide"));
+}
+
 console.log(failed ? `\n${failed} test FAIL` : "\ntất cả test pass");
 process.exit(failed ? 1 : 0);

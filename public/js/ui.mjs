@@ -34,6 +34,7 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
     raycaster.setFromCamera(pointer, camera);
     const hits = raycaster.intersectObjects(planetObjs.map(o => o.mesh));
     if (hits.length) {
+      if (cleanOn) setClean(false);   // clean view: click thiên thể = muốn xem info → hiện lại UI
       const o = planetObjs.find(p => p.mesh === hits[0].object);
       selectPlanet(o);
     }
@@ -335,6 +336,7 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
         div.addEventListener("click", () => {
           searchResults.style.display = "none";
           searchInput.value = "";
+          if (cleanOn) setClean(false);   // chọn kết quả tìm kiếm → hiện lại UI
           flyToBody(m);
         });
         searchResults.appendChild(div);
@@ -433,6 +435,40 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
       FLY.pitch = Math.asin(THREE.MathUtils.clamp(dir.y, -1, 1));
     }
   }
+  // ======================================================================
+  //  G4b: CLEAN VIEW — 1 nút ẩn/hiện toàn bộ UI (H toggle · Esc hiện lại)
+  //  Trạng thái nhớ localStorage; AI đang stream (data-busy) vẫn giữ panel.
+  // ======================================================================
+  const CLEAN_KEY = "cosmos_clean_view";
+  let cleanOn = false;
+  function cleanToast(msg) {
+    const el = document.createElement("div");
+    el.id = "cleanToast";
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+  }
+  function setClean(on) {
+    cleanOn = on;
+    document.body.classList.toggle("ui-clean", on);
+    try { localStorage.setItem(CLEAN_KEY, on ? "1" : "0"); } catch { /* lưu được thì nhớ, không thì bỏ qua */ }
+    const btn = $("uiToggle");
+    const t = T();
+    btn.title = on ? t.cleanShow : t.cleanHide;
+    btn.setAttribute("aria-label", btn.title);
+    if (on && !localStorage.getItem("cosmos_clean_toast")) {
+      try { localStorage.setItem("cosmos_clean_toast", "1"); } catch { /* tương tự */ }
+      cleanToast(t.cleanToast);
+    }
+  }
+  $("uiToggle").addEventListener("click", () => setClean(!cleanOn));
+  window.addEventListener("keydown", e => {
+    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    if (e.code === "KeyH") setClean(!cleanOn);
+    else if (e.code === "Escape" && cleanOn) setClean(false);
+  });
+  if (localStorage.getItem(CLEAN_KEY) === "1") setClean(true);   // restore khi load lại trang
+
   window.addEventListener("keydown", e => {
     if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
     if (e.code === "KeyF") flyToggle();

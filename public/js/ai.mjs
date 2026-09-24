@@ -99,6 +99,8 @@ function executeAIActions(content, msgEl) {
 
 async function aiAsk(question) {
   const msgs = document.getElementById("aiMsgs");
+  // marker cho clean view: AI đang trả lời thì giữ panel AI kể cả khi ẩn UI
+  document.getElementById("aiPanel").dataset.busy = "1";
   const q = document.createElement("div");
   q.className = "q"; q.textContent = "👤 " + question;
   msgs.appendChild(q);
@@ -224,6 +226,8 @@ async function aiAsk(question) {
   } catch (e) {
     a.textContent = "Lỗi kết nối: " + e.message;
     a.classList.add("err");
+  } finally {
+    delete document.getElementById("aiPanel").dataset.busy;
   }
   msgs.scrollTop = msgs.scrollHeight;
 }
