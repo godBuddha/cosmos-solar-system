@@ -227,7 +227,13 @@
     <h3>⚙️ <span class="s-title">Cài đặt</span></h3>
     <h4 class="s-perf">Hiệu năng</h4>
     <div class="srow"><span class="s-bloom">Bloom glow</span>
-      <input type="range" id="setBloom" min="0" max="2.5" step="0.05" style="width:150px"></div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <select id="setBloomOn" style="width:70px">
+          <option value="1">Bật</option>
+          <option value="0">Tắt</option>
+        </select>
+        <input type="range" id="setBloom" min="0" max="2.5" step="0.05" style="width:100px">
+      </div></div>
     <div class="srow"><span class="s-kuiper">Số hạt vành Kuiper</span>
       <select id="setKuiper" style="width:110px">
         <option value="10000">10.000</option>
@@ -1393,39 +1399,95 @@ function buildGalaxies() {
     { pos: [-260, -80, 560], yaw: 4.0, tilt: 0.6, size: 180 },
     { pos: [480, 90, 470], yaw: 5.3, tilt: 1.0, size: 210 },
   ];
+  // glow texture dùng chung (soft radial — như particle các vành)
+  const glowCv = document.createElement("canvas");
+  glowCv.width = glowCv.height = 64;
+  const gctx = glowCv.getContext("2d");
+  const g = gctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  g.addColorStop(0.0, "rgba(255,255,255,1)");
+  g.addColorStop(0.2, "rgba(255,255,255,0.8)");
+  g.addColorStop(0.5, "rgba(255,255,255,0.25)");
+  g.addColorStop(1.0, "rgba(255,255,255,0)");
+  gctx.fillStyle = g; gctx.fillRect(0, 0, 64, 64);
+  const glowTex = new THREE.CanvasTexture(glowCv);
+
   for (const d of defs) {
-    const N = 30000;
-    const pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
+    const N = 40000;
+    const pos = new Float32Array(N * 3), col = new Float32Array(N * 3),
+          sz = new Float32Array(N);
     let s = 12345 + Math.floor(d.yaw * 1000);
     const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
-    const warm = [1.0, 0.88, 0.62], cool = [0.55, 0.66, 1.0];
     for (let i = 0; i < N; i++) {
-      const r = 0.03 + Math.pow(rnd(), 0.55) * 0.97;
+      // lõi đặc: 35% hạt trong 12% bán kính (pow gắt 2.6)
+      let r;
+      const u = rnd();
+      if (u < 0.35) r = 0.02 + Math.pow(rnd(), 2.6) * 0.10;
+      else r = 0.12 + Math.pow(rnd(), 0.72) * 0.88;
       const arm = rnd() < 0.5 ? 0 : Math.PI;
-      const spread = (rnd() - 0.5) * (0.35 + 0.25 * r);
+      const spread = (rnd() - 0.5) * (0.16 + 0.34 * r);        // lõi chặt, rìa loe
       const ang = Math.log(r / 0.04 + 1) / 0.3 + arm + spread;
-      const h = (rnd() - 0.5) * 0.06 * (1 + 2 * Math.exp(-r / 0.25));
+      const h = (rnd() - 0.5) * 0.05 * (1 + 2.5 * Math.exp(-r / 0.2));
       pos[i*3] = r * Math.cos(ang) * d.size;
       pos[i*3+1] = h * d.size;
       pos[i*3+2] = r * Math.sin(ang) * d.size;
-      const t = Math.min(1, Math.max(0, (r - 0.15) / 0.85));
-      const b = (rnd() ** 2 * 0.8 + 0.2) * 2.2;
-      col[i*3] = (warm[0]*(1-t)+cool[0]*t) * b;
-      col[i*3+1] = (warm[1]*(1-t)+cool[1]*t) * b;
-      col[i*3+2] = (warm[2]*(1-t)+cool[2]*t) * b;
+      // màu vật lý: lõi vàng-cam già (K-giant) -> arms xanh trắng trẻ;
+      // vùng HII hồng rải rác ở cánh ngoài
+      let cR, cG, cB;
+      const t = Math.min(1, Math.max(0, (r - 0.1) / 0.9));
+      if (rnd() < 0.05 && r > 0.4) {           // HII regions
+        cR = 1.0; cG = 0.35; cB = 0.5;
+      } else {
+        cR = 1.0 * (1-t) + 0.62 * t;
+        cG = 0.82 * (1-t) + 0.72 * t;
+        cB = 0.55 * (1-t) + 1.0 * t;
+      }
+      const b = Math.pow(rnd(), 1.6) * 1.6 + 0.35;
+      // hạt lõi to sáng hơn (halo effect qua point size)
+      sz[i] = (r < 0.12 ? 2.6 : 1.4) * (0.7 + rnd() * 0.6);
+      col[i*3] = cR * b; col[i*3+1] = cG * b; col[i*3+2] = cB * b;
     }
-    const g = new THREE.BufferGeometry();
-    g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    g.setAttribute("color", new THREE.BufferAttribute(col, 3));
-    const pts = new THREE.Points(g, new THREE.PointsMaterial({
-      size: 1.6, vertexColors: true, transparent: true, opacity: 0.85,
-      blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true,
-    }));
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    geo.setAttribute("color", new THREE.BufferAttribute(col, 3));
+    geo.setAttribute("aSz", new THREE.BufferAttribute(sz, 1));
+    const mat = new THREE.ShaderMaterial({
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      uniforms: { uMap: { value: glowTex }, uPx: { value: 1.0 } },
+      vertexShader: /* glsl */`
+        attribute float aSz;
+        attribute vec3 color;
+        varying vec3 vCol;
+        void main() {
+          vCol = color;
+          vec4 mv = modelViewMatrix * vec4(position, 1.0);
+          gl_PointSize = aSz * uPx * (300.0 / -mv.z);
+          gl_Position = projectionMatrix * mv;
+        }
+      `,
+      fragmentShader: /* glsl */`
+        uniform sampler2D uMap;
+        varying vec3 vCol;
+        void main() {
+          vec4 tex = texture2D(uMap, gl_PointCoord);
+          gl_FragColor = vec4(vCol, 1.0) * tex;
+        }
+      `,
+    });
+    const pts = new THREE.Points(geo, mat);
     pts.position.set(d.pos[0], d.pos[1], d.pos[2]);
     pts.rotation.set(d.tilt, d.yaw, 0.2);
     galaxyGroup.add(pts);
+
+    // sprite glow trung tâm — lõi rực mờ như ảnh thật
+    const spriteMat = new THREE.SpriteMaterial({
+      map: glowTex, color: 0xfff0c8, transparent: true,
+      blending: THREE.AdditiveBlending, depthWrite: false, opacity: 0.85,
+    });
+    const core = new THREE.Sprite(spriteMat);
+    core.scale.setScalar(d.size * 0.55);
+    pts.add(core);
   }
-  console.info("galaxies built: 4 x 30000 pts");
+  console.info("galaxies built: 4 x 40000 pts (upgraded render)");
 }
 
 // ======================================================================
@@ -1440,6 +1502,7 @@ function loadSettings() {
 function applySettingsUI() {
   const s = loadSettings();
   $s("setBloom").value = s.bloom ?? 1.0;
+  $s("setBloomOn").value = (s.bloomOn ?? "1");
   $s("setKuiper").value = s.kuiper ?? "50000";
   $s("setAiUrl").value = s.aiUrl ?? "";
   $s("setAiKey").value = s.aiKey ?? "";
@@ -1454,14 +1517,20 @@ $s("settingsModal").addEventListener("click", e => {
   if (e.target === $s("settingsModal")) $s("settingsModal").classList.remove("open");
 });
 $s("setBloom").addEventListener("input", e => {
-  bloomPass.strength = +e.target.value;                 // realtime
+  bloomPass.strength = +e.target.value;
   const s = loadSettings(); s.bloom = +e.target.value;
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+});
+$s("setBloomOn").addEventListener("change", e => {
+  bloomPass.enabled = e.target.value === "1";
+  const s = loadSettings(); s.bloomOn = e.target.value;
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
 });
 $s("setSave").addEventListener("click", () => {
   const oldKuiper = loadSettingsKuiper();               // đọc TRƯỚC khi ghi
   const s = {
     bloom: +$s("setBloom").value,
+    bloomOn: $s("setBloomOn").value,
     kuiper: $s("setKuiper").value,
     aiUrl: $s("setAiUrl").value.trim(),
     aiKey: $s("setAiKey").value.trim(),                  // localStorage máy user — không vào repo
@@ -1493,7 +1562,20 @@ function loadSettingsKuiper() {
 })();
 (() => {
   const s = loadSettings();
+  // AUTO-DETECT thiết bị lần đầu (chưa có settings): máy yếu -> giảm hạt + tắt galaxy
+  if (!localStorage.getItem(SETTINGS_KEY)) {
+    const weakGPU = /Mali|Adreno [1-5]|PowerVR|Apple GPU.*(A1[0-3]|M1[^0])/.test(
+      (() => { try { return (new (window.WebGLDebugRendererInfo ?? function(){}) ) && "" } catch { return "" } })())
+      || navigator.hardwareConcurrency <= 4
+      || (navigator.deviceMemory && navigator.deviceMemory <= 4);
+    if (weakGPU) {
+      s.kuiper = "10000";
+      s.bloom = 0.8;
+      console.info("auto-detect: thiết bị yếu — Kuiper 10k, bloom nhẹ");
+    }
+  }
   if (s.bloom != null) bloomPass.strength = s.bloom;
+  if (s.bloomOn != null) bloomPass.enabled = s.bloomOn === "1";
 })();
 // Kuiper: đọc setting khi build (gắn vào biến CONFIG nội bộ qua window)
 // (N_K đọc từ localStorage ngay đầu khối Kuiper — xem patch riêng)
@@ -1685,7 +1767,7 @@ function flyToggle(force) {
   FLY.on = force !== undefined ? force : !FLY.on;
   controls.enabled = !FLY.on;
   flyUI.style.display = FLY.on ? "block" : "none";
-  if (FLY.on) flyUI.textContent = "FREE-FLY ON — W/A/S/D di chuyển · Q/E lên xuống · Shift ×5 · lăn chuột: tốc độ (" + FLY.speed.toFixed(0) + ") · F/Esc: thoát";
+  if (FLY.on) flyUI.innerHTML = "FREE-FLY — W/S: tới/lùi · A/D: trái/phải · Q/E: xoay · R/Space: lên/xuống · Shift ×5 · F/Esc: thoát · Tốc độ: <input id='flySpeed' type='number' min='1' max='2000' value='" + FLY.speed.toFixed(0) + "' style='width:60px;background:#0a1626;color:#ffd27a;border:1px solid rgba(255,210,122,.4);border-radius:4px;padding:0 4px;font-size:11px'>";
   // hướng nhìn hiện tại làm mốc bay
   if (FLY.on) {
     const dir = new THREE.Vector3();
@@ -1698,16 +1780,18 @@ window.addEventListener("keydown", e => {
   if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
   if (e.code === "KeyF") flyToggle();
   if (e.code === "Escape" && FLY.on) flyToggle(false);
-  if (FLY.on) FLY.keys[e.code] = true;
+  if (FLY.on) {
+    FLY.keys[e.code] = true;
+    if (e.code === "Space") e.preventDefault();   // chặn scroll trang
+  }
 });
 window.addEventListener("keyup", e => { FLY.keys[e.code] = false; });
-// lăn chuột: đổi tốc độ bay (khi free-fly), chặn zoom của controls
-window.addEventListener("wheel", e => {
-  if (!FLY.on) return;
-  e.preventDefault();
-  FLY.speed = THREE.MathUtils.clamp(FLY.speed * Math.exp(-e.deltaY * 0.0012), 1, 600);
-  flyUI.textContent = "FREE-FLY ON — W/A/S/D di chuyển · Q/E lên xuống · Shift ×5 · tốc độ: " + FLY.speed.toFixed(0) + " · F/Esc: thoát";
-}, { passive: false });
+// tốc độ đổi qua ô nhập số trong HUD (không dùng lăn chuột)
+window.addEventListener("input", e => {
+  if (e.target.id === "flySpeed" && isFinite(+e.target.value)) {
+    FLY.speed = THREE.MathUtils.clamp(+e.target.value, 1, 2000);
+  }
+});
 // pitch/yaw từ chuột kéo (chỉ trong free-fly)
 canvas.addEventListener("pointermove", e => {
   if (!FLY.on || !(e.buttons & 1)) return;
@@ -1783,25 +1867,35 @@ function animate() {
   // ---- Asteroid belt — GPU (chỉ set uniform) ----
   if (asteroidBelt) asteroidBelt.mat.uniforms.uDays.value = ST.days;
 
-  // ---- FREE-FLY camera movement ----
+  // ---- FREE-FLY camera movement (chuẩn FPS) ----
   if (FLY.on) {
     const k = FLY.keys;
+    // Q/E xoay yaw (xử lý ngoài di chuyển, tốc độ xoay 1.8 rad/s)
+    if (k["KeyQ"]) FLY.yaw += 1.8 * dt;
+    if (k["KeyE"]) FLY.yaw -= 1.8 * dt;
+
+    // forward ĐÚNG hướng nhìn: yaw=0 nhìn về -Z
+    const fwd = new THREE.Vector3(
+      -Math.sin(FLY.yaw) * Math.cos(FLY.pitch),
+      Math.sin(FLY.pitch),
+      -Math.cos(FLY.yaw) * Math.cos(FLY.pitch));
+    const right = new THREE.Vector3(fwd.z, 0, -fwd.x).normalize();
+
     const move = new THREE.Vector3();
-    const fwd = new THREE.Vector3(-Math.sin(FLY.yaw) * Math.cos(FLY.pitch), Math.sin(FLY.pitch), -Math.cos(FLY.yaw) * Math.cos(FLY.pitch));
-    const right = new THREE.Vector3(-fwd.z, 0, fwd.x).normalize();
     if (k["KeyW"]) move.add(fwd);
     if (k["KeyS"]) move.sub(fwd);
     if (k["KeyA"]) move.sub(right);
     if (k["KeyD"]) move.add(right);
-    if (k["KeyQ"]) move.y -= 1;
-    if (k["KeyE"]) move.y += 1;
+    if (k["KeyR"] || k["Space"]) move.y += 1;
+    if (k["KeyC"] || k["ControlLeft"]) move.y -= 1;
+
     if (move.lengthSq() > 0) {
       move.normalize().multiplyScalar(FLY.speed * (k["ShiftLeft"] || k["ShiftRight"] ? 5 : 1) * dt);
       camera.position.add(move);
-      controls.target.copy(camera.position).add(fwd);   // target theo hướng nhìn
     }
-    // camera nhìn theo yaw/pitch
-    camera.lookAt(controls.target);
+    const lookAtPt = camera.position.clone().add(fwd);
+    controls.target.copy(lookAtPt);
+    camera.lookAt(lookAtPt);
   }
 
   controls.update();
