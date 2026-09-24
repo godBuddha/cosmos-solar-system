@@ -16,7 +16,7 @@
   }
   #hud b { color:#ffd27a; }
   #panel {
-    position:fixed; right:16px; top:16px; color:#9fc3e8;
+    position:fixed; right:16px; top:16px; color:#9fc3e8; max-width:min(320px, 40vw);
     font:12.5px/1.7 ui-sans-serif,system-ui,sans-serif;
     background:rgba(4,10,22,.72); border:1px solid rgba(120,170,230,.25);
     border-radius:10px; padding:10px 14px; backdrop-filter:blur(6px); user-select:none;
@@ -27,6 +27,24 @@
     border-radius:7px; padding:4px 10px; margin:4px 4px 0 0; cursor:pointer; font-size:12.5px;
   }
   #panel button:hover { background:#1b3358; }
+  /* ===== UI SCALE (Settings: Nhỏ/Vừa/Lớn) — biến gốc cho toàn bộ UI ===== */
+  :root { --ui-scale: 1; }
+  body[data-uiscale="small"] { --ui-scale: 0.88; }
+  body[data-uiscale="large"]  { --ui-scale: 1.15; }
+  #panel, #infopanel, #aiPanel, #searchbox, #settingsCard, #hud {
+    font-size: calc(12.5px * var(--ui-scale));
+  }
+  #panel button, #ipToc button, #speedPresets button, #btnSettings {
+    font-size: calc(12.5px * var(--ui-scale));
+    padding: calc(4px * var(--ui-scale)) calc(10px * var(--ui-scale));
+  }
+  #searchbox input { font-size: calc(13px * var(--ui-scale)); }
+  #ipName { font-size: calc(15px * var(--ui-scale)); }
+  /* ===== CHẾ ĐỘ NHỎ GỌN (compact) ===== */
+  body[data-uimode="compact"] #panel,
+  body[data-uimode="compact"] #infopanel { padding: 8px; }
+  body[data-uimode="compact"] #panel button { padding: 3px 7px; margin: 2px; }
+  body[data-uimode="compact"] #infopanel { width: 250px; }
   #infopanel {
     position:fixed; left:16px; top:80px; width:290px; max-height:calc(100vh - 180px);
     background:rgba(4,10,22,.82); border:1px solid rgba(120,170,230,.3);
@@ -55,8 +73,17 @@
     color:#7a95b5; cursor:pointer; font-size:16px;
   }
   #infopanel .close-x:hover { color:#ffd27a; }
+  /* handle bottom-sheet (mobile only) */
+  #sheetHandle { padding: 4px 0 8px; cursor: grab; touch-action: none; }
+  #sheetHandle .grip { width: 44px; height: 4px; border-radius: 2px;
+    background: rgba(120,170,230,.45); margin: 0 auto; }
+  @media (max-width: 768px) {
+    #sheetHandle { display: block !important; }
+  }
   #date { color:#ffd27a; }
   /* ===== G4: AI chat ===== */
+  body:has(#aiPanel.open) #hud { opacity: 0; pointer-events: none; }
+  #hud { transition: opacity .3s; }
   #aiPanel {
     position:fixed; left:16px; bottom:16px; width:320px; max-height:46vh;
     background:rgba(4,10,22,.88); border:1px solid rgba(120,170,230,.3);
@@ -127,18 +154,37 @@
   #speedPresets button:hover { background:#1b3358; color:#ffd27a; }
   #btnSettings { background:#12233f; color:#cfe2ff; border:1px solid rgba(120,170,230,.35);
     border-radius:7px; padding:4px 10px; margin:4px 4px 0 0; cursor:pointer; font-size:12.5px; }
+  /* màn hẹp vừa: search chuyển sang TRÁI (panel điều khiển chiếm phải) */
+  @media (min-width: 769px) and (max-width: 1360px) {
+    #searchbox { top: 16px; left: 16px; transform: none; }
+    #searchbox input { width: 190px; }
+    #searchResults { left: 0; right: 0; }
+    #hud { left: 16px; top: 76px; }
+  }
   /* ===== MOBILE (<=768px): panel trái full-width bottom-sheet, panel phải gọn ===== */
   @media (max-width: 768px) {
     #infopanel {
       left: 0; right: 0; top: auto; bottom: 0; width: 100%;
-      max-height: 55vh; border-radius: 14px 14px 0 0;
+      max-height: 92vh; border-radius: 14px 14px 0 0;
       transform: translateY(110%);
+      transition: transform .35s cubic-bezier(.2,.9,.3,1);
+      padding-top: 6px;
     }
+    /* 3 trạng thái: peek / half / full — điều khiển bằng .sheet-peek/.sheet-full */
     #infopanel.open { transform: translateY(0); }
+    #infopanel.sheet-peek { transform: translateY(calc(100% - 132px)); }
+    #infopanel.sheet-full { transform: translateY(0); max-height: 95vh; }
     #ipBody { max-height: calc(55vh - 150px); }
-    #panel { left: 8px; right: 8px; top: 8px; max-height: 42vh; overflow-y: auto; }
+    #infopanel.sheet-full #ipBody { max-height: calc(95vh - 170px); }
+    #panel { left: 8px; right: 8px; top: 8px; max-height: 40vh; overflow-y: auto; }
     #hud { left: 8px; bottom: 8px; top: auto; max-width: 60vw; }
     #hint { display: none; }
+    /* search = bottom bar (panel control chiếm top) */
+    #searchbox { top: auto; bottom: 8px; left: 8px; right: 8px; transform: none; }
+    #searchbox input { width: 100%; box-sizing: border-box; }
+    #searchResults { left: 0; right: 0; bottom: 100%; top: auto; }
+    /* info/AI sheet mở thì đè search (quy ước 1 panel cùng lúc) */
+    #infopanel.open ~ #searchbox, body:has(#aiPanel.open) #searchbox { opacity: 0; pointer-events: none; }
   }
 </style>
 </head>
@@ -151,6 +197,7 @@
 </div>
 
 <div id="infopanel">
+  <div id="sheetHandle" style="display:none"><div class="grip"></div></div>
   <button class="close-x" id="btnUnfollow">✕</button>
   <b id="ipName"></b>
   <span id="ipNameEn"></span>
@@ -185,6 +232,17 @@
         <option value="100000">100.000</option>
       </select></div>
     <p style="opacity:.6; font-size:11px" class="s-reload">Số hạt Kuiper áp dụng sau khi tải lại trang.</p>
+    <div class="srow"><span>Cỡ chữ UI</span>
+      <select id="setUiScale" style="width:110px">
+        <option value="small">Nhỏ</option>
+        <option value="medium" selected>Vừa</option>
+        <option value="large">Lớn</option>
+      </select></div>
+    <div class="srow"><span>Chế độ UI</span>
+      <select id="setUiMode" style="width:110px">
+        <option value="auto" selected>Tự động</option>
+        <option value="compact">Nhỏ gọn</option>
+      </select></div>
     <div class="srow"><span>🌌 Thiên hà nền (nặng)</span>
       <select id="setGalaxy" style="width:90px">
         <option value="off">Tắt</option>
@@ -1141,7 +1199,14 @@ function selectPlanet(o) {
     });
     toc.appendChild(btn);
   });
-  document.getElementById("infopanel").classList.add("open");   // trượt vào từ trái
+  const panel = document.getElementById("infopanel");
+  panel.classList.add("open");
+  panel.classList.remove("sheet-peek", "sheet-full");   // mobile: mở chế độ half
+  // quy ước mobile: đóng AI panel nếu đang mở
+  if (window.innerWidth <= 768) {
+    const ap = document.getElementById("aiPanel");
+    if (ap) ap.classList.remove("open");
+  }
 }
 document.getElementById("btnUnfollow").addEventListener("click", () => {
   followTarget = null;
@@ -1376,6 +1441,8 @@ function applySettingsUI() {
   $s("setAiKey").value = s.aiKey ?? "";
   $s("setAiModel").value = s.aiModel ?? "";
   $s("setGalaxy").value = s.galaxy ?? "off";
+  $s("setUiScale").value = s.uiScale ?? "medium";
+  $s("setUiMode").value = s.uiMode ?? "auto";
 }
 $s("btnSettings").addEventListener("click", () => { applySettingsUI(); $s("settingsModal").classList.add("open"); });
 $s("setClose").addEventListener("click", () => $s("settingsModal").classList.remove("open"));
@@ -1396,10 +1463,15 @@ $s("setSave").addEventListener("click", () => {
     aiKey: $s("setAiKey").value.trim(),                  // localStorage máy user — không vào repo
     aiModel: $s("setAiModel").value.trim(),
     galaxy: $s("setGalaxy").value,
+    uiScale: $s("setUiScale").value,
+    uiMode: $s("setUiMode").value,
   };
   const galaxyChanged = $s("setGalaxy").value !== (loadSettings().galaxy ?? "off");
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
   const needReload = String(s.kuiper) !== oldKuiper;    // so với giá trị cũ thật
+  // áp UI scale/mode realtime + lưu body attribute
+  document.body.dataset.uiscale = s.uiScale;
+  document.body.dataset.uimode = s.uiMode;
   $s("settingsModal").classList.remove("open");
   if (galaxyChanged) { toggleGalaxies($s("setGalaxy").value === "on"); }
   if (needReload) location.reload();                    // Kuiper đổi số hạt cần rebuild geometry
@@ -1411,6 +1483,8 @@ function loadSettingsKuiper() {
 // áp bloom + galaxies đã lưu lúc mở trang
 (() => {
   const st = loadSettings();
+  if (st.uiScale && st.uiScale !== "medium") document.body.dataset.uiscale = st.uiScale;
+  if (st.uiMode && st.uiMode !== "auto") document.body.dataset.uimode = st.uiMode;
   if (st.galaxy === "on") toggleGalaxies(true);
 })();
 (() => {
@@ -1445,6 +1519,11 @@ async function detectAI() {
 function aiOpen() {
   const p = document.getElementById("aiPanel");
   p.classList.toggle("open");
+  // quy ước: mobile chỉ 1 panel cùng lúc — mở AI thì đóng info
+  if (p.classList.contains("open") && window.innerWidth <= 768) {
+    const ip = document.getElementById("infopanel");
+    ip.classList.remove("open", "sheet-peek", "sheet-full");
+  }
   if (p.classList.contains("open")) detectAI().then(() => {
     const t = T();
     const head = document.querySelector("#aiHead .t-ai2");
@@ -1582,6 +1661,44 @@ document.getElementById("aiSend").addEventListener("click", aiSendNow);
 document.getElementById("aiIn").addEventListener("keydown", e => {
   if (e.key === "Enter") aiSendNow();
 });
+
+// ======================================================================
+//  G5: BOTTOM-SHEET GESTURE (mobile) — peek/half/full + swipe trên handle
+// ======================================================================
+(() => {
+  const panel = document.getElementById("infopanel");
+  const handle = document.getElementById("sheetHandle");
+  if (!handle) return;
+  let startY = 0, curMode = "half";
+
+  function setMode(m) {
+    curMode = m;
+    panel.classList.remove("sheet-peek", "sheet-full");
+    if (m === "peek") panel.classList.add("sheet-peek");
+    if (m === "full") panel.classList.add("sheet-full");
+  }
+  // mở từ click thiên thể -> mặc định half
+  const origSelect = selectPlanet;
+  window.__setSheetMode = setMode;
+  // touch trên handle
+  handle.addEventListener("touchstart", e => {
+    startY = e.touches[0].clientY;
+    handle.setPointerCapture && handle.setPointerCapture(e.pointerId);
+  }, { passive: true });
+  handle.addEventListener("touchend", e => {
+    const dy = e.changedTouches[0].clientY - startY;
+    if (dy < -40) setMode(curMode === "peek" ? "half" : "full");        // kéo lên
+    else if (dy > 40) {
+      if (curMode === "full") setMode("half");
+      else if (curMode === "half") setMode("peek");
+      else { panel.classList.remove("open", "sheet-peek", "sheet-full"); followTarget = null; }
+    }
+  });
+  // click handle (desktop debug): cycle peek->half->full
+  handle.addEventListener("click", () => {
+    setMode(curMode === "peek" ? "half" : curMode === "half" ? "full" : "peek");
+  });
+})();
 
 const clock = new THREE.Clock();
 function animate() {
