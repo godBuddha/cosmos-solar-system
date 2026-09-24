@@ -274,7 +274,7 @@
 
 <div id="panel">
   <button id="lang" style="float:right; margin-left:6px">🌐 VI</button>
-  Tốc độ <input type="range" id="speed" min="-2" max="3" step="0.05" value="0.7">
+  Tốc độ <input type="range" id="speed" min="-5" max="3" step="0.05" value="0.7">
   (<span id="speedLabel">x</span>)<br>
   <button id="pause">⏸</button>
   <button id="orbits"></button>
@@ -945,9 +945,13 @@ let meteorGPU = null;
 //  nghiêng lan tỏa dày hơn mặt phẳng hoàng đạo (đúng đặc trưng Belt)
 // ======================================================================
 {
-  const N_K = parseInt(localStorage.getItem("cosmos_settings")
-    ? (JSON.parse(localStorage.getItem("cosmos_settings")).kuiper ?? "50000")
-    : "50000", 10);
+  // F4: guard JSON.parse — localStorage hỏng không được phép trắng trang
+  let N_K = 50000;
+  try {
+    const ks = JSON.parse(localStorage.getItem("cosmos_settings") || "{}");
+    if (ks.kuiper) N_K = parseInt(ks.kuiper, 10);
+  } catch (e) { console.warn("settings localStorage hỏng — dùng mặc định 50k:", e.message); }
+  N_K = THREE.MathUtils.clamp(N_K, 1000, 100000);
   const kPos = new Float32Array(N_K * 3), kCol = new Float32Array(N_K * 3);
   const kData = [];
   let s = 733331;
@@ -1367,11 +1371,11 @@ function flyToBody(o) {
 //  G2: SPEED PRESETS — nút nhanh cho tốc độ mô phỏng
 // ======================================================================
 const PRESETS = [
-  { label: "Thực", v: -1.44 },          // ~0.036 ngày/s ≈ thời gian thực (1s=1s)
-  { label: "1h/s", v: -1.62 },          // 0.024 ngày/s
+  { label: "Thực", v: -4.94 },          // 1 giây thực = 1/86400 ngày (F12 fix)
+  { label: "1h/s", v: -1.38 },          // 1/24 ngày/s (F12 fix: cũ -1.62 ≈ 43 phút/s)
   { label: "1d/s", v: 0.0 },            // 1 ngày/s
   { label: "1mo/s", v: 1.48 },          // ~30 ngày/s
-  { label: "1y/s", v: 2.56 },           // ~365 ngày/s
+  { label: "1y/s", v: 2.563 },          // 365.25 ngày/s
 ];
 const presetBox = document.getElementById("speedPresets");
 function renderPresets() {

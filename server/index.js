@@ -15,13 +15,21 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
+import rateLimit from "express-rate-limit";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = process.env.PORT || 3000;
-const JWT_SECRET = process.env.JWT_SECRET || "dev-secret-change-me";
+const JWT_SECRET = process.env.JWT_SECRET || "";
+// FAIL-FAST: chặn chạy với secret thiếu hoặc bằng giá trị mặc định đã lộ
+if (!JWT_SECRET || JWT_SECRET === "dev-secret-change-me" || JWT_SECRET === "doi-chuoi-nay-di") {
+  console.error("FATAL: JWT_SECRET chưa đặt hoặc trùng giá trị mặc định đã lộ. " +
+    "Đặt JWT_SECRET trong file .env (chuỗi ngẫu nhiên >= 32 ký tự) rồi chạy lại.");
+  process.exit(1);
+}
 const SETUP_TOKEN = process.env.SETUP_TOKEN || "";   // optional: bảo vệ lần setup đầu
 const DATA_FILE = process.env.DATA_FILE || path.join(__dirname, "data.json");
 const COOKIE = "cosmos_token";
@@ -39,6 +47,16 @@ function save() {
 const app = express();
 app.use(express.json({ limit: "1mb" }));
 
+// rate-limit: chống brute-force login/setup + lạm dụng AI proxy
+const authLimiter = rateLimit({
+  windowMs: 60_000, max: 10,
+  standardHeaders: true, legacyHeaders: false,
+  message: { error: "quá nhiều lần thử, thử lại sau" },
+});
+app.use("/api/setup", authLimiter);
+app.use("/api/login", authLimiter);
+app.use("/api/ai/chat", authLimiter);
+
 function cookieParse(req) {
   const h = req.headers.cookie || "";
   for (const part of h.split(";")) {
@@ -51,7 +69,7 @@ function auth(req, res, next) {
   const token = cookieParse(req);
   if (!token) return res.status(401).json({ error: "unauthorized" });
   try {
-    req.user = jwt.verify(token, JWT_SECRET);
+    req.user = jwt.verify(token, JWT_SECRET, { algorithms: ["HS256"] });
     next();
   } catch {
     return res.status(401).json({ error: "invalid token" });
@@ -65,15 +83,21 @@ app.get("/api/health", (req, res) => {
 
 app.post("/api/setup", async (req, res) => {
   if (db.admin) return res.status(403).json({ error: "admin already exists" });
-  if (SETUP_TOKEN && req.headers["x-setup-token"] !== SETUP_TOKEN)
-    return res.status(403).json({ error: "invalid setup token" });
+  if (SETUP_TOKEN) {
+    // so sánh constant-time chống timing attack
+    const given = Buffer.from(String(req.headers["x-setup-token"] || ""));
+    const expect = Buffer.from(SETUP_TOKEN);
+    const okLen = given.length === expect.length;
+    const okEq = okLen && crypto.timingSafeEqual(given, expect);
+    if (!okEq) return res.status(403).json({ error: "invalid setup token" });
+  }
   const { username, password } = req.body || {};
   if (!username || !password || String(password).length < 8)
     return res.status(400).json({ error: "username + password >= 8 chars required" });
   const hash = await bcrypt.hash(password, 12);
   db.admin = { username, hash, createdAt: new Date().toISOString() };
   save();
-  const token = jwt.sign({ u: username, role: "admin" }, JWT_SECRET, { expiresIn: "7d" });
+  const token = jwt.sign({ u: username, role: "admin" }, JWT_SECRET, { expiresIn: "7d", algorithm: "HS256" });
   res.cookie(COOKIE, token, { httpOnly: true, sameSite: "lax", maxAge: 7 * 864e5 });
   res.json({ ok: true, username });
 });
@@ -84,7 +108,7 @@ app.post("/api/login", async (req, res) => {
   const ok = username === db.admin.username &&
     await bcrypt.compare(password || "", db.admin.hash);
   if (!ok) return res.status(401).json({ error: "wrong credentials" });
-  const token = jwt.sign({ u: username, role: "admin" }, JWT_SECRET, { expiresIn: "7d" });
+  const token = jwt.sign({ u: username, role: "admin" }, JWT_SECRET, { expiresIn: "7d", algorithm: "HS256" });
   res.cookie(COOKIE, token, { httpOnly: true, sameSite: "lax", maxAge: 7 * 864e5 });
   res.json({ ok: true, username });
 });

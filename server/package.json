@@ -7,8 +7,9 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2",
-    "bcryptjs": "^2.4.3"
+    "express-rate-limit": "^8.7.0",
+    "jsonwebtoken": "^9.0.2"
   }
 }

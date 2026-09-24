@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
     environment:
       - PORT=3000
-      - JWT_SECRET=${JWT_SECRET:-doi-chuoi-nay-di}
+      - JWT_SECRET=${JWT_SECRET:?Hãy đặt JWT_SECRET trong file .env (xem .env.example)}
       - SETUP_TOKEN=${SETUP_TOKEN:-}
     volumes:
       - api_data:/app/data
