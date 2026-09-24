@@ -1500,7 +1500,9 @@ function executeAIActions(content, msgEl) {
     } catch (e) { console.warn("AI action lỗi:", e); }
   }
   if (done.length) console.info("AI actions:", done);
-  return done;
+  // làm sạch: bỏ JSON action khỏi text hiển thị cho người dùng
+  const cleaned = content.replace(m[0], "").trim();
+  return { done, cleaned };
 }
 
 async function aiAsk(question) {
@@ -1538,9 +1540,10 @@ async function aiAsk(question) {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ messages: [sys, { role: "user", content: question }] })});
       const j = await r.json();
-      a.textContent = j.content || ("Lỗi: " + (j.error || "unknown"));
+      const res = j.content ? executeAIActions(j.content, a) : null;
+      a.textContent = (res && res.cleaned) ? res.cleaned
+                    : (j.content || ("Lỗi: " + (j.error || "unknown")));
       if (j.error) a.classList.add("err");
-      if (j.content) executeAIActions(j.content, a);
     } else if (aiMode === "user") {
       const s = loadSettings();
       const r = await fetch(s.aiUrl.replace(/\/$/, "") + "/chat/completions", {
@@ -1550,10 +1553,14 @@ async function aiAsk(question) {
         body: JSON.stringify({ model: s.aiModel, temperature: 0.6,
           messages: [sys, { role: "user", content: question }] })});
       const j = await r.json();
-      a.textContent = j?.choices?.[0]?.message?.content || ("Lỗi: " + (j.error?.message || "unknown"));
-      if (!j?.choices) a.classList.add("err");
       const uc = j?.choices?.[0]?.message?.content;
-      if (uc) executeAIActions(uc, a);
+      if (!j?.choices) {
+        a.textContent = "Lỗi: " + (j.error?.message || "unknown");
+        a.classList.add("err");
+      } else {
+        const res = uc ? executeAIActions(uc, a) : null;
+        a.textContent = (res && res.cleaned) ? res.cleaned : (uc || "");
+      }
     } else {
       a.textContent = t.aiNone;
       a.classList.add("err");

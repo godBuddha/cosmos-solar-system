@@ -7,7 +7,7 @@
    "zh": "Aegina"
   },
   "desc": {
-   "vi": "Aegina — tiểu hành tinh số 91 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Aegina — tiểu hành tinh số 91 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Aegina — asteroid number 91 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Aegina——主带第91号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -20,9 +20,9 @@
   "r": 0.087,
   "col": "#b4a391",
   "col2": "#796f60",
-  "M0": 273.23,
-  "om": 64.7,
-  "node": 170.3,
+  "M0": 61.9,
+  "om": 84.45,
+  "node": 10.36,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -37,7 +37,7 @@
    "zh": "Aegle"
   },
   "desc": {
-   "vi": "Aegle — tiểu hành tinh số 96 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Aegle — tiểu hành tinh số 96 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Aegle — asteroid number 96 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Aegle——主带第96号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -50,9 +50,9 @@
   "r": 0.112,
   "col": "#ab9c8a",
   "col2": "#736a5b",
-  "M0": 240.77,
-  "om": 163.2,
-  "node": 76.8,
+  "M0": 226.17,
+  "om": 169.44,
+  "node": 321.47,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -67,7 +67,7 @@
    "zh": "Aglaja"
   },
   "desc": {
-   "vi": "Aglaja — tiểu hành tinh số 47 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Aglaja — tiểu hành tinh số 47 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Aglaja — asteroid number 47 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Aglaja——主带第47号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -80,9 +80,9 @@
   "r": 0.102,
   "col": "#a39584",
   "col2": "#6e6557",
-  "M0": 342.88,
-  "om": 349.9,
-  "node": 345.1,
+  "M0": 214.61,
+  "om": 318.95,
+  "node": 2.67,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -97,7 +97,7 @@
    "zh": "Alexandra"
   },
   "desc": {
-   "vi": "Alexandra — tiểu hành tinh số 54 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Alexandra — tiểu hành tinh số 54 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Alexandra — asteroid number 54 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Alexandra——主带第54号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -110,9 +110,9 @@
   "r": 0.106,
   "col": "#c6b39f",
   "col2": "#867a69",
-  "M0": 225.43,
-  "om": 271.8,
-  "node": 358.2,
+  "M0": 230.78,
+  "om": 299.37,
+  "node": 313.01,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -127,7 +127,7 @@
    "zh": "Alkmene"
   },
   "desc": {
-   "vi": "Alkmene — tiểu hành tinh số 82 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Alkmene — tiểu hành tinh số 82 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Alkmene — asteroid number 82 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Alkmene——主带第82号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -140,9 +140,9 @@
   "r": 0.1,
   "col": "#a09382",
   "col2": "#6c6356",
-  "M0": 115.66,
-  "om": 319.4,
-  "node": 50.6,
+  "M0": 14.25,
+  "om": 136.05,
+  "node": 25.38,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -157,7 +157,7 @@
    "zh": "Amphitrite"
   },
   "desc": {
-   "vi": "Amphitrite — tiểu hành tinh số 29 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Amphitrite — tiểu hành tinh số 29 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Amphitrite — asteroid number 29 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Amphitrite——主带第29号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -170,9 +170,9 @@
   "r": 0.174,
   "col": "#b7a693",
   "col2": "#7c7161",
-  "M0": 27.73,
-  "om": 139.3,
-  "node": 105.7,
+  "M0": 193.37,
+  "om": 58.18,
+  "node": 356.25,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -187,7 +187,7 @@
    "zh": "Angelina"
   },
   "desc": {
-   "vi": "Angelina — tiểu hành tinh số 64 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Angelina — tiểu hành tinh số 64 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Angelina — asteroid number 64 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Angelina——主带第64号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -200,9 +200,9 @@
   "r": 0.111,
   "col": "#b4a491",
   "col2": "#7a6f60",
-  "M0": 160.51,
-  "om": 108.8,
-  "node": 171.2,
+  "M0": 259.74,
+  "om": 130.1,
+  "node": 308.95,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -217,7 +217,7 @@
    "zh": "Antiope"
   },
   "desc": {
-   "vi": "Antiope — tiểu hành tinh số 90 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Antiope — tiểu hành tinh số 90 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Antiope — asteroid number 90 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Antiope——主带第90号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -230,9 +230,9 @@
   "r": 0.097,
   "col": "#9e9180",
   "col2": "#6b6255",
-  "M0": 135.72,
-  "om": 333.0,
-  "node": 117.0,
+  "M0": 244.53,
+  "om": 314.27,
+  "node": 69.89,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -247,7 +247,7 @@
    "zh": "Arethusa"
   },
   "desc": {
-   "vi": "Arethusa — tiểu hành tinh số 95 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Arethusa — tiểu hành tinh số 95 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Arethusa — asteroid number 95 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Arethusa——主带第95号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -260,9 +260,9 @@
   "r": 0.105,
   "col": "#958979",
   "col2": "#655d50",
-  "M0": 103.26,
-  "om": 71.5,
-  "node": 23.5,
+  "M0": 193.03,
+  "om": 35.69,
+  "node": 242.94,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -277,7 +277,7 @@
    "zh": "Ariadne"
   },
   "desc": {
-   "vi": "Ariadne — tiểu hành tinh số 43 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Ariadne — tiểu hành tinh số 43 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Ariadne — asteroid number 43 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Ariadne——主带第43号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -290,9 +290,9 @@
   "r": 0.106,
   "col": "#c2af9b",
   "col2": "#837767",
-  "M0": 152.84,
-  "om": 343.1,
-  "node": 131.9,
+  "M0": 201.54,
+  "om": 281.05,
+  "node": 264.74,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -307,7 +307,7 @@
    "zh": "Asia"
   },
   "desc": {
-   "vi": "Asia — tiểu hành tinh số 67 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Asia — tiểu hành tinh số 67 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Asia — asteroid number 67 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Asia——主带第67号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -320,9 +320,9 @@
   "r": 0.098,
   "col": "#bba996",
   "col2": "#7e7363",
-  "M0": 213.04,
-  "om": 23.9,
-  "node": 331.1,
+  "M0": 237.76,
+  "om": 309.9,
+  "node": 202.22,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -337,7 +337,7 @@
    "zh": "Astraea"
   },
   "desc": {
-   "vi": "Astraea — tiểu hành tinh số 5 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Astraea — tiểu hành tinh số 5 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Astraea — asteroid number 5 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Astraea——主带第5号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -350,9 +350,9 @@
   "r": 0.132,
   "col": "#bfac99",
   "col2": "#817565",
-  "M0": 327.54,
-  "om": 98.5,
-  "node": 266.5,
+  "M0": 181.48,
+  "om": 140.83,
+  "node": 141.45,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -367,7 +367,7 @@
    "zh": "Atalante"
   },
   "desc": {
-   "vi": "Atalante — tiểu hành tinh số 36 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Atalante — tiểu hành tinh số 36 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Atalante — asteroid number 36 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Atalante——主带第36号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -380,9 +380,9 @@
   "r": 0.095,
   "col": "#9f9281",
   "col2": "#6b6355",
-  "M0": 270.29,
-  "om": 61.2,
-  "node": 118.8,
+  "M0": 142.94,
+  "om": 45.92,
+  "node": 358.16,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -397,7 +397,7 @@
    "zh": "Aurora"
   },
   "desc": {
-   "vi": "Aurora — tiểu hành tinh số 94 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Aurora — tiểu hành tinh số 94 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Aurora — asteroid number 94 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Aurora——主带第94号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -410,9 +410,9 @@
   "r": 0.111,
   "col": "#baa996",
   "col2": "#7e7363",
-  "M0": 325.75,
-  "om": 339.8,
-  "node": 330.2,
+  "M0": 45.71,
+  "om": 63.06,
+  "node": 2.45,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -427,7 +427,7 @@
    "zh": "Ausonia"
   },
   "desc": {
-   "vi": "Ausonia — tiểu hành tinh số 63 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Ausonia — tiểu hành tinh số 63 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Ausonia — asteroid number 63 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Ausonia——主带第63号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -440,9 +440,9 @@
   "r": 0.126,
   "col": "#9e9180",
   "col2": "#6b6255",
-  "M0": 23.0,
-  "om": 17.1,
-  "node": 117.9,
+  "M0": 111.38,
+  "om": 273.23,
+  "node": 337.68,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -457,7 +457,7 @@
    "zh": "Beatrix"
   },
   "desc": {
-   "vi": "Beatrix — tiểu hành tinh số 83 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Beatrix — tiểu hành tinh số 83 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Beatrix — asteroid number 83 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Beatrix——主带第83号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -470,9 +470,9 @@
   "r": 0.092,
   "col": "#b6a592",
   "col2": "#7b7061",
-  "M0": 253.16,
-  "om": 51.1,
-  "node": 103.9,
+  "M0": 183.99,
+  "om": 197.51,
+  "node": 27.65,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -487,7 +487,7 @@
    "zh": "Bellona"
   },
   "desc": {
-   "vi": "Bellona — tiểu hành tinh số 28 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Bellona — tiểu hành tinh số 28 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Bellona — asteroid number 28 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Bellona——主带第28号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -500,9 +500,9 @@
   "r": 0.124,
   "col": "#a19483",
   "col2": "#6d6456",
-  "M0": 250.22,
-  "om": 47.6,
-  "node": 52.4,
+  "M0": 107.97,
+  "om": 127.69,
+  "node": 144.15,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -547,7 +547,7 @@
    "zh": "Circe"
   },
   "desc": {
-   "vi": "Circe — tiểu hành tinh số 34 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Circe — tiểu hành tinh số 34 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Circe — asteroid number 34 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Circe——主带第34号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -560,9 +560,9 @@
   "r": 0.092,
   "col": "#ae9f8d",
   "col2": "#766c5d",
-  "M0": 355.27,
-  "om": 237.8,
-  "node": 12.2,
+  "M0": 350.09,
+  "om": 153.51,
+  "node": 184.25,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -577,7 +577,7 @@
    "zh": "Concordia"
   },
   "desc": {
-   "vi": "Concordia — tiểu hành tinh số 58 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Concordia — tiểu hành tinh số 58 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Concordia — asteroid number 58 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Concordia——主带第58号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -590,9 +590,9 @@
   "r": 0.088,
   "col": "#a79987",
   "col2": "#716859",
-  "M0": 55.46,
-  "om": 278.6,
-  "node": 211.4,
+  "M0": 152.97,
+  "om": 194.87,
+  "node": 161.05,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -607,7 +607,7 @@
    "zh": "Cybele"
   },
   "desc": {
-   "vi": "Cybele — tiểu hành tinh số 65 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Cybele — tiểu hành tinh số 65 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Cybele — asteroid number 65 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Cybele——主带第65号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -620,9 +620,9 @@
   "r": 0.136,
   "col": "#8f8475",
   "col2": "#61594d",
-  "M0": 298.02,
-  "om": 200.5,
-  "node": 224.5,
+  "M0": 303.9,
+  "om": 259.33,
+  "node": 155.1,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -637,7 +637,7 @@
    "zh": "Danae"
   },
   "desc": {
-   "vi": "Danae — tiểu hành tinh số 61 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Danae — tiểu hành tinh số 61 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Danae — asteroid number 61 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Danae——主带第61号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -650,9 +650,9 @@
   "r": 0.111,
   "col": "#ae9e8c",
   "col2": "#756b5d",
-  "M0": 107.99,
-  "om": 193.7,
-  "node": 11.3,
+  "M0": 48.65,
+  "om": 346.42,
+  "node": 333.54,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -667,7 +667,7 @@
    "zh": "Daphne"
   },
   "desc": {
-   "vi": "Daphne — tiểu hành tinh số 41 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Daphne — tiểu hành tinh số 41 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Daphne — asteroid number 41 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Daphne——主带第41号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -680,9 +680,9 @@
   "r": 0.114,
   "col": "#968a7a",
   "col2": "#655d51",
-  "M0": 237.83,
-  "om": 159.7,
-  "node": 25.3,
+  "M0": 331.15,
+  "om": 224.62,
+  "node": 177.6,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -697,7 +697,7 @@
    "zh": "Diana"
   },
   "desc": {
-   "vi": "Diana — tiểu hành tinh số 78 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Diana — tiểu hành tinh số 78 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Diana — asteroid number 78 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Diana——主带第78号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -710,9 +710,9 @@
   "r": 0.097,
   "col": "#bfad99",
   "col2": "#817665",
-  "M0": 285.62,
-  "om": 312.6,
-  "node": 197.4,
+  "M0": 201.43,
+  "om": 126.6,
+  "node": 333.28,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -727,7 +727,7 @@
    "zh": "Dike"
   },
   "desc": {
-   "vi": "Dike — tiểu hành tinh số 99 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Dike — tiểu hành tinh số 99 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Dike — asteroid number 99 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Dike——主带第99号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -740,9 +740,9 @@
   "r": 0.083,
   "col": "#b1a18f",
   "col2": "#786e5e",
-  "M0": 293.29,
-  "om": 78.3,
-  "node": 236.7,
+  "M0": 114.05,
+  "om": 236.79,
+  "node": 41.4,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -757,7 +757,7 @@
    "zh": "Doris"
   },
   "desc": {
-   "vi": "Doris — tiểu hành tinh số 48 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Doris — tiểu hành tinh số 48 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Doris — asteroid number 48 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Doris——主带第48号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -770,9 +770,9 @@
   "r": 0.128,
   "col": "#b9a895",
   "col2": "#7d7262",
-  "M0": 120.38,
-  "om": 81.6,
-  "node": 38.4,
+  "M0": 177.54,
+  "om": 74.87,
+  "node": 183.42,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -817,7 +817,7 @@
    "zh": "Echo"
   },
   "desc": {
-   "vi": "Echo — tiểu hành tinh số 60 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Echo — tiểu hành tinh số 60 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Echo — asteroid number 60 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Echo——主带第60号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -830,9 +830,9 @@
   "r": 0.093,
   "col": "#988c7c",
   "col2": "#675f52",
-  "M0": 330.48,
-  "om": 102.0,
-  "node": 318.0,
+  "M0": 181.3,
+  "om": 102.41,
+  "node": 191.51,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -847,7 +847,7 @@
    "zh": "Egeria"
   },
   "desc": {
-   "vi": "Egeria — tiểu hành tinh số 13 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Egeria — tiểu hành tinh số 13 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Egeria — asteroid number 13 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Egeria——主带第13号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -860,9 +860,9 @@
   "r": 0.133,
   "col": "#bcaa97",
   "col2": "#7f7464",
-  "M0": 347.6,
-  "om": 112.1,
-  "node": 332.9,
+  "M0": 88.62,
+  "om": 122.3,
+  "node": 43.18,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -877,7 +877,7 @@
    "zh": "Elpis"
   },
   "desc": {
-   "vi": "Elpis — tiểu hành tinh số 59 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Elpis — tiểu hành tinh số 59 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Elpis — asteroid number 59 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Elpis——主带第59号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -890,9 +890,9 @@
   "r": 0.103,
   "col": "#bdab98",
   "col2": "#807564",
-  "M0": 192.97,
-  "om": 10.3,
-  "node": 264.7,
+  "M0": 12.37,
+  "om": 21.08,
+  "node": 169.91,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -907,7 +907,7 @@
    "zh": "Erato"
   },
   "desc": {
-   "vi": "Erato — tiểu hành tinh số 62 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Erato — tiểu hành tinh số 62 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Erato — asteroid number 62 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Erato——主带第62号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -920,9 +920,9 @@
   "r": 0.09,
   "col": "#c4b19d",
   "col2": "#847868",
-  "M0": 245.5,
-  "om": 285.4,
-  "node": 64.6,
+  "M0": 341.11,
+  "om": 42.9,
+  "node": 125.1,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -967,7 +967,7 @@
    "zh": "Eugenia"
   },
   "desc": {
-   "vi": "Eugenia — tiểu hành tinh số 45 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Eugenia — tiểu hành tinh số 45 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Eugenia — asteroid number 45 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Eugenia——主带第45号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -980,9 +980,9 @@
   "r": 0.11,
   "col": "#b3a290",
   "col2": "#796e5f",
-  "M0": 67.86,
-  "om": 166.5,
-  "node": 238.5,
+  "M0": 250.51,
+  "om": 234.72,
+  "node": 147.52,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -997,7 +997,7 @@
    "zh": "Eunomia"
   },
   "desc": {
-   "vi": "Eunomia — tiểu hành tinh số 15 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Eunomia — tiểu hành tinh số 15 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Eunomia — asteroid number 15 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Eunomia——主带第15号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1010,9 +1010,9 @@
   "r": 0.206,
   "col": "#ad9d8b",
   "col2": "#756b5c",
-  "M0": 262.62,
-  "om": 295.5,
-  "node": 79.5,
+  "M0": 159.69,
+  "om": 31.34,
+  "node": 292.88,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1027,7 +1027,7 @@
    "zh": "Euphrosyne"
   },
   "desc": {
-   "vi": "Euphrosyne — tiểu hành tinh số 31 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Euphrosyne — tiểu hành tinh số 31 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Euphrosyne — asteroid number 31 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Euphrosyne——主带第31号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1040,9 +1040,9 @@
   "r": 0.136,
   "col": "#a89988",
   "col2": "#71685a",
-  "M0": 302.75,
-  "om": 322.7,
-  "node": 212.3,
+  "M0": 182.91,
+  "om": 92.8,
+  "node": 30.79,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1057,7 +1057,7 @@
    "zh": "Europa"
   },
   "desc": {
-   "vi": "Europa — tiểu hành tinh số 52 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Europa — tiểu hành tinh số 52 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Europa — asteroid number 52 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Europa——主带第52号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1070,9 +1070,9 @@
   "r": 0.143,
   "col": "#9a8e7d",
   "col2": "#686053",
-  "M0": 310.42,
-  "om": 88.4,
-  "node": 251.6,
+  "M0": 348.92,
+  "om": 111.37,
+  "node": 128.57,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1087,7 +1087,7 @@
    "zh": "Eurydike"
   },
   "desc": {
-   "vi": "Eurydike — tiểu hành tinh số 75 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Eurydike — tiểu hành tinh số 75 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Eurydike — asteroid number 75 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Eurydike——主带第75号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1100,9 +1100,9 @@
   "r": 0.085,
   "col": "#b9a794",
   "col2": "#7d7262",
-  "M0": 233.1,
-  "om": 37.5,
-  "node": 37.5,
+  "M0": 187.58,
+  "om": 338.74,
+  "node": 359.1,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1117,7 +1117,7 @@
    "zh": "Eurynome"
   },
   "desc": {
-   "vi": "Eurynome — tiểu hành tinh số 79 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Eurynome — tiểu hành tinh số 79 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Eurynome — asteroid number 79 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Eurynome——主带第79号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1130,9 +1130,9 @@
   "r": 0.109,
   "col": "#998d7d",
   "col2": "#686052",
-  "M0": 63.13,
-  "om": 44.3,
-  "node": 250.7,
+  "M0": 178.93,
+  "om": 47.89,
+  "node": 206.5,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1147,7 +1147,7 @@
    "zh": "Euterpe"
   },
   "desc": {
-   "vi": "Euterpe — tiểu hành tinh số 27 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Euterpe — tiểu hành tinh số 27 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Euterpe — asteroid number 27 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Euterpe——主带第27号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1160,9 +1160,9 @@
   "r": 0.13,
   "col": "#c7b39f",
   "col2": "#867a69",
-  "M0": 112.72,
-  "om": 315.9,
-  "node": 359.1,
+  "M0": 327.72,
+  "om": 91.38,
+  "node": 94.77,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1177,7 +1177,7 @@
    "zh": "Feronia"
   },
   "desc": {
-   "vi": "Feronia — tiểu hành tinh số 72 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Feronia — tiểu hành tinh số 72 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Feronia — asteroid number 72 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Feronia——主带第72号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1190,9 +1190,9 @@
   "r": 0.087,
   "col": "#b2a28f",
   "col2": "#786e5f",
-  "M0": 180.58,
-  "om": 122.4,
-  "node": 237.6,
+  "M0": 38.12,
+  "om": 310.61,
+  "node": 207.93,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1207,7 +1207,7 @@
    "zh": "Fides"
   },
   "desc": {
-   "vi": "Fides — tiểu hành tinh số 37 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Fides — tiểu hành tinh số 37 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Fides — asteroid number 37 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Fides——主带第37号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1220,9 +1220,9 @@
   "r": 0.122,
   "col": "#b5a492",
   "col2": "#7a7060",
-  "M0": 47.8,
-  "om": 152.9,
-  "node": 172.1,
+  "M0": 218.72,
+  "om": 69.56,
+  "node": 7.23,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1237,7 +1237,7 @@
    "zh": "Flora"
   },
   "desc": {
-   "vi": "Flora — tiểu hành tinh số 8 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Flora — tiểu hành tinh số 8 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Flora — asteroid number 8 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Flora——主带第8号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1250,9 +1250,9 @@
   "r": 0.144,
   "col": "#c5b29e",
   "col2": "#857968",
-  "M0": 20.06,
-  "om": 13.6,
-  "node": 66.4,
+  "M0": 259.26,
+  "om": 36.25,
+  "node": 110.84,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1267,7 +1267,7 @@
    "zh": "Fortuna"
   },
   "desc": {
-   "vi": "Fortuna — tiểu hành tinh số 19 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Fortuna — tiểu hành tinh số 19 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Fortuna — asteroid number 19 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Fortuna——主带第19号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1280,9 +1280,9 @@
   "r": 0.116,
   "col": "#8d8374",
   "col2": "#60594c",
-  "M0": 92.65,
-  "om": 302.3,
-  "node": 292.7,
+  "M0": 148.26,
+  "om": 33.43,
+  "node": 210.99,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1297,7 +1297,7 @@
    "zh": "Freia"
   },
   "desc": {
-   "vi": "Freia — tiểu hành tinh số 76 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Freia — tiểu hành tinh số 76 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Freia — asteroid number 76 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Freia——主带第76号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1310,9 +1310,9 @@
   "r": 0.105,
   "col": "#938878",
   "col2": "#635c4f",
-  "M0": 10.61,
-  "om": 129.2,
-  "node": 90.8,
+  "M0": 330.76,
+  "om": 96.55,
+  "node": 204.27,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1327,7 +1327,7 @@
    "zh": "Frigga"
   },
   "desc": {
-   "vi": "Frigga — tiểu hành tinh số 77 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Frigga — tiểu hành tinh số 77 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Frigga — asteroid number 77 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Frigga——主带第77号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1340,9 +1340,9 @@
   "r": 0.094,
   "col": "#a99a89",
   "col2": "#72695a",
-  "M0": 148.12,
-  "om": 220.9,
-  "node": 144.1,
+  "M0": 152.09,
+  "om": 62.18,
+  "node": 1.05,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1357,7 +1357,7 @@
    "zh": "Galatea"
   },
   "desc": {
-   "vi": "Galatea — tiểu hành tinh số 74 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Galatea — tiểu hành tinh số 74 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Galatea — asteroid number 74 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Galatea——主带第74号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1370,9 +1370,9 @@
   "r": 0.089,
   "col": "#a29584",
   "col2": "#6e6557",
-  "M0": 95.59,
-  "om": 305.8,
-  "node": 344.2,
+  "M0": 106.72,
+  "om": 12.0,
+  "node": 196.98,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1417,7 +1417,7 @@
    "zh": "Harmonia"
   },
   "desc": {
-   "vi": "Harmonia — tiểu hành tinh số 40 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Harmonia — tiểu hành tinh số 40 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Harmonia — asteroid number 40 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Harmonia——主带第40号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1430,9 +1430,9 @@
   "r": 0.146,
   "col": "#bcaa97",
   "col2": "#7f7464",
-  "M0": 100.32,
-  "om": 68.0,
-  "node": 332.0,
+  "M0": 137.89,
+  "om": 4.08,
+  "node": 94.15,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1477,7 +1477,7 @@
    "zh": "Hebe"
   },
   "desc": {
-   "vi": "Hebe — tiểu hành tinh số 6 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Hebe — tiểu hành tinh số 6 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Hebe — asteroid number 6 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Hebe——主带第6号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1490,9 +1490,9 @@
   "r": 0.193,
   "col": "#998d7c",
   "col2": "#675f52",
-  "M0": 105.05,
-  "om": 190.2,
-  "node": 319.8,
+  "M0": 44.72,
+  "om": 18.34,
+  "node": 138.61,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1507,7 +1507,7 @@
    "zh": "Hekate"
   },
   "desc": {
-   "vi": "Hekate — tiểu hành tinh số 100 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Hekate — tiểu hành tinh số 100 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Hekate — asteroid number 100 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Hekate——主带第100号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1520,9 +1520,9 @@
   "r": 0.111,
   "col": "#8c8273",
   "col2": "#5f584c",
-  "M0": 70.8,
-  "om": 170.0,
-  "node": 290.0,
+  "M0": 359.56,
+  "om": 310.67,
+  "node": 127.16,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1537,7 +1537,7 @@
    "zh": "Hesperia"
   },
   "desc": {
-   "vi": "Hesperia — tiểu hành tinh số 69 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Hesperia — tiểu hành tinh số 69 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Hesperia — asteroid number 69 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Hesperia——主带第69号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1550,9 +1550,9 @@
   "r": 0.124,
   "col": "#ab9c8a",
   "col2": "#746a5b",
-  "M0": 128.05,
-  "om": 207.3,
-  "node": 77.7,
+  "M0": 81.16,
+  "om": 113.07,
+  "node": 184.89,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1567,7 +1567,7 @@
    "zh": "Hestia"
   },
   "desc": {
-   "vi": "Hestia — tiểu hành tinh số 46 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Hestia — tiểu hành tinh số 46 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Hestia — asteroid number 46 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Hestia——主带第46号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1580,9 +1580,9 @@
   "r": 0.095,
   "col": "#8d8373",
   "col2": "#5f584c",
-  "M0": 205.37,
-  "om": 258.2,
-  "node": 291.8,
+  "M0": 348.86,
+  "om": 358.1,
+  "node": 181.05,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1627,7 +1627,7 @@
    "zh": "Ianthe"
   },
   "desc": {
-   "vi": "Ianthe — tiểu hành tinh số 98 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Ianthe — tiểu hành tinh số 98 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Ianthe — asteroid number 98 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Ianthe——主带第98号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1640,9 +1640,9 @@
   "r": 0.089,
   "col": "#9b8f7e",
   "col2": "#696153",
-  "M0": 155.78,
-  "om": 346.6,
-  "node": 183.4,
+  "M0": 348.2,
+  "om": 151.92,
+  "node": 353.85,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1657,7 +1657,7 @@
    "zh": "Io"
   },
   "desc": {
-   "vi": "Io — tiểu hành tinh số 85 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Io — tiểu hành tinh số 85 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Io — asteroid number 85 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Io——主带第85号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1670,9 +1670,9 @@
   "r": 0.106,
   "col": "#a79887",
   "col2": "#716759",
-  "M0": 168.18,
-  "om": 234.5,
-  "node": 210.5,
+  "M0": 93.84,
+  "om": 326.0,
+  "node": 203.04,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1687,7 +1687,7 @@
    "zh": "Irene"
   },
   "desc": {
-   "vi": "Irene — tiểu hành tinh số 14 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Irene — tiểu hành tinh số 14 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Irene — asteroid number 14 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Irene——主带第14号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1700,9 +1700,9 @@
   "r": 0.147,
   "col": "#968b7b",
   "col2": "#665e51",
-  "M0": 125.11,
-  "om": 203.8,
-  "node": 26.2,
+  "M0": 60.23,
+  "om": 184.32,
+  "node": 86.01,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1717,7 +1717,7 @@
    "zh": "Iris"
   },
   "desc": {
-   "vi": "Iris — tiểu hành tinh số 7 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Iris — tiểu hành tinh số 7 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Iris — asteroid number 7 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Iris——主带第7号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1730,9 +1730,9 @@
   "r": 0.189,
   "col": "#af9f8d",
   "col2": "#766c5d",
-  "M0": 242.56,
-  "om": 281.9,
-  "node": 13.1,
+  "M0": 115.29,
+  "om": 44.9,
+  "node": 259.49,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1747,7 +1747,7 @@
    "zh": "Isis"
   },
   "desc": {
-   "vi": "Isis — tiểu hành tinh số 42 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Isis — tiểu hành tinh số 42 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Isis — asteroid number 42 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Isis——主带第42号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1760,9 +1760,9 @@
   "r": 0.111,
   "col": "#ac9d8b",
   "col2": "#746a5c",
-  "M0": 15.34,
-  "om": 251.4,
-  "node": 78.6,
+  "M0": 154.36,
+  "om": 321.77,
+  "node": 84.15,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1777,7 +1777,7 @@
    "zh": "Julia"
   },
   "desc": {
-   "vi": "Julia — tiểu hành tinh số 89 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Julia — tiểu hành tinh số 89 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Julia — asteroid number 89 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Julia——主带第89号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1790,9 +1790,9 @@
   "r": 0.154,
   "col": "#c3b09c",
   "col2": "#847867",
-  "M0": 358.21,
-  "om": 241.3,
-  "node": 63.7,
+  "M0": 46.77,
+  "om": 356.72,
+  "node": 311.52,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1867,7 +1867,7 @@
    "zh": "Kalliope"
   },
   "desc": {
-   "vi": "Kalliope — tiểu hành tinh số 22 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Kalliope — tiểu hành tinh số 22 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Kalliope — asteroid number 22 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Kalliope——主带第22号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1880,9 +1880,9 @@
   "r": 0.138,
   "col": "#948979",
   "col2": "#645c50",
-  "M0": 145.18,
-  "om": 217.4,
-  "node": 92.6,
+  "M0": 350.33,
+  "om": 64.28,
+  "node": 65.97,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1897,7 +1897,7 @@
    "zh": "Kalypso"
   },
   "desc": {
-   "vi": "Kalypso — tiểu hành tinh số 53 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Kalypso — tiểu hành tinh số 53 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Kalypso — asteroid number 53 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Kalypso——主带第53号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1910,9 +1910,9 @@
   "r": 0.09,
   "col": "#b0a08e",
   "col2": "#776d5e",
-  "M0": 87.92,
-  "om": 180.1,
-  "node": 304.9,
+  "M0": 307.59,
+  "om": 97.88,
+  "node": 143.44,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1927,7 +1927,7 @@
    "zh": "Klio"
   },
   "desc": {
-   "vi": "Klio — tiểu hành tinh số 84 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Klio — tiểu hành tinh số 84 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Klio — asteroid number 84 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Klio——主带第84号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1940,9 +1940,9 @@
   "r": 0.084,
   "col": "#908676",
   "col2": "#625a4e",
-  "M0": 30.67,
-  "om": 142.8,
-  "node": 157.2,
+  "M0": 93.07,
+  "om": 342.68,
+  "node": 327.49,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1957,7 +1957,7 @@
    "zh": "Klotho"
   },
   "desc": {
-   "vi": "Klotho — tiểu hành tinh số 97 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Klotho — tiểu hành tinh số 97 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Klotho — asteroid number 97 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Klotho——主带第97号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -1970,9 +1970,9 @@
   "r": 0.109,
   "col": "#c1ae9b",
   "col2": "#827766",
-  "M0": 18.28,
-  "om": 254.9,
-  "node": 130.1,
+  "M0": 179.26,
+  "om": 68.04,
+  "node": 159.58,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -1987,7 +1987,7 @@
    "zh": "Klytia"
   },
   "desc": {
-   "vi": "Klytia — tiểu hành tinh số 73 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Klytia — tiểu hành tinh số 73 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Klytia — asteroid number 73 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Klytia——主带第73号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2000,9 +2000,9 @@
   "r": 0.088,
   "col": "#8c8273",
   "col2": "#5f584c",
-  "M0": 318.08,
-  "om": 214.1,
-  "node": 290.9,
+  "M0": 21.34,
+  "om": 63.71,
+  "node": 6.82,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2017,7 +2017,7 @@
    "zh": "Laetitia"
   },
   "desc": {
-   "vi": "Laetitia — tiểu hành tinh số 39 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Laetitia — tiểu hành tinh số 39 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Laetitia — asteroid number 39 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Laetitia——主带第39号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2030,9 +2030,9 @@
   "r": 0.174,
   "col": "#a59786",
   "col2": "#706758",
-  "M0": 322.81,
-  "om": 336.3,
-  "node": 278.7,
+  "M0": 136.61,
+  "om": 6.92,
+  "node": 156.82,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2047,7 +2047,7 @@
    "zh": "Leda"
   },
   "desc": {
-   "vi": "Leda — tiểu hành tinh số 38 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Leda — tiểu hành tinh số 38 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Leda — asteroid number 38 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Leda——主带第38号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2060,9 +2060,9 @@
   "r": 0.095,
   "col": "#8f8575",
   "col2": "#615a4d",
-  "M0": 185.3,
-  "om": 244.6,
-  "node": 225.4,
+  "M0": 209.1,
+  "om": 105.32,
+  "node": 295.49,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2077,7 +2077,7 @@
    "zh": "Leto"
   },
   "desc": {
-   "vi": "Leto — tiểu hành tinh số 68 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Leto — tiểu hành tinh số 68 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Leto — asteroid number 68 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Leto——主带第68号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2090,9 +2090,9 @@
   "r": 0.134,
   "col": "#958a7a",
   "col2": "#655d50",
-  "M0": 350.54,
-  "om": 115.6,
-  "node": 24.4,
+  "M0": 92.91,
+  "om": 349.14,
+  "node": 44.03,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2107,7 +2107,7 @@
    "zh": "Leukothea"
   },
   "desc": {
-   "vi": "Leukothea — tiểu hành tinh số 35 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Leukothea — tiểu hành tinh số 35 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Leukothea — asteroid number 35 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Leukothea——主带第35号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2120,9 +2120,9 @@
   "r": 0.093,
   "col": "#c5b19d",
   "col2": "#857968",
-  "M0": 132.78,
-  "om": 329.5,
-  "node": 65.5,
+  "M0": 346.88,
+  "om": 208.43,
+  "node": 352.9,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2137,7 +2137,7 @@
    "zh": "Lutetia"
   },
   "desc": {
-   "vi": "Lutetia — tiểu hành tinh số 21 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Lutetia — tiểu hành tinh số 21 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Lutetia — asteroid number 21 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Lutetia——主带第21号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2150,9 +2150,9 @@
   "r": 0.117,
   "col": "#baa895",
   "col2": "#7d7263",
-  "M0": 7.67,
-  "om": 125.7,
-  "node": 39.3,
+  "M0": 298.77,
+  "om": 330.72,
+  "node": 80.84,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2167,7 +2167,7 @@
    "zh": "Maja"
   },
   "desc": {
-   "vi": "Maja — tiểu hành tinh số 66 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Maja — tiểu hành tinh số 66 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Maja — asteroid number 66 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Maja——主带第66号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2180,9 +2180,9 @@
   "r": 0.082,
   "col": "#a59785",
   "col2": "#6f6658",
-  "M0": 75.53,
-  "om": 292.2,
-  "node": 277.8,
+  "M0": 255.02,
+  "om": 50.94,
+  "node": 7.47,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2257,7 +2257,7 @@
    "zh": "Massalia"
   },
   "desc": {
-   "vi": "Massalia — tiểu hành tinh số 20 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Massalia — tiểu hành tinh số 20 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Massalia — asteroid number 20 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Massalia——主带第20号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2270,9 +2270,9 @@
   "r": 0.147,
   "col": "#a49685",
   "col2": "#6f6658",
-  "M0": 230.16,
-  "om": 34.0,
-  "node": 346.0,
+  "M0": 82.8,
+  "om": 103.15,
+  "node": 205.95,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2287,7 +2287,7 @@
    "zh": "Melete"
   },
   "desc": {
-   "vi": "Melete — tiểu hành tinh số 56 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Melete — tiểu hành tinh số 56 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Melete — asteroid number 56 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Melete——主带第56号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2300,9 +2300,9 @@
   "r": 0.095,
   "col": "#b7a693",
   "col2": "#7b7161",
-  "M0": 140.45,
-  "om": 95.2,
-  "node": 104.8,
+  "M0": 139.05,
+  "om": 297.93,
+  "node": 192.9,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2317,7 +2317,7 @@
    "zh": "Melpomene"
   },
   "desc": {
-   "vi": "Melpomene — tiểu hành tinh số 18 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Melpomene — tiểu hành tinh số 18 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Melpomene — asteroid number 18 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Melpomene——主带第18号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2330,9 +2330,9 @@
   "r": 0.155,
   "col": "#b3a390",
   "col2": "#796f5f",
-  "M0": 315.14,
-  "om": 210.6,
-  "node": 239.4,
+  "M0": 283.95,
+  "om": 18.35,
+  "node": 150.32,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2377,7 +2377,7 @@
    "zh": "Metis"
   },
   "desc": {
-   "vi": "Metis — tiểu hành tinh số 9 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Metis — tiểu hành tinh số 9 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Metis — asteroid number 9 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Metis——主带第9号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2390,9 +2390,9 @@
   "r": 0.163,
   "col": "#9f9281",
   "col2": "#6c6355",
-  "M0": 157.57,
-  "om": 105.3,
-  "node": 119.7,
+  "M0": 252.62,
+  "om": 74.8,
+  "node": 68.87,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2407,7 +2407,7 @@
    "zh": "Minerva"
   },
   "desc": {
-   "vi": "Minerva — tiểu hành tinh số 93 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Minerva — tiểu hành tinh số 93 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Minerva — asteroid number 93 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Minerva——主带第93号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2420,9 +2420,9 @@
   "r": 0.107,
   "col": "#a49685",
   "col2": "#6f6658",
-  "M0": 188.24,
-  "om": 248.1,
-  "node": 276.9,
+  "M0": 316.29,
+  "om": 279.71,
+  "node": 3.81,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2437,7 +2437,7 @@
    "zh": "Mnemosyne"
   },
   "desc": {
-   "vi": "Mnemosyne — tiểu hành tinh số 57 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Mnemosyne — tiểu hành tinh số 57 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Mnemosyne — asteroid number 57 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Mnemosyne——主带第57号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2450,9 +2450,9 @@
   "r": 0.133,
   "col": "#918677",
   "col2": "#625b4e",
-  "M0": 277.96,
-  "om": 186.9,
-  "node": 158.1,
+  "M0": 240.32,
+  "om": 49.87,
+  "node": 198.88,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2467,7 +2467,7 @@
    "zh": "Nemausa"
   },
   "desc": {
-   "vi": "Nemausa — tiểu hành tinh số 51 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Nemausa — tiểu hành tinh số 51 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Nemausa — asteroid number 51 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Nemausa——主带第51号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2480,9 +2480,9 @@
   "r": 0.111,
   "col": "#c0ad9a",
   "col2": "#817666",
-  "M0": 172.91,
-  "om": 356.7,
-  "node": 198.3,
+  "M0": 80.61,
+  "om": 178.28,
+  "node": 175.88,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2527,7 +2527,7 @@
    "zh": "Niobe"
   },
   "desc": {
-   "vi": "Niobe — tiểu hành tinh số 71 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Niobe — tiểu hành tinh số 71 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Niobe — asteroid number 71 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Niobe——主带第71号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2540,9 +2540,9 @@
   "r": 0.124,
   "col": "#9c8f7f",
   "col2": "#696154",
-  "M0": 43.07,
-  "om": 30.7,
-  "node": 184.3,
+  "M0": 104.31,
+  "om": 222.91,
+  "node": 315.91,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2557,7 +2557,7 @@
    "zh": "Nysa"
   },
   "desc": {
-   "vi": "Nysa — tiểu hành tinh số 44 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Nysa — tiểu hành tinh số 44 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Nysa — asteroid number 44 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Nysa——主带第44号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2570,9 +2570,9 @@
   "r": 0.139,
   "col": "#9c907f",
   "col2": "#6a6154",
-  "M0": 290.35,
-  "om": 74.8,
-  "node": 185.2,
+  "M0": 41.46,
+  "om": 115.37,
+  "node": 131.48,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2617,7 +2617,7 @@
    "zh": "Pales"
   },
   "desc": {
-   "vi": "Pales — tiểu hành tinh số 49 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Pales — tiểu hành tinh số 49 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Pales — asteroid number 49 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Pales——主带第49号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2630,9 +2630,9 @@
   "r": 0.105,
   "col": "#938878",
   "col2": "#645c4f",
-  "M0": 257.89,
-  "om": 173.3,
-  "node": 91.7,
+  "M0": 349.09,
+  "om": 38.46,
+  "node": 284.98,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2677,7 +2677,7 @@
    "zh": "Pandora"
   },
   "desc": {
-   "vi": "Pandora — tiểu hành tinh số 55 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Pandora — tiểu hành tinh số 55 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Pandora — asteroid number 55 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Pandora——主带第55号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2690,9 +2690,9 @@
   "r": 0.108,
   "col": "#a19382",
   "col2": "#6d6456",
-  "M0": 2.94,
-  "om": 3.5,
-  "node": 51.5,
+  "M0": 200.63,
+  "om": 15.17,
+  "node": 10.28,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2707,7 +2707,7 @@
    "zh": "Panopaea"
   },
   "desc": {
-   "vi": "Panopaea — tiểu hành tinh số 70 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Panopaea — tiểu hành tinh số 70 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Panopaea — asteroid number 70 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Panopaea——主带第70号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2720,9 +2720,9 @@
   "r": 0.101,
   "col": "#c2af9b",
   "col2": "#837767",
-  "M0": 265.56,
-  "om": 299.0,
-  "node": 131.0,
+  "M0": 316.26,
+  "om": 303.04,
+  "node": 47.64,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2737,7 +2737,7 @@
    "zh": "Parthenope"
   },
   "desc": {
-   "vi": "Parthenope — tiểu hành tinh số 11 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Parthenope — tiểu hành tinh số 11 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Parthenope — asteroid number 11 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Parthenope——主带第11号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2750,9 +2750,9 @@
   "r": 0.14,
   "col": "#908576",
   "col2": "#615a4e",
-  "M0": 72.59,
-  "om": 288.7,
-  "node": 226.3,
+  "M0": 224.94,
+  "om": 321.93,
+  "node": 125.47,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2767,7 +2767,7 @@
    "zh": "Phocaea"
   },
   "desc": {
-   "vi": "Phocaea — tiểu hành tinh số 25 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Phocaea — tiểu hành tinh số 25 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Phocaea — asteroid number 25 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Phocaea——主带第25号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2780,9 +2780,9 @@
   "r": 0.107,
   "col": "#9b8e7e",
   "col2": "#696053",
-  "M0": 197.7,
-  "om": 132.5,
-  "node": 252.5,
+  "M0": 142.12,
+  "om": 304.38,
+  "node": 214.06,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2827,7 +2827,7 @@
    "zh": "Polyhymnia"
   },
   "desc": {
-   "vi": "Polyhymnia — tiểu hành tinh số 33 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Polyhymnia — tiểu hành tinh số 33 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Polyhymnia — asteroid number 33 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Polyhymnia——主带第33号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2840,9 +2840,9 @@
   "r": 0.096,
   "col": "#988c7c",
   "col2": "#675f52",
-  "M0": 217.76,
-  "om": 146.1,
-  "node": 318.9,
+  "M0": 147.61,
+  "om": 346.94,
+  "node": 8.13,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2857,7 +2857,7 @@
    "zh": "Pomona"
   },
   "desc": {
-   "vi": "Pomona — tiểu hành tinh số 32 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Pomona — tiểu hành tinh số 32 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Pomona — asteroid number 32 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Pomona——主带第32号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2870,9 +2870,9 @@
   "r": 0.11,
   "col": "#beac98",
   "col2": "#807565",
-  "M0": 80.26,
-  "om": 54.4,
-  "node": 265.6,
+  "M0": 289.62,
+  "om": 197.89,
+  "node": 220.31,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2887,7 +2887,7 @@
    "zh": "Proserpina"
   },
   "desc": {
-   "vi": "Proserpina — tiểu hành tinh số 26 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Proserpina — tiểu hành tinh số 26 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Proserpina — asteroid number 26 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Proserpina——主带第26号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2900,9 +2900,9 @@
   "r": 0.117,
   "col": "#b1a18e",
   "col2": "#776d5e",
-  "M0": 335.21,
-  "om": 224.2,
-  "node": 305.8,
+  "M0": 335.1,
+  "om": 241.8,
+  "node": 45.68,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2917,7 +2917,7 @@
    "zh": "Psyche"
   },
   "desc": {
-   "vi": "Psyche — tiểu hành tinh số 16 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Psyche — tiểu hành tinh số 16 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Psyche — asteroid number 16 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Psyche——主带第16号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2930,9 +2930,9 @@
   "r": 0.162,
   "col": "#c3b09c",
   "col2": "#837867",
-  "M0": 40.13,
-  "om": 27.2,
-  "node": 132.8,
+  "M0": 79.77,
+  "om": 20.01,
+  "node": 149.98,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -2977,7 +2977,7 @@
    "zh": "Sappho"
   },
   "desc": {
-   "vi": "Sappho — tiểu hành tinh số 80 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Sappho — tiểu hành tinh số 80 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Sappho — asteroid number 80 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Sappho——主带第80号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -2990,9 +2990,9 @@
   "r": 0.103,
   "col": "#b0a08e",
   "col2": "#776d5e",
-  "M0": 200.64,
-  "om": 136.0,
-  "node": 304.0,
+  "M0": 113.78,
+  "om": 358.41,
+  "node": 218.6,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -3067,7 +3067,7 @@
    "zh": "Semele"
   },
   "desc": {
-   "vi": "Semele — tiểu hành tinh số 86 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Semele — tiểu hành tinh số 86 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Semele — asteroid number 86 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Semele——主带第86号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -3080,9 +3080,9 @@
   "r": 0.092,
   "col": "#bdab97",
   "col2": "#7f7464",
-  "M0": 305.69,
-  "om": 326.2,
-  "node": 263.8,
+  "M0": 100.2,
+  "om": 34.76,
+  "node": 86.04,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -3097,7 +3097,7 @@
    "zh": "Sylvia"
   },
   "desc": {
-   "vi": "Sylvia — tiểu hành tinh số 87 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Sylvia — tiểu hành tinh số 87 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Sylvia — asteroid number 87 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Sylvia——主带第87号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -3110,9 +3110,9 @@
   "r": 0.133,
   "col": "#978b7b",
   "col2": "#665e51",
-  "M0": 83.2,
-  "om": 57.9,
-  "node": 317.1,
+  "M0": 123.92,
+  "om": 340.05,
+  "node": 72.95,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -3127,7 +3127,7 @@
    "zh": "Terpsichore"
   },
   "desc": {
-   "vi": "Terpsichore — tiểu hành tinh số 81 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Terpsichore — tiểu hành tinh số 81 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Terpsichore — asteroid number 81 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Terpsichore——主带第81号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -3140,9 +3140,9 @@
   "r": 0.093,
   "col": "#c6b29e",
   "col2": "#857969",
-  "M0": 338.15,
-  "om": 227.7,
-  "node": 357.3,
+  "M0": 159.61,
+  "om": 52.12,
+  "node": 0.89,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -3157,7 +3157,7 @@
    "zh": "Thalia"
   },
   "desc": {
-   "vi": "Thalia — tiểu hành tinh số 23 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Thalia — tiểu hành tinh số 23 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Thalia — asteroid number 23 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Thalia——主带第23号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -3170,9 +3170,9 @@
   "r": 0.128,
   "col": "#aa9b89",
   "col2": "#73695b",
-  "M0": 282.68,
-  "om": 309.1,
-  "node": 145.9,
+  "M0": 216.4,
+  "om": 128.15,
+  "node": 66.48,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -3187,7 +3187,7 @@
    "zh": "Themis"
   },
   "desc": {
-   "vi": "Themis — tiểu hành tinh số 24 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Themis — tiểu hành tinh số 24 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Themis — asteroid number 24 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Themis——主带第24号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -3200,9 +3200,9 @@
   "r": 0.124,
   "col": "#c0ae9a",
   "col2": "#827666",
-  "M0": 60.19,
-  "om": 40.8,
-  "node": 199.2,
+  "M0": 92.02,
+  "om": 145.61,
+  "node": 36.39,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -3217,7 +3217,7 @@
    "zh": "Thetis"
   },
   "desc": {
-   "vi": "Thetis — tiểu hành tinh số 17 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Thetis — tiểu hành tinh số 17 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Thetis — asteroid number 17 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Thetis——主带第17号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -3230,9 +3230,9 @@
   "r": 0.106,
   "col": "#9d9080",
   "col2": "#6a6254",
-  "M0": 177.64,
-  "om": 118.9,
-  "node": 186.1,
+  "M0": 243.07,
+  "om": 261.66,
+  "node": 125.5,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -3247,7 +3247,7 @@
    "zh": "Thisbe"
   },
   "desc": {
-   "vi": "Thisbe — tiểu hành tinh số 88 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Thisbe — tiểu hành tinh số 88 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Thisbe — asteroid number 88 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Thisbe——主带第88号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -3260,9 +3260,9 @@
   "r": 0.123,
   "col": "#ad9e8c",
   "col2": "#756b5c",
-  "M0": 220.7,
-  "om": 149.6,
-  "node": 10.4,
+  "M0": 244.36,
+  "om": 313.29,
+  "node": 276.32,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -3277,7 +3277,7 @@
    "zh": "Undina"
   },
   "desc": {
-   "vi": "Undina — tiểu hành tinh số 92 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Undina — tiểu hành tinh số 92 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Undina — asteroid number 92 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Undina——主带第92号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -3290,9 +3290,9 @@
   "r": 0.14,
   "col": "#8e8474",
   "col2": "#60594d",
-  "M0": 50.74,
-  "om": 156.4,
-  "node": 223.6,
+  "M0": 272.95,
+  "om": 337.95,
+  "node": 101.39,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -3307,7 +3307,7 @@
    "zh": "Urania"
   },
   "desc": {
-   "vi": "Urania — tiểu hành tinh số 30 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Urania — tiểu hành tinh số 30 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Urania — asteroid number 30 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Urania——主带第30号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -3320,9 +3320,9 @@
   "r": 0.114,
   "col": "#928777",
   "col2": "#635b4f",
-  "M0": 165.24,
-  "om": 231.0,
-  "node": 159.0,
+  "M0": 13.67,
+  "om": 34.63,
+  "node": 307.4,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -3427,7 +3427,7 @@
    "zh": "Victoria"
   },
   "desc": {
-   "vi": "Victoria — tiểu hành tinh số 12 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Victoria — tiểu hành tinh số 12 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Victoria — asteroid number 12 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Victoria——主带第12号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -3440,9 +3440,9 @@
   "r": 0.122,
   "col": "#a69886",
   "col2": "#706759",
-  "M0": 210.1,
-  "om": 20.4,
-  "node": 279.6,
+  "M0": 132.14,
+  "om": 304.98,
+  "node": 235.35,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
@@ -3457,7 +3457,7 @@
    "zh": "Virginia"
   },
   "desc": {
-   "vi": "Virginia — tiểu hành tinh số 50 của vành đai chính, được JPL SBDB xếp loại main-belt.",
+   "vi": "Virginia — tiểu hành tinh số 50 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).",
    "en": "Virginia — asteroid number 50 of the main belt (JPL SBDB), spectral class main-belt.",
    "zh": "Virginia——主带第50号小行星（JPL SBDB），光谱类型 main-belt。"
   },
@@ -3470,9 +3470,9 @@
   "r": 0.083,
   "col": "#aa9b89",
   "col2": "#73695b",
-  "M0": 35.4,
-  "om": 265.0,
-  "node": 145.0,
+  "M0": 32.28,
+  "om": 13.55,
+  "node": 173.45,
   "dwarf": false,
   "mass": 1e-09,
   "temp": 170.0,
