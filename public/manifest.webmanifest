@@ -1,0 +1,15 @@
+{
+  "name": "Cosmos Solar System 3D",
+  "short_name": "Cosmos",
+  "description": "Mô phỏng hệ Mặt Trời 3D — quỹ đạo Kepler thật, tàu thăm dò, trợ lý AI",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#03070f",
+  "theme_color": "#0a1424",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

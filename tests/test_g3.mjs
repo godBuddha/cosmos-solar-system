@@ -74,5 +74,30 @@ for (const lang of ["vi", "en", "zh"]) {
      fs.readFileSync(path.join(PUB, "js", "i18n.mjs"), "utf8").includes("cleanHide"));
 }
 
+// ---- 7. PWA: sw.js + manifest + icon — precache list phải trỏ file thật ----
+const swTxt = fs.readFileSync(path.join(PUB, "sw.js"), "utf8");
+ok("sw.js có install/activate/fetch handlers",
+   swTxt.includes("addEventListener(\"install\"") &&
+   swTxt.includes("addEventListener(\"activate\"") &&
+   swTxt.includes("addEventListener(\"fetch\""));
+const listed = [...swTxt.matchAll(/"\.\/([^"]+)"/g)].map(m => m[1]);
+const missing = listed.filter(rel => !fs.existsSync(path.join(PUB, rel)));
+ok(`sw.js precache ${listed.length} file đều tồn tại`, missing.length === 0, "thiếu " + missing.join(","));
+ok("sw.js bỏ qua /api/", swTxt.includes("/api/"));
+ok("main.mjs đăng ký service worker",
+   fs.readFileSync(path.join(PUB, "js", "main.mjs"), "utf8").includes("serviceWorker.register"));
+let manifestOk = false, iconOk = false;
+try {
+  const mf = JSON.parse(fs.readFileSync(path.join(PUB, "manifest.webmanifest"), "utf8"));
+  manifestOk = !!mf.name && Array.isArray(mf.icons) && mf.icons.length >= 1;
+  iconOk = fs.existsSync(path.join(PUB, mf.icons[0].src.replace("./", "")));
+} catch { /* manifest hỏng JSON */ }
+ok("manifest.webmanifest hợp lệ + icon tồn tại", manifestOk && iconOk);
+const conf = fs.readFileSync(path.join(ROOT, "nginxconf", "default.conf"), "utf8");
+ok("nginx: /sw.js no-cache (exact match trước regex .js)", /location = \/sw\.js/.test(conf));
+ok("nginx: .mjs no-cache (chống bug cache immutable JS cũ)",
+   /location ~ \\.mjs\$[\s\S]{0,300}no-cache/.test(conf));
+ok("CSP có manifest-src 'self'", fs.readFileSync(path.join(ROOT, "nginxconf", "security-headers.conf"), "utf8").includes("manifest-src 'self'"));
+
 console.log(failed ? `\n${failed} test FAIL` : "\ntất cả test pass");
 process.exit(failed ? 1 : 0);
