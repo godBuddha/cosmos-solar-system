@@ -12,8 +12,9 @@ echo "=== 2/4 api smoke (node) ==="
 [ -d server/node_modules ] || (cd server && npm ci --omit=dev --no-audit --no-fund)
 node tests/test_api_smoke.mjs || rc=1
 
-echo "=== 3/4 speed presets (node) ==="
+echo "=== 3/4 speed presets + G3 (node) ==="
 node tests/test_speed_presets.mjs || rc=1
+node tests/test_g3.mjs || rc=1
 
 echo "=== 4/4 nginx -t (docker) ==="
 if [ "${1:-}" = "--no-docker" ]; then

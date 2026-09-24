@@ -29,6 +29,7 @@ jobs:
         working-directory: server
       - run: node tests/test_api_smoke.mjs
       - run: node tests/test_speed_presets.mjs
+      - run: node tests/test_g3.mjs
 
   nginx:
     name: nginx -t (config image hợp lệ)

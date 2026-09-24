@@ -29,6 +29,14 @@ initI18n({ ST, planetObjs, selectPlanet: ui.selectPlanet,
 applyLang();   // khởi tạo ngôn ngữ từ localStorage
 
 const $ = id => document.getElementById(id);
+// G3 float32 precision: uDays (~9760 ngày từ J2000) tách uD_HI (nguyên) +
+// uD_LO (phân số) — cả hai exact trong float32, shader chia riêng từng phần
+// => sai số là HẰNG SỐ, không dao động theo frame (hết jitter phase).
+const setDaysUniforms = (mat, days) => {
+  const hi = Math.floor(days);
+  mat.uniforms.uD_HI.value = hi;
+  mat.uniforms.uD_LO.value = days - hi;
+};
 const clock = new THREE.Clock();
 function animate() {
   requestAnimationFrame(animate);
@@ -55,10 +63,10 @@ function animate() {
   }
 
   // ---- Phase 2: vành Saturn Keplerian — GPU (chỉ set uniform) ----
-  if (saturnRing) saturnRing.mat.uniforms.uDays.value = ST.days;
+  if (saturnRing) setDaysUniforms(saturnRing.mat, ST.days);
 
   // ---- Asteroid belt — GPU (chỉ set uniform) ----
-  if (asteroidBelt) asteroidBelt.mat.uniforms.uDays.value = ST.days;
+  if (asteroidBelt) setDaysUniforms(asteroidBelt.mat, ST.days);
 
   // ---- FREE-FLY camera movement (chuẩn FPS) ----
   if (FLY.on) {
@@ -146,10 +154,10 @@ function animate() {
   }
 
   // ---- Vành đai Kuiper: GPU-side Kepler (chỉ set uniform thời gian) ----
-  if (kuiperBelt) kuiperBelt.mat.uniforms.uDays.value = ST.days;
+  if (kuiperBelt) setDaysUniforms(kuiperBelt.mat, ST.days);
 
   // ---- Sao chổi + mưa sao băng ----
-  if (cometGPU) cometGPU.mat.uniforms.uDays.value = ST.days;
+  if (cometGPU) setDaysUniforms(cometGPU.mat, ST.days);
   // đầu comet: 1 mesh duy nhất — cập nhật CPU (không đáng GPU hóa)
   if (cometGPU) {
     const CA = 18, CE = 0.85, CT = 365.25 * Math.pow(18, 1.5);

@@ -42,9 +42,13 @@ function aiOpen() {
     if (head) head.textContent = t.aiTitle;
     const msgs = document.getElementById("aiMsgs");
     if (!msgs.children.length) {
-      msgs.innerHTML = '<div class="a">' + (aiMode
+      // DOM-safe: textContent — phản hồi/struct AI không bao giờ thành HTML
+      const hello = document.createElement("div");
+      hello.className = "a";
+      hello.textContent = aiMode
         ? (aiMode === "server" ? t.aiReadyServer : t.aiReadyUser)
-        : t.aiNone) + '</div>';
+        : t.aiNone;
+      msgs.appendChild(hello);
     }
   });
 }

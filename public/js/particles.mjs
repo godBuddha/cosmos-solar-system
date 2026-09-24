@@ -163,20 +163,22 @@ export function createParticles({ scene, planetObjs }) {
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
     g.setAttribute("color", new THREE.BufferAttribute(col, 3));
-    // GPU-side Kepler: góc quay tính trong vertex shader, CPU chỉ set uDays
+    // GPU-side Kepler: góc quay tính trong vertex shader, CPU chỉ set uD_HI/uD_LO
     g.setAttribute("aR", new THREE.BufferAttribute(rRad, 1));
     g.setAttribute("aOm", new THREE.BufferAttribute(rOm, 1));
     const ringMat = new THREE.ShaderMaterial({
       transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-      uniforms: { uDays: { value: 0 }, uMap: { value: makeGlowTexture() }, uSize: { value: 0.09 } },
+      uniforms: { uD_HI: { value: 0 }, uD_LO: { value: 0 }, uMap: { value: makeGlowTexture() }, uSize: { value: 0.09 } },
       vertexShader: /* glsl */`
         attribute float aR, aOm;
         attribute vec3 color;
-        uniform float uDays, uSize;
+        // G3: uDays tách uD_HI (nguyên) + uD_LO (phân số) — cả hai exact trong
+        // float32 => sai số không dao động theo frame (hết jitter phase)
+        uniform float uSize, uD_HI, uD_LO;
         varying vec3 vCol;
         void main() {
           // quay quanh Y trong hệ quy chiếu của Saturn (grp), omega du 1/sqrt(r)
-          float a = aOm * uDays * 0.35;
+          float a = aOm * 0.35 * uD_HI + aOm * 0.35 * uD_LO;
           vec3 p = vec3(cos(a) * aR, position.y, sin(a) * aR);
           vCol = color;
           vec4 mv = modelViewMatrix * vec4(p, 1.0);
@@ -222,7 +224,8 @@ export function createParticles({ scene, planetObjs }) {
     const cMat = new THREE.ShaderMaterial({
       transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
       uniforms: {
-        uDays: { value: 0 },
+        uD_HI: { value: 0 },
+        uD_LO: { value: 0 },
         uMap: { value: makeGlowTexture() },
         uSize: { value: 0.16 },
         uCA: { value: CA }, uCE: { value: CE }, uCT: { value: CT },
@@ -231,7 +234,8 @@ export function createParticles({ scene, planetObjs }) {
       vertexShader: /* glsl */`
         attribute float aT;
         attribute vec3 color;
-        uniform float uDays, uSize, uCA, uCE, uCT, uInc;
+        // G3: uD_HI/uD_LO — M tách thành 2 số hạng exact (xem comment ring)
+        uniform float uSize, uCA, uCE, uCT, uInc, uD_HI, uD_LO;
         varying vec3 vCol;
         float solveK(float M, float e) {
           float E = M;
@@ -239,7 +243,8 @@ export function createParticles({ scene, planetObjs }) {
           return E;
         }
         void main() {
-          float M = 6.283185 * (uDays / uCT);
+          float uD = uD_HI + uD_LO;   // dùng cho hiệu ứng nhỏ (wob/bright)
+          float M = 6.283185 * (uD_HI / uCT) + 6.283185 * (uD_LO / uCT);
           M = mod(mod(M, 6.283185) + 6.283185, 6.283185);
           float E = solveK(M, uCE);
           float sc = 11.0 * pow(uCA, 0.55) / uCA;
@@ -251,9 +256,9 @@ export function createParticles({ scene, planetObjs }) {
           vec3 away = normalize(head);
           float t = aT;
           float dist = t * 5.5;
-          float wob = sin(t * 40.0 + uDays * 0.02) * 0.25 * t;
+          float wob = sin(t * 40.0 + uD * 0.02) * 0.25 * t;
           vec3 p = head + away * dist + vec3(wob * 0.6, wob, wob * 0.4);
-          float bright = (1.0 - t) * (0.5 + 0.5 * sin(t * 20.0 + uDays * 0.05));
+          float bright = (1.0 - t) * (0.5 + 0.5 * sin(t * 20.0 + uD * 0.05));
           vCol = vec3(0.75, 0.85, 1.0) * bright;
           vec4 mv = modelViewMatrix * vec4(p, 1.0);
           gl_PointSize = uSize * (240.0 / -mv.z);
@@ -372,11 +377,12 @@ export function createParticles({ scene, planetObjs }) {
     ag.setAttribute("aT", new THREE.BufferAttribute(aTa, 1));
     const aMat = new THREE.ShaderMaterial({
       transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-      uniforms: { uDays: { value: 0 }, uMap: { value: makeGlowTexture() }, uSize: { value: 0.13 } },
+      uniforms: { uD_HI: { value: 0 }, uD_LO: { value: 0 }, uMap: { value: makeGlowTexture() }, uSize: { value: 0.13 } },
       vertexShader: /* glsl */`
         attribute float aA, aE, aI, aM, aT;
         attribute vec3 color;
-        uniform float uDays, uSize;
+        // G3: uD_HI/uD_LO — M tách thành 2 số hạng exact (xem comment ring)
+        uniform float uSize, uD_HI, uD_LO;
         varying vec3 vCol;
         float solveK(float M, float e) {
           float E = M;
@@ -384,7 +390,7 @@ export function createParticles({ scene, planetObjs }) {
           return E;
         }
         void main() {
-          float M = aM + 6.283185 * (uDays / aT);
+          float M = aM + 6.283185 * (uD_HI / aT) + 6.283185 * (uD_LO / aT);
           M = mod(mod(M, 6.283185) + 6.283185, 6.283185);
           float E = solveK(M, aE);
           float sc = 11.0 * pow(aA, 0.55) / aA;
@@ -448,7 +454,7 @@ export function createParticles({ scene, planetObjs }) {
     kg.setAttribute("position", new THREE.BufferAttribute(kPos, 3));
     kg.setAttribute("color", new THREE.BufferAttribute(kCol, 3));
     // attributes cho GPU-side Kepler: tính vị trí trong vertex shader
-    // (CPU chỉ set uDays — không còn vòng lặp 8000 hạt mỗi frame)
+    // (CPU chỉ set uD_HI/uD_LO — không còn vòng lặp 8000 hạt mỗi frame)
     const kA = new Float32Array(N_K), kE = new Float32Array(N_K),
           kI = new Float32Array(N_K), kM = new Float32Array(N_K), kT = new Float32Array(N_K);
     for (let i = 0; i < N_K; i++) {
@@ -465,14 +471,16 @@ export function createParticles({ scene, planetObjs }) {
       transparent: true, depthWrite: false,
       blending: THREE.AdditiveBlending,
       uniforms: {
-        uDays: { value: 0 },
+        uD_HI: { value: 0 },
+        uD_LO: { value: 0 },
         uMap:  { value: makeGlowTexture() },
         uSize: { value: 0.11 },
       },
       vertexShader: /* glsl */`
         attribute float aA, aE, aI, aM, aT;
         attribute vec3 color;
-        uniform float uDays, uSize;
+        // G3: uD_HI/uD_LO — M tách thành 2 số hạng exact (xem comment ring)
+        uniform float uSize, uD_HI, uD_LO;
         varying vec3 vColor2;
         varying vec3 vCol;
         // Newton-Raphson giải M = E - e*sin(E) ngay trên GPU
@@ -482,7 +490,7 @@ export function createParticles({ scene, planetObjs }) {
           return E;
         }
         void main() {
-          float M = aM + 6.283185 * (uDays / aT);
+          float M = aM + 6.283185 * (uD_HI / aT) + 6.283185 * (uD_LO / aT);
           M = mod(mod(M, 6.283185) + 6.283185, 6.283185);
           float E = solveK(M, aE);
           float sc = 11.0 * pow(aA, 0.55) / aA;           // distScale nén sẵn

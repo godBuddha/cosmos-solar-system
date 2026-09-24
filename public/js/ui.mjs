@@ -40,50 +40,83 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
   });
 
   // ---- Phase 3: chọn hành tinh + info panel + fly-to follow camera ----
+  // DOM-safe helper: dựng <div id="ipsecK"><h4>title</h4> rows... [desc]</div>
+  // (textContent thay chuỗi HTML — mô tả catalog/AI không bao giờ thành markup)
+  function sectionEl(k, title, rows, descText) {
+    const sec = document.createElement("div");
+    sec.id = "ipsec" + k;
+    const h4 = document.createElement("h4");
+    h4.textContent = title;
+    sec.appendChild(h4);
+    for (const [label, value] of rows) {
+      const row = document.createElement("div");
+      row.className = "row";
+      const sp = document.createElement("span"); sp.textContent = label;
+      const b = document.createElement("b"); b.textContent = value;
+      row.append(sp, b);
+      sec.appendChild(row);
+    }
+    if (descText) {
+      const dv = document.createElement("div");
+      dv.style.cssText = "margin-top:6px; opacity:.85";
+      dv.textContent = descText;
+      sec.appendChild(dv);
+    }
+    return sec;
+  }
   function selectPlanet(o) {
     uiState.followTarget = o;
     const t = T();
     const d = o.data.info;
     const isSun = o.data.name === "Sun";
     const bodyId = o.data.name.toLowerCase();
-    const descText = isSun ? t.sunDesc : (CATALOG_DESC[bodyId] || {})[getLang()] || "";  document.getElementById("ipName").textContent = t.names[o.data.name] || o.data.name;
+    const descText = isSun ? t.sunDesc : (CATALOG_DESC[bodyId] || {})[getLang()] || "";
+    document.getElementById("ipName").textContent = t.names[o.data.name] || o.data.name;
     document.getElementById("ipNameEn").textContent = o.data.name + (o.data.dwarf ? " " + t.dwarf : "");
-    const secs = isSun ? {
-      1: `<h4>${t.sec1}</h4>
-          <div class="row"><span>${t.mass}</span><b>${d.mass.toLocaleString("vi-VN")} ${t.earthU}</b></div>
-          <div class="row"><span>${t.dia}</span><b>${d.dia.toLocaleString("vi-VN")} km</b></div>
-          <div class="row"><span>${t.temp}</span><b>${d.temp.toLocaleString("vi-VN")} K</b></div>
-          <div class="row"><span>${t.spectral}</span><b>G2V</b></div>
-          <div style="margin-top:6px; opacity:.85">${descText}</div>`,
-      2: `<h4>${t.secSun2}</h4>
-          <div class="row"><span>${t.lum}</span><b>3.828×10<sup>26</sup> W</b></div>
-          <div class="row"><span>${t.coreT}</span><b>15.7M K</b></div>
-          <div class="row"><span>${t.comp}</span><b>H 73% · He 25%</b></div>
-          <div class="row"><span>${t.sunAge}</span><b>${t.sunAgeVal}</b></div>`,
-      3: `<h4>${t.sec3}</h4>
-          <div class="row"><span>Rot</span><b>${o.data.rot} ${t.days}</b></div>
-          <div class="row"><span>Tilt</span><b>${o.data.tilt}°</b></div>`,
-    } : {
-      1: `<h4>${t.sec1}</h4>
-          <div class="row"><span>${t.mass}</span><b>${d.mass} ${t.earthU}</b></div>
-          <div class="row"><span>${t.dia}</span><b>${d.dia.toLocaleString("vi-VN")} km</b></div>
-          <div class="row"><span>${t.temp}</span><b>${d.temp} K</b></div>
-          <div class="row"><span>${t.moons}</span><b>${d.moons}</b></div>
-          ${descText ? `<div style="margin-top:6px; opacity:.85">${descText}</div>` : ""}`,
-      2: `<h4>${t.sec2}</h4>
-          <div class="row"><span>${t.period}</span><b>${o.data.T} ${t.days}</b></div>
-          <div class="row"><span>a</span><b>${o.data.a} AU</b></div>
-          <div class="row"><span>e</span><b>${o.data.e}</b></div>
-          <div class="row"><span>i</span><b>${o.data.i}°</b></div>`,
-      3: `<h4>${t.sec3}</h4>
-          <div class="row"><span>Rot</span><b>${Math.abs(o.data.rot)} ${t.days}</b></div>
-          <div class="row"><span>Tilt</span><b>${o.data.tilt}°</b></div>`,
-    };
-    document.getElementById("ipBody").innerHTML =
-      Object.entries(secs).map(([k, v]) => `<div id="ipsec${k}">${v}</div>`).join("");
+    const fmt = n => n.toLocaleString("vi-VN");
+    const ipBody = document.getElementById("ipBody");
+    if (isSun) {
+      ipBody.replaceChildren(
+        sectionEl(1, t.sec1, [
+          [t.mass, `${fmt(d.mass)} ${t.earthU}`],
+          [t.dia, `${fmt(d.dia)} km`],
+          [t.temp, `${fmt(d.temp)} K`],
+          [t.spectral, "G2V"],
+        ], descText),
+        sectionEl(2, t.secSun2, [
+          [t.lum, "3.828×10²⁶ W"],
+          [t.coreT, "15.7M K"],
+          [t.comp, "H 73% · He 25%"],
+          [t.sunAge, t.sunAgeVal],
+        ], null),
+        sectionEl(3, t.sec3, [
+          ["Rot", `${o.data.rot} ${t.days}`],
+          ["Tilt", `${o.data.tilt}°`],
+        ], null),
+      );
+    } else {
+      ipBody.replaceChildren(
+        sectionEl(1, t.sec1, [
+          [t.mass, `${d.mass} ${t.earthU}`],
+          [t.dia, `${fmt(d.dia)} km`],
+          [t.temp, `${d.temp} K`],
+          [t.moons, `${d.moons}`],
+        ], descText || null),
+        sectionEl(2, t.sec2, [
+          [t.period, `${o.data.T} ${t.days}`],
+          ["a", `${o.data.a} AU`],
+          ["e", `${o.data.e}`],
+          ["i", `${o.data.i}°`],
+        ], null),
+        sectionEl(3, t.sec3, [
+          ["Rot", `${Math.abs(o.data.rot)} ${t.days}`],
+          ["Tilt", `${o.data.tilt}°`],
+        ], null),
+      );
+    }
     const toc = document.getElementById("ipToc");
-    toc.innerHTML = "";
-    Object.keys(secs).forEach((k, i) => {
+    toc.replaceChildren();
+    [1, 2, 3].forEach((k, i) => {
       const btn = document.createElement("button");
       btn.textContent = [t.sec1, isSun ? t.secSun2 : t.sec2, t.sec3][i];
       btn.addEventListener("click", () => {
@@ -273,14 +306,22 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
       return en.includes(q) || vi.includes(q) || zh.includes(q) ||
              en.replace(/\s/g, "").includes(q.replace(/\s/g, ""));
     });
-    searchResults.innerHTML = "";
+    searchResults.replaceChildren();
     if (!matches.length) {
-      searchResults.innerHTML = '<div style="opacity:.5">∅</div>';
+      const empty = document.createElement("div");
+      empty.style.opacity = ".5";
+      empty.textContent = "∅";
+      searchResults.appendChild(empty);
     } else {
       for (const m of matches) {
         const div = document.createElement("div");
-        div.innerHTML = (t.names[m.name] || m.name) +
-          '<span class="sr-sub">' + m.name + (m.dwarf ? " " + t.dwarf : "") + " · " + m.a + " AU</span>";
+        div.append(
+          (t.names[m.name] || m.name),
+          Object.assign(document.createElement("span"), {
+            className: "sr-sub",
+            textContent: m.name + (m.dwarf ? " " + t.dwarf : "") + " · " + m.a + " AU",
+          })
+        );
         div.addEventListener("click", () => {
           searchResults.style.display = "none";
           searchInput.value = "";
@@ -349,6 +390,12 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
       "color:#ffd27a;font:12px ui-monospace,monospace;background:rgba(4,10,22,.8);" +
       "border:1px solid rgba(255,210,122,.35);border-radius:8px;padding:6px 14px;" +
       "z-index:40;display:none;user-select:none";
+    // dựng DOM tĩnh 1 lần (DOM-safe — không ghép chuỗi HTML); toggle chỉ set value
+    el.append("FREE-FLY — W/S: tới/lùi · A/D: trái/phải · Q/E: xoay · R/Space: lên/xuống · Shift ×5 · F/Esc: thoát · Tốc độ: ");
+    const num = document.createElement("input");
+    num.id = "flySpeed"; num.type = "number"; num.min = "1"; num.max = "2000";
+    num.style.cssText = "width:60px;background:#0a1626;color:#ffd27a;border:1px solid rgba(255,210,122,.4);border-radius:4px;padding:0 4px;font-size:11px";
+    el.appendChild(num);
     document.body.appendChild(el);
     return el;
   })();
@@ -367,7 +414,7 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
       controls.update();
     }
     flyUI.style.display = FLY.on ? "block" : "none";
-    if (FLY.on) flyUI.innerHTML = "FREE-FLY — W/S: tới/lùi · A/D: trái/phải · Q/E: xoay · R/Space: lên/xuống · Shift ×5 · F/Esc: thoát · Tốc độ: <input id='flySpeed' type='number' min='1' max='2000' value='" + FLY.speed.toFixed(0) + "' style='width:60px;background:#0a1626;color:#ffd27a;border:1px solid rgba(255,210,122,.4);border-radius:4px;padding:0 4px;font-size:11px'>";
+    if (FLY.on) flyUI.querySelector("#flySpeed").value = FLY.speed.toFixed(0);
     // hướng nhìn hiện tại làm mốc bay
     if (FLY.on) {
       const dir = new THREE.Vector3();
