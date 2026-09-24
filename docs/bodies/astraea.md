@@ -11,9 +11,9 @@ tilt: 0
 r: 0.132
 col: "#bfac99"
 col2: "#817565"
-M0: 327.54
-om: 98.5
-node: 266.5
+M0: 181.48
+om: 140.83
+node: 141.45
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 145
 
 ## Mô tả (VI)
 
-Astraea — tiểu hành tinh số 5 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Astraea — tiểu hành tinh số 5 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

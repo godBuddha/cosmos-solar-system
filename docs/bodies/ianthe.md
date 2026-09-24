@@ -11,9 +11,9 @@ tilt: 0
 r: 0.089
 col: "#9b8f7e"
 col2: "#696153"
-M0: 155.78
-om: 346.6
-node: 183.4
+M0: 348.2
+om: 151.92
+node: 353.85
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 58
 
 ## Mô tả (VI)
 
-Ianthe — tiểu hành tinh số 98 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Ianthe — tiểu hành tinh số 98 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

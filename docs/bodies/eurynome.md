@@ -11,9 +11,9 @@ tilt: 0
 r: 0.109
 col: "#998d7d"
 col2: "#686052"
-M0: 63.13
-om: 44.3
-node: 250.7
+M0: 178.93
+om: 47.89
+node: 206.5
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 99
 
 ## Mô tả (VI)
 
-Eurynome — tiểu hành tinh số 79 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Eurynome — tiểu hành tinh số 79 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

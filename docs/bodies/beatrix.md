@@ -11,9 +11,9 @@ tilt: 0
 r: 0.092
 col: "#b6a592"
 col2: "#7b7061"
-M0: 253.16
-om: 51.1
-node: 103.9
+M0: 183.99
+om: 197.51
+node: 27.65
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 64
 
 ## Mô tả (VI)
 
-Beatrix — tiểu hành tinh số 83 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Beatrix — tiểu hành tinh số 83 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

@@ -11,9 +11,9 @@ tilt: 0
 r: 0.122
 col: "#a69886"
 col2: "#706759"
-M0: 210.1
-om: 20.4
-node: 279.6
+M0: 132.14
+om: 304.98
+node: 235.35
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 123
 
 ## Mô tả (VI)
 
-Victoria — tiểu hành tinh số 12 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Victoria — tiểu hành tinh số 12 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

@@ -11,9 +11,9 @@ tilt: 0
 r: 0.088
 col: "#a79987"
 col2: "#716859"
-M0: 55.46
-om: 278.6
-node: 211.4
+M0: 152.97
+om: 194.87
+node: 161.05
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 56
 
 ## Mô tả (VI)
 
-Concordia — tiểu hành tinh số 58 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Concordia — tiểu hành tinh số 58 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

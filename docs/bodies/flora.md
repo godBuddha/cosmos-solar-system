@@ -11,9 +11,9 @@ tilt: 0
 r: 0.144
 col: "#c5b29e"
 col2: "#857968"
-M0: 20.06
-om: 13.6
-node: 66.4
+M0: 259.26
+om: 36.25
+node: 110.84
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 168
 
 ## Mô tả (VI)
 
-Flora — tiểu hành tinh số 8 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Flora — tiểu hành tinh số 8 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

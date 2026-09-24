@@ -11,9 +11,9 @@ tilt: 0
 r: 0.106
 col: "#c6b39f"
 col2: "#867a69"
-M0: 225.43
-om: 271.8
-node: 358.2
+M0: 230.78
+om: 299.37
+node: 313.01
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 92
 
 ## Mô tả (VI)
 
-Alexandra — tiểu hành tinh số 54 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Alexandra — tiểu hành tinh số 54 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

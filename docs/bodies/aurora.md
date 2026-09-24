@@ -11,9 +11,9 @@ tilt: 0
 r: 0.111
 col: "#baa996"
 col2: "#7e7363"
-M0: 325.75
-om: 339.8
-node: 330.2
+M0: 45.71
+om: 63.06
+node: 2.45
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 102
 
 ## Mô tả (VI)
 
-Aurora — tiểu hành tinh số 94 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Aurora — tiểu hành tinh số 94 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

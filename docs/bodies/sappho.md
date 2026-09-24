@@ -11,9 +11,9 @@ tilt: 0
 r: 0.103
 col: "#b0a08e"
 col2: "#776d5e"
-M0: 200.64
-om: 136.0
-node: 304.0
+M0: 113.78
+om: 358.41
+node: 218.6
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 87
 
 ## Mô tả (VI)
 
-Sappho — tiểu hành tinh số 80 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Sappho — tiểu hành tinh số 80 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

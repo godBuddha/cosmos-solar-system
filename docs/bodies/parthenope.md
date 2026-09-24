@@ -11,9 +11,9 @@ tilt: 0
 r: 0.14
 col: "#908576"
 col2: "#615a4e"
-M0: 72.59
-om: 288.7
-node: 226.3
+M0: 224.94
+om: 321.93
+node: 125.47
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 160
 
 ## Mô tả (VI)
 
-Parthenope — tiểu hành tinh số 11 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Parthenope — tiểu hành tinh số 11 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

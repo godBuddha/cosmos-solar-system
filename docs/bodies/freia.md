@@ -11,9 +11,9 @@ tilt: 0
 r: 0.105
 col: "#938878"
 col2: "#635c4f"
-M0: 10.61
-om: 129.2
-node: 90.8
+M0: 330.76
+om: 96.55
+node: 204.27
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 89
 
 ## Mô tả (VI)
 
-Freia — tiểu hành tinh số 76 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Freia — tiểu hành tinh số 76 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

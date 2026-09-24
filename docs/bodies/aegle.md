@@ -11,9 +11,9 @@ tilt: 0
 r: 0.112
 col: "#ab9c8a"
 col2: "#736a5b"
-M0: 240.77
-om: 163.2
-node: 76.8
+M0: 226.17
+om: 169.44
+node: 321.47
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 104
 
 ## Mô tả (VI)
 
-Aegle — tiểu hành tinh số 96 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Aegle — tiểu hành tinh số 96 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

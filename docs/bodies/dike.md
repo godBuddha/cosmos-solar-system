@@ -11,9 +11,9 @@ tilt: 0
 r: 0.083
 col: "#b1a18f"
 col2: "#786e5e"
-M0: 293.29
-om: 78.3
-node: 236.7
+M0: 114.05
+om: 236.79
+node: 41.4
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 46
 
 ## Mô tả (VI)
 
-Dike — tiểu hành tinh số 99 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Dike — tiểu hành tinh số 99 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

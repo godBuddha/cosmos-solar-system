@@ -11,9 +11,9 @@ tilt: 0
 r: 0.128
 col: "#b9a895"
 col2: "#7d7262"
-M0: 120.38
-om: 81.6
-node: 38.4
+M0: 177.54
+om: 74.87
+node: 183.42
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 135
 
 ## Mô tả (VI)
 
-Doris — tiểu hành tinh số 48 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Doris — tiểu hành tinh số 48 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

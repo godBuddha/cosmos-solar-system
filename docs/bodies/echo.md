@@ -11,9 +11,9 @@ tilt: 0
 r: 0.093
 col: "#988c7c"
 col2: "#675f52"
-M0: 330.48
-om: 102.0
-node: 318.0
+M0: 181.3
+om: 102.41
+node: 191.51
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 67
 
 ## Mô tả (VI)
 
-Echo — tiểu hành tinh số 60 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Echo — tiểu hành tinh số 60 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

@@ -11,9 +11,9 @@ tilt: 0
 r: 0.087
 col: "#b4a391"
 col2: "#796f60"
-M0: 273.23
-om: 64.7
-node: 170.3
+M0: 61.9
+om: 84.45
+node: 10.36
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 53
 
 ## Mô tả (VI)
 
-Aegina — tiểu hành tinh số 91 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Aegina — tiểu hành tinh số 91 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

@@ -11,9 +11,9 @@ tilt: 0
 r: 0.095
 col: "#8d8373"
 col2: "#5f584c"
-M0: 205.37
-om: 258.2
-node: 291.8
+M0: 348.86
+om: 358.1
+node: 181.05
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 70
 
 ## Mô tả (VI)
 
-Hestia — tiểu hành tinh số 46 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Hestia — tiểu hành tinh số 46 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

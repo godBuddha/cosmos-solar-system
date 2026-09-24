@@ -11,9 +11,9 @@ tilt: 0
 r: 0.111
 col: "#8c8273"
 col2: "#5f584c"
-M0: 70.8
-om: 170.0
-node: 290.0
+M0: 359.56
+om: 310.67
+node: 127.16
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 101
 
 ## Mô tả (VI)
 
-Hekate — tiểu hành tinh số 100 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Hekate — tiểu hành tinh số 100 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

@@ -11,9 +11,9 @@ tilt: 0
 r: 0.143
 col: "#9a8e7d"
 col2: "#686053"
-M0: 310.42
-om: 88.4
-node: 251.6
+M0: 348.92
+om: 111.37
+node: 128.57
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 166
 
 ## Mô tả (VI)
 
-Europa — tiểu hành tinh số 52 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Europa — tiểu hành tinh số 52 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

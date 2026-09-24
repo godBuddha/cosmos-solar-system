@@ -11,9 +11,9 @@ tilt: 0
 r: 0.162
 col: "#c3b09c"
 col2: "#837867"
-M0: 40.13
-om: 27.2
-node: 132.8
+M0: 79.77
+om: 20.01
+node: 149.98
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 204
 
 ## Mô tả (VI)
 
-Psyche — tiểu hành tinh số 16 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Psyche — tiểu hành tinh số 16 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

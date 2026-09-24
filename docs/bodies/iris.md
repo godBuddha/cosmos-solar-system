@@ -11,9 +11,9 @@ tilt: 0
 r: 0.189
 col: "#af9f8d"
 col2: "#766c5d"
-M0: 242.56
-om: 281.9
-node: 13.1
+M0: 115.29
+om: 44.9
+node: 259.49
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 257
 
 ## Mô tả (VI)
 
-Iris — tiểu hành tinh số 7 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Iris — tiểu hành tinh số 7 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

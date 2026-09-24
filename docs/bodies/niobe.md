@@ -11,9 +11,9 @@ tilt: 0
 r: 0.124
 col: "#9c8f7f"
 col2: "#696154"
-M0: 43.07
-om: 30.7
-node: 184.3
+M0: 104.31
+om: 222.91
+node: 315.91
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 127
 
 ## Mô tả (VI)
 
-Niobe — tiểu hành tinh số 71 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Niobe — tiểu hành tinh số 71 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

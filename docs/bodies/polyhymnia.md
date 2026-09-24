@@ -11,9 +11,9 @@ tilt: 0
 r: 0.096
 col: "#988c7c"
 col2: "#675f52"
-M0: 217.76
-om: 146.1
-node: 318.9
+M0: 147.61
+om: 346.94
+node: 8.13
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 72
 
 ## Mô tả (VI)
 
-Polyhymnia — tiểu hành tinh số 33 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Polyhymnia — tiểu hành tinh số 33 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

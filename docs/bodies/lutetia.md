@@ -11,9 +11,9 @@ tilt: 0
 r: 0.117
 col: "#baa895"
 col2: "#7d7263"
-M0: 7.67
-om: 125.7
-node: 39.3
+M0: 298.77
+om: 330.72
+node: 80.84
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 113
 
 ## Mô tả (VI)
 
-Lutetia — tiểu hành tinh số 21 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Lutetia — tiểu hành tinh số 21 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

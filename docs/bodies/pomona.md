@@ -11,9 +11,9 @@ tilt: 0
 r: 0.11
 col: "#beac98"
 col2: "#807565"
-M0: 80.26
-om: 54.4
-node: 265.6
+M0: 289.62
+om: 197.89
+node: 220.31
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 100
 
 ## Mô tả (VI)
 
-Pomona — tiểu hành tinh số 32 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Pomona — tiểu hành tinh số 32 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

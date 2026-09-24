@@ -11,9 +11,9 @@ tilt: 0
 r: 0.088
 col: "#8c8273"
 col2: "#5f584c"
-M0: 318.08
-om: 214.1
-node: 290.9
+M0: 21.34
+om: 63.71
+node: 6.82
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 55
 
 ## Mô tả (VI)
 
-Klytia — tiểu hành tinh số 73 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Klytia — tiểu hành tinh số 73 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

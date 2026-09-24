@@ -11,9 +11,9 @@ tilt: 0
 r: 0.146
 col: "#bcaa97"
 col2: "#7f7464"
-M0: 100.32
-om: 68.0
-node: 332.0
+M0: 137.89
+om: 4.08
+node: 94.15
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 172
 
 ## Mô tả (VI)
 
-Harmonia — tiểu hành tinh số 40 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Harmonia — tiểu hành tinh số 40 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

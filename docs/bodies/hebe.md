@@ -11,9 +11,9 @@ tilt: 0
 r: 0.193
 col: "#998d7c"
 col2: "#675f52"
-M0: 105.05
-om: 190.2
-node: 319.8
+M0: 44.72
+om: 18.34
+node: 138.61
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 267
 
 ## Mô tả (VI)
 
-Hebe — tiểu hành tinh số 6 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Hebe — tiểu hành tinh số 6 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

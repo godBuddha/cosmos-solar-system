@@ -11,9 +11,9 @@ tilt: 0
 r: 0.098
 col: "#bba996"
 col2: "#7e7363"
-M0: 213.04
-om: 23.9
-node: 331.1
+M0: 237.76
+om: 309.9
+node: 202.22
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 75
 
 ## Mô tả (VI)
 
-Asia — tiểu hành tinh số 67 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Asia — tiểu hành tinh số 67 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

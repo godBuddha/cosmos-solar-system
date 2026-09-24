@@ -11,9 +11,9 @@ tilt: 0
 r: 0.09
 col: "#b0a08e"
 col2: "#776d5e"
-M0: 87.92
-om: 180.1
-node: 304.9
+M0: 307.59
+om: 97.88
+node: 143.44
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 59
 
 ## Mô tả (VI)
 
-Kalypso — tiểu hành tinh số 53 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Kalypso — tiểu hành tinh số 53 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

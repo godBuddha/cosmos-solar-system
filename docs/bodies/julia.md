@@ -11,9 +11,9 @@ tilt: 0
 r: 0.154
 col: "#c3b09c"
 col2: "#847867"
-M0: 358.21
-om: 241.3
-node: 63.7
+M0: 46.77
+om: 356.72
+node: 311.52
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 187
 
 ## Mô tả (VI)
 
-Julia — tiểu hành tinh số 89 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Julia — tiểu hành tinh số 89 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

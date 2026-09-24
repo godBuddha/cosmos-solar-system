@@ -11,9 +11,9 @@ tilt: 0
 r: 0.147
 col: "#968b7b"
 col2: "#665e51"
-M0: 125.11
-om: 203.8
-node: 26.2
+M0: 60.23
+om: 184.32
+node: 86.01
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 174
 
 ## Mô tả (VI)
 
-Irene — tiểu hành tinh số 14 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Irene — tiểu hành tinh số 14 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

@@ -11,9 +11,9 @@ tilt: 0
 r: 0.174
 col: "#a59786"
 col2: "#706758"
-M0: 322.81
-om: 336.3
-node: 278.7
+M0: 136.61
+om: 6.92
+node: 156.82
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 227
 
 ## Mô tả (VI)
 
-Laetitia — tiểu hành tinh số 39 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Laetitia — tiểu hành tinh số 39 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

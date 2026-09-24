@@ -11,9 +11,9 @@ tilt: 0
 r: 0.111
 col: "#b4a491"
 col2: "#7a6f60"
-M0: 160.51
-om: 108.8
-node: 171.2
+M0: 259.74
+om: 130.1
+node: 308.95
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 101
 
 ## Mô tả (VI)
 
-Angelina — tiểu hành tinh số 64 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Angelina — tiểu hành tinh số 64 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

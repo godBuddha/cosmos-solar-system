@@ -11,9 +11,9 @@ tilt: 0
 r: 0.163
 col: "#9f9281"
 col2: "#6c6355"
-M0: 157.57
-om: 105.3
-node: 119.7
+M0: 252.62
+om: 74.8
+node: 68.87
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 206
 
 ## Mô tả (VI)
 
-Metis — tiểu hành tinh số 9 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Metis — tiểu hành tinh số 9 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

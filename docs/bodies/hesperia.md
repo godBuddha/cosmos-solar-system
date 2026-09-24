@@ -11,9 +11,9 @@ tilt: 0
 r: 0.124
 col: "#ab9c8a"
 col2: "#746a5b"
-M0: 128.05
-om: 207.3
-node: 77.7
+M0: 81.16
+om: 113.07
+node: 184.89
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 128
 
 ## Mô tả (VI)
 
-Hesperia — tiểu hành tinh số 69 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Hesperia — tiểu hành tinh số 69 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

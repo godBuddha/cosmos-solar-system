@@ -11,9 +11,9 @@ tilt: 0
 r: 0.136
 col: "#a89988"
 col2: "#71685a"
-M0: 302.75
-om: 322.7
-node: 212.3
+M0: 182.91
+om: 92.8
+node: 30.79
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 153
 
 ## Mô tả (VI)
 
-Euphrosyne — tiểu hành tinh số 31 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Euphrosyne — tiểu hành tinh số 31 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

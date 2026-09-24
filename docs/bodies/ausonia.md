@@ -11,9 +11,9 @@ tilt: 0
 r: 0.126
 col: "#9e9180"
 col2: "#6b6255"
-M0: 23.0
-om: 17.1
-node: 117.9
+M0: 111.38
+om: 273.23
+node: 337.68
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 132
 
 ## Mô tả (VI)
 
-Ausonia — tiểu hành tinh số 63 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Ausonia — tiểu hành tinh số 63 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

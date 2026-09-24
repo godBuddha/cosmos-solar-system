@@ -11,9 +11,9 @@ tilt: 0
 r: 0.14
 col: "#8e8474"
 col2: "#60594d"
-M0: 50.74
-om: 156.4
-node: 223.6
+M0: 272.95
+om: 337.95
+node: 101.39
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 159
 
 ## Mô tả (VI)
 
-Undina — tiểu hành tinh số 92 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Undina — tiểu hành tinh số 92 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

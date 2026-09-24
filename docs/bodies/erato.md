@@ -11,9 +11,9 @@ tilt: 0
 r: 0.09
 col: "#c4b19d"
 col2: "#847868"
-M0: 245.5
-om: 285.4
-node: 64.6
+M0: 341.11
+om: 42.9
+node: 125.1
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 59
 
 ## Mô tả (VI)
 
-Erato — tiểu hành tinh số 62 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Erato — tiểu hành tinh số 62 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

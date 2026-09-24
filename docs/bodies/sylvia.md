@@ -11,9 +11,9 @@ tilt: 0
 r: 0.133
 col: "#978b7b"
 col2: "#665e51"
-M0: 83.2
-om: 57.9
-node: 317.1
+M0: 123.92
+om: 340.05
+node: 72.95
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 146
 
 ## Mô tả (VI)
 
-Sylvia — tiểu hành tinh số 87 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Sylvia — tiểu hành tinh số 87 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

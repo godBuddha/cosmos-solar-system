@@ -11,9 +11,9 @@ tilt: 0
 r: 0.138
 col: "#948979"
 col2: "#645c50"
-M0: 145.18
-om: 217.4
-node: 92.6
+M0: 350.33
+om: 64.28
+node: 65.97
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 156
 
 ## Mô tả (VI)
 
-Kalliope — tiểu hành tinh số 22 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Kalliope — tiểu hành tinh số 22 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

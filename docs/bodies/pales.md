@@ -11,9 +11,9 @@ tilt: 0
 r: 0.105
 col: "#938878"
 col2: "#645c4f"
-M0: 257.89
-om: 173.3
-node: 91.7
+M0: 349.09
+om: 38.46
+node: 284.98
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 90
 
 ## Mô tả (VI)
 
-Pales — tiểu hành tinh số 49 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Pales — tiểu hành tinh số 49 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

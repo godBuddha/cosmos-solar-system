@@ -11,9 +11,9 @@ tilt: 0
 r: 0.094
 col: "#a99a89"
 col2: "#72695a"
-M0: 148.12
-om: 220.9
-node: 144.1
+M0: 152.09
+om: 62.18
+node: 1.05
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 68
 
 ## Mô tả (VI)
 
-Frigga — tiểu hành tinh số 77 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Frigga — tiểu hành tinh số 77 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

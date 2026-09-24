@@ -11,9 +11,9 @@ tilt: 0
 r: 0.105
 col: "#958979"
 col2: "#655d50"
-M0: 103.26
-om: 71.5
-node: 23.5
+M0: 193.03
+om: 35.69
+node: 242.94
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 91
 
 ## Mô tả (VI)
 
-Arethusa — tiểu hành tinh số 95 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Arethusa — tiểu hành tinh số 95 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

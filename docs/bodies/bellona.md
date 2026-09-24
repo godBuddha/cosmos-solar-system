@@ -11,9 +11,9 @@ tilt: 0
 r: 0.124
 col: "#a19483"
 col2: "#6d6456"
-M0: 250.22
-om: 47.6
-node: 52.4
+M0: 107.97
+om: 127.69
+node: 144.15
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 128
 
 ## Mô tả (VI)
 
-Bellona — tiểu hành tinh số 28 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Bellona — tiểu hành tinh số 28 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

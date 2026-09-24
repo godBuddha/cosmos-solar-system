@@ -11,9 +11,9 @@ tilt: 0
 r: 0.102
 col: "#a39584"
 col2: "#6e6557"
-M0: 342.88
-om: 349.9
-node: 345.1
+M0: 214.61
+om: 318.95
+node: 2.67
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 84
 
 ## Mô tả (VI)
 
-Aglaja — tiểu hành tinh số 47 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Aglaja — tiểu hành tinh số 47 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

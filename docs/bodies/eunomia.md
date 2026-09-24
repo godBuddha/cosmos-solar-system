@@ -11,9 +11,9 @@ tilt: 0
 r: 0.206
 col: "#ad9d8b"
 col2: "#756b5c"
-M0: 262.62
-om: 295.5
-node: 79.5
+M0: 159.69
+om: 31.34
+node: 292.88
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 293
 
 ## Mô tả (VI)
 
-Eunomia — tiểu hành tinh số 15 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Eunomia — tiểu hành tinh số 15 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

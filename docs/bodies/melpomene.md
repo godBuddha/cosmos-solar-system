@@ -11,9 +11,9 @@ tilt: 0
 r: 0.155
 col: "#b3a390"
 col2: "#796f5f"
-M0: 315.14
-om: 210.6
-node: 239.4
+M0: 283.95
+om: 18.35
+node: 150.32
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 191
 
 ## Mô tả (VI)
 
-Melpomene — tiểu hành tinh số 18 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Melpomene — tiểu hành tinh số 18 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

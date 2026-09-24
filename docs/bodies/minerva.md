@@ -11,9 +11,9 @@ tilt: 0
 r: 0.107
 col: "#a49685"
 col2: "#6f6658"
-M0: 188.24
-om: 248.1
-node: 276.9
+M0: 316.29
+om: 279.71
+node: 3.81
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 94
 
 ## Mô tả (VI)
 
-Minerva — tiểu hành tinh số 93 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Minerva — tiểu hành tinh số 93 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

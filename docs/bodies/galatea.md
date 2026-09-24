@@ -11,9 +11,9 @@ tilt: 0
 r: 0.089
 col: "#a29584"
 col2: "#6e6557"
-M0: 95.59
-om: 305.8
-node: 344.2
+M0: 106.72
+om: 12.0
+node: 196.98
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 59
 
 ## Mô tả (VI)
 
-Galatea — tiểu hành tinh số 74 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Galatea — tiểu hành tinh số 74 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

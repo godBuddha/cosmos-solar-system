@@ -11,9 +11,9 @@ tilt: 0
 r: 0.133
 col: "#bcaa97"
 col2: "#7f7464"
-M0: 347.6
-om: 112.1
-node: 332.9
+M0: 88.62
+om: 122.3
+node: 43.18
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 147
 
 ## Mô tả (VI)
 
-Egeria — tiểu hành tinh số 13 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Egeria — tiểu hành tinh số 13 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

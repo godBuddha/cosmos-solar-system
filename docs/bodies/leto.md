@@ -11,9 +11,9 @@ tilt: 0
 r: 0.134
 col: "#958a7a"
 col2: "#655d50"
-M0: 350.54
-om: 115.6
-node: 24.4
+M0: 92.91
+om: 349.14
+node: 44.03
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 148
 
 ## Mô tả (VI)
 
-Leto — tiểu hành tinh số 68 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Leto — tiểu hành tinh số 68 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

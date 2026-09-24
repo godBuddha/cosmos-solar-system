@@ -11,9 +11,9 @@ tilt: 0
 r: 0.101
 col: "#c2af9b"
 col2: "#837767"
-M0: 265.56
-om: 299.0
-node: 131.0
+M0: 316.26
+om: 303.04
+node: 47.64
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 83
 
 ## Mô tả (VI)
 
-Panopaea — tiểu hành tinh số 70 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Panopaea — tiểu hành tinh số 70 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

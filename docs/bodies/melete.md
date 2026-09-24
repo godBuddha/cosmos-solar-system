@@ -11,9 +11,9 @@ tilt: 0
 r: 0.095
 col: "#b7a693"
 col2: "#7b7161"
-M0: 140.45
-om: 95.2
-node: 104.8
+M0: 139.05
+om: 297.93
+node: 192.9
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 71
 
 ## Mô tả (VI)
 
-Melete — tiểu hành tinh số 56 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Melete — tiểu hành tinh số 56 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

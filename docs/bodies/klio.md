@@ -11,9 +11,9 @@ tilt: 0
 r: 0.084
 col: "#908676"
 col2: "#625a4e"
-M0: 30.67
-om: 142.8
-node: 157.2
+M0: 93.07
+om: 342.68
+node: 327.49
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 48
 
 ## Mô tả (VI)
 
-Klio — tiểu hành tinh số 84 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Klio — tiểu hành tinh số 84 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

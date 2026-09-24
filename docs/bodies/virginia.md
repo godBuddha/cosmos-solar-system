@@ -11,9 +11,9 @@ tilt: 0
 r: 0.083
 col: "#aa9b89"
 col2: "#73695b"
-M0: 35.4
-om: 265.0
-node: 145.0
+M0: 32.28
+om: 13.55
+node: 173.45
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 46
 
 ## Mô tả (VI)
 
-Virginia — tiểu hành tinh số 50 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Virginia — tiểu hành tinh số 50 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

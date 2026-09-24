@@ -11,9 +11,9 @@ tilt: 0
 r: 0.136
 col: "#8f8475"
 col2: "#61594d"
-M0: 298.02
-om: 200.5
-node: 224.5
+M0: 303.9
+om: 259.33
+node: 155.1
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 153
 
 ## Mô tả (VI)
 
-Cybele — tiểu hành tinh số 65 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Cybele — tiểu hành tinh số 65 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

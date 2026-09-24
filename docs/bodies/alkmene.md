@@ -11,9 +11,9 @@ tilt: 0
 r: 0.1
 col: "#a09382"
 col2: "#6c6356"
-M0: 115.66
-om: 319.4
-node: 50.6
+M0: 14.25
+om: 136.05
+node: 25.38
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 79
 
 ## Mô tả (VI)
 
-Alkmene — tiểu hành tinh số 82 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Alkmene — tiểu hành tinh số 82 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

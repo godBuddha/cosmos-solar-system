@@ -11,9 +11,9 @@ tilt: 0
 r: 0.123
 col: "#ad9e8c"
 col2: "#756b5c"
-M0: 220.7
-om: 149.6
-node: 10.4
+M0: 244.36
+om: 313.29
+node: 276.32
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 127
 
 ## Mô tả (VI)
 
-Thisbe — tiểu hành tinh số 88 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Thisbe — tiểu hành tinh số 88 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

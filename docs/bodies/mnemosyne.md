@@ -11,9 +11,9 @@ tilt: 0
 r: 0.133
 col: "#918677"
 col2: "#625b4e"
-M0: 277.96
-om: 186.9
-node: 158.1
+M0: 240.32
+om: 49.87
+node: 198.88
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 146
 
 ## Mô tả (VI)
 
-Mnemosyne — tiểu hành tinh số 57 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Mnemosyne — tiểu hành tinh số 57 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

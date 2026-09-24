@@ -11,9 +11,9 @@ tilt: 0
 r: 0.095
 col: "#9f9281"
 col2: "#6b6355"
-M0: 270.29
-om: 61.2
-node: 118.8
+M0: 142.94
+om: 45.92
+node: 358.16
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 70
 
 ## Mô tả (VI)
 
-Atalante — tiểu hành tinh số 36 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Atalante — tiểu hành tinh số 36 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

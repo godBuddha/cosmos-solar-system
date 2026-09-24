@@ -11,9 +11,9 @@ tilt: 0
 r: 0.116
 col: "#8d8374"
 col2: "#60594c"
-M0: 92.65
-om: 302.3
-node: 292.7
+M0: 148.26
+om: 33.43
+node: 210.99
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 113
 
 ## Mô tả (VI)
 
-Fortuna — tiểu hành tinh số 19 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Fortuna — tiểu hành tinh số 19 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

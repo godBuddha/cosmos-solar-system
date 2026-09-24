@@ -11,9 +11,9 @@ tilt: 0
 r: 0.087
 col: "#b2a28f"
 col2: "#786e5f"
-M0: 180.58
-om: 122.4
-node: 237.6
+M0: 38.12
+om: 310.61
+node: 207.93
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 54
 
 ## Mô tả (VI)
 
-Feronia — tiểu hành tinh số 72 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Feronia — tiểu hành tinh số 72 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

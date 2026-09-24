@@ -11,9 +11,9 @@ tilt: 0
 r: 0.122
 col: "#b5a492"
 col2: "#7a7060"
-M0: 47.8
-om: 152.9
-node: 172.1
+M0: 218.72
+om: 69.56
+node: 7.23
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 124
 
 ## Mô tả (VI)
 
-Fides — tiểu hành tinh số 37 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Fides — tiểu hành tinh số 37 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

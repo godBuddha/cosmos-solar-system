@@ -11,9 +11,9 @@ tilt: 0
 r: 0.11
 col: "#b3a290"
 col2: "#796e5f"
-M0: 67.86
-om: 166.5
-node: 238.5
+M0: 250.51
+om: 234.72
+node: 147.52
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 101
 
 ## Mô tả (VI)
 
-Eugenia — tiểu hành tinh số 45 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Eugenia — tiểu hành tinh số 45 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

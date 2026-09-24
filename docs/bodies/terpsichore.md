@@ -11,9 +11,9 @@ tilt: 0
 r: 0.093
 col: "#c6b29e"
 col2: "#857969"
-M0: 338.15
-om: 227.7
-node: 357.3
+M0: 159.61
+om: 52.12
+node: 0.89
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 66
 
 ## Mô tả (VI)
 
-Terpsichore — tiểu hành tinh số 81 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Terpsichore — tiểu hành tinh số 81 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

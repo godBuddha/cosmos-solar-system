@@ -11,9 +11,9 @@ tilt: 0
 r: 0.128
 col: "#aa9b89"
 col2: "#73695b"
-M0: 282.68
-om: 309.1
-node: 145.9
+M0: 216.4
+om: 128.15
+node: 66.48
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 136
 
 ## Mô tả (VI)
 
-Thalia — tiểu hành tinh số 23 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Thalia — tiểu hành tinh số 23 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

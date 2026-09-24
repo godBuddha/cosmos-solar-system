@@ -11,9 +11,9 @@ tilt: 0
 r: 0.097
 col: "#bfad99"
 col2: "#817665"
-M0: 285.62
-om: 312.6
-node: 197.4
+M0: 201.43
+om: 126.6
+node: 333.28
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 75
 
 ## Mô tả (VI)
 
-Diana — tiểu hành tinh số 78 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Diana — tiểu hành tinh số 78 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

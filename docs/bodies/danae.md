@@ -11,9 +11,9 @@ tilt: 0
 r: 0.111
 col: "#ae9e8c"
 col2: "#756b5d"
-M0: 107.99
-om: 193.7
-node: 11.3
+M0: 48.65
+om: 346.42
+node: 333.54
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 101
 
 ## Mô tả (VI)
 
-Danae — tiểu hành tinh số 61 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Danae — tiểu hành tinh số 61 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

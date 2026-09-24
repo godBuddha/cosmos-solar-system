@@ -11,9 +11,9 @@ tilt: 0
 r: 0.111
 col: "#c0ad9a"
 col2: "#817666"
-M0: 172.91
-om: 356.7
-node: 198.3
+M0: 80.61
+om: 178.28
+node: 175.88
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 101
 
 ## Mô tả (VI)
 
-Nemausa — tiểu hành tinh số 51 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Nemausa — tiểu hành tinh số 51 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

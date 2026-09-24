@@ -11,9 +11,9 @@ tilt: 0
 r: 0.095
 col: "#8f8575"
 col2: "#615a4d"
-M0: 185.3
-om: 244.6
-node: 225.4
+M0: 209.1
+om: 105.32
+node: 295.49
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 71
 
 ## Mô tả (VI)
 
-Leda — tiểu hành tinh số 38 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Leda — tiểu hành tinh số 38 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

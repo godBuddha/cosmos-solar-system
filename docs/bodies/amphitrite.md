@@ -11,9 +11,9 @@ tilt: 0
 r: 0.174
 col: "#b7a693"
 col2: "#7c7161"
-M0: 27.73
-om: 139.3
-node: 105.7
+M0: 193.37
+om: 58.18
+node: 356.25
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 227
 
 ## Mô tả (VI)
 
-Amphitrite — tiểu hành tinh số 29 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Amphitrite — tiểu hành tinh số 29 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

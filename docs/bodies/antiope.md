@@ -11,9 +11,9 @@ tilt: 0
 r: 0.097
 col: "#9e9180"
 col2: "#6b6255"
-M0: 135.72
-om: 333.0
-node: 117.0
+M0: 244.53
+om: 314.27
+node: 69.89
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 74
 
 ## Mô tả (VI)
 
-Antiope — tiểu hành tinh số 90 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Antiope — tiểu hành tinh số 90 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

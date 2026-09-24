@@ -11,9 +11,9 @@ tilt: 0
 r: 0.106
 col: "#c2af9b"
 col2: "#837767"
-M0: 152.84
-om: 343.1
-node: 131.9
+M0: 201.54
+om: 281.05
+node: 264.74
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 93
 
 ## Mô tả (VI)
 
-Ariadne — tiểu hành tinh số 43 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Ariadne — tiểu hành tinh số 43 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

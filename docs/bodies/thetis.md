@@ -11,9 +11,9 @@ tilt: 0
 r: 0.106
 col: "#9d9080"
 col2: "#6a6254"
-M0: 177.64
-om: 118.9
-node: 186.1
+M0: 243.07
+om: 261.66
+node: 125.5
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 93
 
 ## Mô tả (VI)
 
-Thetis — tiểu hành tinh số 17 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Thetis — tiểu hành tinh số 17 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

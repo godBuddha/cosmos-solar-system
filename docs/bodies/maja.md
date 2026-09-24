@@ -11,9 +11,9 @@ tilt: 0
 r: 0.082
 col: "#a59785"
 col2: "#6f6658"
-M0: 75.53
-om: 292.2
-node: 277.8
+M0: 255.02
+om: 50.94
+node: 7.47
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 44
 
 ## Mô tả (VI)
 
-Maja — tiểu hành tinh số 66 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Maja — tiểu hành tinh số 66 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

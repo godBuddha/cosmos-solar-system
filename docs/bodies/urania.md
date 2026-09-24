@@ -11,9 +11,9 @@ tilt: 0
 r: 0.114
 col: "#928777"
 col2: "#635b4f"
-M0: 165.24
-om: 231.0
-node: 159.0
+M0: 13.67
+om: 34.63
+node: 307.4
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 109
 
 ## Mô tả (VI)
 
-Urania — tiểu hành tinh số 30 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Urania — tiểu hành tinh số 30 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

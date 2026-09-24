@@ -11,9 +11,9 @@ tilt: 0
 r: 0.111
 col: "#ac9d8b"
 col2: "#746a5c"
-M0: 15.34
-om: 251.4
-node: 78.6
+M0: 154.36
+om: 321.77
+node: 84.15
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 103
 
 ## Mô tả (VI)
 
-Isis — tiểu hành tinh số 42 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Isis — tiểu hành tinh số 42 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

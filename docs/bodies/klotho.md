@@ -11,9 +11,9 @@ tilt: 0
 r: 0.109
 col: "#c1ae9b"
 col2: "#827766"
-M0: 18.28
-om: 254.9
-node: 130.1
+M0: 179.26
+om: 68.04
+node: 159.58
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 99
 
 ## Mô tả (VI)
 
-Klotho — tiểu hành tinh số 97 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Klotho — tiểu hành tinh số 97 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

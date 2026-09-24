@@ -11,9 +11,9 @@ tilt: 0
 r: 0.117
 col: "#b1a18e"
 col2: "#776d5e"
-M0: 335.21
-om: 224.2
-node: 305.8
+M0: 335.1
+om: 241.8
+node: 45.68
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 113
 
 ## Mô tả (VI)
 
-Proserpina — tiểu hành tinh số 26 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Proserpina — tiểu hành tinh số 26 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

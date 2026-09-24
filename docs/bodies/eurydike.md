@@ -11,9 +11,9 @@ tilt: 0
 r: 0.085
 col: "#b9a794"
 col2: "#7d7262"
-M0: 233.1
-om: 37.5
-node: 37.5
+M0: 187.58
+om: 338.74
+node: 359.1
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 51
 
 ## Mô tả (VI)
 
-Eurydike — tiểu hành tinh số 75 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Eurydike — tiểu hành tinh số 75 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

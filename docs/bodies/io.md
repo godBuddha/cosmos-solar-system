@@ -11,9 +11,9 @@ tilt: 0
 r: 0.106
 col: "#a79887"
 col2: "#716759"
-M0: 168.18
-om: 234.5
-node: 210.5
+M0: 93.84
+om: 326.0
+node: 203.04
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 92
 
 ## Mô tả (VI)
 
-Io — tiểu hành tinh số 85 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Io — tiểu hành tinh số 85 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

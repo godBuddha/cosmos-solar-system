@@ -11,9 +11,9 @@ tilt: 0
 r: 0.147
 col: "#a49685"
 col2: "#6f6658"
-M0: 230.16
-om: 34.0
-node: 346.0
+M0: 82.8
+om: 103.15
+node: 205.95
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 175
 
 ## Mô tả (VI)
 
-Massalia — tiểu hành tinh số 20 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Massalia — tiểu hành tinh số 20 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

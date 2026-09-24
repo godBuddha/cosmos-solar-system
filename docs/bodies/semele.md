@@ -11,9 +11,9 @@ tilt: 0
 r: 0.092
 col: "#bdab97"
 col2: "#7f7464"
-M0: 305.69
-om: 326.2
-node: 263.8
+M0: 100.2
+om: 34.76
+node: 86.04
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 64
 
 ## Mô tả (VI)
 
-Semele — tiểu hành tinh số 86 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Semele — tiểu hành tinh số 86 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

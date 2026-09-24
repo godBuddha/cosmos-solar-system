@@ -11,9 +11,9 @@ tilt: 0
 r: 0.103
 col: "#bdab98"
 col2: "#807564"
-M0: 192.97
-om: 10.3
-node: 264.7
+M0: 12.37
+om: 21.08
+node: 169.91
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 86
 
 ## Mô tả (VI)
 
-Elpis — tiểu hành tinh số 59 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Elpis — tiểu hành tinh số 59 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

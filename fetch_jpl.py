@@ -10,7 +10,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 OUT_DIR = ROOT / "docs" / "bodies"
-# các id đã có sẵn — không ghi đè (giữ mô tả 3 ngôn ngữ thủ công chất lượng cao)
+# các file thủ công chất lượng cao — KHÔNG BAO GIỜ ghi đè
+MANUAL = {"mercury","venus","earth","mars","jupiter","saturn","uranus","neptune",
+          "pluto","eris","haumea","makemake","ceres","quaoar","orcus","gonggong",
+          "sedna","vesta","pallas","hygiea","juno"}
 EXISTING = {f.stem.lower() for f in OUT_DIR.glob("*.md")}
 
 
@@ -52,7 +55,7 @@ dia: {dia}
 
 ## Mô tả (VI)
 
-{en} — tiểu hành tinh số {num} của vành đai chính, được JPL SBDB xếp loại {klass}.
+{en} — tiểu hành tinh số {num} của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 
@@ -71,7 +74,7 @@ dia: {dia}
 def main():
     print("Fetching 100 numbered asteroids từ JPL SBDB…")
     q = ("https://ssd-api.jpl.nasa.gov/sbdb_query.api"
-         "?fields=full_name,a,e,i,per,H&sb-kind=a&limit=130")
+         "?fields=full_name,a,e,i,per,om,w,ma,H&sb-kind=a&limit=130")
     data = fetch_jpl(q)
     rows = data["data"]
     # lọc: chỉ giữ tên dạng "N Name (prov)" — numbered asteroid chính thức
@@ -82,6 +85,7 @@ def main():
             continue
         num, rest = fn.split(" ", 1)
         name = rest.split(" (")[0].strip()
+        # row: [full_name, a, e, i, per, om, w, ma, H]
         picked.append((int(num), name, row))
         if len(picked) >= 100:
             break
@@ -89,11 +93,14 @@ def main():
     added, skipped = 0, 0
     for num, name, row in picked:
         sid = slug(name)
-        if sid in EXISTING:
+        if sid in MANUAL:
             skipped += 1
             continue
-        _, a, e, i, per, H = row
-        a, e, i, per, H = float(a), float(e), float(i), float(per), float(H)
+        # asteroid JPL: CHO PHÉP ghi đè để cập nhật elements thật (om/w/ma)
+        _, a, e, i, per, om_jpl, w_jpl, ma_jpl, H = row
+        a, e, i, per = float(a), float(e), float(i), float(per)
+        om_jpl = float(om_jpl); w_jpl = float(w_jpl); ma_jpl = float(ma_jpl)
+        H = float(H) if H else 18.0
         # kích thước hiển thị: từ H (độ sáng tuyệt đối) → ước lượng bán kính km
         # D(km) ≈ 1329 / sqrt(albedo 0.14) * 10^(-H/5)
         dia_km = 1329 / math.sqrt(0.14) * 10 ** (-(H) / 5) if H else 20
@@ -104,11 +111,11 @@ def main():
         col2 = "#%02x%02x%02x" % (int(95+40*h), int(88+35*h), int(76+30*h))
         mass = 1e-9  # không quan trọng với asteroid nhỏ
         temp = 170
-        # ước tính M0/om/node không có trong query này — dùng hash ổn định (xấp xỉ
-        # đủ dùng cho hiển thị; ghi chú trong file)
-        M0 = round((num * 137.508) % 360, 2)
-        om = round((num * 91.7) % 360, 2)
-        node = round((num * 53.3) % 360, 2)
+        # elements góc THẬT từ JPL (không còn hash xấp xỉ)
+        # app dùng: om = longitude of perihelion ϖ = Ω + ω (JPL trả riêng om=Ω, w=ω)
+        om = round((om_jpl + w_jpl) % 360, 2)
+        node = round(om_jpl % 360, 2)
+        M0 = round(ma_jpl % 360, 2)
         content = TPL.format(
             en=name.capitalize(), vi=name.capitalize(), zh=name.capitalize(),
             sid=sid, a=a, e=e, i=i, T=round(per, 1), r=round(r_scene, 3),

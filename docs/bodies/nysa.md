@@ -11,9 +11,9 @@ tilt: 0
 r: 0.139
 col: "#9c907f"
 col2: "#6a6154"
-M0: 290.35
-om: 74.8
-node: 185.2
+M0: 41.46
+om: 115.37
+node: 131.48
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 159
 
 ## Mô tả (VI)
 
-Nysa — tiểu hành tinh số 44 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Nysa — tiểu hành tinh số 44 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

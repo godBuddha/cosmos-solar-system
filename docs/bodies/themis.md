@@ -11,9 +11,9 @@ tilt: 0
 r: 0.124
 col: "#c0ae9a"
 col2: "#827666"
-M0: 60.19
-om: 40.8
-node: 199.2
+M0: 92.02
+om: 145.61
+node: 36.39
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 128
 
 ## Mô tả (VI)
 
-Themis — tiểu hành tinh số 24 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Themis — tiểu hành tinh số 24 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

@@ -11,9 +11,9 @@ tilt: 0
 r: 0.13
 col: "#c7b39f"
 col2: "#867a69"
-M0: 112.72
-om: 315.9
-node: 359.1
+M0: 327.72
+om: 91.38
+node: 94.77
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 139
 
 ## Mô tả (VI)
 
-Euterpe — tiểu hành tinh số 27 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Euterpe — tiểu hành tinh số 27 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 

@@ -11,9 +11,9 @@ tilt: 0
 r: 0.092
 col: "#ae9f8d"
 col2: "#766c5d"
-M0: 355.27
-om: 237.8
-node: 12.2
+M0: 350.09
+om: 153.51
+node: 184.25
 dwarf: false
 mass: 1e-09
 temp: 170
@@ -23,7 +23,7 @@ dia: 63
 
 ## Mô tả (VI)
 
-Circe — tiểu hành tinh số 34 của vành đai chính, được JPL SBDB xếp loại main-belt.
+Circe — tiểu hành tinh số 34 của vành đai chính. Phần tử quỹ đạo J2000 lấy trực tiếp từ JPL SBDB (đúng vị trí theo ngày thực).
 
 ## Description (EN)
 
