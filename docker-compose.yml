@@ -1,5 +1,6 @@
 # =====================================================================
 #  COSMOS — Solar System 3D (Three.js) — self-hosted stack
+#  App static + API server (auth + AI gateway)
 #  docker compose up -d --build
 # =====================================================================
 services:
@@ -10,11 +11,27 @@ services:
     restart: unless-stopped
     ports:
       - "8090:80"           # đổi cổng tùy ý
+    depends_on:
+      - api
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]   # IPv4, tránh false-unhealthy do IPv6
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
       interval: 30s
       timeout: 5s
       retries: 3
+    networks:
+      - webnet
+
+  api:
+    build: ./server
+    image: cosmos-api:latest
+    container_name: cosmos-api
+    restart: unless-stopped
+    environment:
+      - PORT=3000
+      - JWT_SECRET=${JWT_SECRET:-doi-chuoi-nay-di}
+      - SETUP_TOKEN=${SETUP_TOKEN:-}
+    volumes:
+      - api_data:/app/data
     networks:
       - webnet
 
@@ -27,7 +44,7 @@ services:
   #     - "80:80"
   #     - "443:443"
   #   volumes:
-  #     - ./nginx/proxy.conf:/etc/nginx/conf.d/default.conf:ro
+  #     - ./nginxconf/proxy.conf:/etc/nginx/conf.d/proxy.conf:ro
   #     - ./certbot/conf:/etc/letsencrypt:ro
   #     - ./certbot/www:/var/www/certbot
   #   depends_on:
@@ -41,7 +58,6 @@ services:
   #   volumes:
   #     - ./certbot/conf:/etc/letsencrypt
   #     - ./certbot/www:/var/www/certbot
-  #   # gia hạn SSL mỗi 12h
   #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
   #   networks:
   #     - webnet
@@ -49,3 +65,6 @@ services:
 networks:
   webnet:
     driver: bridge
+
+volumes:
+  api_data:
