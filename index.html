@@ -56,6 +56,19 @@
   }
   #infopanel .close-x:hover { color:#ffd27a; }
   #date { color:#ffd27a; }
+  /* ===== MOBILE (<=768px): panel trái full-width bottom-sheet, panel phải gọn ===== */
+  @media (max-width: 768px) {
+    #infopanel {
+      left: 0; right: 0; top: auto; bottom: 0; width: 100%;
+      max-height: 55vh; border-radius: 14px 14px 0 0;
+      transform: translateY(110%);
+    }
+    #infopanel.open { transform: translateY(0); }
+    #ipBody { max-height: calc(55vh - 150px); }
+    #panel { left: 8px; right: 8px; top: 8px; max-height: 42vh; overflow-y: auto; }
+    #hud { left: 8px; bottom: 8px; top: auto; max-width: 60vw; }
+    #hint { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -113,7 +126,9 @@ import { CSS2DRenderer, CSS2DObject } from "three/addons/renderers/CSS2DRenderer
 //  M0 = mean anomaly tại epoch J2000 (JD 2451545.0) = L − ϖ (bảng JPL
 //  "Approximate Positions of the Planets", độ chính xác ~vài phút cung)
 //  om = longitude of perihelion ϖ | node = longitude of ascending node Ω (deg)
-const PLANETS = [ // info: mass(×E), temp(K), moons, đường kính km
+// Bảng PLANETS nạp từ catalog.json (sinh từ docs/bodies/*.md — single
+// source of truth). Fallback hard-code giữ cho app chạy khi fetch fail.
+const PLANETS_FALLBACK = [
   { name:"Mercury", a:0.387, e:0.206, i:7.005, T:88,     rot:58.6, tilt:0.03, r:0.55, col:"#9c8f84", col2:"#6b615a", M0:174.795, om:77.457,  node:48.331,  info:{mass:0.055, temp:440, moons:0, dia:4879} },
   { name:"Venus",   a:0.723, e:0.007, i:3.395, T:225,    rot:-243, tilt:177.4,r:0.85, col:"#e8c78f", col2:"#b8945f", M0:50.416,  om:131.564, node:76.680,  info:{mass:0.815, temp:737, moons:0, dia:12104} },
   { name:"Earth",   a:1.000, e:0.017, i:0.0,   T:365.25, rot:1.0,  tilt:23.4, r:0.9,  col:"#5f8fd8", col2:"#3a5f9f", M0:357.527, om:102.937, node:-11.26,  info:{mass:1.0, temp:288, moons:1, dia:12756} },
@@ -122,12 +137,33 @@ const PLANETS = [ // info: mass(×E), temp(K), moons, đường kính km
   { name:"Saturn",  a:9.537, e:0.054, i:2.489, T:10759,  rot:0.44, tilt:26.7, r:2.05, col:"#e0c896", col2:"#b09860", M0:317.355, om:92.599,  node:113.662, info:{mass:95.2, temp:134, moons:146, dia:120536} },
   { name:"Uranus",  a:19.19, e:0.047, i:0.773, T:30687,  rot:-0.72,tilt:97.8, r:1.4,  col:"#9fdde8", col2:"#6ba8b8", M0:142.284, om:170.954, node:74.017,  info:{mass:14.5, temp:76, moons:28, dia:51118} },
   { name:"Neptune", a:30.07, e:0.009, i:1.770, T:60190,  rot:0.67, tilt:28.3, r:1.35, col:"#4a6fe0", col2:"#2a45a8", M0:259.916, om:44.964,  node:131.784, info:{mass:17.1, temp:72, moons:16, dia:49528} },
-  // ---- Dwarf planets (IAU 2006): Pluto bị hạ bậc 24/8/2006 ----
-  // Dwarf planets: phần tử J2000 xấp xỉ (JPL SBDB)
   { name:"Ceres",  a:2.77,  e:0.076, i:10.6, T:1682,   rot:0.38, tilt:4,    r:0.30, col:"#a8a29a", col2:"#7a756d", M0:95.99,  om:153.9,  node:80.3,  dwarf:true, info:{mass:0.00016, temp:168, moons:0, dia:940} },
   { name:"Pluto",   a:39.48, e:0.249, i:17.2, T:90560,  rot:-6.39, tilt:119.6,r:0.42, col:"#d8c0a8", col2:"#a08878", M0:14.53,  om:224.07, node:110.3, dwarf:true, info:{mass:0.0022, temp:44, moons:5, dia:2377} },
   { name:"Eris",    a:67.78, e:0.44,  i:44.2, T:203830, rot:15.8/24,tilt:78, r:0.40, col:"#cfd8dc", col2:"#9aa4ab", M0:205.99, om:187.35, node:35.95, dwarf:true, info:{mass:0.0027, temp:30, moons:1, dia:2326} },
 ];
+let PLANETS = [...PLANETS_FALLBACK];   // sẽ bị thay nếu fetch catalog thành công
+let CATALOG_DESC = {};   // mô tả đa ngôn ngữ theo id, từ catalog
+
+// nạp catalog — PHẢI hoàn tất trước khi dựng scene (có await ngay dưới)
+async function loadCatalog() {
+  try {
+    const res = await fetch("./data/catalog.json");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const cat = await res.json();
+    PLANETS = cat.map(b => ({
+      name: b.names.en,                       // key nội bộ giữ EN (map qua I18N.names)
+      a: b.a, e: b.e, i: b.i, T: b.T, rot: b.rot, tilt: b.tilt, r: b.r,
+      col: b.col, col2: b.col2, M0: b.M0, om: b.om, node: b.node,
+      dwarf: !!b.dwarf,
+      info: { mass: b.mass, temp: b.temp, moons: b.moons, dia: b.dia },
+    }));
+    for (const b of cat) CATALOG_DESC[b.id] = b.desc;
+    console.info("catalog loaded:", PLANETS.length, "bodies");
+  } catch (e) {
+    console.warn("catalog fetch fail — dùng fallback hard-code:", e.message);
+  }
+}
+await loadCatalog();
 
 // NÉN KHOẢNG CÁCH: d_scene = C * a^0.55 (Neptune chỉ ~6.6x Earth thay vì 30x)
 const DIST_C = 11.0;
@@ -926,14 +962,16 @@ function selectPlanet(o) {
   followTarget = o;
   const t = T();
   const d = o.data.info;
-  document.getElementById("ipName").textContent = t.names[o.data.name] || o.data.name;
+  const bodyId = o.data.name.toLowerCase();
+  const descText = (CATALOG_DESC[bodyId] || {})[LANG] || "";  document.getElementById("ipName").textContent = t.names[o.data.name] || o.data.name;
   document.getElementById("ipNameEn").textContent = o.data.name + (o.data.dwarf ? " " + t.dwarf : "");
   const secs = {
     1: `<h4>${t.sec1}</h4>
         <div class="row"><span>${t.mass}</span><b>${d.mass} ${t.earthU}</b></div>
         <div class="row"><span>${t.dia}</span><b>${d.dia.toLocaleString("vi-VN")} km</b></div>
         <div class="row"><span>${t.temp}</span><b>${d.temp} K</b></div>
-        <div class="row"><span>${t.moons}</span><b>${d.moons}</b></div>`,
+        <div class="row"><span>${t.moons}</span><b>${d.moons}</b></div>
+        ${descText ? `<div style="margin-top:6px; opacity:.85">${descText}</div>` : ""}`,
     2: `<h4>${t.sec2}</h4>
         <div class="row"><span>${t.period}</span><b>${o.data.T} ${t.days}</b></div>
         <div class="row"><span>a</span><b>${o.data.a} AU</b></div>
