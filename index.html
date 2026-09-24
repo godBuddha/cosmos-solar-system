@@ -27,6 +27,34 @@
     border-radius:7px; padding:4px 10px; margin:4px 4px 0 0; cursor:pointer; font-size:12.5px;
   }
   #panel button:hover { background:#1b3358; }
+  #infopanel {
+    position:fixed; left:16px; top:80px; width:290px; max-height:calc(100vh - 180px);
+    background:rgba(4,10,22,.82); border:1px solid rgba(120,170,230,.3);
+    border-radius:12px; padding:14px; backdrop-filter:blur(8px);
+    color:#cfe2ff; font:12.5px/1.65 ui-sans-serif,system-ui,sans-serif;
+    transform:translateX(-120%); opacity:0; transition:transform .45s cubic-bezier(.2,.9,.3,1), opacity .45s;
+    z-index:5;
+  }
+  #infopanel.open { transform:translateX(0); opacity:1; }
+  #ipName { color:#ffd27a; font-size:15px; display:block; margin-bottom:2px; }
+  #ipNameEn { opacity:.55; font-size:11px; display:block; margin-bottom:8px; }
+  #ipToc { display:flex; gap:6px; margin-bottom:10px; flex-wrap:wrap; }
+  #ipToc button {
+    background:#12233f; color:#9fc3e8; border:1px solid rgba(120,170,230,.3);
+    border-radius:6px; padding:3px 9px; cursor:pointer; font-size:11px;
+  }
+  #ipToc button:hover, #ipToc button.active { background:#1b3358; color:#ffd27a; }
+  #ipBody { max-height:calc(100vh - 300px); overflow-y:auto; padding-right:4px; }
+  #ipBody::-webkit-scrollbar { width:5px; }
+  #ipBody::-webkit-scrollbar-thumb { background:rgba(120,170,230,.4); border-radius:3px; }
+  #ipBody h4 { color:#8cbeeb; margin:8px 0 4px; font-size:12px; }
+  #ipBody .row { display:flex; justify-content:space-between; padding:2px 0; border-bottom:1px dashed rgba(120,170,230,.12); }
+  #ipBody .row b { color:#ffd27a; }
+  #infopanel .close-x {
+    position:absolute; right:10px; top:8px; background:none; border:none;
+    color:#7a95b5; cursor:pointer; font-size:16px;
+  }
+  #infopanel .close-x:hover { color:#ffd27a; }
   #date { color:#ffd27a; }
 </style>
 </head>
@@ -38,14 +66,15 @@
   <span class="t-hint">Kéo: xoay · Lăn: zoom · Click hành tinh: xem tên</span>
 </div>
 
+<div id="infopanel">
+  <button class="close-x" id="btnUnfollow">✕</button>
+  <b id="ipName"></b>
+  <span id="ipNameEn"></span>
+  <div id="ipToc"></div>
+  <div id="ipBody"></div>
+</div>
 <div id="panel">
   <button id="lang" style="float:right; margin-left:6px">🌐 VI</button>
-  <div id="infopanel" style="display:none; margin-bottom:10px; padding:8px; background:rgba(20,40,70,.5); border-radius:8px;">
-    <b id="ipName" style="color:#ffd27a; font-size:14px;"></b>
-    <div id="ipInfo" style="opacity:.9; margin-top:4px;"></div>
-    <button id="btnFollow" style="margin-top:6px">🎯 <span class="t-follow">Bám theo</span></button>
-    <button id="btnUnfollow" style="margin-top:6px">✕ <span class="t-unfollow">Thả camera</span></button>
-  </div>
   Tốc độ <input type="range" id="speed" min="-2" max="3" step="0.05" value="0.7">
   (<span id="speedLabel">x</span>)<br>
   <button id="pause">⏸</button>
@@ -332,7 +361,8 @@ for (const p of PLANETS) {
   scene.add(grp);
   // nhãn tên (CSS2D, nhỏ hơn + mờ hơn cho dwarf planet)
   const lbl = document.createElement("div");
-  lbl.textContent = p.name;   // đuôi dwarf do applyLang() bổ sung theo ngôn ngữ
+  // nhãn hành tinh: tên dịch theo ngôn ngữ
+  lbl.textContent = p.name;   // tên dịch do applyLang() bổ sung khi init
   lbl.style.cssText = "font:11px ui-sans-serif; color:" +
     (p.dwarf ? "#7a95b5" : "#cfe2ff") + "; text-shadow:0 0 6px rgba(0,20,50,.9); pointer-events:none;";
   const lblObj = new CSS2DObject(lbl);
@@ -432,15 +462,40 @@ function makeGlowTexture() {
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
     g.setAttribute("color", new THREE.BufferAttribute(col, 3));
-    const ringPts = new THREE.Points(g, new THREE.PointsMaterial({
-      size: 0.09, map: makeGlowTexture(), vertexColors: true,
-      transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending,
-      depthWrite: false, sizeAttenuation: true,
-    }));
+    // GPU-side Kepler: góc quay tính trong vertex shader, CPU chỉ set uDays
+    g.setAttribute("aR", new THREE.BufferAttribute(rRad, 1));
+    g.setAttribute("aOm", new THREE.BufferAttribute(rOm, 1));
+    const ringMat = new THREE.ShaderMaterial({
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      uniforms: { uDays: { value: 0 }, uMap: { value: makeGlowTexture() }, uSize: { value: 0.09 } },
+      vertexShader: /* glsl */`
+        attribute float aR, aOm;
+        attribute vec3 color;
+        uniform float uDays, uSize;
+        varying vec3 vCol;
+        void main() {
+          // quay quanh Y trong hệ quy chiếu của Saturn (grp), omega du 1/sqrt(r)
+          float a = aOm * uDays * 0.35;
+          vec3 p = vec3(cos(a) * aR, position.y, sin(a) * aR);
+          vCol = color;
+          vec4 mv = modelViewMatrix * vec4(p, 1.0);
+          gl_PointSize = uSize * (240.0 / -mv.z);
+          gl_Position = projectionMatrix * mv;
+        }
+      `,
+      fragmentShader: /* glsl */`
+        uniform sampler2D uMap;
+        varying vec3 vCol;
+        void main() {
+          vec4 tex = texture2D(uMap, gl_PointCoord);
+          gl_FragColor = vec4(vCol, 1.0) * tex;
+        }
+      `,
+    });
+    const ringPts = new THREE.Points(g, ringMat);
     ringPts.rotation.x = 0.47;          // nghiêng vành theo trục Saturn 26.7°
     sat.grp.add(ringPts);
-    // animate: đưa vào mảng cập nhật Keplerian quanh Saturn (trong hệ quy chiếu grp)
-    saturnRing = { geo: g, ang: rAng, rad: rRad, om: rOm, n: idx };
+    saturnRing = { mat: ringMat, n: idx };
   }
 }
 
@@ -568,18 +623,17 @@ let meteorUpdater = null;
 }
 
 // ======================================================================
-//  PHASE 2c: ASTEROID BELT — InstancedMesh giữa Mars–Jupiter
-//  (logic Kepler per-asteroid, mượn ý tưởng KeplerParticles của spacekit)
+//  PHASE 2c: ASTEROID BELT — GPU Points giữa Mars–Jupiter
+//  (Kepler per-asteroid tính trong vertex shader — cùng mẫu Kuiper)
 // ======================================================================
 {
-  const N_AST = 3000;
-  const rockGeo = new THREE.IcosahedronGeometry(0.05, 0);   // đá dăm đa diện
-  const rockMat = new THREE.MeshStandardMaterial({ color: 0x8a7f70, roughness: 0.95, metalness: 0.05 });
-  const inst = new THREE.InstancedMesh(rockGeo, rockMat, N_AST);
-  const astData = [];
+  const N_AST = 6000;   // nâng gấp 2 vì chi phí CPU = 0 sau khi GPU hóa
+  const aPos = new Float32Array(N_AST * 3), aCol = new Float32Array(N_AST * 3);
+  const aArr = new Float32Array(N_AST), aEa = new Float32Array(N_AST),
+        aIa = new Float32Array(N_AST), aMa = new Float32Array(N_AST), aTa = new Float32Array(N_AST);
   let s = 55555;
   const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
-  const dummy = new THREE.Object3D();
+  const cRock = new THREE.Color(0x8a7f70), cRock2 = new THREE.Color(0x5f5648);
   for (let i = 0; i < N_AST; i++) {
     // a giữa 2.1 - 3.3 AU (vành chính), e ngẫu nhiên nhỏ, i nghiêng nhẹ
     const a = 2.1 + rnd() * 1.2;
@@ -587,24 +641,70 @@ let meteorUpdater = null;
     const inc = (rnd() - 0.5) * 0.15;
     const M0 = rnd() * 6.283;
     const T = 365.25 * Math.pow(a, 1.5);                  // định luật III Kepler
-    const rotSpeed = rnd() * 2 - 1;
-    const scl = 0.5 + rnd() * 1.6;
-    astData.push({ a, e, inc, M0, T, rotSpeed, scl });
-    dummy.scale.setScalar(scl);
-    dummy.updateMatrix();
-    inst.setMatrixAt(i, dummy.matrix);
+    aArr[i] = a; aEa[i] = e; aIa[i] = inc; aMa[i] = M0; aTa[i] = T;
+    aPos[i * 3] = 0; aPos[i * 3 + 1] = 0; aPos[i * 3 + 2] = 0;   // shader tự tính
+    const c = cRock.clone().lerp(cRock2, rnd());
+    const b = 0.5 + rnd() * 0.5;
+    aCol[i * 3] = c.r * b; aCol[i * 3 + 1] = c.g * b; aCol[i * 3 + 2] = c.b * b;
   }
-  scene.add(inst);
-  asteroidBelt = { inst, data: astData, dummy };
+  const ag = new THREE.BufferGeometry();
+  ag.setAttribute("position", new THREE.BufferAttribute(aPos, 3));
+  ag.setAttribute("color", new THREE.BufferAttribute(aCol, 3));
+  ag.setAttribute("aA", new THREE.BufferAttribute(aArr, 1));
+  ag.setAttribute("aE", new THREE.BufferAttribute(aEa, 1));
+  ag.setAttribute("aI", new THREE.BufferAttribute(aIa, 1));
+  ag.setAttribute("aM", new THREE.BufferAttribute(aMa, 1));
+  ag.setAttribute("aT", new THREE.BufferAttribute(aTa, 1));
+  const aMat = new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    uniforms: { uDays: { value: 0 }, uMap: { value: makeGlowTexture() }, uSize: { value: 0.13 } },
+    vertexShader: /* glsl */`
+      attribute float aA, aE, aI, aM, aT;
+      attribute vec3 color;
+      uniform float uDays, uSize;
+      varying vec3 vCol;
+      float solveK(float M, float e) {
+        float E = M;
+        for (int k = 0; k < 5; k++) E = E - (E - e * sin(E) - M) / (1.0 - e * cos(E));
+        return E;
+      }
+      void main() {
+        float M = aM + 6.283185 * (uDays / aT);
+        M = mod(mod(M, 6.283185) + 6.283185, 6.283185);
+        float E = solveK(M, aE);
+        float sc = 11.0 * pow(aA, 0.55) / aA;
+        vec3 p;
+        p.x = aA * (cos(E) - aE) * sc;
+        float yO = aA * sqrt(1.0 - aE * aE) * sin(E) * sc;
+        p.y = yO * cos(aI);
+        p.z = yO * sin(aI);
+        vCol = color;
+        vec4 mv = modelViewMatrix * vec4(p, 1.0);
+        gl_PointSize = uSize * (240.0 / -mv.z);
+        gl_Position = projectionMatrix * mv;
+      }
+    `,
+    fragmentShader: /* glsl */`
+      uniform sampler2D uMap;
+      varying vec3 vCol;
+      void main() {
+        vec4 tex = texture2D(uMap, gl_PointCoord);
+        gl_FragColor = vec4(vCol, 1.0) * tex;
+      }
+    `,
+  });
+  const belt = new THREE.Points(ag, aMat);
+  scene.add(belt);
+  asteroidBelt = { mat: aMat, n: N_AST };
 }
 
 // ======================================================================
-//  VÀNH ĐAI KUIPER — 8.000 thiên thể nhỏ 30–50 AU (ngoài Neptune),
+//  VÀNH ĐAI KUIPER — 50.000 thiên thể nhỏ 32–48 AU (ngoài Neptune),
 //  vùng của Pluto/Eris. Points cho rẻ draw call, Kepler per-object,
 //  nghiêng lan tỏa dày hơn mặt phẳng hoàng đạo (đúng đặc trưng Belt)
 // ======================================================================
 {
-  const N_K = 8000;
+  const N_K = 50000;
   const kPos = new Float32Array(N_K * 3), kCol = new Float32Array(N_K * 3);
   const kData = [];
   let s = 733331;
@@ -750,6 +850,8 @@ let followTarget = null;   // planetObjs entry đang bám
 // ======================================================================
 const I18N = {
   vi: {
+    names: { Mercury:"Sao Thủy", Venus:"Sao Kim", Earth:"Trái Đất", Mars:"Sao Hỏa", Jupiter:"Sao Mộc", Saturn:"Sao Thổ", Uranus:"Sao Thiên Vương", Neptune:"Sao Hải Vương", Ceres:"Ceres", Pluto:"Sao Diêm Vương", Eris:"Eris" },
+    sec1: "Tổng quan", sec2: "Quỹ đạo", sec3: "Tự quay",
     note: "tỷ lệ nghệ thuật, quỹ đạo Kepler thật",
     hint: "Kéo: xoay · Lăn: zoom · Click hành tinh: xem tên",
     orbits: b => "Đường quỹ đạo: " + (b ? "BẬT" : "TẮT"),
@@ -763,6 +865,8 @@ const I18N = {
     dwarf: "(dwarf)",
   },
   en: {
+    names: { Mercury:"Mercury", Venus:"Venus", Earth:"Earth", Mars:"Mars", Jupiter:"Jupiter", Saturn:"Saturn", Uranus:"Uranus", Neptune:"Neptune", Ceres:"Ceres", Pluto:"Pluto", Eris:"Eris" },
+    sec1: "Overview", sec2: "Orbit", sec3: "Rotation",
     note: "artistic scale, true Kepler orbits",
     hint: "Drag: rotate · Scroll: zoom · Click a planet for info",
     orbits: b => "Orbits: " + (b ? "ON" : "OFF"),
@@ -776,6 +880,8 @@ const I18N = {
     dwarf: "(dwarf)",
   },
   zh: {
+    names: { Mercury:"水星", Venus:"金星", Earth:"地球", Mars:"火星", Jupiter:"木星", Saturn:"土星", Uranus:"天王星", Neptune:"海王星", Ceres:"谷神星", Pluto:"冥王星", Eris:"阋神星" },
+    sec1: "概述", sec2: "轨道", sec3: "自转",
     note: "艺术比例，真实开普勒轨道",
     hint: "拖动：旋转 · 滚轮：缩放 · 点击行星查看信息",
     orbits: b => "轨道线：" + (b ? "开" : "关"),
@@ -798,16 +904,15 @@ function applyLang() {
   document.querySelector(".t-note").textContent = t.note;
   document.querySelector(".t-hint").textContent = t.hint;
   document.querySelector(".t-date").textContent = t.date;
-  document.querySelector(".t-follow").textContent = t.follow;
-  document.querySelector(".t-unfollow").textContent = t.unfollow;
   $("orbits").textContent = t.orbits(ST.showOrbits);
   $("labels").textContent = t.labels(ST.showLabels);
   $("tour").textContent = t.tour(ST.tourOn);
   $("ambient").textContent = t.audio(false);
   $("lang").textContent = "🌐 " + LANG.toUpperCase();
-  // nhãn hành tinh: cập nhật đuôi dwarf theo ngôn ngữ
+  // nhãn hành tinh: tên dịch theo ngôn ngữ + đuôi dwarf
   for (const o of planetObjs) {
-    o.lblObj.element.textContent = o.data.name + (o.data.dwarf ? " " + t.dwarf : "");
+    o.lblObj.element.textContent = (t.names[o.data.name] || o.data.name) +
+      (o.data.dwarf ? " " + t.dwarf : "");
   }
   // info panel đang mở thì render lại theo ngôn ngữ mới
   if (followTarget) selectPlanet(followTarget);
@@ -820,22 +925,44 @@ document.getElementById("lang").addEventListener("click", () => {
 function selectPlanet(o) {
   followTarget = o;
   const t = T();
-  document.getElementById("infopanel").style.display = "block";
-  document.getElementById("ipName").textContent = o.data.name;
   const d = o.data.info;
-  document.getElementById("ipInfo").innerHTML =
-    `${t.mass}: <b>${d.mass}</b> ${t.earthU} · ${t.dia}: <b>${d.dia.toLocaleString("vi-VN")}</b> km<br>` +
-    `${t.temp}: <b>${d.temp}</b> K · ${t.moons}: <b>${d.moons}</b> · ${t.period}: <b>${o.data.T}</b> ${t.days}`;
-  // Mượn từ thebuggeddev/solar-system: rim light đổi màu theo hành tinh đang xem
-  dirLight.color.set(o.data.col);
+  document.getElementById("ipName").textContent = t.names[o.data.name] || o.data.name;
+  document.getElementById("ipNameEn").textContent = o.data.name + (o.data.dwarf ? " " + t.dwarf : "");
+  const secs = {
+    1: `<h4>${t.sec1}</h4>
+        <div class="row"><span>${t.mass}</span><b>${d.mass} ${t.earthU}</b></div>
+        <div class="row"><span>${t.dia}</span><b>${d.dia.toLocaleString("vi-VN")} km</b></div>
+        <div class="row"><span>${t.temp}</span><b>${d.temp} K</b></div>
+        <div class="row"><span>${t.moons}</span><b>${d.moons}</b></div>`,
+    2: `<h4>${t.sec2}</h4>
+        <div class="row"><span>${t.period}</span><b>${o.data.T} ${t.days}</b></div>
+        <div class="row"><span>a</span><b>${o.data.a} AU</b></div>
+        <div class="row"><span>e</span><b>${o.data.e}</b></div>
+        <div class="row"><span>i</span><b>${o.data.i}°</b></div>`,
+    3: `<h4>${t.sec3}</h4>
+        <div class="row"><span>Rot</span><b>${Math.abs(o.data.rot)} ${t.days}</b></div>
+        <div class="row"><span>Tilt</span><b>${o.data.tilt}°</b></div>`,
+  };
+  document.getElementById("ipBody").innerHTML =
+    Object.entries(secs).map(([k, v]) => `<div id="ipsec${k}">${v}</div>`).join("");
+  const toc = document.getElementById("ipToc");
+  toc.innerHTML = "";
+  Object.keys(secs).forEach((k, i) => {
+    const btn = document.createElement("button");
+    btn.textContent = [t.sec1, t.sec2, t.sec3][i];
+    btn.addEventListener("click", () => {
+      document.getElementById("ipsec" + k).scrollIntoView({ behavior: "smooth" });
+      toc.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+    toc.appendChild(btn);
+  });
+  document.getElementById("infopanel").classList.add("open");   // trượt vào từ trái
 }
 document.getElementById("btnUnfollow").addEventListener("click", () => {
   followTarget = null;
-  document.getElementById("infopanel").style.display = "none";
+  document.getElementById("infopanel").classList.remove("open");
   controls.target.set(0, 0, 0);
-});
-document.getElementById("btnFollow").addEventListener("click", () => {
-  if (followTarget) controls.target.copy(followTarget.grp.position);
 });
 
 const $ = id => document.getElementById(id);
@@ -866,7 +993,7 @@ $("tour").addEventListener("click", () => {
   $("tour").textContent = T().tour(ST.tourOn);
   if (ST.tourOn) {
     followTarget = null;                      // tour đè lên follow
-    document.getElementById("infopanel").style.display = "none";
+    document.getElementById("infopanel").classList.remove("open");
     ST.tourIdx = 0;
     ST.tourPhase = "approach";                // approach -> dwell -> next
     ST.tourTimer = 0;
@@ -934,37 +1061,11 @@ function animate() {
     });
   }
 
-  // ---- Phase 2: vành Saturn Keplerian (tính theo ngày mô phỏng, hệ quy chiếu grp) ----
-  if (saturnRing) {
-    const pos = saturnRing.geo.attributes.position.array;
-    for (let i = 0; i < saturnRing.n; i++) {
-      // ω đã là rad/ngày-không-gian-thực: quy từ chu kỳ vật lý ~ 0.6 ngày/vòng tại r=2.6
-      saturnRing.ang[i] += saturnRing.om[i] * 0.35 * (ST.paused ? 0 : 1);
-      const a = saturnRing.ang[i], r = saturnRing.rad[i];
-      pos[i * 3] = Math.cos(a) * r;
-      pos[i * 3 + 2] = Math.sin(a) * r;
-    }
-    saturnRing.geo.attributes.position.needsUpdate = true;
-  }
+  // ---- Phase 2: vành Saturn Keplerian — GPU (chỉ set uniform) ----
+  if (saturnRing) saturnRing.mat.uniforms.uDays.value = ST.days;
 
-  // ---- Phase 2: asteroid belt — vị trí Kepler per-asteroid ----
-  if (asteroidBelt && !ST.paused) {
-    const { inst, data, dummy } = asteroidBelt;
-    for (let i = 0; i < data.length; i++) {
-      const d = data[i];
-      const M = 2 * Math.PI * (ST.days / d.T) + d.M0;
-      const E = solveKepler(((M % 6.283185) + 6.283185) % 6.283185, d.e);
-      const xO = d.a * (Math.cos(E) - d.e);
-      const yO = d.a * Math.sqrt(1 - d.e * d.e) * Math.sin(E);
-      const s = distScale(d.a) / d.a;
-      dummy.position.set(xO * s, yO * Math.cos(d.inc), yO * Math.sin(d.inc));
-      dummy.rotation.set(d.M0 + ST.days * d.rotSpeed * 0.01, d.M0 * 2, 0);
-      dummy.scale.setScalar(d.scl);
-      dummy.updateMatrix();
-      inst.setMatrixAt(i, dummy.matrix);
-    }
-    inst.instanceMatrix.needsUpdate = true;
-  }
+  // ---- Asteroid belt — GPU (chỉ set uniform) ----
+  if (asteroidBelt) asteroidBelt.mat.uniforms.uDays.value = ST.days;
 
   controls.update();
 
