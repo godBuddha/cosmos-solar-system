@@ -58,7 +58,7 @@ for (const f of fs.readdirSync(jsDir).filter(f => f.endsWith(".mjs"))) {
 // ---- 4. admin.html không inline script ----
 const adm = fs.readFileSync(path.join(PUB, "admin.html"), "utf8");
 ok("admin.html: chỉ <script src> (không inline)",
-   !/<script>(?![\s\S]*src=)/.test(adm) && /<script src="\.\/js\/admin\.js"><\/script>/.test(adm));
+   !/<script>(?![\s\S]*src=)/.test(adm) && /<script src="\.\/js\/admin\.mjs"><\/script>/.test(adm));
 
 // ---- 5. index shell nạp main.mjs ----
 ok("index.html nạp ./js/main.mjs", idx.includes('<script type="module" src="./js/main.mjs">'));
@@ -74,16 +74,16 @@ for (const lang of ["vi", "en", "zh"]) {
      fs.readFileSync(path.join(PUB, "js", "i18n.mjs"), "utf8").includes("cleanHide"));
 }
 
-// ---- 7. PWA: sw.js + manifest + icon — precache list phải trỏ file thật ----
-const swTxt = fs.readFileSync(path.join(PUB, "sw.js"), "utf8");
-ok("sw.js có install/activate/fetch handlers",
+// ---- 7. PWA: sw.mjs + manifest + icon — precache list phải trỏ file thật ----
+const swTxt = fs.readFileSync(path.join(PUB, "sw.mjs"), "utf8");
+ok("sw.mjs có install/activate/fetch handlers",
    swTxt.includes("addEventListener(\"install\"") &&
    swTxt.includes("addEventListener(\"activate\"") &&
    swTxt.includes("addEventListener(\"fetch\""));
 const listed = [...swTxt.matchAll(/"\.\/([^"]+)"/g)].map(m => m[1]);
 const missing = listed.filter(rel => !fs.existsSync(path.join(PUB, rel)));
-ok(`sw.js precache ${listed.length} file đều tồn tại`, missing.length === 0, "thiếu " + missing.join(","));
-ok("sw.js bỏ qua /api/", swTxt.includes("/api/"));
+ok(`sw.mjs precache ${listed.length} file đều tồn tại`, missing.length === 0, "thiếu " + missing.join(","));
+ok("sw.mjs bỏ qua /api/", swTxt.includes("/api/"));
 ok("main.mjs đăng ký service worker",
    fs.readFileSync(path.join(PUB, "js", "main.mjs"), "utf8").includes("serviceWorker.register"));
 let manifestOk = false, iconOk = false;
@@ -94,7 +94,7 @@ try {
 } catch { /* manifest hỏng JSON */ }
 ok("manifest.webmanifest hợp lệ + icon tồn tại", manifestOk && iconOk);
 const conf = fs.readFileSync(path.join(ROOT, "nginxconf", "default.conf"), "utf8");
-ok("nginx: /sw.js no-cache (exact match trước regex .js)", /location = \/sw\.js/.test(conf));
+ok("nginx: /sw.mjs no-cache (exact match + đuôi .mjs thoát cache CF)", /location = \/sw\.mjs/.test(conf));
 ok("nginx: .mjs no-cache (chống bug cache immutable JS cũ)",
    /location ~ \\.mjs\$[\s\S]{0,300}no-cache/.test(conf));
 ok("CSP có manifest-src 'self'", fs.readFileSync(path.join(ROOT, "nginxconf", "security-headers.conf"), "utf8").includes("manifest-src 'self'"));

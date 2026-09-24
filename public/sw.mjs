@@ -13,7 +13,7 @@ const PRECACHE = [
   "./manifest.webmanifest",
   "./icon.svg",
   "./admin.html",
-  "./js/admin.js",
+  "./js/admin.mjs",
   "./js/data.mjs",
   "./js/kepler.mjs",
   "./js/scene.mjs",

@@ -217,6 +217,6 @@ animate();
 
 // G4f: PWA — đăng ký service worker (offline + cài như app)
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
-  navigator.serviceWorker.register("./sw.js")
+  navigator.serviceWorker.register("./sw.mjs")
     .catch(e => console.info("Service worker:", e.message));
 }
