@@ -158,6 +158,21 @@
   #speedPresets button:hover { background:#1b3358; color:#ffd27a; }
   #btnSettings { background:#12233f; color:#cfe2ff; border:1px solid rgba(120,170,230,.35);
     border-radius:7px; padding:4px 10px; margin:4px 4px 0 0; cursor:pointer; font-size:12.5px; }
+  /* ===== G4c: timeline scrubber 1900–2100 + mốc sự kiện ===== */
+  #tlRow { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  #tlYear { min-width:40px; color:#9fc3e8; font-size:11.5px; text-align:right; }
+  #tlWrap { position:relative; width:300px; max-width:52vw; }
+  #timeline { width:100%; accent-color:#ffd27a; vertical-align:middle; }
+  #tlMarks { position:absolute; left:8px; right:8px; top:-2px; height:0; pointer-events:none; }
+  #tlMarks span {
+    position:absolute; top:0; width:7px; height:7px; border-radius:50%;
+    transform:translateX(-50%); pointer-events:auto; cursor:pointer;
+    opacity:.85; box-shadow:0 0 4px rgba(0,0,0,.6);
+    transition:transform .15s ease, opacity .15s ease;
+  }
+  #tlMarks span:hover { transform:translateX(-50%) scale(1.7); opacity:1; }
+  #tlNow { padding:2px 7px; font-size:11.5px; }
+
   /* ===== G4b: CLEAN VIEW — 1 nút ẩn/hiện toàn bộ UI (phím H / Esc) ===== */
   #uiToggle {
     position:fixed; top:14px; right:14px; z-index:40;
@@ -316,6 +331,14 @@
   <button id="btnShare">🔗 <span class="t-share">Share</span></button>
   <button id="btnAdmin">🔑 <span class="t-admin">Admin</span></button><br>
   <div id="speedPresets"></div>
+  <div id="tlRow">
+    <b id="tlYear">—</b>
+    <div id="tlWrap">
+      <input type="range" id="timeline" min="-36525" max="36525" step="1" value="0">
+      <div id="tlMarks"></div>
+    </div>
+    <button id="tlNow">⟳</button>
+  </div>
   <span class="t-date">Ngày mô phỏng:</span> <span id="date">0</span>
 </div>
 

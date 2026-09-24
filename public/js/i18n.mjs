@@ -9,6 +9,7 @@ const I18N = {
     shareCopied: "Đã copy link chia sẻ!", aiBtn: "Hỏi AI", aiTitle: "Trợ lý AI",
     cleanHide: "Ẩn giao diện (H)", cleanShow: "Hiện giao diện (H)",
     cleanToast: "Đã ẩn UI — bấm H hoặc nút 👁 để hiện lại",
+    tlNow: "Về hiện tại",
     aiReadyServer: "Sẵn sàng — AI gateway server đã cấu hình. Hỏi bất kỳ điều gì về thiên thể!", aiReadyUser: "Sẵn sàng — dùng API key của bạn (Settings). Hỏi bất kỳ điều gì!", aiNone: "Chưa cấu hình AI. Vào ⚙️ Settings nhập Base URL + Model (và API key nếu dùng cloud).",
     names: { Sun:"Mặt Trời", Mercury:"Sao Thủy", Venus:"Sao Kim", Earth:"Trái Đất", Mars:"Sao Hỏa", Jupiter:"Sao Mộc", Saturn:"Sao Thổ", Uranus:"Sao Thiên Vương", Neptune:"Sao Hải Vương", Ceres:"Ceres", Pluto:"Sao Diêm Vương", Eris:"Eris" },
     sec1: "Tổng quan", sec2: "Quỹ đạo", sec3: "Tự quay",
@@ -32,6 +33,7 @@ const I18N = {
     shareCopied: "Share link copied!", aiBtn: "Ask AI", aiTitle: "AI Assistant",
     cleanHide: "Hide interface (H)", cleanShow: "Show interface (H)",
     cleanToast: "UI hidden — press H or the 👁 button to bring it back",
+    tlNow: "Jump to now",
     aiReadyServer: "Ready — server AI gateway configured. Ask anything about the bodies!", aiReadyUser: "Ready — using your API key (Settings). Ask anything!", aiNone: "AI not configured. Open ⚙️ Settings and enter Base URL + Model (plus API key for cloud).",
     names: { Sun:"Sun", Mercury:"Mercury", Venus:"Venus", Earth:"Earth", Mars:"Mars", Jupiter:"Jupiter", Saturn:"Saturn", Uranus:"Uranus", Neptune:"Neptune", Ceres:"Ceres", Pluto:"Pluto", Eris:"Eris" },
     sec1: "Overview", sec2: "Orbit", sec3: "Rotation",
@@ -55,6 +57,7 @@ const I18N = {
     shareCopied: "分享链接已复制！", aiBtn: "问AI", aiTitle: "AI助手",
     cleanHide: "隐藏界面 (H)", cleanShow: "显示界面 (H)",
     cleanToast: "界面已隐藏 — 按 H 或 👁 按钮恢复",
+    tlNow: "回到当前",
     aiReadyServer: "就绪——服务器AI网关已配置。随意提问！", aiReadyUser: "就绪——使用你的API密钥（设置）。随意提问！", aiNone: "未配置AI。打开⚙️设置输入Base URL + Model（云服务还需API密钥）。",
     names: { Sun:"太阳", Mercury:"水星", Venus:"金星", Earth:"地球", Mars:"火星", Jupiter:"木星", Saturn:"土星", Uranus:"天王星", Neptune:"海王星", Ceres:"谷神星", Pluto:"冥王星", Eris:"阋神星" },
     sec1: "概述", sec2: "轨道", sec3: "自转",
@@ -98,6 +101,9 @@ export function applyLang() {
   // clean view: tooltip nút 👁 theo ngôn ngữ hiện tại
   const uiT = document.getElementById("uiToggle");
   if (uiT) uiT.title = (document.body.classList.contains("ui-clean") ? t.cleanShow : t.cleanHide);
+  // G4c: tooltip nút về hiện tại
+  const tlNow = document.getElementById("tlNow");
+  if (tlNow) tlNow.title = t.tlNow;
   document.querySelector(".t-share").textContent = t.share || "Share";
   document.querySelector(".t-ai2").textContent = t.aiTitle;
   document.getElementById("lang").textContent = "🌐 " + LANG.toUpperCase();
@@ -108,6 +114,8 @@ export function applyLang() {
   }
   // info panel đang mở thì render lại theo ngôn ngữ mới
   if (deps.getFollowTarget()) deps.selectPlanet(deps.getFollowTarget());
+  // G4c: báo cho các module phụ (timeline markers...) render lại nhãn
+  document.dispatchEvent(new Event("cosmos:lang"));
   localStorage.setItem("cosmos_lang", LANG);
 }
 

@@ -5,7 +5,7 @@
 import * as THREE from "three";
 import { PLANETS, CATALOG_DESC, SUN_DATA } from "./data.mjs";
 import { T, getLang } from "./i18n.mjs";
-import { ST, initTime } from "./time.mjs";
+import { ST } from "./time.mjs";
 
 const $ = id => document.getElementById(id);
 const $s = id => document.getElementById(id);
@@ -151,7 +151,7 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
     controls.target.set(0, 0, 0);
   });
 
-  initTime();
+  // G4c: initTime() chuyển lên main (cần deps timelineEvents) — không gọi đúp
 
   $("pause").addEventListener("click", () => {
     ST.paused = !ST.paused;

@@ -8,8 +8,8 @@ import { solveKepler, orbitalPosition } from "./kepler.mjs";
 import { createScene } from "./scene.mjs";
 import { createBodies } from "./bodies.mjs";
 import { createParticles, toggleGalaxies } from "./particles.mjs";
-import { createProbes } from "./probes.mjs";
-import { ST, initTime } from "./time.mjs";
+import { createProbes, probeEvents } from "./probes.mjs";
+import { ST, initTime, syncTimeline } from "./time.mjs";
 import { initI18n, applyLang } from "./i18n.mjs";
 import { initUI, uiState, FLY } from "./ui.mjs";
 import { initAI } from "./ai.mjs";
@@ -27,7 +27,7 @@ const { update: updateProbes, renderProbeSections } = createProbes({ scene, plan
 
 const ui = initUI({ canvas, camera, controls, bloomPass, planetObjs, toggleGalaxies, renderProbeSections });
 initAI({ planetObjs, flyToBody: ui.flyToBody });
-initTime();
+initTime({ timelineEvents: probeEvents });
 initI18n({ ST, planetObjs, selectPlanet: ui.selectPlanet,
            getFollowTarget: () => uiState.followTarget });
 applyLang();   // khởi tạo ngôn ngữ từ localStorage
@@ -65,6 +65,7 @@ function animate() {
       hour: "2-digit", minute: "2-digit"
     });
   }
+  syncTimeline();   // G4c: đồng bộ thanh thời gian khi ST.days đổi từ nguồn khác
 
   // ---- Phase 2: vành Saturn Keplerian — GPU (chỉ set uniform) ----
   if (saturnRing) setDaysUniforms(saturnRing.mat, ST.days);

@@ -17,7 +17,55 @@ export const PRESETS = [
   { label: "1y/s", v: 2.563 },          // 365.25 ngày/s
 ];
 
-export function initTime() {
+// G4c: timeline scrubber 1900–2100 — kéo thả ST.days, mốc sự kiện tàu thăm dò
+const TL_MIN = -36525;    // 1900-01-01 (days từ J2000)
+const TL_MAX = 36525;     // 2100-01-01
+let tlState = null;       // { input, yearEl } khi #timeline tồn tại
+
+export function syncTimeline() {
+  if (!tlState) return;
+  const { input, yearEl } = tlState;
+  if (!tlState.dragging && Math.abs(+input.value - ST.days) > 0.5) {
+    input.value = Math.round(ST.days);
+  }
+  const y = new Date((ST.days + 2451545.0 - 2440587.5) * 86400000).getFullYear();
+  const ys = String(y);
+  if (yearEl.textContent !== ys) yearEl.textContent = ys;
+}
+
+function initTimeline(timelineEvents) {
+  const $ = id => document.getElementById(id);
+  const input = $("timeline"), yearEl = $("tlYear"), marks = $("tlMarks");
+  if (!input || !yearEl || !marks) return;
+  tlState = { input, yearEl, dragging: false };
+
+  input.addEventListener("input", () => { tlState.dragging = true; ST.days = +input.value; });
+  const endDrag = () => { if (tlState) tlState.dragging = false; };
+  input.addEventListener("change", endDrag);
+  input.addEventListener("pointerup", endDrag);
+
+  // nút về hiện tại
+  $("tlNow").addEventListener("click", () => { ST.days = NOW_DAYS; });
+
+  // dựng mốc sự kiện (đặc tính theo lang — rebuild khi đổi ngôn ngữ)
+  const buildMarks = () => {
+    marks.replaceChildren();
+    if (typeof timelineEvents !== "function") return;
+    for (const ev of timelineEvents()) {
+      const dot = document.createElement("span");
+      dot.style.left = ((ev.t - TL_MIN) / (TL_MAX - TL_MIN) * 100).toFixed(2) + "%";
+      dot.style.background = ev.color;
+      dot.title = `${ev.mission} — ${(new Date((ev.t + 2451545.0 - 2440587.5) * 86400000))
+        .toLocaleDateString("vi-VN")}`;
+      dot.addEventListener("click", () => { ST.days = ev.t; });
+      marks.appendChild(dot);
+    }
+  };
+  buildMarks();
+  document.addEventListener("cosmos:lang", buildMarks);
+}
+
+export function initTime(deps = {}) {
   const $ = id => document.getElementById(id);
   $("speed").addEventListener("input", e => {
     ST.speedExp = +e.target.value;
@@ -37,4 +85,5 @@ export function initTime() {
     });
     presetBox.appendChild(btn);
   }
+  initTimeline(deps.timelineEvents);
 }

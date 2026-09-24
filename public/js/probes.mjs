@@ -183,6 +183,23 @@ const MISSIONS = [
 ];
 
 // ======================================================================
+//  G4c: TIMELINE MARKERS — danh sách mốc sự kiện cho timeline scrubber
+//  (mỗi phần tử: t = days từ J2000, mission tên, màu, loại sự kiện)
+// ======================================================================
+export function probeEvents() {
+  const out = [];
+  for (const m of MISSIONS) {
+    const color = "#" + m.color.toString(16).padStart(6, "0");
+    for (const w of m.waypoints ?? []) {
+      out.push({ t: w.t, id: m.id, mission: m.name, color, ev: w.ev, body: w.body });
+    }
+    if (m.end) out.push({ t: m.end, id: m.id, mission: m.name, color, ev: "impact", body: m.orbit?.body || "Sun" });
+    if (m.synth) out.push({ t: m.synth.periAt, id: m.id, mission: m.name, color, ev: "peri", body: "Sun" });
+  }
+  return out;
+}
+
+// ======================================================================
 //  MODEL PROCEDURAL — dựng theo cấu trúc tàu thật (primitives Three.js)
 // ======================================================================
 function mat(color, opts = {}) {
