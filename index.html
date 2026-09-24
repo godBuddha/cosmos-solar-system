@@ -1556,13 +1556,14 @@ function animate() {
   }
   if (meteorGPU) meteorGPU.uniforms.uTime.value = clock.elapsedTime;
 
-  // ---- fade nhãn theo khoảng cách camera: gần hiện rõ, xa mờ dần, rất xa ẩn ----
-  const camDist = camera.position.distanceTo(controls.target);
+  // ---- fade nhãn theo khoảng cách: hành tinh lớn 260, thiên thể nhỏ 45 ----
+  // (chính sách đã chốt: 121+ nhãn chỉ hiện khi zoom gần, tránh "rừng nhãn")
   for (const o of planetObjs) {
     if (!ST.showLabels) break;
+    const isMinor = o.data.dwarf || o.data.a > 2.2;
+    const maxD = isMinor ? 45 : 260;
     const d = camera.position.distanceTo(o.grp.position);
-    // visible trong 260 đơn vị, fade 160->260, ngoài ẩn (tiết kiệm render)
-    const opacity = Math.max(0, Math.min(1, (260 - d) / 100));
+    const opacity = Math.max(0, Math.min(1, (maxD - d) / (maxD * 0.4)));
     o.lblObj.visible = opacity > 0.02;
     if (o.lblObj.visible) o.lblObj.element.style.opacity = opacity.toFixed(2);
   }
