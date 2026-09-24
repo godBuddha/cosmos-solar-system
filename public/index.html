@@ -310,6 +310,8 @@ import { PLANETS, CATALOG_DESC, loadCatalog, distScale, SUN_DATA, MOONS } from "
 import { solveKepler, orbitalPosition } from "./js/kepler.mjs";
 import { createScene, planetTexture } from "./js/scene.mjs";
 import { createParticles, toggleGalaxies } from "./js/particles.mjs";
+import { T, applyLang, initI18n } from "./js/i18n.mjs";
+import { NOW_DAYS, ST, PRESETS, initTime } from "./js/time.mjs";
 
 await loadCatalog();
 
@@ -406,9 +408,7 @@ let cometGPU = null, meteorGPU = null;
 // ======================================================================
 // Khởi tạo: số ngày Julius từ J2000 (2000-01-01 12:00 TT) đến hiện tại thực
 // JD = 2440587.5 + unix_ms/86400000  ->  days = JD − 2451545.0
-const NOW_DAYS = (Date.now() / 86400000 + 2440587.5) - 2451545.0;
-const ST = { days: NOW_DAYS, speedExp: 0.7, paused: false, showOrbits: true, showLabels: true,
-             tourOn: false, tourIdx: 0, tourPhase: "approach", tourTimer: 0 };
+// G3-B3: ST + NOW_DAYS + PRESETS chuyển sang js/time.mjs (import ở đầu file)
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 let downXY = null;
@@ -427,106 +427,7 @@ canvas.addEventListener("pointerup", e => {
 
 // ---- Phase 3: chọn hành tinh + info panel + fly-to follow camera ----
 let followTarget = null;   // planetObjs entry đang bám
-
-// ======================================================================
-//  I18N — đa ngôn ngữ (VI / EN / ZH), lưu lựa chọn vào localStorage
-//  Tên hành tinh giữ quốc tế chuẩn thiên văn (không dịch)
-// ======================================================================
-const I18N = {
-  vi: {
-    shareCopied: "Đã copy link chia sẻ!", aiBtn: "Hỏi AI", aiTitle: "Trợ lý AI",
-    aiReadyServer: "Sẵn sàng — AI gateway server đã cấu hình. Hỏi bất kỳ điều gì về thiên thể!", aiReadyUser: "Sẵn sàng — dùng API key của bạn (Settings). Hỏi bất kỳ điều gì!", aiNone: "Chưa cấu hình AI. Vào ⚙️ Settings nhập Base URL + Model (và API key nếu dùng cloud).",
-    names: { Sun:"Mặt Trời", Mercury:"Sao Thủy", Venus:"Sao Kim", Earth:"Trái Đất", Mars:"Sao Hỏa", Jupiter:"Sao Mộc", Saturn:"Sao Thổ", Uranus:"Sao Thiên Vương", Neptune:"Sao Hải Vương", Ceres:"Ceres", Pluto:"Sao Diêm Vương", Eris:"Eris" },
-    sec1: "Tổng quan", sec2: "Quỹ đạo", sec3: "Tự quay",
-    secSun2: "Cấu trúc & Vật lý",
-    spectral: "Loại quang phổ", lum: "Độ phát sáng", coreT: "Nhiệt độ lõi",
-    comp: "Thành phần", sunAge: "Tuổi", sunAgeVal: "≈ 4,6 tỷ năm",
-    sunDesc: "Mặt Trời — ngôi sao lùn vàng loại G2V ở trung tâm hệ, chiếm 99,86% khối lượng toàn hệ. Hợp nhất ~600 triệu tấn hydro mỗi giây; ánh sáng mất ~8 phút 20 giây tới Trái Đất.",
-    note: "tỷ lệ nghệ thuật, quỹ đạo Kepler thật",
-    hint: "Kéo: xoay · Lăn: zoom · Click hành tinh: xem tên",
-    orbits: b => "Đường quỹ đạo: " + (b ? "BẬT" : "TẮT"),
-    labels: b => "Nhãn: " + (b ? "BẬT" : "TẮT"),
-    tour: b => "🎬 Tour: " + (b ? "ON" : "OFF"),
-    audio: b => "🎵 Âm thanh: " + (b ? "ON" : "OFF"),
-    date: "Ngày mô phỏng:",
-    follow: "Bám theo", unfollow: "Thả camera",
-    mass: "Khối lượng", earthU: "× Trái Đất", dia: "Đường kính",
-    temp: "Nhiệt độ", moons: "Mặt trăng", period: "Chu kỳ", days: "ngày",
-    dwarf: "(dwarf)",
-  },
-  en: {
-    shareCopied: "Share link copied!", aiBtn: "Ask AI", aiTitle: "AI Assistant",
-    aiReadyServer: "Ready — server AI gateway configured. Ask anything about the bodies!", aiReadyUser: "Ready — using your API key (Settings). Ask anything!", aiNone: "AI not configured. Open ⚙️ Settings and enter Base URL + Model (plus API key for cloud).",
-    names: { Sun:"Sun", Mercury:"Mercury", Venus:"Venus", Earth:"Earth", Mars:"Mars", Jupiter:"Jupiter", Saturn:"Saturn", Uranus:"Uranus", Neptune:"Neptune", Ceres:"Ceres", Pluto:"Pluto", Eris:"Eris" },
-    sec1: "Overview", sec2: "Orbit", sec3: "Rotation",
-    secSun2: "Structure & Physics",
-    spectral: "Spectral type", lum: "Luminosity", coreT: "Core temp",
-    comp: "Composition", sunAge: "Age", sunAgeVal: "≈ 4.6 billion yr",
-    sunDesc: "The Sun — a G2V yellow dwarf at the center of the system, holding 99.86% of its total mass. Fuses ~600 million tonnes of hydrogen per second; light takes ~8 min 20 s to reach Earth.",
-    note: "artistic scale, true Kepler orbits",
-    hint: "Drag: rotate · Scroll: zoom · Click a planet for info",
-    orbits: b => "Orbits: " + (b ? "ON" : "OFF"),
-    labels: b => "Labels: " + (b ? "ON" : "OFF"),
-    tour: b => "🎬 Tour: " + (b ? "ON" : "OFF"),
-    audio: b => "🎵 Sound: " + (b ? "ON" : "OFF"),
-    date: "Sim date:",
-    follow: "Follow", unfollow: "Release",
-    mass: "Mass", earthU: "× Earth", dia: "Diameter",
-    temp: "Temp", moons: "Moons", period: "Period", days: "days",
-    dwarf: "(dwarf)",
-  },
-  zh: {
-    shareCopied: "分享链接已复制！", aiBtn: "问AI", aiTitle: "AI助手",
-    aiReadyServer: "就绪——服务器AI网关已配置。随意提问！", aiReadyUser: "就绪——使用你的API密钥（设置）。随意提问！", aiNone: "未配置AI。打开⚙️设置输入Base URL + Model（云服务还需API密钥）。",
-    names: { Sun:"太阳", Mercury:"水星", Venus:"金星", Earth:"地球", Mars:"火星", Jupiter:"木星", Saturn:"土星", Uranus:"天王星", Neptune:"海王星", Ceres:"谷神星", Pluto:"冥王星", Eris:"阋神星" },
-    sec1: "概述", sec2: "轨道", sec3: "自转",
-    secSun2: "结构与物理",
-    spectral: "光谱型", lum: "光度", coreT: "核心温度",
-    comp: "成分", sunAge: "年龄", sunAgeVal: "≈ 46亿年",
-    sunDesc: "太阳——系统中心的G2V黄矮星，占系统总质量的99.86%。每秒聚变约6亿吨氢；光到达地球约需8分20秒。",
-    note: "艺术比例，真实开普勒轨道",
-    hint: "拖动：旋转 · 滚轮：缩放 · 点击行星查看信息",
-    orbits: b => "轨道线：" + (b ? "开" : "关"),
-    labels: b => "标签：" + (b ? "开" : "关"),
-    tour: b => "🎬 巡游：" + (b ? "开" : "关"),
-    audio: b => "🎵 音效：" + (b ? "开" : "关"),
-    date: "模拟日期：",
-    follow: "跟随", unfollow: "释放",
-    mass: "质量", earthU: "× 地球", dia: "直径",
-    temp: "温度", moons: "卫星", period: "周期", days: "天",
-    dwarf: "（矮行星）",
-  },
-};
-let LANG = localStorage.getItem("cosmos_lang") || "vi";
-if (!I18N[LANG]) LANG = "vi";
-const T = () => I18N[LANG];
-
-function applyLang() {
-  const t = T();
-  document.querySelector(".t-note").textContent = t.note;
-  document.querySelector(".t-hint").textContent = t.hint;
-  document.querySelector(".t-date").textContent = t.date;
-  $("orbits").textContent = t.orbits(ST.showOrbits);
-  $("labels").textContent = t.labels(ST.showLabels);
-  $("tour").textContent = t.tour(ST.tourOn);
-  $("ambient").textContent = t.audio(false);
-  document.querySelector(".t-ai").textContent = t.aiBtn;
-  document.querySelector(".t-share").textContent = t.share || "Share";
-  document.querySelector(".t-ai2").textContent = t.aiTitle;
-  $("lang").textContent = "🌐 " + LANG.toUpperCase();
-  // nhãn hành tinh: tên dịch theo ngôn ngữ + đuôi dwarf
-  for (const o of planetObjs) {
-    o.lblObj.element.textContent = (t.names[o.data.name] || o.data.name) +
-      (o.data.dwarf ? " " + t.dwarf : "");
-  }
-  // info panel đang mở thì render lại theo ngôn ngữ mới
-  if (followTarget) selectPlanet(followTarget);
-  localStorage.setItem("cosmos_lang", LANG);
-}
-document.getElementById("lang").addEventListener("click", () => {
-  LANG = LANG === "vi" ? "en" : LANG === "en" ? "zh" : "vi";
-  applyLang();
-});
+// G3-B3: I18N + applyLang chuyển sang js/i18n.mjs (import ở đầu file)
 function selectPlanet(o) {
   followTarget = o;
   const t = T();
@@ -596,167 +497,7 @@ document.getElementById("btnUnfollow").addEventListener("click", () => {
 });
 
 const $ = id => document.getElementById(id);
-$("speed").addEventListener("input", e => {
-  ST.speedExp = +e.target.value;
-  $("speedLabel").textContent =
-    (ST.speedExp >= 0 ? Math.pow(10, ST.speedExp).toFixed(ST.speedExp < 1 ? 2 : 0)
-                      : Math.pow(10, ST.speedExp).toFixed(2)) + " ngày/s";
-});
-$("pause").addEventListener("click", () => {
-  ST.paused = !ST.paused;
-  $("pause").textContent = ST.paused ? "▶" : "⏸";
-});
-$("orbits").addEventListener("click", () => {
-  ST.showOrbits = !ST.showOrbits;
-  PLANETS.forEach(p => p._orbitLine.visible = ST.showOrbits);
-  $("orbits").textContent = T().orbits(ST.showOrbits);
-});
-$("labels").addEventListener("click", () => {
-  ST.showLabels = !ST.showLabels;
-  $("labels").textContent = T().labels(ST.showLabels);
-  planetObjs.forEach(o => o.lblObj.visible = ST.showLabels);
-});
-
-// ---- Tour tự động: camera bay qua các hành tinh theo thứ tự ----
-$("tour").addEventListener("click", () => {
-  ST.tourOn = !ST.tourOn;
-  $("tour").textContent = T().tour(ST.tourOn);
-  if (ST.tourOn) {
-    followTarget = null;                      // tour đè lên follow
-    document.getElementById("infopanel").classList.remove("open");
-    ST.tourIdx = 0;
-    ST.tourPhase = "approach";                // approach -> dwell -> next
-    ST.tourTimer = 0;
-  }
-});
-
-// ---- Âm thanh ambient: Web Audio API, drone pad procedural (không file ngoài) ----
-let audioCtx = null, ambientNodes = null;
-$("ambient").addEventListener("click", () => {
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
-  if (!ambientNodes) {
-    // 3 oscillator detune nhẹ tạo drone pad + LFO điều biến gain cho "thở"
-    const master = audioCtx.createGain();
-    master.gain.value = 0;                     // fade-in bằng setTargetAtTime
-    master.connect(audioCtx.destination);
-    const lfo = audioCtx.createOscillator();
-    const lfoGain = audioCtx.createGain();
-    lfo.frequency.value = 0.07;                // chu kỳ thở ~14s
-    lfoGain.gain.value = 0.035;
-    lfo.connect(lfoGain);
-    const oscs = [];
-    [[55, "sine"], [110.5, "sine"], [164.8, "triangle"]].forEach(([f, type], i) => {
-      const o = audioCtx.createOscillator();
-      const g = audioCtx.createGain();
-      o.type = type; o.frequency.value = f;
-      g.gain.value = i === 2 ? 0.04 : 0.09;    // гармон higher nhỏ hơn
-      o.connect(g); g.connect(master);
-      o.start();
-      oscs.push(o);
-    });
-    lfo.connect(oscs[0].frequency);            // vibrato nhẹ tầng nền
-    lfo.start();
-    master.gain.setTargetAtTime(0.22, audioCtx.currentTime, 1.5);   // fade-in 1.5s
-    ambientNodes = { master, oscs, lfo };
-  } else {
-    const on = ambientNodes.master.gain.value > 0.01;
-    ambientNodes.master.gain.setTargetAtTime(on ? 0 : 0.22, audioCtx.currentTime, 0.8);
-  }
-  const on = ambientNodes.master.gain.value > 0.01;
-  $("ambient").textContent = T().audio(!on);
-});
-
-// ======================================================================
-//  G2: SEARCH — tìm thiên thể đa ngôn ngữ, bay camera tới
-// ======================================================================
-const searchInput = document.getElementById("searchInput");
-const searchResults = document.getElementById("searchResults");
-
-function doSearch(q) {
-  q = q.trim().toLowerCase();
-  if (!q) { searchResults.style.display = "none"; return; }
-  const t = T();
-  const matches = PLANETS.concat([SUN_DATA]).filter(o => {
-    const en = o.name.toLowerCase();
-    const vi = (t.names[o.name] || "").toLowerCase();
-    const zh = t.names[o.name] || "";
-    return en.includes(q) || vi.includes(q) || zh.includes(q) ||
-           en.replace(/\s/g, "").includes(q.replace(/\s/g, ""));
-  });
-  searchResults.innerHTML = "";
-  if (!matches.length) {
-    searchResults.innerHTML = '<div style="opacity:.5">∅</div>';
-  } else {
-    for (const m of matches) {
-      const div = document.createElement("div");
-      div.innerHTML = (t.names[m.name] || m.name) +
-        '<span class="sr-sub">' + m.name + (m.dwarf ? " " + t.dwarf : "") + " · " + m.a + " AU</span>";
-      div.addEventListener("click", () => {
-        searchResults.style.display = "none";
-        searchInput.value = "";
-        flyToBody(m);
-      });
-      searchResults.appendChild(div);
-    }
-  }
-  searchResults.style.display = "block";
-}
-searchInput.addEventListener("input", () => doSearch(searchInput.value));
-searchInput.addEventListener("keydown", e => {
-  if (e.key === "Enter") {
-    const first = searchResults.querySelector("div");
-    if (first && first.textContent !== "∅") first.click();
-  }
-});
-document.addEventListener("click", e => {
-  if (!document.getElementById("searchbox").contains(e.target))
-    searchResults.style.display = "none";
-});
-
-// fly-to: tái dùng cơ chế tour (approach + dwell) cho 1 thiên thể bất kỳ
-let flyTarget = null;
-function flyToBody(o) {
-  // guard: nhận object (planetObjs entry / PLANETS entry) hoặc string tên
-  if (!o) { console.warn("flyToBody: thiếu tham số"); return; }
-  const bodyName = typeof o === "string" ? o : o.name;
-  if (!bodyName) { console.warn("flyToBody: o không có .name"); return; }
-  const sceneObj = planetObjs.find(po =>
-    po.data.name.toLowerCase() === bodyName.toLowerCase());
-  if (!sceneObj) { console.warn("flyToBody: không tìm thấy", bodyName); return; }
-  ST.tourOn = false;
-  document.getElementById("tour").textContent = T().tour(false);
-  flyTarget = { obj: sceneObj, phase: "approach", timer: 0 };
-  try { selectPlanet(sceneObj); }
-  catch (e) { console.error("selectPlanet lỗi:", e); }
-}
-
-// ======================================================================
-//  G2: SPEED PRESETS — nút nhanh cho tốc độ mô phỏng
-// ======================================================================
-const PRESETS = [
-  { label: "Thực", v: -4.94 },          // 1 giây thực = 1/86400 ngày (F12 fix)
-  { label: "1h/s", v: -1.38 },          // 1/24 ngày/s (F12 fix: cũ -1.62 ≈ 43 phút/s)
-  { label: "1d/s", v: 0.0 },            // 1 ngày/s
-  { label: "1mo/s", v: 1.48 },          // ~30 ngày/s
-  { label: "1y/s", v: 2.563 },          // 365.25 ngày/s
-];
-const presetBox = document.getElementById("speedPresets");
-function renderPresets() {
-  presetBox.innerHTML = "";
-  for (const pr of PRESETS) {
-    const btn = document.createElement("button");
-    btn.textContent = pr.label;
-    btn.addEventListener("click", () => {
-      ST.speedExp = pr.v;
-      const slider = document.getElementById("speed");
-      if (slider) slider.value = pr.v;
-    });
-    presetBox.appendChild(btn);
-  }
-}
-renderPresets();
+initTime();   // G3-B3: slider + presets (js/time.mjs)
 
 // ======================================================================
 //  G2: SETTINGS — hiệu năng + AI key (localStorage, không hard-code)
@@ -1378,6 +1119,7 @@ function animate() {
   labelRenderer.render(scene, camera);          // Phase 3.5: nhãn CSS2D
 }
 animate();
+initI18n({ ST, planetObjs, selectPlanet, getFollowTarget: () => followTarget });
 applyLang();   // khởi tạo ngôn ngữ từ localStorage
 </script>
 </body>
