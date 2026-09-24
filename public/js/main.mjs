@@ -25,7 +25,11 @@ const { saturnRing, asteroidBelt, kuiperBelt, cometGPU, meteorGPU } =
 // G4: tàu thăm dò — lộ trình lịch sử (đăng ký vào planetObjs → click/search/AI ăn luôn)
 const { update: updateProbes, renderProbeSections } = createProbes({ scene, planetObjs });
 
-const ui = initUI({ canvas, camera, controls, bloomPass, planetObjs, toggleGalaxies, renderProbeSections });
+// G4d: chụp ảnh — cờ set từ nút 📷, thực thi ngay sau composer.render()
+// (cùng task → drawing buffer chưa bị xoá, không cần preserveDrawingBuffer)
+let shotPending = false;
+const ui = initUI({ canvas, camera, controls, bloomPass, planetObjs, toggleGalaxies, renderProbeSections,
+                    captureFrame: () => { shotPending = true; } });
 initAI({ planetObjs, flyToBody: ui.flyToBody });
 initTime({ timelineEvents: probeEvents });
 initI18n({ ST, planetObjs, selectPlanet: ui.selectPlanet,
@@ -192,5 +196,20 @@ function animate() {
 
   composer.render();
   labelRenderer.render(scene, camera);          // Phase 3.5: nhãn CSS2D
+
+  // G4d: chụp PNG góc nhìn hiện tại (đặt tên theo ngày mô phỏng)
+  if (shotPending) {
+    shotPending = false;
+    const name = "cosmos-" + new Date((ST.days + 2451545.0 - 2440587.5) * 86400000)
+      .toISOString().slice(0, 16).replace(/[:T]/g, "-") + ".png";
+    canvas.toBlob(b => {
+      if (!b) return;
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(b);
+      a.download = name;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    }, "image/png");
+  }
 }
 animate();

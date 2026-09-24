@@ -21,7 +21,7 @@ export function loadSettings() {
   catch { return {}; }
 }
 
-export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggleGalaxies, renderProbeSections }) {
+export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggleGalaxies, renderProbeSections, captureFrame }) {
 
   // ---- click canvas chọn thiên thể ----
   const raycaster = new THREE.Raycaster();
@@ -378,6 +378,12 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
   });
 
   // ---- SHARE: copy link góc nhìn hiện tại ----
+  // G4d: chụp ảnh góc nhìn (PNG) — capture ở main ngay sau frame render
+  document.getElementById("btnShot").addEventListener("click", () => {
+    if (captureFrame) captureFrame();
+    cleanToast(T().shotOk);
+  });
+
   document.getElementById("btnShare").addEventListener("click", async () => {
     const t = T();
     const url = new URL(location.origin + location.pathname);
