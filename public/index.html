@@ -34,25 +34,26 @@
 <canvas id="c"></canvas>
 
 <div id="hud">
-  <b>Solar System — Phase 1</b> (tỷ lệ nghệ thuật, quỹ đạo Kepler thật)<br>
-  Kéo: xoay · Lăn: zoom · Click hành tinh: xem tên
+  <b>Solar System</b> (<span class="t-note">tỷ lệ nghệ thuật, quỹ đạo Kepler thật</span>)<br>
+  <span class="t-hint">Kéo: xoay · Lăn: zoom · Click hành tinh: xem tên</span>
 </div>
 
 <div id="panel">
+  <button id="lang" style="float:right; margin-left:6px">🌐 VI</button>
   <div id="infopanel" style="display:none; margin-bottom:10px; padding:8px; background:rgba(20,40,70,.5); border-radius:8px;">
     <b id="ipName" style="color:#ffd27a; font-size:14px;"></b>
     <div id="ipInfo" style="opacity:.9; margin-top:4px;"></div>
-    <button id="btnFollow" style="margin-top:6px">🎯 Bám theo</button>
-    <button id="btnUnfollow" style="margin-top:6px">✕ Thả camera</button>
+    <button id="btnFollow" style="margin-top:6px">🎯 <span class="t-follow">Bám theo</span></button>
+    <button id="btnUnfollow" style="margin-top:6px">✕ <span class="t-unfollow">Thả camera</span></button>
   </div>
   Tốc độ <input type="range" id="speed" min="-2" max="3" step="0.05" value="0.7">
   (<span id="speedLabel">x</span>)<br>
   <button id="pause">⏸</button>
-  <button id="orbits">Đường quỹ đạo: BẬT</button>
-  <button id="labels">Nhãn: BẬT</button>
-  <button id="tour">🎬 Tour: OFF</button>
-  <button id="ambient">🎵 Âm thanh: OFF</button><br>
-  Ngày mô phỏng: <span id="date">0</span>
+  <button id="orbits"></button>
+  <button id="labels"></button>
+  <button id="tour"></button>
+  <button id="ambient"></button><br>
+  <span class="t-date">Ngày mô phỏng:</span> <span id="date">0</span>
 </div>
 
 <script type="importmap">
@@ -331,7 +332,7 @@ for (const p of PLANETS) {
   scene.add(grp);
   // nhãn tên (CSS2D, nhỏ hơn + mờ hơn cho dwarf planet)
   const lbl = document.createElement("div");
-  lbl.textContent = p.name + (p.dwarf ? " (dwarf)" : "");
+  lbl.textContent = p.name;   // đuôi dwarf do applyLang() bổ sung theo ngôn ngữ
   lbl.style.cssText = "font:11px ui-sans-serif; color:" +
     (p.dwarf ? "#7a95b5" : "#cfe2ff") + "; text-shadow:0 0 6px rgba(0,20,50,.9); pointer-events:none;";
   const lblObj = new CSS2DObject(lbl);
@@ -686,14 +687,91 @@ canvas.addEventListener("pointerup", e => {
 
 // ---- Phase 3: chọn hành tinh + info panel + fly-to follow camera ----
 let followTarget = null;   // planetObjs entry đang bám
+
+// ======================================================================
+//  I18N — đa ngôn ngữ (VI / EN / ZH), lưu lựa chọn vào localStorage
+//  Tên hành tinh giữ quốc tế chuẩn thiên văn (không dịch)
+// ======================================================================
+const I18N = {
+  vi: {
+    note: "tỷ lệ nghệ thuật, quỹ đạo Kepler thật",
+    hint: "Kéo: xoay · Lăn: zoom · Click hành tinh: xem tên",
+    orbits: b => "Đường quỹ đạo: " + (b ? "BẬT" : "TẮT"),
+    labels: b => "Nhãn: " + (b ? "BẬT" : "TẮT"),
+    tour: b => "🎬 Tour: " + (b ? "ON" : "OFF"),
+    audio: b => "🎵 Âm thanh: " + (b ? "ON" : "OFF"),
+    date: "Ngày mô phỏng:",
+    follow: "Bám theo", unfollow: "Thả camera",
+    mass: "Khối lượng", earthU: "× Trái Đất", dia: "Đường kính",
+    temp: "Nhiệt độ", moons: "Mặt trăng", period: "Chu kỳ", days: "ngày",
+    dwarf: "(dwarf)",
+  },
+  en: {
+    note: "artistic scale, true Kepler orbits",
+    hint: "Drag: rotate · Scroll: zoom · Click a planet for info",
+    orbits: b => "Orbits: " + (b ? "ON" : "OFF"),
+    labels: b => "Labels: " + (b ? "ON" : "OFF"),
+    tour: b => "🎬 Tour: " + (b ? "ON" : "OFF"),
+    audio: b => "🎵 Sound: " + (b ? "ON" : "OFF"),
+    date: "Sim date:",
+    follow: "Follow", unfollow: "Release",
+    mass: "Mass", earthU: "× Earth", dia: "Diameter",
+    temp: "Temp", moons: "Moons", period: "Period", days: "days",
+    dwarf: "(dwarf)",
+  },
+  zh: {
+    note: "艺术比例，真实开普勒轨道",
+    hint: "拖动：旋转 · 滚轮：缩放 · 点击行星查看信息",
+    orbits: b => "轨道线：" + (b ? "开" : "关"),
+    labels: b => "标签：" + (b ? "开" : "关"),
+    tour: b => "🎬 巡游：" + (b ? "开" : "关"),
+    audio: b => "🎵 音效：" + (b ? "开" : "关"),
+    date: "模拟日期：",
+    follow: "跟随", unfollow: "释放",
+    mass: "质量", earthU: "× 地球", dia: "直径",
+    temp: "温度", moons: "卫星", period: "周期", days: "天",
+    dwarf: "（矮行星）",
+  },
+};
+let LANG = localStorage.getItem("cosmos_lang") || "vi";
+if (!I18N[LANG]) LANG = "vi";
+const T = () => I18N[LANG];
+
+function applyLang() {
+  const t = T();
+  document.querySelector(".t-note").textContent = t.note;
+  document.querySelector(".t-hint").textContent = t.hint;
+  document.querySelector(".t-date").textContent = t.date;
+  document.querySelector(".t-follow").textContent = t.follow;
+  document.querySelector(".t-unfollow").textContent = t.unfollow;
+  $("orbits").textContent = t.orbits(ST.showOrbits);
+  $("labels").textContent = t.labels(ST.showLabels);
+  $("tour").textContent = t.tour(ST.tourOn);
+  $("ambient").textContent = t.audio(false);
+  $("lang").textContent = "🌐 " + LANG.toUpperCase();
+  // nhãn hành tinh: cập nhật đuôi dwarf theo ngôn ngữ
+  for (const o of planetObjs) {
+    o.lblObj.element.textContent = o.data.name + (o.data.dwarf ? " " + t.dwarf : "");
+  }
+  // info panel đang mở thì render lại theo ngôn ngữ mới
+  if (followTarget) selectPlanet(followTarget);
+  localStorage.setItem("cosmos_lang", LANG);
+}
+document.getElementById("lang").addEventListener("click", () => {
+  LANG = LANG === "vi" ? "en" : LANG === "en" ? "zh" : "vi";
+  applyLang();
+});
 function selectPlanet(o) {
   followTarget = o;
+  const t = T();
   document.getElementById("infopanel").style.display = "block";
   document.getElementById("ipName").textContent = o.data.name;
   const d = o.data.info;
   document.getElementById("ipInfo").innerHTML =
-    `Khối lượng: ${d.mass} × Trái Đất · Đường kính: ${d.dia.toLocaleString("vi-VN")} km<br>` +
-    `Nhiệt độ: ${d.temp} K · Mặt trăng: ${d.moons} · Chu kỳ: ${o.data.T} ngày`;
+    `${t.mass}: <b>${d.mass}</b> ${t.earthU} · ${t.dia}: <b>${d.dia.toLocaleString("vi-VN")}</b> km<br>` +
+    `${t.temp}: <b>${d.temp}</b> K · ${t.moons}: <b>${d.moons}</b> · ${t.period}: <b>${o.data.T}</b> ${t.days}`;
+  // Mượn từ thebuggeddev/solar-system: rim light đổi màu theo hành tinh đang xem
+  dirLight.color.set(o.data.col);
 }
 document.getElementById("btnUnfollow").addEventListener("click", () => {
   followTarget = null;
@@ -718,18 +796,18 @@ $("pause").addEventListener("click", () => {
 $("orbits").addEventListener("click", () => {
   ST.showOrbits = !ST.showOrbits;
   PLANETS.forEach(p => p._orbitLine.visible = ST.showOrbits);
-  $("orbits").textContent = "Đường quỹ đạo: " + (ST.showOrbits ? "BẬT" : "TẮT");
+  $("orbits").textContent = T().orbits(ST.showOrbits);
 });
 $("labels").addEventListener("click", () => {
   ST.showLabels = !ST.showLabels;
-  $("labels").textContent = "Nhãn: " + (ST.showLabels ? "BẬT" : "TẮT");
+  $("labels").textContent = T().labels(ST.showLabels);
   planetObjs.forEach(o => o.lblObj.visible = ST.showLabels);
 });
 
 // ---- Tour tự động: camera bay qua các hành tinh theo thứ tự ----
 $("tour").addEventListener("click", () => {
   ST.tourOn = !ST.tourOn;
-  $("tour").textContent = "🎬 Tour: " + (ST.tourOn ? "ON" : "OFF");
+  $("tour").textContent = T().tour(ST.tourOn);
   if (ST.tourOn) {
     followTarget = null;                      // tour đè lên follow
     document.getElementById("infopanel").style.display = "none";
@@ -774,7 +852,7 @@ $("ambient").addEventListener("click", () => {
     ambientNodes.master.gain.setTargetAtTime(on ? 0 : 0.22, audioCtx.currentTime, 0.8);
   }
   const on = ambientNodes.master.gain.value > 0.01;
-  $("ambient").textContent = "🎵 Âm thanh: " + (on ? "OFF" : "ON");
+  $("ambient").textContent = T().audio(!on);
 });
 
 const clock = new THREE.Clock();
@@ -903,6 +981,7 @@ function animate() {
   labelRenderer.render(scene, camera);          // Phase 3.5: nhãn CSS2D
 }
 animate();
+applyLang();   // khởi tạo ngôn ngữ từ localStorage
 </script>
 </body>
 </html>
