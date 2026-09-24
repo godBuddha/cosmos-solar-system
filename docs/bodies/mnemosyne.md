@@ -27,11 +27,11 @@ Mnemosyne — tiểu hành tinh số 57 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Mnemosyne — asteroid number 57 of the main belt (JPL SBDB), spectral class main-belt.
+Mnemosyne — asteroid number 57 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Mnemosyne——主带第57号小行星（JPL SBDB），光谱类型 main-belt。
+Mnemosyne——主带第57号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

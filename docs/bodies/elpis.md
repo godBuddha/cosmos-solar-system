@@ -27,11 +27,11 @@ Elpis — tiểu hành tinh số 59 của vành đai chính. Phần tử quỹ �
 
 ## Description (EN)
 
-Elpis — asteroid number 59 of the main belt (JPL SBDB), spectral class main-belt.
+Elpis — asteroid number 59 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Elpis——主带第59号小行星（JPL SBDB），光谱类型 main-belt。
+Elpis——主带第59号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

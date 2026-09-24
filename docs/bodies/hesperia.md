@@ -27,11 +27,11 @@ Hesperia — tiểu hành tinh số 69 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Hesperia — asteroid number 69 of the main belt (JPL SBDB), spectral class main-belt.
+Hesperia — asteroid number 69 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Hesperia——主带第69号小行星（JPL SBDB），光谱类型 main-belt。
+Hesperia——主带第69号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

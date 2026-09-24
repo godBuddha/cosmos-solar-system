@@ -27,11 +27,11 @@ Parthenope — tiểu hành tinh số 11 của vành đai chính. Phần tử qu
 
 ## Description (EN)
 
-Parthenope — asteroid number 11 of the main belt (JPL SBDB), spectral class main-belt.
+Parthenope — asteroid number 11 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Parthenope——主带第11号小行星（JPL SBDB），光谱类型 main-belt。
+Parthenope——主带第11号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

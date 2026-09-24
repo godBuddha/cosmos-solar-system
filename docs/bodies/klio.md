@@ -27,11 +27,11 @@ Klio — tiểu hành tinh số 84 của vành đai chính. Phần tử quỹ đ
 
 ## Description (EN)
 
-Klio — asteroid number 84 of the main belt (JPL SBDB), spectral class main-belt.
+Klio — asteroid number 84 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Klio——主带第84号小行星（JPL SBDB），光谱类型 main-belt。
+Klio——主带第84号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

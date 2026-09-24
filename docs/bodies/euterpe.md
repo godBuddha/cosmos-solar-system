@@ -27,11 +27,11 @@ Euterpe — tiểu hành tinh số 27 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Euterpe — asteroid number 27 of the main belt (JPL SBDB), spectral class main-belt.
+Euterpe — asteroid number 27 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Euterpe——主带第27号小行星（JPL SBDB），光谱类型 main-belt。
+Euterpe——主带第27号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

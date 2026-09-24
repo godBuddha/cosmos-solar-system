@@ -27,11 +27,11 @@ Iris — tiểu hành tinh số 7 của vành đai chính. Phần tử quỹ đ�
 
 ## Description (EN)
 
-Iris — asteroid number 7 of the main belt (JPL SBDB), spectral class main-belt.
+Iris — asteroid number 7 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Iris——主带第7号小行星（JPL SBDB），光谱类型 main-belt。
+Iris——主带第7号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

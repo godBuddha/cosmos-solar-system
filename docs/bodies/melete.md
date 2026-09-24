@@ -27,11 +27,11 @@ Melete — tiểu hành tinh số 56 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Melete — asteroid number 56 of the main belt (JPL SBDB), spectral class main-belt.
+Melete — asteroid number 56 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Melete——主带第56号小行星（JPL SBDB），光谱类型 main-belt。
+Melete——主带第56号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

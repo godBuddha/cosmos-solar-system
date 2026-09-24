@@ -27,11 +27,11 @@ Aegle — tiểu hành tinh số 96 của vành đai chính. Phần tử quỹ �
 
 ## Description (EN)
 
-Aegle — asteroid number 96 of the main belt (JPL SBDB), spectral class main-belt.
+Aegle — asteroid number 96 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Aegle——主带第96号小行星（JPL SBDB），光谱类型 main-belt。
+Aegle——主带第96号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

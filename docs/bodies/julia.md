@@ -27,11 +27,11 @@ Julia — tiểu hành tinh số 89 của vành đai chính. Phần tử quỹ �
 
 ## Description (EN)
 
-Julia — asteroid number 89 of the main belt (JPL SBDB), spectral class main-belt.
+Julia — asteroid number 89 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Julia——主带第89号小行星（JPL SBDB），光谱类型 main-belt。
+Julia——主带第89号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

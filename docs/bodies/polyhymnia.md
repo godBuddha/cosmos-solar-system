@@ -27,11 +27,11 @@ Polyhymnia — tiểu hành tinh số 33 của vành đai chính. Phần tử qu
 
 ## Description (EN)
 
-Polyhymnia — asteroid number 33 of the main belt (JPL SBDB), spectral class main-belt.
+Polyhymnia — asteroid number 33 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Polyhymnia——主带第33号小行星（JPL SBDB），光谱类型 main-belt。
+Polyhymnia——主带第33号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

@@ -27,11 +27,11 @@ Alkmene — tiểu hành tinh số 82 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Alkmene — asteroid number 82 of the main belt (JPL SBDB), spectral class main-belt.
+Alkmene — asteroid number 82 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Alkmene——主带第82号小行星（JPL SBDB），光谱类型 main-belt。
+Alkmene——主带第82号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

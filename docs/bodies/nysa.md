@@ -27,11 +27,11 @@ Nysa — tiểu hành tinh số 44 của vành đai chính. Phần tử quỹ đ
 
 ## Description (EN)
 
-Nysa — asteroid number 44 of the main belt (JPL SBDB), spectral class main-belt.
+Nysa — asteroid number 44 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Nysa——主带第44号小行星（JPL SBDB），光谱类型 main-belt。
+Nysa——主带第44号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

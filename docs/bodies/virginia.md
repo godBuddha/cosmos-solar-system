@@ -27,11 +27,11 @@ Virginia — tiểu hành tinh số 50 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Virginia — asteroid number 50 of the main belt (JPL SBDB), spectral class main-belt.
+Virginia — asteroid number 50 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Virginia——主带第50号小行星（JPL SBDB），光谱类型 main-belt。
+Virginia——主带第50号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

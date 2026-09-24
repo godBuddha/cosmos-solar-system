@@ -27,11 +27,11 @@ Eunomia — tiểu hành tinh số 15 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Eunomia — asteroid number 15 of the main belt (JPL SBDB), spectral class main-belt.
+Eunomia — asteroid number 15 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Eunomia——主带第15号小行星（JPL SBDB），光谱类型 main-belt。
+Eunomia——主带第15号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

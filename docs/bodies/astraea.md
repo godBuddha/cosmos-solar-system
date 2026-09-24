@@ -27,11 +27,11 @@ Astraea — tiểu hành tinh số 5 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Astraea — asteroid number 5 of the main belt (JPL SBDB), spectral class main-belt.
+Astraea — asteroid number 5 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Astraea——主带第5号小行星（JPL SBDB），光谱类型 main-belt。
+Astraea——主带第5号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

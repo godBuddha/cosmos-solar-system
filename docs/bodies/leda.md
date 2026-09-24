@@ -27,11 +27,11 @@ Leda — tiểu hành tinh số 38 của vành đai chính. Phần tử quỹ đ
 
 ## Description (EN)
 
-Leda — asteroid number 38 of the main belt (JPL SBDB), spectral class main-belt.
+Leda — asteroid number 38 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Leda——主带第38号小行星（JPL SBDB），光谱类型 main-belt。
+Leda——主带第38号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

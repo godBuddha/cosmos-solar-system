@@ -27,11 +27,11 @@ Euphrosyne — tiểu hành tinh số 31 của vành đai chính. Phần tử qu
 
 ## Description (EN)
 
-Euphrosyne — asteroid number 31 of the main belt (JPL SBDB), spectral class main-belt.
+Euphrosyne — asteroid number 31 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Euphrosyne——主带第31号小行星（JPL SBDB），光谱类型 main-belt。
+Euphrosyne——主带第31号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

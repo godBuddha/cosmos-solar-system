@@ -27,11 +27,11 @@ Fortuna — tiểu hành tinh số 19 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Fortuna — asteroid number 19 of the main belt (JPL SBDB), spectral class main-belt.
+Fortuna — asteroid number 19 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Fortuna——主带第19号小行星（JPL SBDB），光谱类型 main-belt。
+Fortuna——主带第19号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

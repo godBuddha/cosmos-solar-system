@@ -27,11 +27,11 @@ Proserpina — tiểu hành tinh số 26 của vành đai chính. Phần tử qu
 
 ## Description (EN)
 
-Proserpina — asteroid number 26 of the main belt (JPL SBDB), spectral class main-belt.
+Proserpina — asteroid number 26 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Proserpina——主带第26号小行星（JPL SBDB），光谱类型 main-belt。
+Proserpina——主带第26号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

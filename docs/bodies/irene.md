@@ -27,11 +27,11 @@ Irene — tiểu hành tinh số 14 của vành đai chính. Phần tử quỹ �
 
 ## Description (EN)
 
-Irene — asteroid number 14 of the main belt (JPL SBDB), spectral class main-belt.
+Irene — asteroid number 14 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Irene——主带第14号小行星（JPL SBDB），光谱类型 main-belt。
+Irene——主带第14号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

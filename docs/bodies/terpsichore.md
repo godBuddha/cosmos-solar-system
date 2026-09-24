@@ -27,11 +27,11 @@ Terpsichore — tiểu hành tinh số 81 của vành đai chính. Phần tử q
 
 ## Description (EN)
 
-Terpsichore — asteroid number 81 of the main belt (JPL SBDB), spectral class main-belt.
+Terpsichore — asteroid number 81 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Terpsichore——主带第81号小行星（JPL SBDB），光谱类型 main-belt。
+Terpsichore——主带第81号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

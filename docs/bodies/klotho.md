@@ -27,11 +27,11 @@ Klotho — tiểu hành tinh số 97 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Klotho — asteroid number 97 of the main belt (JPL SBDB), spectral class main-belt.
+Klotho — asteroid number 97 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Klotho——主带第97号小行星（JPL SBDB），光谱类型 main-belt。
+Klotho——主带第97号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

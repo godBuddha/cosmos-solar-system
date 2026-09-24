@@ -27,11 +27,11 @@ Cybele — tiểu hành tinh số 65 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Cybele — asteroid number 65 of the main belt (JPL SBDB), spectral class main-belt.
+Cybele — asteroid number 65 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Cybele——主带第65号小行星（JPL SBDB），光谱类型 main-belt。
+Cybele——主带第65号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

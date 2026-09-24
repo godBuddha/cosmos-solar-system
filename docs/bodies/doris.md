@@ -27,11 +27,11 @@ Doris — tiểu hành tinh số 48 của vành đai chính. Phần tử quỹ �
 
 ## Description (EN)
 
-Doris — asteroid number 48 of the main belt (JPL SBDB), spectral class main-belt.
+Doris — asteroid number 48 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Doris——主带第48号小行星（JPL SBDB），光谱类型 main-belt。
+Doris——主带第48号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

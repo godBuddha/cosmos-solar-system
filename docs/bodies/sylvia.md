@@ -27,11 +27,11 @@ Sylvia — tiểu hành tinh số 87 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Sylvia — asteroid number 87 of the main belt (JPL SBDB), spectral class main-belt.
+Sylvia — asteroid number 87 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Sylvia——主带第87号小行星（JPL SBDB），光谱类型 main-belt。
+Sylvia——主带第87号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

@@ -27,11 +27,11 @@ Thalia — tiểu hành tinh số 23 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Thalia — asteroid number 23 of the main belt (JPL SBDB), spectral class main-belt.
+Thalia — asteroid number 23 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Thalia——主带第23号小行星（JPL SBDB），光谱类型 main-belt。
+Thalia——主带第23号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

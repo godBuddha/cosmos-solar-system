@@ -27,11 +27,11 @@ Themis — tiểu hành tinh số 24 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Themis — asteroid number 24 of the main belt (JPL SBDB), spectral class main-belt.
+Themis — asteroid number 24 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Themis——主带第24号小行星（JPL SBDB），光谱类型 main-belt。
+Themis——主带第24号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

@@ -27,11 +27,11 @@ Aglaja — tiểu hành tinh số 47 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Aglaja — asteroid number 47 of the main belt (JPL SBDB), spectral class main-belt.
+Aglaja — asteroid number 47 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Aglaja——主带第47号小行星（JPL SBDB），光谱类型 main-belt。
+Aglaja——主带第47号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

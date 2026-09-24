@@ -27,11 +27,11 @@ Danae — tiểu hành tinh số 61 của vành đai chính. Phần tử quỹ �
 
 ## Description (EN)
 
-Danae — asteroid number 61 of the main belt (JPL SBDB), spectral class main-belt.
+Danae — asteroid number 61 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Danae——主带第61号小行星（JPL SBDB），光谱类型 main-belt。
+Danae——主带第61号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

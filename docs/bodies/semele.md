@@ -27,11 +27,11 @@ Semele — tiểu hành tinh số 86 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Semele — asteroid number 86 of the main belt (JPL SBDB), spectral class main-belt.
+Semele — asteroid number 86 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Semele——主带第86号小行星（JPL SBDB），光谱类型 main-belt。
+Semele——主带第86号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

@@ -27,11 +27,11 @@ Kalliope — tiểu hành tinh số 22 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Kalliope — asteroid number 22 of the main belt (JPL SBDB), spectral class main-belt.
+Kalliope — asteroid number 22 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Kalliope——主带第22号小行星（JPL SBDB），光谱类型 main-belt。
+Kalliope——主带第22号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

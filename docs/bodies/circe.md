@@ -27,11 +27,11 @@ Circe — tiểu hành tinh số 34 của vành đai chính. Phần tử quỹ �
 
 ## Description (EN)
 
-Circe — asteroid number 34 of the main belt (JPL SBDB), spectral class main-belt.
+Circe — asteroid number 34 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Circe——主带第34号小行星（JPL SBDB），光谱类型 main-belt。
+Circe——主带第34号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

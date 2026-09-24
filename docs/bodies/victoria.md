@@ -27,11 +27,11 @@ Victoria — tiểu hành tinh số 12 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Victoria — asteroid number 12 of the main belt (JPL SBDB), spectral class main-belt.
+Victoria — asteroid number 12 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Victoria——主带第12号小行星（JPL SBDB），光谱类型 main-belt。
+Victoria——主带第12号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

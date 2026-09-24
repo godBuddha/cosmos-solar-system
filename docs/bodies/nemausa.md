@@ -27,11 +27,11 @@ Nemausa — tiểu hành tinh số 51 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Nemausa — asteroid number 51 of the main belt (JPL SBDB), spectral class main-belt.
+Nemausa — asteroid number 51 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Nemausa——主带第51号小行星（JPL SBDB），光谱类型 main-belt。
+Nemausa——主带第51号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

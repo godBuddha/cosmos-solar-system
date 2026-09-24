@@ -27,11 +27,11 @@ Leukothea — tiểu hành tinh số 35 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Leukothea — asteroid number 35 of the main belt (JPL SBDB), spectral class main-belt.
+Leukothea — asteroid number 35 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Leukothea——主带第35号小行星（JPL SBDB），光谱类型 main-belt。
+Leukothea——主带第35号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

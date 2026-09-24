@@ -27,11 +27,11 @@ Hebe — tiểu hành tinh số 6 của vành đai chính. Phần tử quỹ đ�
 
 ## Description (EN)
 
-Hebe — asteroid number 6 of the main belt (JPL SBDB), spectral class main-belt.
+Hebe — asteroid number 6 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Hebe——主带第6号小行星（JPL SBDB），光谱类型 main-belt。
+Hebe——主带第6号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

@@ -27,11 +27,11 @@ Eurydike — tiểu hành tinh số 75 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Eurydike — asteroid number 75 of the main belt (JPL SBDB), spectral class main-belt.
+Eurydike — asteroid number 75 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Eurydike——主带第75号小行星（JPL SBDB），光谱类型 main-belt。
+Eurydike——主带第75号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

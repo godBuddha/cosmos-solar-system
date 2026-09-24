@@ -27,11 +27,11 @@ Panopaea — tiểu hành tinh số 70 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Panopaea — asteroid number 70 of the main belt (JPL SBDB), spectral class main-belt.
+Panopaea — asteroid number 70 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Panopaea——主带第70号小行星（JPL SBDB），光谱类型 main-belt。
+Panopaea——主带第70号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

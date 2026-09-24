@@ -27,11 +27,11 @@ Maja — tiểu hành tinh số 66 của vành đai chính. Phần tử quỹ đ
 
 ## Description (EN)
 
-Maja — asteroid number 66 of the main belt (JPL SBDB), spectral class main-belt.
+Maja — asteroid number 66 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Maja——主带第66号小行星（JPL SBDB），光谱类型 main-belt。
+Maja——主带第66号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

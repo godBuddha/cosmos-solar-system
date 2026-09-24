@@ -27,11 +27,11 @@ Feronia — tiểu hành tinh số 72 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Feronia — asteroid number 72 of the main belt (JPL SBDB), spectral class main-belt.
+Feronia — asteroid number 72 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Feronia——主带第72号小行星（JPL SBDB），光谱类型 main-belt。
+Feronia——主带第72号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

@@ -27,11 +27,11 @@ Fides — tiểu hành tinh số 37 của vành đai chính. Phần tử quỹ �
 
 ## Description (EN)
 
-Fides — asteroid number 37 of the main belt (JPL SBDB), spectral class main-belt.
+Fides — asteroid number 37 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Fides——主带第37号小行星（JPL SBDB），光谱类型 main-belt。
+Fides——主带第37号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

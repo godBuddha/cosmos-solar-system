@@ -27,11 +27,11 @@ Ausonia — tiểu hành tinh số 63 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Ausonia — asteroid number 63 of the main belt (JPL SBDB), spectral class main-belt.
+Ausonia — asteroid number 63 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Ausonia——主带第63号小行星（JPL SBDB），光谱类型 main-belt。
+Ausonia——主带第63号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

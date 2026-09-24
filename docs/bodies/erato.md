@@ -27,11 +27,11 @@ Erato — tiểu hành tinh số 62 của vành đai chính. Phần tử quỹ �
 
 ## Description (EN)
 
-Erato — asteroid number 62 of the main belt (JPL SBDB), spectral class main-belt.
+Erato — asteroid number 62 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Erato——主带第62号小行星（JPL SBDB），光谱类型 main-belt。
+Erato——主带第62号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

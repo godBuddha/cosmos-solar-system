@@ -27,11 +27,11 @@ Aegina — tiểu hành tinh số 91 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Aegina — asteroid number 91 of the main belt (JPL SBDB), spectral class main-belt.
+Aegina — asteroid number 91 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Aegina——主带第91号小行星（JPL SBDB），光谱类型 main-belt。
+Aegina——主带第91号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

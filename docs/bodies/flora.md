@@ -27,11 +27,11 @@ Flora — tiểu hành tinh số 8 của vành đai chính. Phần tử quỹ đ
 
 ## Description (EN)
 
-Flora — asteroid number 8 of the main belt (JPL SBDB), spectral class main-belt.
+Flora — asteroid number 8 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Flora——主带第8号小行星（JPL SBDB），光谱类型 main-belt。
+Flora——主带第8号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

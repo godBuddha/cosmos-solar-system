@@ -27,11 +27,11 @@ Pandora — tiểu hành tinh số 55 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Pandora — asteroid number 55 of the main belt (JPL SBDB), spectral class main-belt.
+Pandora — asteroid number 55 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Pandora——主带第55号小行星（JPL SBDB），光谱类型 main-belt。
+Pandora——主带第55号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

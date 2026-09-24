@@ -27,11 +27,11 @@ Massalia — tiểu hành tinh số 20 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Massalia — asteroid number 20 of the main belt (JPL SBDB), spectral class main-belt.
+Massalia — asteroid number 20 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Massalia——主带第20号小行星（JPL SBDB），光谱类型 main-belt。
+Massalia——主带第20号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

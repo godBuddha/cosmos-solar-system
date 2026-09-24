@@ -27,11 +27,11 @@ Hekate — tiểu hành tinh số 100 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Hekate — asteroid number 100 of the main belt (JPL SBDB), spectral class main-belt.
+Hekate — asteroid number 100 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Hekate——主带第100号小行星（JPL SBDB），光谱类型 main-belt。
+Hekate——主带第100号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

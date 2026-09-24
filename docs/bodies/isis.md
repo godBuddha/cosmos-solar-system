@@ -27,11 +27,11 @@ Isis — tiểu hành tinh số 42 của vành đai chính. Phần tử quỹ đ
 
 ## Description (EN)
 
-Isis — asteroid number 42 of the main belt (JPL SBDB), spectral class main-belt.
+Isis — asteroid number 42 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Isis——主带第42号小行星（JPL SBDB），光谱类型 main-belt。
+Isis——主带第42号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

@@ -27,11 +27,11 @@ Pales — tiểu hành tinh số 49 của vành đai chính. Phần tử quỹ �
 
 ## Description (EN)
 
-Pales — asteroid number 49 of the main belt (JPL SBDB), spectral class main-belt.
+Pales — asteroid number 49 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Pales——主带第49号小行星（JPL SBDB），光谱类型 main-belt。
+Pales——主带第49号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

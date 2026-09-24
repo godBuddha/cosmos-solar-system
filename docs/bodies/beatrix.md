@@ -27,11 +27,11 @@ Beatrix — tiểu hành tinh số 83 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Beatrix — asteroid number 83 of the main belt (JPL SBDB), spectral class main-belt.
+Beatrix — asteroid number 83 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Beatrix——主带第83号小行星（JPL SBDB），光谱类型 main-belt。
+Beatrix——主带第83号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

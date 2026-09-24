@@ -27,11 +27,11 @@ Bellona — tiểu hành tinh số 28 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Bellona — asteroid number 28 of the main belt (JPL SBDB), spectral class main-belt.
+Bellona — asteroid number 28 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Bellona——主带第28号小行星（JPL SBDB），光谱类型 main-belt。
+Bellona——主带第28号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

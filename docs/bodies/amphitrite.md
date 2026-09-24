@@ -27,11 +27,11 @@ Amphitrite — tiểu hành tinh số 29 của vành đai chính. Phần tử qu
 
 ## Description (EN)
 
-Amphitrite — asteroid number 29 of the main belt (JPL SBDB), spectral class main-belt.
+Amphitrite — asteroid number 29 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Amphitrite——主带第29号小行星（JPL SBDB），光谱类型 main-belt。
+Amphitrite——主带第29号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

@@ -27,11 +27,11 @@ Ariadne — tiểu hành tinh số 43 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Ariadne — asteroid number 43 of the main belt (JPL SBDB), spectral class main-belt.
+Ariadne — asteroid number 43 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Ariadne——主带第43号小行星（JPL SBDB），光谱类型 main-belt。
+Ariadne——主带第43号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

@@ -27,11 +27,11 @@ Urania — tiểu hành tinh số 30 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Urania — asteroid number 30 of the main belt (JPL SBDB), spectral class main-belt.
+Urania — asteroid number 30 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Urania——主带第30号小行星（JPL SBDB），光谱类型 main-belt。
+Urania——主带第30号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

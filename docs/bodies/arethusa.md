@@ -27,11 +27,11 @@ Arethusa — tiểu hành tinh số 95 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Arethusa — asteroid number 95 of the main belt (JPL SBDB), spectral class main-belt.
+Arethusa — asteroid number 95 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Arethusa——主带第95号小行星（JPL SBDB），光谱类型 main-belt。
+Arethusa——主带第95号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

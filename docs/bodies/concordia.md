@@ -27,11 +27,11 @@ Concordia — tiểu hành tinh số 58 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Concordia — asteroid number 58 of the main belt (JPL SBDB), spectral class main-belt.
+Concordia — asteroid number 58 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Concordia——主带第58号小行星（JPL SBDB），光谱类型 main-belt。
+Concordia——主带第58号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

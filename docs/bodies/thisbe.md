@@ -27,11 +27,11 @@ Thisbe — tiểu hành tinh số 88 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Thisbe — asteroid number 88 of the main belt (JPL SBDB), spectral class main-belt.
+Thisbe — asteroid number 88 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Thisbe——主带第88号小行星（JPL SBDB），光谱类型 main-belt。
+Thisbe——主带第88号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

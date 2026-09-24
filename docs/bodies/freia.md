@@ -27,11 +27,11 @@ Freia — tiểu hành tinh số 76 của vành đai chính. Phần tử quỹ �
 
 ## Description (EN)
 
-Freia — asteroid number 76 of the main belt (JPL SBDB), spectral class main-belt.
+Freia — asteroid number 76 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Freia——主带第76号小行星（JPL SBDB），光谱类型 main-belt。
+Freia——主带第76号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

@@ -27,11 +27,11 @@ Asia — tiểu hành tinh số 67 của vành đai chính. Phần tử quỹ đ
 
 ## Description (EN)
 
-Asia — asteroid number 67 of the main belt (JPL SBDB), spectral class main-belt.
+Asia — asteroid number 67 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Asia——主带第67号小行星（JPL SBDB），光谱类型 main-belt。
+Asia——主带第67号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

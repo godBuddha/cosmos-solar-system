@@ -27,11 +27,11 @@ Thetis — tiểu hành tinh số 17 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Thetis — asteroid number 17 of the main belt (JPL SBDB), spectral class main-belt.
+Thetis — asteroid number 17 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Thetis——主带第17号小行星（JPL SBDB），光谱类型 main-belt。
+Thetis——主带第17号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

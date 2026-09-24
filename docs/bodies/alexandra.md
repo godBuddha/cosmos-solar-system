@@ -27,11 +27,11 @@ Alexandra — tiểu hành tinh số 54 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Alexandra — asteroid number 54 of the main belt (JPL SBDB), spectral class main-belt.
+Alexandra — asteroid number 54 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Alexandra——主带第54号小行星（JPL SBDB），光谱类型 main-belt。
+Alexandra——主带第54号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

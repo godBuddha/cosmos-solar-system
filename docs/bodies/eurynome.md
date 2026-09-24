@@ -27,11 +27,11 @@ Eurynome — tiểu hành tinh số 79 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Eurynome — asteroid number 79 of the main belt (JPL SBDB), spectral class main-belt.
+Eurynome — asteroid number 79 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Eurynome——主带第79号小行星（JPL SBDB），光谱类型 main-belt。
+Eurynome——主带第79号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

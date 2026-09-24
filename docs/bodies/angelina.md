@@ -27,11 +27,11 @@ Angelina — tiểu hành tinh số 64 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Angelina — asteroid number 64 of the main belt (JPL SBDB), spectral class main-belt.
+Angelina — asteroid number 64 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Angelina——主带第64号小行星（JPL SBDB），光谱类型 main-belt。
+Angelina——主带第64号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

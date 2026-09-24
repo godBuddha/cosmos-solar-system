@@ -5,7 +5,12 @@ Chỉ chạy khi cần cập nhật catalog. Kết quả: 100 numbered asteroids
 đã có sẵn file .md riêng (không đè).
 """
 import json
+import math
+import sys
+import time
+import urllib.error
 import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -14,13 +19,33 @@ OUT_DIR = ROOT / "docs" / "bodies"
 MANUAL = {"mercury","venus","earth","mars","jupiter","saturn","uranus","neptune",
           "pluto","eris","haumea","makemake","ceres","quaoar","orcus","gonggong",
           "sedna","vesta","pallas","hygiea","juno"}
-EXISTING = {f.stem.lower() for f in OUT_DIR.glob("*.md")}
+FETCH_DATE = datetime.now(timezone.utc).date().isoformat()  # ngày fetch thật, ghi vào nguồn .md
 
 
-def fetch_jpl(url):
-    req = urllib.request.Request(url, headers={"User-Agent": "cosmos-catalog/1.0"})
-    with urllib.request.urlopen(req, timeout=40) as r:
-        return json.loads(r.read())
+def fetch_jpl(url, retries=3, backoff=5):
+    """GET JSON từ JPL — retry đơn giản khi lỗi mạng/lỗi tạm thời của API."""
+    last = None
+    for attempt in range(1, retries + 1):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "cosmos-catalog/1.0"})
+            with urllib.request.urlopen(req, timeout=40) as r:
+                return json.loads(r.read())
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError,
+                json.JSONDecodeError) as exc:
+            last = exc
+            if attempt < retries:
+                print(f"  fetch lỗi ({exc}) — thử lại sau {backoff}s "
+                      f"({attempt}/{retries - 1})…", file=sys.stderr)
+                time.sleep(backoff)
+    raise RuntimeError(f"fetch JPL thất bại sau {retries} lần: {last}") from last
+
+
+def fnum(value, default, what):
+    """Ép float an toàn [G1-P4]: JPL có thể trả None cho từng trường."""
+    if value is None:
+        print(f"  cảnh báo: {what} = None từ JPL — dùng mặc định {default}", file=sys.stderr)
+        return float(default)
+    return float(value)
 
 
 def slug(name):
@@ -59,11 +84,11 @@ dia: {dia}
 
 ## Description (EN)
 
-{en} — asteroid number {num} of the main belt (JPL SBDB), spectral class {klass}.
+{en} — asteroid number {num} of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-{en}——主带第{num}号小行星（JPL SBDB），光谱类型 {klass}。
+{en}——主带第{num}号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 
@@ -98,12 +123,14 @@ def main():
             continue
         # asteroid JPL: CHO PHÉP ghi đè để cập nhật elements thật (om/w/ma)
         _, a, e, i, per, om_jpl, w_jpl, ma_jpl, H = row
-        a, e, i, per = float(a), float(e), float(i), float(per)
-        om_jpl = float(om_jpl); w_jpl = float(w_jpl); ma_jpl = float(ma_jpl)
-        H = float(H) if H else 18.0
+        a = fnum(a, 0.0, f"{name} a"); e = fnum(e, 0.0, f"{name} e")
+        i = fnum(i, 0.0, f"{name} i"); per = fnum(per, 1000.0, f"{name} per (ngày)")
+        om_jpl = fnum(om_jpl, 0.0, f"{name} om"); w_jpl = fnum(w_jpl, 0.0, f"{name} w")
+        ma_jpl = fnum(ma_jpl, 0.0, f"{name} ma")
+        H = fnum(H, 18.0, f"{name} H")
         # kích thước hiển thị: từ H (độ sáng tuyệt đối) → ước lượng bán kính km
         # D(km) ≈ 1329 / sqrt(albedo 0.14) * 10^(-H/5)
-        dia_km = 1329 / math.sqrt(0.14) * 10 ** (-(H) / 5) if H else 20
+        dia_km = 1329 / math.sqrt(0.14) * 10 ** (-(H) / 5)
         r_scene = max(0.06, min(0.35, (dia_km / 1000) * 0.5 + 0.06))
         # màu: lớp C tối, S sáng hơn theo H ngẫu nhiên ổn định
         h = (num * 37) % 100 / 100
@@ -122,15 +149,14 @@ def main():
             col=col, col2=col2, M0=M0, om=om, node=node,
             dwarf="true" if dia_km > 800 else "false",
             mass=mass, temp=temp, dia=round(dia_km), num=num,
-            klass="main-belt", date="2026-10")
+            date=FETCH_DATE)
         (OUT_DIR / f"{sid}.md").write_text(content, encoding="utf-8")
-        EXISTING.add(sid)
         added += 1
 
     print(f"added: {added} | skipped (đã có): {skipped}")
     print(f"tổng file: {len(list(OUT_DIR.glob('*.md')))}")
+    print(f"ngày fetch ghi vào nguồn: {FETCH_DATE}")
 
 
-import math
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

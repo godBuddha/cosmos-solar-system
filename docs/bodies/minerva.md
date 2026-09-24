@@ -27,11 +27,11 @@ Minerva — tiểu hành tinh số 93 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Minerva — asteroid number 93 of the main belt (JPL SBDB), spectral class main-belt.
+Minerva — asteroid number 93 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Minerva——主带第93号小行星（JPL SBDB），光谱类型 main-belt。
+Minerva——主带第93号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

@@ -27,11 +27,11 @@ Kalypso — tiểu hành tinh số 53 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Kalypso — asteroid number 53 of the main belt (JPL SBDB), spectral class main-belt.
+Kalypso — asteroid number 53 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Kalypso——主带第53号小行星（JPL SBDB），光谱类型 main-belt。
+Kalypso——主带第53号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

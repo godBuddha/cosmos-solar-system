@@ -27,11 +27,11 @@ Psyche — tiểu hành tinh số 16 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Psyche — asteroid number 16 of the main belt (JPL SBDB), spectral class main-belt.
+Psyche — asteroid number 16 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Psyche——主带第16号小行星（JPL SBDB），光谱类型 main-belt。
+Psyche——主带第16号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

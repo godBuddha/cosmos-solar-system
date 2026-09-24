@@ -27,11 +27,11 @@ Europa — tiểu hành tinh số 52 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Europa — asteroid number 52 of the main belt (JPL SBDB), spectral class main-belt.
+Europa — asteroid number 52 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Europa——主带第52号小行星（JPL SBDB），光谱类型 main-belt。
+Europa——主带第52号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

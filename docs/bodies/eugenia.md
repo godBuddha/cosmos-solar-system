@@ -27,11 +27,11 @@ Eugenia — tiểu hành tinh số 45 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Eugenia — asteroid number 45 of the main belt (JPL SBDB), spectral class main-belt.
+Eugenia — asteroid number 45 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Eugenia——主带第45号小行星（JPL SBDB），光谱类型 main-belt。
+Eugenia——主带第45号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

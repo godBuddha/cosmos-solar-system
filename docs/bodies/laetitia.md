@@ -27,11 +27,11 @@ Laetitia — tiểu hành tinh số 39 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Laetitia — asteroid number 39 of the main belt (JPL SBDB), spectral class main-belt.
+Laetitia — asteroid number 39 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Laetitia——主带第39号小行星（JPL SBDB），光谱类型 main-belt。
+Laetitia——主带第39号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

@@ -27,11 +27,11 @@ Aurora — tiểu hành tinh số 94 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Aurora — asteroid number 94 of the main belt (JPL SBDB), spectral class main-belt.
+Aurora — asteroid number 94 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Aurora——主带第94号小行星（JPL SBDB），光谱类型 main-belt。
+Aurora——主带第94号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

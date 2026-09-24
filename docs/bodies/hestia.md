@@ -27,11 +27,11 @@ Hestia — tiểu hành tinh số 46 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Hestia — asteroid number 46 of the main belt (JPL SBDB), spectral class main-belt.
+Hestia — asteroid number 46 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Hestia——主带第46号小行星（JPL SBDB），光谱类型 main-belt。
+Hestia——主带第46号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

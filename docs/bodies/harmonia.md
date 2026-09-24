@@ -27,11 +27,11 @@ Harmonia — tiểu hành tinh số 40 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Harmonia — asteroid number 40 of the main belt (JPL SBDB), spectral class main-belt.
+Harmonia — asteroid number 40 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Harmonia——主带第40号小行星（JPL SBDB），光谱类型 main-belt。
+Harmonia——主带第40号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

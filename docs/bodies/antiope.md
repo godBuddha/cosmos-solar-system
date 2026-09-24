@@ -27,11 +27,11 @@ Antiope — tiểu hành tinh số 90 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Antiope — asteroid number 90 of the main belt (JPL SBDB), spectral class main-belt.
+Antiope — asteroid number 90 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Antiope——主带第90号小行星（JPL SBDB），光谱类型 main-belt。
+Antiope——主带第90号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

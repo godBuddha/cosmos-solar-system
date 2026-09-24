@@ -27,11 +27,11 @@ Galatea — tiểu hành tinh số 74 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Galatea — asteroid number 74 of the main belt (JPL SBDB), spectral class main-belt.
+Galatea — asteroid number 74 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Galatea——主带第74号小行星（JPL SBDB），光谱类型 main-belt。
+Galatea——主带第74号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

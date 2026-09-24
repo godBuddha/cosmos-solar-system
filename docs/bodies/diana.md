@@ -27,11 +27,11 @@ Diana — tiểu hành tinh số 78 của vành đai chính. Phần tử quỹ �
 
 ## Description (EN)
 
-Diana — asteroid number 78 of the main belt (JPL SBDB), spectral class main-belt.
+Diana — asteroid number 78 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Diana——主带第78号小行星（JPL SBDB），光谱类型 main-belt。
+Diana——主带第78号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

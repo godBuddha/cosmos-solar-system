@@ -27,11 +27,11 @@ Klytia — tiểu hành tinh số 73 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Klytia — asteroid number 73 of the main belt (JPL SBDB), spectral class main-belt.
+Klytia — asteroid number 73 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Klytia——主带第73号小行星（JPL SBDB），光谱类型 main-belt。
+Klytia——主带第73号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

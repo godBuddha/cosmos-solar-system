@@ -27,11 +27,11 @@ Niobe — tiểu hành tinh số 71 của vành đai chính. Phần tử quỹ �
 
 ## Description (EN)
 
-Niobe — asteroid number 71 of the main belt (JPL SBDB), spectral class main-belt.
+Niobe — asteroid number 71 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Niobe——主带第71号小行星（JPL SBDB），光谱类型 main-belt。
+Niobe——主带第71号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

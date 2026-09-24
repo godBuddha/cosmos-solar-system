@@ -27,11 +27,11 @@ Ianthe — tiểu hành tinh số 98 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Ianthe — asteroid number 98 of the main belt (JPL SBDB), spectral class main-belt.
+Ianthe — asteroid number 98 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Ianthe——主带第98号小行星（JPL SBDB），光谱类型 main-belt。
+Ianthe——主带第98号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

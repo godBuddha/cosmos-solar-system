@@ -27,11 +27,11 @@ Undina — tiểu hành tinh số 92 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Undina — asteroid number 92 of the main belt (JPL SBDB), spectral class main-belt.
+Undina — asteroid number 92 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Undina——主带第92号小行星（JPL SBDB），光谱类型 main-belt。
+Undina——主带第92号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

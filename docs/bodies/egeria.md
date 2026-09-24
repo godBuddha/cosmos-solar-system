@@ -27,11 +27,11 @@ Egeria — tiểu hành tinh số 13 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Egeria — asteroid number 13 of the main belt (JPL SBDB), spectral class main-belt.
+Egeria — asteroid number 13 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Egeria——主带第13号小行星（JPL SBDB），光谱类型 main-belt。
+Egeria——主带第13号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

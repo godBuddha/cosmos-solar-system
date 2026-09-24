@@ -27,11 +27,11 @@ Sappho — tiểu hành tinh số 80 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Sappho — asteroid number 80 of the main belt (JPL SBDB), spectral class main-belt.
+Sappho — asteroid number 80 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Sappho——主带第80号小行星（JPL SBDB），光谱类型 main-belt。
+Sappho——主带第80号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

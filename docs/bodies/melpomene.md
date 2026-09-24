@@ -27,11 +27,11 @@ Melpomene — tiểu hành tinh số 18 của vành đai chính. Phần tử qu�
 
 ## Description (EN)
 
-Melpomene — asteroid number 18 of the main belt (JPL SBDB), spectral class main-belt.
+Melpomene — asteroid number 18 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Melpomene——主带第18号小行星（JPL SBDB），光谱类型 main-belt。
+Melpomene——主带第18号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

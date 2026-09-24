@@ -27,11 +27,11 @@ Frigga — tiểu hành tinh số 77 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Frigga — asteroid number 77 of the main belt (JPL SBDB), spectral class main-belt.
+Frigga — asteroid number 77 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Frigga——主带第77号小行星（JPL SBDB），光谱类型 main-belt。
+Frigga——主带第77号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

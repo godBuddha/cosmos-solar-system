@@ -27,11 +27,11 @@ Lutetia — tiểu hành tinh số 21 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Lutetia — asteroid number 21 of the main belt (JPL SBDB), spectral class main-belt.
+Lutetia — asteroid number 21 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Lutetia——主带第21号小行星（JPL SBDB），光谱类型 main-belt。
+Lutetia——主带第21号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

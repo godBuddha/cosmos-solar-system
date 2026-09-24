@@ -27,11 +27,11 @@ Phocaea — tiểu hành tinh số 25 của vành đai chính. Phần tử quỹ
 
 ## Description (EN)
 
-Phocaea — asteroid number 25 of the main belt (JPL SBDB), spectral class main-belt.
+Phocaea — asteroid number 25 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Phocaea——主带第25号小行星（JPL SBDB），光谱类型 main-belt。
+Phocaea——主带第25号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 

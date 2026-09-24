@@ -27,11 +27,11 @@ Pomona — tiểu hành tinh số 32 của vành đai chính. Phần tử quỹ 
 
 ## Description (EN)
 
-Pomona — asteroid number 32 of the main belt (JPL SBDB), spectral class main-belt.
+Pomona — asteroid number 32 of the main belt (JPL SBDB).
 
 ## 描述 (ZH)
 
-Pomona——主带第32号小行星（JPL SBDB），光谱类型 main-belt。
+Pomona——主带第32号小行星（JPL SBDB）。
 
 ## Nguồn / Sources
 
