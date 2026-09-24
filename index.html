@@ -56,6 +56,29 @@
   }
   #infopanel .close-x:hover { color:#ffd27a; }
   #date { color:#ffd27a; }
+  /* ===== G4: AI chat ===== */
+  #aiPanel {
+    position:fixed; left:16px; bottom:16px; width:320px; max-height:46vh;
+    background:rgba(4,10,22,.88); border:1px solid rgba(120,170,230,.3);
+    border-radius:12px; backdrop-filter:blur(8px); z-index:30;
+    display:none; flex-direction:column; overflow:hidden;
+  }
+  #aiPanel.open { display:flex; }
+  #aiHead { padding:8px 12px; color:#ffd27a; font-size:13px;
+    border-bottom:1px solid rgba(120,170,230,.2); display:flex; justify-content:space-between; }
+  #aiHead button { background:none; border:none; color:#7a95b5; cursor:pointer; }
+  #aiMsgs { flex:1; overflow-y:auto; padding:10px 12px; font-size:12.5px; }
+  #aiMsgs .q { color:#9fd8e8; margin:6px 0; }
+  #aiMsgs .a { color:#cfe2ff; margin:6px 0; opacity:.92; white-space:pre-wrap; }
+  #aiMsgs .a.err { color:#ff8a8a; }
+  #aiRow { display:flex; border-top:1px solid rgba(120,170,230,.2); }
+  #aiIn { flex:1; background:transparent; border:none; color:#cfe2ff;
+    padding:9px 12px; font-size:13px; outline:none; }
+  #aiSend { background:#12233f; border:none; color:#ffd27a; padding:0 14px; cursor:pointer; }
+  /* AI panel mobile: full-width bottom sheet */
+  @media (max-width: 768px) {
+    #aiPanel { left:0; right:0; bottom:0; width:100%; max-height:60vh; border-radius:14px 14px 0 0; }
+  }
   /* ===== G2: search bar ===== */
   #searchbox {
     position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:20;
@@ -139,6 +162,15 @@
   <div id="searchResults"></div>
 </div>
 
+<div id="aiPanel">
+  <div id="aiHead"><span>🤖 <span class="t-ai2">Trợ lý AI</span></span><button id="aiClose">✕</button></div>
+  <div id="aiMsgs"></div>
+  <div id="aiRow">
+    <input id="aiIn" placeholder="Hỏi về thiên thể...">
+    <button id="aiSend">➤</button>
+  </div>
+</div>
+
 <div id="settingsModal">
   <div id="settingsCard">
     <h3>⚙️ <span class="s-title">Cài đặt</span></h3>
@@ -176,7 +208,8 @@
   <button id="labels"></button>
   <button id="tour"></button>
   <button id="ambient"></button>
-  <button id="btnSettings">⚙️</button><br>
+  <button id="btnSettings">⚙️</button>
+  <button id="btnAI">🤖 <span class="t-ai">Hỏi AI</span></button><br>
   <div id="speedPresets"></div>
   <span class="t-date">Ngày mô phỏng:</span> <span id="date">0</span>
 </div>
@@ -971,6 +1004,8 @@ let followTarget = null;   // planetObjs entry đang bám
 // ======================================================================
 const I18N = {
   vi: {
+    aiBtn: "Hỏi AI", aiTitle: "Trợ lý AI",
+    aiReadyServer: "Sẵn sàng — AI gateway server đã cấu hình. Hỏi bất kỳ điều gì về thiên thể!", aiReadyUser: "Sẵn sàng — dùng API key của bạn (Settings). Hỏi bất kỳ điều gì!", aiNone: "Chưa cấu hình AI. Vào ⚙️ Settings nhập Base URL + Model (và API key nếu dùng cloud).",
     names: { Mercury:"Sao Thủy", Venus:"Sao Kim", Earth:"Trái Đất", Mars:"Sao Hỏa", Jupiter:"Sao Mộc", Saturn:"Sao Thổ", Uranus:"Sao Thiên Vương", Neptune:"Sao Hải Vương", Ceres:"Ceres", Pluto:"Sao Diêm Vương", Eris:"Eris" },
     sec1: "Tổng quan", sec2: "Quỹ đạo", sec3: "Tự quay",
     note: "tỷ lệ nghệ thuật, quỹ đạo Kepler thật",
@@ -986,6 +1021,8 @@ const I18N = {
     dwarf: "(dwarf)",
   },
   en: {
+    aiBtn: "Ask AI", aiTitle: "AI Assistant",
+    aiReadyServer: "Ready — server AI gateway configured. Ask anything about the bodies!", aiReadyUser: "Ready — using your API key (Settings). Ask anything!", aiNone: "AI not configured. Open ⚙️ Settings and enter Base URL + Model (plus API key for cloud).",
     names: { Mercury:"Mercury", Venus:"Venus", Earth:"Earth", Mars:"Mars", Jupiter:"Jupiter", Saturn:"Saturn", Uranus:"Uranus", Neptune:"Neptune", Ceres:"Ceres", Pluto:"Pluto", Eris:"Eris" },
     sec1: "Overview", sec2: "Orbit", sec3: "Rotation",
     note: "artistic scale, true Kepler orbits",
@@ -1001,6 +1038,8 @@ const I18N = {
     dwarf: "(dwarf)",
   },
   zh: {
+    aiBtn: "问AI", aiTitle: "AI助手",
+    aiReadyServer: "就绪——服务器AI网关已配置。随意提问！", aiReadyUser: "就绪——使用你的API密钥（设置）。随意提问！", aiNone: "未配置AI。打开⚙️设置输入Base URL + Model（云服务还需API密钥）。",
     names: { Mercury:"水星", Venus:"金星", Earth:"地球", Mars:"火星", Jupiter:"木星", Saturn:"土星", Uranus:"天王星", Neptune:"海王星", Ceres:"谷神星", Pluto:"冥王星", Eris:"阋神星" },
     sec1: "概述", sec2: "轨道", sec3: "自转",
     note: "艺术比例，真实开普勒轨道",
@@ -1029,6 +1068,8 @@ function applyLang() {
   $("labels").textContent = t.labels(ST.showLabels);
   $("tour").textContent = t.tour(ST.tourOn);
   $("ambient").textContent = t.audio(false);
+  document.querySelector(".t-ai").textContent = t.aiBtn;
+  document.querySelector(".t-ai2").textContent = t.aiTitle;
   $("lang").textContent = "🌐 " + LANG.toUpperCase();
   // nhãn hành tinh: tên dịch theo ngôn ngữ + đuôi dwarf
   for (const o of planetObjs) {
@@ -1297,6 +1338,102 @@ function loadSettingsKuiper() {
 })();
 // Kuiper: đọc setting khi build (gắn vào biến CONFIG nội bộ qua window)
 // (N_K đọc từ localStorage ngay đầu khối Kuiper — xem patch riêng)
+
+// ======================================================================
+//  G4: AI ASSISTANT — ưu tiên server gateway (self-host), fallback key user
+// ======================================================================
+let aiMode = null;   // "server" | "user" | null
+async function detectAI() {
+  try {
+    const h = await (await fetch("/api/health", { signal: AbortSignal.timeout(2500) })).json();
+    if (h.ok && !h.setupNeeded) {
+      const me = await fetch("/api/me");
+      if (me.ok) { aiMode = "server"; return; }
+    }
+  } catch {}
+  const s = loadSettings();
+  aiMode = (s.aiUrl && s.aiModel) ? "user" : null;
+}
+function aiOpen() {
+  const p = document.getElementById("aiPanel");
+  p.classList.toggle("open");
+  if (p.classList.contains("open")) detectAI().then(() => {
+    const t = T();
+    const head = document.querySelector("#aiHead .t-ai2");
+    if (head) head.textContent = t.aiTitle;
+    const msgs = document.getElementById("aiMsgs");
+    if (!msgs.children.length) {
+      msgs.innerHTML = '<div class="a">' + (aiMode
+        ? (aiMode === "server" ? t.aiReadyServer : t.aiReadyUser)
+        : t.aiNone) + '</div>';
+    }
+  });
+}
+document.getElementById("btnAI").addEventListener("click", aiOpen);
+document.getElementById("aiClose").addEventListener("click",
+  () => document.getElementById("aiPanel").classList.remove("open"));
+
+async function aiAsk(question) {
+  const msgs = document.getElementById("aiMsgs");
+  const q = document.createElement("div");
+  q.className = "q"; q.textContent = "👤 " + question;
+  msgs.appendChild(q);
+  const a = document.createElement("div");
+  a.className = "a"; a.textContent = "…";
+  msgs.appendChild(a);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  // ngữ cảnh: catalog rút gọn của thiên thể đang chọn + câu hỏi
+  const t = T();
+  const ctxBodies = PLANETS.map(o =>
+    `${o.name} (${t.names[o.name] || ""}): a=${o.a}AU e=${o.e} T=${o.T}d` +
+    ` mass=${o.info.mass}xE temp=${o.info.temp}K moons=${o.info.moons} dia=${o.info.dia}km` +
+    (CATALOG_DESC[o.name.toLowerCase()] ? " — " + CATALOG_DESC[o.name.toLowerCase()][LANG] : "")
+  ).join("\n");
+  const sys = { role: "system", content:
+    "Bạn là trợ lý thiên văn của ứng dụng mô phỏng hệ mặt trời. Trả lời ngắn gọn, chính xác, bằng ngôn ngữ '" +
+    LANG + "'. Dữ liệu hiện tại:\n" + ctxBodies };
+
+  try {
+    if (aiMode === "server") {
+      const r = await fetch("/api/ai/chat", { method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ messages: [sys, { role: "user", content: question }] })});
+      const j = await r.json();
+      a.textContent = j.content || ("Lỗi: " + (j.error || "unknown"));
+      if (j.error) a.classList.add("err");
+    } else if (aiMode === "user") {
+      const s = loadSettings();
+      const r = await fetch(s.aiUrl.replace(/\/$/, "") + "/chat/completions", {
+        method: "POST",
+        headers: { "content-type": "application/json",
+                   ...(s.aiKey ? { authorization: "Bearer " + s.aiKey } : {}) },
+        body: JSON.stringify({ model: s.aiModel, temperature: 0.6,
+          messages: [sys, { role: "user", content: question }] })});
+      const j = await r.json();
+      a.textContent = j?.choices?.[0]?.message?.content || ("Lỗi: " + (j.error?.message || "unknown"));
+      if (!j?.choices) a.classList.add("err");
+    } else {
+      a.textContent = t.aiNone;
+      a.classList.add("err");
+    }
+  } catch (e) {
+    a.textContent = "Lỗi kết nối: " + e.message;
+    a.classList.add("err");
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function aiSendNow() {
+  const inp = document.getElementById("aiIn");
+  const v = inp.value.trim();
+  if (!v) return;
+  inp.value = "";
+  aiAsk(v);
+}
+document.getElementById("aiSend").addEventListener("click", aiSendNow);
+document.getElementById("aiIn").addEventListener("keydown", e => {
+  if (e.key === "Enter") aiSendNow();
+});
 
 const clock = new THREE.Clock();
 function animate() {

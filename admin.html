@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COSMOS — Admin</title>
+<style>
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+         background:#02040a; color:#cfe2ff; font:14px/1.7 ui-sans-serif,system-ui,sans-serif; }
+  .card { background:#0a1424; border:1px solid rgba(120,170,230,.35); border-radius:14px;
+          padding:28px; width:min(420px, 92vw); }
+  h2 { color:#ffd27a; margin:0 0 6px; }
+  .sub { opacity:.6; font-size:12px; margin-bottom:18px; }
+  label { display:block; margin:10px 0 4px; opacity:.85; font-size:12.5px; }
+  input { width:100%; box-sizing:border-box; background:#0a1626; color:#cfe2ff;
+          border:1px solid rgba(120,170,230,.3); border-radius:7px; padding:8px 10px; font-size:14px; }
+  button { margin-top:16px; width:100%; background:#1b3358; color:#ffd27a;
+           border:1px solid rgba(255,210,122,.4); border-radius:8px;
+           padding:10px; cursor:pointer; font-size:14px; }
+  button:hover { background:#24437a; }
+  .msg { margin-top:10px; font-size:12.5px; min-height:18px; }
+  .ok { color:#7fe8a0; } .err { color:#ff8a8a; }
+  .hidden { display:none; }
+  a { color:#8cbeeb; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h2>🌌 COSMOS Admin</h2>
+  <div class="sub" id="mode">Đang kiểm tra trạng thái…</div>
+
+  <!-- one-time setup -->
+  <div id="setupForm" class="hidden">
+    <label>Tài khoản quản trị</label>
+    <input id="su" placeholder="admin">
+    <label>Mật khẩu (tối thiểu 8 ký tự)</label>
+    <input id="sp" type="password">
+    <button id="btnSetup">Tạo tài khoản quản trị</button>
+  </div>
+
+  <!-- login -->
+  <div id="loginForm" class="hidden">
+    <label>Tài khoản</label>
+    <input id="lu">
+    <label>Mật khẩu</label>
+    <input id="lp" type="password">
+    <button id="btnLogin">Đăng nhập</button>
+  </div>
+
+  <!-- dashboard -->
+  <div id="dash" class="hidden">
+    <p>Xin chào, <b id="whoami"></b> 👋</p>
+    <label>AI Base URL (OpenAI-compatible)</label>
+    <input id="aiUrl" placeholder="http://localhost:11434/v1">
+    <label>Model</label>
+    <input id="aiModel" placeholder="llama3 / gpt-4o-mini / ...">
+    <label>API Key (bỏ trống nếu giữ nguyên key cũ)</label>
+    <input id="aiKey" type="password">
+    <button id="btnSaveAI">💾 Lưu cấu hình AI</button>
+    <button id="btnLogout" style="background:#12233f;color:#cfe2ff;border-color:rgba(120,170,230,.3)">Đăng xuất</button>
+    <p style="font-size:12px; opacity:.65">Key lưu trên server (data.json trong volume) — trình duyệt chỉ nhận trạng thái hasKey.</p>
+  </div>
+
+  <div class="msg" id="msg"></div>
+  <p class="sub" style="margin-top:14px"><a href="/">← Về app</a></p>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const msg = (t, ok) => { $("msg").textContent = t; $("msg").className = "msg " + (ok ? "ok" : "err"); };
+
+async function init() {
+  const h = await (await fetch("/api/health")).json();
+  if (h.setupNeeded) {
+    $("mode").textContent = "Lần đầu triển khai — tạo tài khoản quản trị (chỉ 1 lần)";
+    $("setupForm").classList.remove("hidden");
+  } else {
+    const me = await fetch("/api/me");
+    if (me.ok) { showDash((await me.json()).username); }
+    else { $("mode").textContent = "Đăng nhập quản trị"; $("loginForm").classList.remove("hidden"); }
+  }
+}
+function showDash(username) {
+  ["setupForm","loginForm"].forEach(i => $(i).classList.add("hidden"));
+  $("dash").classList.remove("hidden");
+  $("mode").textContent = "Đã đăng nhập";
+  $("whoami").textContent = username;
+  fetch("/api/admin/ai-config").then(r => r.json()).then(c => {
+    $("aiUrl").value = c.aiUrl || "";
+    $("aiModel").value = c.aiModel || "";
+  });
+}
+$("btnSetup").addEventListener("click", async () => {
+  const r = await fetch("/api/setup", { method:"POST",
+    headers: { "content-type":"application/json" },
+    body: JSON.stringify({ username: $("su").value, password: $("sp").value }) });
+  const j = await r.json();
+  if (j.ok) showDash(j.username); else msg(j.error || "Lỗi", false);
+});
+$("btnLogin").addEventListener("click", async () => {
+  const r = await fetch("/api/login", { method:"POST",
+    headers: { "content-type":"application/json" },
+    body: JSON.stringify({ username: $("lu").value, password: $("lp").value }) });
+  const j = await r.json();
+  if (j.ok) showDash(j.username); else msg(j.error || "Sai thông tin", false);
+});
+$("btnSaveAI").addEventListener("click", async () => {
+  const r = await fetch("/api/admin/ai-config", { method:"PUT",
+    headers: { "content-type":"application/json" },
+    body: JSON.stringify({ aiUrl: $("aiUrl").value, aiModel: $("aiModel").value, aiKey: $("aiKey").value }) });
+  const j = await r.json();
+  msg(j.ok ? "Đã lưu cấu hình AI ✓" : (j.error || "Lỗi"), j.ok);
+  if (j.ok) $("aiKey").value = "";
+});
+$("btnLogout").addEventListener("click", async () => {
+  await fetch("/api/logout", { method:"POST" });
+  location.reload();
+});
+init();
+</script>
+</body>
+</html>
