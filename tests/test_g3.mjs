@@ -99,5 +99,19 @@ ok("nginx: .mjs no-cache (chống bug cache immutable JS cũ)",
    /location ~ \\.mjs\$[\s\S]{0,300}no-cache/.test(conf));
 ok("CSP có manifest-src 'self'", fs.readFileSync(path.join(ROOT, "nginxconf", "security-headers.conf"), "utf8").includes("manifest-src 'self'"));
 
+// ---- 8. G5a: procedural textures — registry đủ thiên thể lớn + moons ----
+{
+  const t = fs.readFileSync(path.join(PUB, "js", "textures.mjs"), "utf8");
+  const needReg = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn",
+                   "Uranus", "Neptune", "Ceres", "Pluto", "Eris",
+                   "_Moon", "_Io", "_Europa", "_Ganymede", "_Callisto", "_Titan"];
+  const missing = needReg.filter(n => !t.includes(`reg("${n}"`));
+  ok("textures.mjs registry đủ " + needReg.length + " thiên thể", missing.length === 0, "thiếu " + missing.join(","));
+  ok("textures.mjs có bump map cho thiên thể hố", t.includes("BUMPS.set") && t.includes("craterBump"));
+  ok("textures.mjs có mây Trái Đất", t.includes("earthClouds"));
+  ok("bodies.mjs dùng bodyTexture + fallback",
+     fs.readFileSync(path.join(PUB, "js", "bodies.mjs"), "utf8").includes("bodyTexture(p.name)"));
+}
+
 console.log(failed ? `\n${failed} test FAIL` : "\ntất cả test pass");
 process.exit(failed ? 1 : 0);

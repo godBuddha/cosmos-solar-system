@@ -4,6 +4,7 @@
 import * as THREE from "three";
 import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
 import { planetTexture } from "./scene.mjs";
+import { bodyTexture, bumpTexture, earthClouds } from "./textures.mjs";
 import { orbitalPosition } from "./kepler.mjs";
 import { PLANETS, SUN_DATA, MOONS } from "./data.mjs";
 
@@ -16,14 +17,32 @@ export function createBodies({ scene, sun }) {
     const grp = new THREE.Group();                    // nghiêng trục
     const spin = new THREE.Group();                   // tự quay
     grp.add(spin);
+    // G5a: texture bản sắc riêng (Mercury hố, Earth lục địa+mây, Mars băng,
+    // Jupiter GRS, Pluto trái tim...). Minor khác fallback planetTexture.
+    const tex = bodyTexture(p.name) ||
+      planetTexture(p.col, p.col2, GAS.has(p.name));
+    const bump = bumpTexture(p.name);
     const mesh = new THREE.Mesh(
       new THREE.SphereGeometry(p.r, 48, 48),
       new THREE.MeshStandardMaterial({
-        map: planetTexture(p.col, p.col2, GAS.has(p.name)),
+        map: tex, bumpMap: bump, bumpScale: bump ? 0.012 : 0,
         roughness: 0.85, metalness: 0.1,
       })
     );
     spin.add(mesh);
+    // Trái Đất: lớp mây riêng quay lệch tốc độ (texture bán trong suốt)
+    const clouds = earthClouds(p.name);
+    if (clouds) {
+      const cm = new THREE.Mesh(
+        new THREE.SphereGeometry(p.r * 1.018, 48, 48),
+        new THREE.MeshStandardMaterial({
+          map: clouds, transparent: true, opacity: 0.85,
+          depthWrite: false, roughness: 1,
+        })
+      );
+      spin.add(cm);
+      cm.userData.cloudDrift = true;
+    }
     grp.rotation.z = p.tilt * Math.PI / 180;          // nghiêng trục quay
     scene.add(grp);
     // nhãn tên (CSS2D, nhỏ hơn + mờ hơn cho dwarf planet)
@@ -64,15 +83,36 @@ export function createBodies({ scene, sun }) {
   }
 
   // PHASE 2a: MOONS — mặt trăng cho Trái Đất / Jupiter / Saturn
+  // G5a: Moon/Io/Europa/Ganymede/Callisto/Titan có texture riêng
+  const JUP_TEX = ["_Io", "_Europa", "_Ganymede", "_Callisto"];
+  const texFor = (parent, idx) => {
+    if (parent === "Jupiter") return bodyTexture(JUP_TEX[idx] || "");
+    if (parent === "Earth") return bodyTexture("_Moon");
+    if (parent === "Saturn") return bodyTexture("_Titan");
+    return null;
+  };
+  const bumpFor = (parent, idx) => {
+    if (parent === "Earth") return bumpTexture("_Moon");
+    if (parent === "Jupiter" && (idx === 2 || idx === 3)) return bumpTexture(JUP_TEX[idx]);
+    return null;
+  };
+  const moonCount = {};
   const moonObjs = [];
   for (const m of MOONS) {
     const host = planetObjs.find(o => o.data.name === m.parent);
     if (!host) continue;
+    const idx = moonCount[m.parent] = (moonCount[m.parent] ?? -1) + 1;
     const pivot = new THREE.Group();
     pivot.rotation.x = m.tilt;                          // nghiêng mặt phẳng quỹ đạo moon
+    const mtex = texFor(m.parent, idx);
+    const mbump = bumpFor(m.parent, idx);
     const mm = new THREE.Mesh(
       new THREE.SphereGeometry(m.r, 24, 24),
-      new THREE.MeshStandardMaterial({ color: m.col, roughness: 0.9, metalness: 0.05 })
+      mtex
+        ? new THREE.MeshStandardMaterial({
+            map: mtex, bumpMap: mbump, bumpScale: mbump ? 0.01 : 0,
+            roughness: 0.9, metalness: 0.05 })
+        : new THREE.MeshStandardMaterial({ color: m.col, roughness: 0.9, metalness: 0.05 })
     );
     mm.position.x = m.dist;
     pivot.add(mm);

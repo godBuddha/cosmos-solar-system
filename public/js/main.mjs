@@ -61,6 +61,10 @@ function animate() {
       }
       // tự quay: rot = chu kỳ tự quay (ngày), âm = quay ngược (Venus, Uranus)
       o.spin.rotation.y = 2 * Math.PI * ST.days / o.data.rot;
+      // G5a: mây Trái Đất trôi lệch tốc độ ~4% — chiều sâu khí quyển
+      for (const ch of o.spin.children) {
+        if (ch.userData.cloudDrift) ch.rotation.y = 2 * Math.PI * ST.days / (o.data.rot * 1.04);
+      }
     }
     sunUniforms.uTime.value = ST.days * 0.02;
     // hiển thị ngày/giờ lịch thực: days -> unix ms -> Date
