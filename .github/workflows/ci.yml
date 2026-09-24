@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  catalog:
+    name: catalog (round-trip + fail-fast + invariant)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 tests/test_catalog.py
+
+  api:
+    name: api smoke + speed presets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+        working-directory: server
+      - run: node tests/test_api_smoke.mjs
+      - run: node tests/test_speed_presets.mjs
+
+  nginx:
+    name: nginx -t (config image hợp lệ)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t cosmos-web-ci .
+      # --add-host: nginx resolve upstream "api" lúc parse config — không có
+      # container api trong job test
+      - run: docker run --rm --add-host api:127.0.0.1 cosmos-web-ci nginx -t
