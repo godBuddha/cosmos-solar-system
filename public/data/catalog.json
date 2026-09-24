@@ -1,0 +1,332 @@
+[
+ {
+  "id": "ceres",
+  "names": {
+   "en": "Ceres",
+   "vi": "Ceres",
+   "zh": "谷神星"
+  },
+  "desc": {
+   "vi": "Hành tinh lùn lớn nhất trong vành đai tiểu hành tinh, từng được xem là hành tinh thứ 5 khi được phát hiện 1801.",
+   "en": "The largest object in the asteroid belt, once considered the fifth planet upon its 1801 discovery.",
+   "zh": "小行星带中最大的天体，1801年发现时曾被视为第五大行星。"
+  },
+  "a": 2.77,
+  "e": 0.076,
+  "i": 10.6,
+  "T": 1682.0,
+  "rot": 0.38,
+  "tilt": 4.0,
+  "r": 0.3,
+  "col": "#a8a29a",
+  "col2": "#7a756d",
+  "M0": 95.99,
+  "om": 153.9,
+  "node": 80.3,
+  "dwarf": true,
+  "mass": 0.00016,
+  "temp": 168.0,
+  "moons": 0,
+  "dia": 940.0
+ },
+ {
+  "id": "earth",
+  "names": {
+   "en": "Earth",
+   "vi": "Trái Đất",
+   "zh": "地球"
+  },
+  "desc": {
+   "vi": "Ngôi nhà duy nhất được biết đến có sự sống, hành tinh duy nhất có nước lỏng bền vững trên bề mặt.",
+   "en": "Our home — the only place known to harbor life, and the only planet with stable liquid water on its surface.",
+   "zh": "我们的家园——已知唯一孕育生命、表面拥有稳定液态水的行星。"
+  },
+  "a": 1.0,
+  "e": 0.017,
+  "i": 0.0,
+  "T": 365.25,
+  "rot": 1.0,
+  "tilt": 23.4,
+  "r": 0.9,
+  "col": "#5f8fd8",
+  "col2": "#3a5f9f",
+  "M0": 357.527,
+  "om": 102.937,
+  "node": -11.26,
+  "dwarf": false,
+  "mass": 1.0,
+  "temp": 288.0,
+  "moons": 1,
+  "dia": 12756.0
+ },
+ {
+  "id": "eris",
+  "names": {
+   "en": "Eris",
+   "vi": "Eris",
+   "zh": "阋神星"
+  },
+  "desc": {
+   "vi": "Hành tinh lùn nặng nhất (khối lượng hơn Pluto) — chính sự khám phá năm 2005 dẫn đến định nghĩa lại 'hành tinh' của IAU.",
+   "en": "The most massive known dwarf planet (heavier than Pluto) — its 2005 discovery triggered the IAU planet redefinition.",
+   "zh": "已知质量最大的矮行星（超过冥王星）——2005年的发现促成了IAU重新定义行星。"
+  },
+  "a": 67.78,
+  "e": 0.44,
+  "i": 44.2,
+  "T": 203830.0,
+  "rot": 0.658,
+  "tilt": 78.0,
+  "r": 0.4,
+  "col": "#cfd8dc",
+  "col2": "#9aa4ab",
+  "M0": 205.99,
+  "om": 187.35,
+  "node": 35.95,
+  "dwarf": true,
+  "mass": 0.0027,
+  "temp": 30.0,
+  "moons": 1,
+  "dia": 2326.0
+ },
+ {
+  "id": "jupiter",
+  "names": {
+   "en": "Jupiter",
+   "vi": "Sao Mộc",
+   "zh": "木星"
+  },
+  "desc": {
+   "vi": "Khối lượng gấp hơn đôi tổng tất cả hành tinh khác cộng lại. Vết Đỏ Lớn là cơn bão hàng thế kỷ.",
+   "en": "More than twice as massive as all other planets combined. The Great Red Spot is a centuries-old storm.",
+   "zh": "质量超过其他所有行星总和的两倍。大红斑是持续数百年的风暴。"
+  },
+  "a": 5.203,
+  "e": 0.048,
+  "i": 1.303,
+  "T": 4333.0,
+  "rot": 0.41,
+  "tilt": 3.1,
+  "r": 2.4,
+  "col": "#d8b088",
+  "col2": "#a87850",
+  "M0": 19.668,
+  "om": 14.728,
+  "node": 100.474,
+  "dwarf": false,
+  "mass": 317.8,
+  "temp": 165.0,
+  "moons": 95,
+  "dia": 142984.0
+ },
+ {
+  "id": "mars",
+  "names": {
+   "en": "Mars",
+   "vi": "Sao Hỏa",
+   "zh": "火星"
+  },
+  "desc": {
+   "vi": "Hành tinh đỏ sa mạc lạnh, khí quyển cực mỏng. Bằng chứng mạnh cho thấy hàng tỷ năm trước từng ấm ẩm hơn.",
+   "en": "A dusty, cold desert world with a very thin atmosphere. Strong evidence suggests it was far warmer and wetter billions of years ago.",
+   "zh": "寒冷的红色沙漠世界，大气极稀薄。有力证据表明数十亿年前曾更温暖湿润。"
+  },
+  "a": 1.524,
+  "e": 0.093,
+  "i": 1.85,
+  "T": 687.0,
+  "rot": 1.03,
+  "tilt": 25.2,
+  "r": 0.68,
+  "col": "#d1704a",
+  "col2": "#94452c",
+  "M0": 19.406,
+  "om": 336.041,
+  "node": 49.559,
+  "dwarf": false,
+  "mass": 0.107,
+  "temp": 210.0,
+  "moons": 2,
+  "dia": 6792.0
+ },
+ {
+  "id": "mercury",
+  "names": {
+   "en": "Mercury",
+   "vi": "Sao Thủy",
+   "zh": "水星"
+  },
+  "desc": {
+   "vi": "Hành tinh nhỏ nhất và gần Mặt Trời nhất, chỉ hơi lớn hơn Mặt Trăng. Bề mặt đầy hố va chạm, chênh lệch nhiệt độ ngày-đêm lớn nhất hệ mặt trời.",
+   "en": "The smallest planet and nearest to the Sun, only slightly larger than Earth's Moon. Cratered surface with the largest day-night temperature swing in the solar system.",
+   "zh": "最小、离太阳最近的行星，仅比月球略大。表面布满陨石坑，昼夜温差为太阳系之最。"
+  },
+  "a": 0.387,
+  "e": 0.206,
+  "i": 7.005,
+  "T": 88.0,
+  "rot": 58.6,
+  "tilt": 0.03,
+  "r": 0.55,
+  "col": "#9c8f84",
+  "col2": "#6b615a",
+  "M0": 174.795,
+  "om": 77.457,
+  "node": 48.331,
+  "dwarf": false,
+  "mass": 0.055,
+  "temp": 440.0,
+  "moons": 0,
+  "dia": 4879.0
+ },
+ {
+  "id": "neptune",
+  "names": {
+   "en": "Neptune",
+   "vi": "Sao Hải Vương",
+   "zh": "海王星"
+  },
+  "desc": {
+   "vi": "Tối, lạnh, với những cơn giận siêu âm thanh — hành tinh thứ tám và xa nhất của hệ mặt trời.",
+   "en": "Dark, cold, and whipped by supersonic winds — the eighth and most distant planet of the solar system.",
+   "zh": "黑暗、寒冷、刮着超音速风暴——太阳系第八颗也是最遥远的行星。"
+  },
+  "a": 30.07,
+  "e": 0.009,
+  "i": 1.77,
+  "T": 60190.0,
+  "rot": 0.67,
+  "tilt": 28.3,
+  "r": 1.35,
+  "col": "#4a6fe0",
+  "col2": "#2a45a8",
+  "M0": 259.916,
+  "om": 44.964,
+  "node": 131.784,
+  "dwarf": false,
+  "mass": 17.1,
+  "temp": 72.0,
+  "moons": 16,
+  "dia": 49528.0
+ },
+ {
+  "id": "pluto",
+  "names": {
+   "en": "Pluto",
+   "vi": "Sao Diêm Vương",
+   "zh": "冥王星"
+  },
+  "desc": {
+   "vi": "Từng là hành tinh thứ 9, bị xếp lại lớp thành hành tinh lùn năm 2006. Bề mặt có núi băng nước phức tạp, thuộc vành Kuiper.",
+   "en": "Once the ninth planet, reclassified as a dwarf planet in 2006. Complex water-ice mountains; a Kuiper Belt world.",
+   "zh": "曾为第九大行星，2006年重新归类为矮行星。表面有复杂的水冰山脉，属柯伊伯带。"
+  },
+  "a": 39.48,
+  "e": 0.249,
+  "i": 17.2,
+  "T": 90560.0,
+  "rot": -6.39,
+  "tilt": 119.6,
+  "r": 0.42,
+  "col": "#d8c0a8",
+  "col2": "#a08878",
+  "M0": 14.53,
+  "om": 224.07,
+  "node": 110.3,
+  "dwarf": true,
+  "mass": 0.0022,
+  "temp": 44.0,
+  "moons": 5,
+  "dia": 2377.0
+ },
+ {
+  "id": "saturn",
+  "names": {
+   "en": "Saturn",
+   "vi": "Sao Thổ",
+   "zh": "土星"
+  },
+  "desc": {
+   "vi": "Nổi bật với hệ vành băng rực rỡ và phức tạp nhất hệ mặt trời; hành tinh khí khổng lồ thứ hai.",
+   "en": "Adorned with the most dazzling, complex icy ring system in the solar system; the second-largest gas giant.",
+   "zh": "拥有太阳系最耀眼复杂的冰环系统；第二大气体巨行星。"
+  },
+  "a": 9.537,
+  "e": 0.054,
+  "i": 2.489,
+  "T": 10759.0,
+  "rot": 0.44,
+  "tilt": 26.7,
+  "r": 2.05,
+  "col": "#e0c896",
+  "col2": "#b09860",
+  "M0": 317.355,
+  "om": 92.599,
+  "node": 113.662,
+  "dwarf": false,
+  "mass": 95.2,
+  "temp": 134.0,
+  "moons": 146,
+  "dia": 120536.0
+ },
+ {
+  "id": "uranus",
+  "names": {
+   "en": "Uranus",
+   "vi": "Sao Thiên Vương",
+   "zh": "天王星"
+  },
+  "desc": {
+   "vi": "Hành tinh băng khổng lồ 'nằm nghiêng' — trục quay nghiêng 97.8°, có bán kính lớn thứ ba.",
+   "en": "The 'sideways' ice giant — its rotation axis is tilted 97.8 degrees, with the third-largest planetary radius.",
+   "zh": "'躺着'转的冰巨星——自转轴倾斜97.8度，半径居第三。"
+  },
+  "a": 19.19,
+  "e": 0.047,
+  "i": 0.773,
+  "T": 30687.0,
+  "rot": -0.72,
+  "tilt": 97.8,
+  "r": 1.4,
+  "col": "#9fdde8",
+  "col2": "#6ba8b8",
+  "M0": 142.284,
+  "om": 170.954,
+  "node": 74.017,
+  "dwarf": false,
+  "mass": 14.5,
+  "temp": 76.0,
+  "moons": 28,
+  "dia": 51118.0
+ },
+ {
+  "id": "venus",
+  "names": {
+   "en": "Venus",
+   "vi": "Sao Kim",
+   "zh": "金星"
+  },
+  "desc": {
+   "vi": "Được đặt theo nữ thần sắc đẹp La Mã. Nóng nhất hệ mặt trời do hiệu ứng nhà kính của khí quyển CO2 dày đặc; tự quay ngược chiều.",
+   "en": "Named for the Roman goddess of love. Hottest planet due to a dense CO2 greenhouse atmosphere; rotates backwards.",
+   "zh": "以罗马爱与美之神命名。浓密二氧化碳温室效应使其成为最热行星；自转方向相反。"
+  },
+  "a": 0.723,
+  "e": 0.007,
+  "i": 3.395,
+  "T": 225.0,
+  "rot": -243.0,
+  "tilt": 177.4,
+  "r": 0.85,
+  "col": "#e8c78f",
+  "col2": "#b8945f",
+  "M0": 50.416,
+  "om": 131.564,
+  "node": 76.68,
+  "dwarf": false,
+  "mass": 0.815,
+  "temp": 737.0,
+  "moons": 0,
+  "dia": 12104.0
+ }
+]
