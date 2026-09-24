@@ -464,11 +464,34 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
     const t = T();
     btn.title = on ? t.cleanShow : t.cleanHide;
     btn.setAttribute("aria-label", btn.title);
+    positionEye();   // G4g: clean → góc phải trên; thoát clean → về mép panel
     if (on && !localStorage.getItem("cosmos_clean_toast")) {
       try { localStorage.setItem("cosmos_clean_toast", "1"); } catch { /* tương tự */ }
       cleanToast(t.cleanToast);
     }
   }
+  const eyeBtn = $("uiToggle");
+  const panelEl = $("panel");
+  // G4g: đặt nút mắt theo mép panel — desktop: gắn trên góc trái của panel
+  // (panel ở đáy màn hình); mobile (≤768): panel nằm mép trên → gắn dưới
+  // góc trái. Clean view bật: xoá inline, class CSS đưa về góc phải trên.
+  function positionEye() {
+    if (cleanOn) {
+      eyeBtn.style.left = eyeBtn.style.top = eyeBtn.style.right = eyeBtn.style.bottom = "";
+      return;
+    }
+    const r = panelEl.getBoundingClientRect();
+    if (window.innerWidth <= 768) {
+      eyeBtn.style.left = r.left + "px";
+      eyeBtn.style.top = (r.bottom + 6) + "px";
+    } else {
+      eyeBtn.style.left = r.left + "px";
+      eyeBtn.style.top = Math.max(6, r.top - eyeBtn.offsetHeight - 6) + "px";
+    }
+  }
+  new ResizeObserver(positionEye).observe(panelEl);   // panel đổi kích thước (presets, lang) → đi theo
+  window.addEventListener("resize", positionEye);
+
   $("uiToggle").addEventListener("click", () => setClean(!cleanOn));
   window.addEventListener("keydown", e => {
     if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
