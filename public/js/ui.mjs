@@ -249,8 +249,9 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
   })();
 
   // ---- Tour tự động: camera bay qua các hành tinh theo thứ tự ----
-  $("tour").addEventListener("click", () => {
-    ST.tourOn = !ST.tourOn;
+  // (G4e: tách hàm để AI action gọi được)
+  function toggleTour(on) {
+    ST.tourOn = on === undefined ? !ST.tourOn : !!on;
     $("tour").textContent = T().tour(ST.tourOn);
     if (ST.tourOn) {
       uiState.followTarget = null;              // tour đè lên follow
@@ -259,7 +260,8 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
       ST.tourPhase = "approach";                // approach -> dwell -> next
       ST.tourTimer = 0;
     }
-  });
+  }
+  $("tour").addEventListener("click", () => toggleTour());
 
   // ---- Âm thanh ambient: Web Audio API, drone pad procedural (không file ngoài) ----
   let audioCtx = null, ambientNodes = null;
@@ -564,5 +566,5 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
     }
   })();
 
-  return { selectPlanet, flyToBody };
+  return { selectPlanet, flyToBody, setClean, toggleTour };
 }

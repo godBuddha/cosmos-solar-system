@@ -4,11 +4,16 @@
 // ======================================================================
 import { PLANETS, CATALOG_DESC } from "./data.mjs";
 import { T, getLang } from "./i18n.mjs";
-import { ST } from "./time.mjs";
+import { ST, NOW_DAYS, syncTimeline } from "./time.mjs";
 import { loadSettings } from "./ui.mjs";
 
 let aiMode = null;   // "server" | "user" | null
 let planetObjs = null, flyToBodyRef = null;
+// G4e: action mở rộng — cần handle từ ui.mjs (wire qua main)
+let setCleanRef = null, toggleTourRef = null, getFollowRef = null;
+// G4e: hội thoại nhiều lượt — giữ tối đa 12 message gần nhất (6 lượt hỏi-đáp)
+const HISTORY_MAX = 12;
+const chatHistory = [];
 
 async function detectAI() {
   try {
@@ -89,6 +94,22 @@ function executeAIActions(content, msgEl) {
         document.getElementById("labels").textContent = T().labels(ST.showLabels);
         done.push("labels " + ST.showLabels);
       }
+      else if (act.action === "clean_view") {
+        if (setCleanRef) { setCleanRef(!!act.on); done.push("clean " + !!act.on); }
+      }
+      else if (act.action === "start_tour") {
+        if (toggleTourRef) { toggleTourRef(act.on === undefined ? true : !!act.on); done.push("tour " + !!act.on); }
+      }
+      else if (act.action === "now") {
+        ST.days = NOW_DAYS;
+        syncTimeline();
+        done.push("date now");
+      }
+      else if (act.action === "set_date" && isFinite(act.days)) {
+        ST.days = act.days;
+        syncTimeline();
+        done.push("date " + act.days.toFixed(0));
+      }
     } catch (e) { console.warn("AI action lỗi:", e); }
   }
   if (done.length) console.info("AI actions:", done);
@@ -119,20 +140,34 @@ async function aiAsk(question) {
   const sys = { role: "system", content:
     "Bạn là trợ lý thiên văn của ứng dụng mô phỏng hệ mặt trời. Trả lời ngắn gọn, chính xác, bằng ngôn ngữ '" +
     getLang() + "'." + "\n\n" +
+    // G4e: ngữ cảnh động — ngày mô phỏng, thiên thể đang theo, tốc độ
+    "BỐI CẢNH HIỆN TẠI (mô phỏng): ngày " +
+    new Date((ST.days + 2451545.0 - 2440587.5) * 86400000).toISOString().slice(0, 10) +
+    " (days từ J2000: " + ST.days.toFixed(1) + ")" +
+    (getFollowRef && getFollowRef() ? " · đang xem: " + getFollowRef().data.name : "") +
+    " · tốc độ " + Math.pow(10, ST.speedExp).toFixed(2) + " ngày/giây" +
+    (ST.paused ? " · ĐANG TẠM DỪNG" : "") + "\n\n" +
     "QUAN TRỌNG — điều khiển app: nếu người dùng yêu cầu xem/di chuyển/thay đổi tốc độ, " +
     "HÃY BẮT ĐẦU câu trả lời bằng đúng 1 dòng JSON (không thêm gì trước nó), sau đó có thể viết giải thích:" + "\n" +
     '{"action":"fly_to","body":"<id>"} — bay tới thiên thể (id = tên EN thường, vd "saturn","vesta")' + "\n" +
     '{"action":"set_speed","days_per_sec":<số>}' + "\n" +
     '{"action":"show_orbits","on":true|false}' + "\n" +
     '{"action":"show_labels","on":true|false}' + "\n" +
+    '{"action":"clean_view","on":true|false} — ẩn/hiện toàn bộ UI' + "\n" +
+    '{"action":"start_tour","on":true} — chạy tour tự động qua các hành tinh' + "\n" +
+    '{"action":"now"} — đưa thời gian về hiện tại' + "\n" +
+    '{"action":"set_date","days":<số>} — nhảy tới thời điểm (số ngày từ J2000, âm = trước năm 2000)' + "\n" +
     "Có thể kết hợp nhiều action trong 1 JSON array. Nếu không cần hành động thì KHÔNG trả JSON." + "\n\n" +
     "Dữ liệu hiện tại:\n" + ctxBodies };
+
+  // G4e: hội thoại nhiều lượt — gửi kèm lịch sử gần nhất
+  const messages = [sys, ...chatHistory.slice(-HISTORY_MAX), { role: "user", content: question }];
 
   try {
     if (aiMode === "server") {
       const r = await fetch("/api/ai/chat", { method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ messages: [sys, { role: "user", content: question }], stream: true })});
+        body: JSON.stringify({ messages, stream: true })});
       const ct = r.headers.get("content-type") || "";
       if (r.ok && ct.includes("text/event-stream")) {
         const reader = r.body.getReader();
@@ -185,7 +220,7 @@ async function aiAsk(question) {
           headers: { "content-type": "application/json",
                      ...(s.aiKey ? { authorization: "Bearer " + s.aiKey } : {}) },
           body: JSON.stringify({ model: s.aiModel, temperature: 0.6, stream: true,
-            messages: [sys, { role: "user", content: question }] })});
+            messages })});
         const ct2 = r2.headers.get("content-type") || "";
         if (r2.ok && ct2.includes("text/event-stream")) {
           const reader = r2.body.getReader();
@@ -229,6 +264,12 @@ async function aiAsk(question) {
   } finally {
     delete document.getElementById("aiPanel").dataset.busy;
   }
+  // G4e: lưu lượt hỏi-đáp vào lịch sử (bỏ qua khi lỗi — không ô nhiễm context)
+  if (!a.classList.contains("err") && a.textContent) {
+    chatHistory.push({ role: "user", content: question });
+    chatHistory.push({ role: "assistant", content: a.textContent });
+    if (chatHistory.length > HISTORY_MAX) chatHistory.splice(0, chatHistory.length - HISTORY_MAX);
+  }
   msgs.scrollTop = msgs.scrollHeight;
 }
 function aiSendNow() {
@@ -239,9 +280,13 @@ function aiSendNow() {
   aiAsk(v);
 }
 
-export function initAI({ planetObjs: po, flyToBody }) {
+export function initAI({ planetObjs: po, flyToBody, setClean, toggleTour, getFollow }) {
   planetObjs = po;
   flyToBodyRef = flyToBody;
+  // G4e: handles cho action mở rộng (clean_view / start_tour / ngữ cảnh đang xem)
+  setCleanRef = setClean || null;
+  toggleTourRef = toggleTour || null;
+  getFollowRef = getFollow || null;
   document.getElementById("btnAI").addEventListener("click", aiOpen);
   document.getElementById("aiClose").addEventListener("click",
     () => document.getElementById("aiPanel").classList.remove("open"));

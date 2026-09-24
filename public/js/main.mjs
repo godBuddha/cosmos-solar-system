@@ -30,7 +30,8 @@ const { update: updateProbes, renderProbeSections } = createProbes({ scene, plan
 let shotPending = false;
 const ui = initUI({ canvas, camera, controls, bloomPass, planetObjs, toggleGalaxies, renderProbeSections,
                     captureFrame: () => { shotPending = true; } });
-initAI({ planetObjs, flyToBody: ui.flyToBody });
+initAI({ planetObjs, flyToBody: ui.flyToBody, setClean: ui.setClean,
+         toggleTour: ui.toggleTour, getFollow: () => uiState.followTarget });
 initTime({ timelineEvents: probeEvents });
 initI18n({ ST, planetObjs, selectPlanet: ui.selectPlanet,
            getFollowTarget: () => uiState.followTarget });
