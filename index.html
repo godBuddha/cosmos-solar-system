@@ -81,6 +81,10 @@
     #sheetHandle { display: block !important; }
   }
   #date { color:#ffd27a; }
+  /* ===== FREE-FLY HUD ===== */
+  @media (max-width: 768px) {
+    #flyHud { display: none !important; }   /* mobile không có bàn phím */
+  }
   /* ===== G4: AI chat ===== */
   body:has(#aiPanel.open) #hud { opacity: 0; pointer-events: none; }
   #hud { transition: opacity .3s; }
@@ -193,7 +197,7 @@
 
 <div id="hud">
   <b>Solar System</b> (<span class="t-note">tỷ lệ nghệ thuật, quỹ đạo Kepler thật</span>)<br>
-  <span class="t-hint">Kéo: xoay · Lăn: zoom · Click hành tinh: xem tên</span>
+  <span class="t-hint">Kéo: xoay · Lăn: zoom · Click hành tinh: xem tên · <b>F</b>: bay tự do (WASD+QE)</span>
 </div>
 
 <div id="infopanel">
@@ -1663,6 +1667,56 @@ document.getElementById("aiIn").addEventListener("keydown", e => {
 });
 
 // ======================================================================
+//  FREE-FLY CAMERA — phím F bật/tắt, WASD + Q/E dịch chuyển, Shift ×5,
+//  lăn chuột đổi tốc độ bay. OrbitControls tạm vô hiệu trong chế độ này.
+// ======================================================================
+const FLY = { on: false, keys: {}, speed: 22 };
+const flyUI = (() => {
+  const el = document.createElement("div");
+  el.id = "flyHud";
+  el.style.cssText = "position:fixed;bottom:12px;left:50%;transform:translateX(-50%);" +
+    "color:#ffd27a;font:12px ui-monospace,monospace;background:rgba(4,10,22,.8);" +
+    "border:1px solid rgba(255,210,122,.35);border-radius:8px;padding:6px 14px;" +
+    "z-index:40;display:none;user-select:none";
+  document.body.appendChild(el);
+  return el;
+})();
+function flyToggle(force) {
+  FLY.on = force !== undefined ? force : !FLY.on;
+  controls.enabled = !FLY.on;
+  flyUI.style.display = FLY.on ? "block" : "none";
+  if (FLY.on) flyUI.textContent = "FREE-FLY ON — W/A/S/D di chuyển · Q/E lên xuống · Shift ×5 · lăn chuột: tốc độ (" + FLY.speed.toFixed(0) + ") · F/Esc: thoát";
+  // hướng nhìn hiện tại làm mốc bay
+  if (FLY.on) {
+    const dir = new THREE.Vector3();
+    camera.getWorldDirection(dir);
+    FLY.yaw = Math.atan2(-dir.x, -dir.z);
+    FLY.pitch = Math.asin(THREE.MathUtils.clamp(dir.y, -1, 1));
+  }
+}
+window.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+  if (e.code === "KeyF") flyToggle();
+  if (e.code === "Escape" && FLY.on) flyToggle(false);
+  if (FLY.on) FLY.keys[e.code] = true;
+});
+window.addEventListener("keyup", e => { FLY.keys[e.code] = false; });
+// lăn chuột: đổi tốc độ bay (khi free-fly), chặn zoom của controls
+window.addEventListener("wheel", e => {
+  if (!FLY.on) return;
+  e.preventDefault();
+  FLY.speed = THREE.MathUtils.clamp(FLY.speed * Math.exp(-e.deltaY * 0.0012), 1, 600);
+  flyUI.textContent = "FREE-FLY ON — W/A/S/D di chuyển · Q/E lên xuống · Shift ×5 · tốc độ: " + FLY.speed.toFixed(0) + " · F/Esc: thoát";
+}, { passive: false });
+// pitch/yaw từ chuột kéo (chỉ trong free-fly)
+canvas.addEventListener("pointermove", e => {
+  if (!FLY.on || !(e.buttons & 1)) return;
+  FLY.yaw   -= e.movementX * 0.0026;
+  FLY.pitch -= e.movementY * 0.0026;
+  FLY.pitch = THREE.MathUtils.clamp(FLY.pitch, -1.55, 1.55);
+});
+
+// ======================================================================
 //  G5: BOTTOM-SHEET GESTURE (mobile) — peek/half/full + swipe trên handle
 // ======================================================================
 (() => {
@@ -1728,6 +1782,27 @@ function animate() {
 
   // ---- Asteroid belt — GPU (chỉ set uniform) ----
   if (asteroidBelt) asteroidBelt.mat.uniforms.uDays.value = ST.days;
+
+  // ---- FREE-FLY camera movement ----
+  if (FLY.on) {
+    const k = FLY.keys;
+    const move = new THREE.Vector3();
+    const fwd = new THREE.Vector3(-Math.sin(FLY.yaw) * Math.cos(FLY.pitch), Math.sin(FLY.pitch), -Math.cos(FLY.yaw) * Math.cos(FLY.pitch));
+    const right = new THREE.Vector3(-fwd.z, 0, fwd.x).normalize();
+    if (k["KeyW"]) move.add(fwd);
+    if (k["KeyS"]) move.sub(fwd);
+    if (k["KeyA"]) move.sub(right);
+    if (k["KeyD"]) move.add(right);
+    if (k["KeyQ"]) move.y -= 1;
+    if (k["KeyE"]) move.y += 1;
+    if (move.lengthSq() > 0) {
+      move.normalize().multiplyScalar(FLY.speed * (k["ShiftLeft"] || k["ShiftRight"] ? 5 : 1) * dt);
+      camera.position.add(move);
+      controls.target.copy(camera.position).add(fwd);   // target theo hướng nhìn
+    }
+    // camera nhìn theo yaw/pitch
+    camera.lookAt(controls.target);
+  }
 
   controls.update();
 
