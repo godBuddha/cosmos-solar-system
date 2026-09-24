@@ -282,7 +282,8 @@
   <button id="tour"></button>
   <button id="ambient"></button>
   <button id="btnSettings">⚙️</button>
-  <button id="btnAI">🤖 <span class="t-ai">Hỏi AI</span></button><br>
+  <button id="btnAI">🤖 <span class="t-ai">Hỏi AI</span></button>
+  <button id="btnShare">🔗 <span class="t-share">Share</span></button><br>
   <div id="speedPresets"></div>
   <span class="t-date">Ngày mô phỏng:</span> <span id="date">0</span>
 </div>
@@ -1092,7 +1093,7 @@ let followTarget = null;   // planetObjs entry đang bám
 // ======================================================================
 const I18N = {
   vi: {
-    aiBtn: "Hỏi AI", aiTitle: "Trợ lý AI",
+    shareCopied: "Đã copy link chia sẻ!", aiBtn: "Hỏi AI", aiTitle: "Trợ lý AI",
     aiReadyServer: "Sẵn sàng — AI gateway server đã cấu hình. Hỏi bất kỳ điều gì về thiên thể!", aiReadyUser: "Sẵn sàng — dùng API key của bạn (Settings). Hỏi bất kỳ điều gì!", aiNone: "Chưa cấu hình AI. Vào ⚙️ Settings nhập Base URL + Model (và API key nếu dùng cloud).",
     names: { Mercury:"Sao Thủy", Venus:"Sao Kim", Earth:"Trái Đất", Mars:"Sao Hỏa", Jupiter:"Sao Mộc", Saturn:"Sao Thổ", Uranus:"Sao Thiên Vương", Neptune:"Sao Hải Vương", Ceres:"Ceres", Pluto:"Sao Diêm Vương", Eris:"Eris" },
     sec1: "Tổng quan", sec2: "Quỹ đạo", sec3: "Tự quay",
@@ -1109,7 +1110,7 @@ const I18N = {
     dwarf: "(dwarf)",
   },
   en: {
-    aiBtn: "Ask AI", aiTitle: "AI Assistant",
+    shareCopied: "Share link copied!", aiBtn: "Ask AI", aiTitle: "AI Assistant",
     aiReadyServer: "Ready — server AI gateway configured. Ask anything about the bodies!", aiReadyUser: "Ready — using your API key (Settings). Ask anything!", aiNone: "AI not configured. Open ⚙️ Settings and enter Base URL + Model (plus API key for cloud).",
     names: { Mercury:"Mercury", Venus:"Venus", Earth:"Earth", Mars:"Mars", Jupiter:"Jupiter", Saturn:"Saturn", Uranus:"Uranus", Neptune:"Neptune", Ceres:"Ceres", Pluto:"Pluto", Eris:"Eris" },
     sec1: "Overview", sec2: "Orbit", sec3: "Rotation",
@@ -1126,7 +1127,7 @@ const I18N = {
     dwarf: "(dwarf)",
   },
   zh: {
-    aiBtn: "问AI", aiTitle: "AI助手",
+    shareCopied: "分享链接已复制！", aiBtn: "问AI", aiTitle: "AI助手",
     aiReadyServer: "就绪——服务器AI网关已配置。随意提问！", aiReadyUser: "就绪——使用你的API密钥（设置）。随意提问！", aiNone: "未配置AI。打开⚙️设置输入Base URL + Model（云服务还需API密钥）。",
     names: { Mercury:"水星", Venus:"金星", Earth:"地球", Mars:"火星", Jupiter:"木星", Saturn:"土星", Uranus:"天王星", Neptune:"海王星", Ceres:"谷神星", Pluto:"冥王星", Eris:"阋神星" },
     sec1: "概述", sec2: "轨道", sec3: "自转",
@@ -1157,6 +1158,7 @@ function applyLang() {
   $("tour").textContent = t.tour(ST.tourOn);
   $("ambient").textContent = t.audio(false);
   document.querySelector(".t-ai").textContent = t.aiBtn;
+  document.querySelector(".t-share").textContent = t.share || "Share";
   document.querySelector(".t-ai2").textContent = t.aiTitle;
   $("lang").textContent = "🌐 " + LANG.toUpperCase();
   // nhãn hành tinh: tên dịch theo ngôn ngữ + đuôi dwarf
@@ -1347,13 +1349,18 @@ document.addEventListener("click", e => {
 // fly-to: tái dùng cơ chế tour (approach + dwell) cho 1 thiên thể bất kỳ
 let flyTarget = null;
 function flyToBody(o) {
+  // guard: nhận object (planetObjs entry / PLANETS entry) hoặc string tên
+  if (!o) { console.warn("flyToBody: thiếu tham số"); return; }
+  const bodyName = typeof o === "string" ? o : o.name;
+  if (!bodyName) { console.warn("flyToBody: o không có .name"); return; }
+  const sceneObj = planetObjs.find(po =>
+    po.data.name.toLowerCase() === bodyName.toLowerCase());
+  if (!sceneObj) { console.warn("flyToBody: không tìm thấy", bodyName); return; }
   ST.tourOn = false;
   document.getElementById("tour").textContent = T().tour(false);
-  // object trong PLANETS (catalog) không có mesh — map qua scene object thật
-  const sceneObj = planetObjs.find(po => po.data.name === o.name);
-  if (!sceneObj) return;
   flyTarget = { obj: sceneObj, phase: "approach", timer: 0 };
-  selectPlanet(sceneObj);               // mở info panel luôn
+  try { selectPlanet(sceneObj); }
+  catch (e) { console.error("selectPlanet lỗi:", e); }
 }
 
 // ======================================================================
@@ -1703,12 +1710,39 @@ async function aiAsk(question) {
     if (aiMode === "server") {
       const r = await fetch("/api/ai/chat", { method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ messages: [sys, { role: "user", content: question }] })});
-      const j = await r.json();
-      const res = j.content ? executeAIActions(j.content, a) : null;
-      a.textContent = (res && res.cleaned) ? res.cleaned
-                    : (j.content || ("Lỗi: " + (j.error || "unknown")));
-      if (j.error) a.classList.add("err");
+        body: JSON.stringify({ messages: [sys, { role: "user", content: question }], stream: true })});
+      const ct = r.headers.get("content-type") || "";
+      if (r.ok && ct.includes("text/event-stream")) {
+        const reader = r.body.getReader();
+        const dec = new TextDecoder();
+        let buf = "", full = "";
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buf += dec.decode(value, { stream: true });
+          const lines = buf.split("\n");
+          buf = lines.pop();
+          for (const line of lines) {
+            if (!line.startsWith("data: ")) continue;
+            const payload = line.slice(6).trim();
+            if (payload === "[DONE]") continue;
+            try {
+              const j = JSON.parse(payload);
+              const piece = j?.choices?.[0]?.delta?.content || "";
+              if (piece) { full += piece; a.textContent = full; msgs.scrollTop = msgs.scrollHeight; }
+            } catch {}
+          }
+        }
+        const res = executeAIActions(full, a);
+        if (res && res.cleaned) a.textContent = res.cleaned;
+        else if (full) a.textContent = full;
+      } else {
+        const j = await r.json();
+        const res = j.content ? executeAIActions(j.content, a) : null;
+        a.textContent = (res && res.cleaned) ? res.cleaned
+                      : (j.content || ("Lỗi: " + (j.error || "unknown")));
+        if (j.error) a.classList.add("err");
+      }
     } else if (aiMode === "user") {
       const s = loadSettings();
       const r = await fetch(s.aiUrl.replace(/\/$/, "") + "/chat/completions", {
@@ -1723,8 +1757,45 @@ async function aiAsk(question) {
         a.textContent = "Lỗi: " + (j.error?.message || "unknown");
         a.classList.add("err");
       } else {
-        const res = uc ? executeAIActions(uc, a) : null;
-        a.textContent = (res && res.cleaned) ? res.cleaned : (uc || "");
+        // STREAM với key user (OpenRouter/OpenAI đều hỗ trợ)
+        const r2 = await fetch(s.aiUrl.replace(/\/$/, "") + "/chat/completions", {
+          method: "POST",
+          headers: { "content-type": "application/json",
+                     ...(s.aiKey ? { authorization: "Bearer " + s.aiKey } : {}) },
+          body: JSON.stringify({ model: s.aiModel, temperature: 0.6, stream: true,
+            messages: [sys, { role: "user", content: question }] })});
+        const ct2 = r2.headers.get("content-type") || "";
+        if (r2.ok && ct2.includes("text/event-stream")) {
+          const reader = r2.body.getReader();
+          const dec = new TextDecoder();
+          let buf2 = "", full2 = "";
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buf2 += dec.decode(value, { stream: true });
+            const lines2 = buf2.split("\n");
+            buf2 = lines2.pop();
+            for (const line of lines2) {
+              if (!line.startsWith("data: ")) continue;
+              const payload = line.slice(6).trim();
+              if (payload === "[DONE]") continue;
+              try {
+                const jj = JSON.parse(payload);
+                const piece = jj?.choices?.[0]?.delta?.content || "";
+                if (piece) { full2 += piece; a.textContent = full2; msgs.scrollTop = msgs.scrollHeight; }
+              } catch {}
+            }
+          }
+          const res = executeAIActions(full2, a);
+          if (res && res.cleaned) a.textContent = res.cleaned;
+          else if (full2) a.textContent = full2;
+        } else {
+          const j = await r2.json();
+          const uc2 = j?.choices?.[0]?.message?.content;
+          const res = uc2 ? executeAIActions(uc2, a) : null;
+          a.textContent = (res && res.cleaned) ? res.cleaned : (uc2 || ("Lỗi: " + (j.error?.message || "unknown")));
+          if (!j?.choices) a.classList.add("err");
+        }
       }
     } else {
       a.textContent = t.aiNone;
@@ -1746,6 +1817,20 @@ function aiSendNow() {
 document.getElementById("aiSend").addEventListener("click", aiSendNow);
 document.getElementById("aiIn").addEventListener("keydown", e => {
   if (e.key === "Enter") aiSendNow();
+});
+
+// ---- SHARE: copy link góc nhìn hiện tại ----
+document.getElementById("btnShare").addEventListener("click", async () => {
+  const t = T();
+  const url = new URL(location.origin + location.pathname);
+  if (followTarget) url.searchParams.set("body", followTarget.data.name.toLowerCase());
+  url.searchParams.set("d", ST.days.toFixed(2));
+  try {
+    await navigator.clipboard.writeText(url.href);
+    alert(t.shareCopied + "\n" + url.href);
+  } catch {
+    prompt(t.shareCopied, url.href);
+  }
 });
 
 // ======================================================================
@@ -1803,13 +1888,28 @@ window.addEventListener("input", e => {
     FLY.speed = THREE.MathUtils.clamp(+e.target.value, 1, 2000);
   }
 });
-// pitch/yaw từ chuột kéo (chỉ trong free-fly)
+// pitch/yaw từ chuột kéo + TOUCH (chỉ trong free-fly)
+let lastTouch = null;
 canvas.addEventListener("pointermove", e => {
   if (!FLY.on || !(e.buttons & 1)) return;
   FLY.yaw   -= e.movementX * 0.0026;
   FLY.pitch -= e.movementY * 0.0026;
   FLY.pitch = THREE.MathUtils.clamp(FLY.pitch, -1.55, 1.55);
 });
+canvas.addEventListener("touchstart", e => {
+  if (!FLY.on || e.touches.length !== 1) return;
+  lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+}, { passive: true });
+canvas.addEventListener("touchmove", e => {
+  if (!FLY.on || !lastTouch || e.touches.length !== 1) return;
+  e.preventDefault();                       // chặn scroll khi đang free-fly touch
+  const t = e.touches[0];
+  FLY.yaw   -= (t.clientX - lastTouch.x) * 0.005;
+  FLY.pitch -= (t.clientY - lastTouch.y) * 0.005;
+  FLY.pitch = THREE.MathUtils.clamp(FLY.pitch, -1.55, 1.55);
+  lastTouch = { x: t.clientX, y: t.clientY };
+}, { passive: false });
+canvas.addEventListener("touchend", () => { lastTouch = null; }, { passive: true });
 
 // ======================================================================
 //  G5: BOTTOM-SHEET GESTURE (mobile) — peek/half/full + swipe trên handle
@@ -1847,6 +1947,19 @@ canvas.addEventListener("pointermove", e => {
   handle.addEventListener("click", () => {
     setMode(curMode === "peek" ? "half" : curMode === "half" ? "full" : "peek");
   });
+})();
+
+// ======================================================================
+//  SHARE-LINK: ?body=saturn&d=<days-tu-J2000> — copy/mở link chia sẻ góc nhìn
+// ======================================================================
+(() => {
+  const q = new URLSearchParams(location.search);
+  const d = parseFloat(q.get("d"));
+  if (isFinite(d)) ST.days = d;                      // thời điểm từ link
+  const bodyName = q.get("body");
+  if (bodyName) {
+    flyToBody(bodyName);
+  }
 })();
 
 const clock = new THREE.Clock();

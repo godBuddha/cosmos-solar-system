@@ -109,28 +109,41 @@ app.put("/api/admin/ai-config", auth, (req, res) => {
   res.json({ ok: true, hasKey: !!db.ai.aiKey });
 });
 
-// ---------------- AI chat proxy (OpenAI-compatible) ----------------
+// ---------------- AI chat proxy (OpenAI-compatible, hỗ trợ stream) ----------------
 app.post("/api/ai/chat", auth, async (req, res) => {
-  const { messages } = req.body || {};
+  const { messages, stream } = req.body || {};
   if (!Array.isArray(messages) || !messages.length)
     return res.status(400).json({ error: "messages required" });
   const { aiUrl, aiKey, aiModel } = db.ai;
   if (!aiUrl || !aiModel)
     return res.status(400).json({ error: "AI gateway chưa được cấu hình (admin)" });
   try {
-    const r = await fetch(aiUrl.replace(/\/$/, "") + "/chat/completions", {
+    const upstream = await fetch(aiUrl.replace(/\/$/, "") + "/chat/completions", {
       method: "POST",
       headers: {
         "content-type": "application/json",
         ...(aiKey ? { authorization: "Bearer " + aiKey } : {}),
       },
-      body: JSON.stringify({ model: aiModel, messages, temperature: 0.6 }),
+      body: JSON.stringify({ model: aiModel, messages, temperature: 0.6, stream: !!stream }),
     });
-    if (!r.ok) {
-      const txt = await r.text();
-      return res.status(502).json({ error: "upstream " + r.status, detail: txt.slice(0, 300) });
+    if (!upstream.ok) {
+      const txt = await upstream.text();
+      return res.status(502).json({ error: "upstream " + upstream.status, detail: txt.slice(0, 300) });
     }
-    const data = await r.json();
+    if (stream && upstream.headers.get("content-type")?.includes("event-stream")) {
+      // forward SSE nguyên vẹn
+      res.setHeader("content-type", "text/event-stream");
+      res.setHeader("cache-control", "no-cache");
+      res.setHeader("connection", "keep-alive");
+      const reader = upstream.body.getReader();
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        res.write(Buffer.from(value));
+      }
+      return res.end();
+    }
+    const data = await upstream.json();
     const content = data?.choices?.[0]?.message?.content ?? "";
     res.json({ content });
   } catch (e) {
