@@ -18,6 +18,8 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import rateLimit from "express-rate-limit";
 import fs from "fs";
+import net from "net";
+import dns from "dns";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -124,14 +126,76 @@ app.get("/api/me", auth, (req, res) => res.json({ username: req.user.u }));
 app.get("/api/admin/ai-config", auth, (req, res) => {
   res.json({ aiUrl: db.ai.aiUrl, aiModel: db.ai.aiModel, hasKey: !!db.ai.aiKey });
 });
-app.put("/api/admin/ai-config", auth, (req, res) => {
+app.put("/api/admin/ai-config", auth, async (req, res) => {
   const { aiUrl, aiKey, aiModel } = req.body || {};
-  if (aiUrl != null) db.ai.aiUrl = String(aiUrl).trim();
+  if (aiUrl != null) {
+    const v = String(aiUrl).trim();
+    if (v && await isPrivateAiUrl(v))
+      return res.status(400).json({
+        error: "AI Base URL không hợp lệ hoặc trỏ tới địa chỉ nội bộ (SSRF guard)"
+      });
+    db.ai.aiUrl = v;
+  }
   if (aiModel != null) db.ai.aiModel = String(aiModel).trim();
   if (aiKey != null && aiKey !== "") db.ai.aiKey = String(aiKey).trim();  // rỗng = giữ nguyên
   save();
   res.json({ ok: true, hasKey: !!db.ai.aiKey });
 });
+
+// ---------------- SSRF guard cho AI Base URL [G1-P5] ----------------
+// Admin khai báo Base URL server sẽ fetch → chặn mọi URL trỏ tới địa chỉ
+// nội bộ (localhost / IP private / link-local metadata / DNS nội bộ).
+// Risk còn lại: DNS rebinding giữa lúc save và lúc fetch — chấp nhận được
+// vì chỉ admin (đã auth) mới đặt được URL.
+function isPrivateIPv4(ip) {
+  const p = ip.split(".").map(Number);
+  const [a, b, c] = p;
+  return a === 0 || a === 10 || a === 127 ||
+    (a === 100 && b >= 64 && b <= 127) ||       // CGNAT
+    (a === 169 && b === 254) ||                  // link-local + AWS metadata 169.254.169.254
+    (a === 172 && b >= 16 && b <= 31) ||         // private
+    (a === 192 && b === 168) ||                  // private
+    (a === 192 && b === 0 && c === 0) ||         // 192.0.0.0/24
+    (a === 198 && (b === 18 || b === 19)) ||     // benchmark 198.18.0.0/15
+    a >= 224;                                    // multicast + reserved
+}
+function isPrivateIPv6(sRaw) {
+  const s = sRaw.replace(/^\[|\]$/g, "").toLowerCase();
+  if (s === "::" || s === "::1") return true;    // unspecified + loopback
+  const mapped = s.match(/^::ffff:(.+)$/);       // IPv4-mapped ::ffff:…/96
+  if (mapped) {
+    const tail = mapped[1];
+    if (net.isIPv4(tail)) return isPrivateIPv4(tail);
+    const groups = tail.split(":").filter(Boolean);
+    if (groups.length === 2) {                    // dạng nén "7f00:1" = 127.0.0.1
+      const a = parseInt(groups[0].padStart(4, "0"), 16);
+      const b = parseInt(groups[1].padStart(4, "0"), 16);
+      return isPrivateIPv4(`${(a >> 8) & 255}.${a & 255}.${(b >> 8) & 255}.${b & 255}`);
+    }
+    return true;                                  // cấu trúc mapped lạ — chặn an toàn
+  }
+  const first = parseInt((s.match(/^[0-9a-f]+/) || ["0"])[0], 16);
+  if ((first & 0xfe00) === 0xfc00) return true;   // unique local fc00::/7
+  if ((first & 0xffc0) === 0xfe80) return true;   // link-local fe80::/10
+  return false;
+}
+async function isPrivateAiUrl(raw) {
+  let u;
+  try { u = new URL(String(raw)); } catch { return true; }   // không parse được → chặn
+  if (u.protocol !== "http:" && u.protocol !== "https:") return true;
+  // WHATWG URL tự chuẩn hóa IPv4 dạng lạ (0x7f.0.0.1, 0177.0.0.1, 2130706433)
+  const host = u.hostname;
+  const bare = host.replace(/^\[|\]$/g, "").toLowerCase();
+  if (net.isIPv4(bare)) return isPrivateIPv4(bare);
+  if (bare.includes(":")) return isPrivateIPv6(host);
+  if (/(^|\.)localhost$|\.local$|\.internal$/.test(bare)) return true;
+  try {
+    // domain thật → resolve và chặn nếu BẤT KỲ địa chỉ nào nằm nội bộ
+    const addrs = await dns.promises.lookup(bare, { all: true });
+    return addrs.some(a => net.isIPv4(a.address)
+      ? isPrivateIPv4(a.address) : isPrivateIPv6(a.address));
+  } catch { return true; }                     // DNS fail → không cho phép
+}
 
 // ---------------- AI chat proxy (OpenAI-compatible, hỗ trợ stream) ----------------
 app.post("/api/ai/chat", auth, async (req, res) => {
