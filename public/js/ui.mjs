@@ -472,25 +472,28 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
   }
   const eyeBtn = $("uiToggle");
   const panelEl = $("panel");
-  // G4g: đặt nút mắt theo mép panel — desktop: gắn trên góc trái của panel
-  // (panel ở đáy màn hình); mobile (≤768): panel nằm mép trên → gắn dưới
-  // góc trái. Clean view bật: xoá inline, class CSS đưa về góc phải trên.
+  // G4g: đặt nút mắt cạnh mép trên-trái của #panel — desktop (panel ở góc
+  // phải trên): sát bên TRÁI panel, thẳng hàng mép trên, không đè lên;
+  // mobile (≤768, panel mép trên full-rộng): gắn dưới góc trái panel.
+  // Clean view bật: xoá inline, class CSS đưa về góc phải trên màn hình.
   function positionEye() {
     if (cleanOn) {
       eyeBtn.style.left = eyeBtn.style.top = eyeBtn.style.right = eyeBtn.style.bottom = "";
       return;
     }
     const r = panelEl.getBoundingClientRect();
+    if (!r.width && !r.height) return;   // panel chưa layout — chờ RO lần sau
     if (window.innerWidth <= 768) {
-      eyeBtn.style.left = r.left + "px";
+      eyeBtn.style.left = Math.max(4, r.left) + "px";
       eyeBtn.style.top = (r.bottom + 6) + "px";
     } else {
-      eyeBtn.style.left = r.left + "px";
-      eyeBtn.style.top = Math.max(6, r.top - eyeBtn.offsetHeight - 6) + "px";
+      eyeBtn.style.left = Math.max(4, r.left - eyeBtn.offsetWidth - 6) + "px";
+      eyeBtn.style.top = Math.max(4, r.top) + "px";
     }
   }
   new ResizeObserver(positionEye).observe(panelEl);   // panel đổi kích thước (presets, lang) → đi theo
   window.addEventListener("resize", positionEye);
+  positionEye();
 
   $("uiToggle").addEventListener("click", () => setClean(!cleanOn));
   window.addEventListener("keydown", e => {
