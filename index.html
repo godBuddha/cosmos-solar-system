@@ -626,13 +626,69 @@ let meteorUpdater = null;
   const kg = new THREE.BufferGeometry();
   kg.setAttribute("position", new THREE.BufferAttribute(kPos, 3));
   kg.setAttribute("color", new THREE.BufferAttribute(kCol, 3));
-  const kuiper = new THREE.Points(kg, new THREE.PointsMaterial({
-    size: 0.11, map: makeGlowTexture(), vertexColors: true,
-    transparent: true, opacity: 0.75, blending: THREE.AdditiveBlending,
-    depthWrite: false, sizeAttenuation: true,
-  }));
+  // attributes cho GPU-side Kepler: tính vị trí trong vertex shader
+  // (CPU chỉ set uDays — không còn vòng lặp 8000 hạt mỗi frame)
+  const kA = new Float32Array(N_K), kE = new Float32Array(N_K),
+        kI = new Float32Array(N_K), kM = new Float32Array(N_K), kT = new Float32Array(N_K);
+  for (let i = 0; i < N_K; i++) {
+    kA[i] = kData[i].a; kE[i] = kData[i].e; kI[i] = kData[i].inc;
+    kM[i] = kData[i].M0; kT[i] = kData[i].T;
+  }
+  kg.setAttribute("aA", new THREE.BufferAttribute(kA, 1));
+  kg.setAttribute("aE", new THREE.BufferAttribute(kE, 1));
+  kg.setAttribute("aI", new THREE.BufferAttribute(kI, 1));
+  kg.setAttribute("aM", new THREE.BufferAttribute(kM, 1));
+  kg.setAttribute("aT", new THREE.BufferAttribute(kT, 1));
+  // nén scale theo a (distScale) tính sẵn vào aA để shader đơn giản
+  const kMat = new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    uniforms: {
+      uDays: { value: 0 },
+      uMap:  { value: makeGlowTexture() },
+      uSize: { value: 0.11 },
+    },
+    vertexShader: /* glsl */`
+      attribute float aA, aE, aI, aM, aT;
+      attribute vec3 color;
+      uniform float uDays, uSize;
+      varying vec3 vColor2;
+      varying vec3 vCol;
+      // Newton-Raphson giải M = E - e*sin(E) ngay trên GPU
+      float solveK(float M, float e) {
+        float E = M;
+        for (int k = 0; k < 5; k++) E = E - (E - e * sin(E) - M) / (1.0 - e * cos(E));
+        return E;
+      }
+      void main() {
+        float M = aM + 6.283185 * (uDays / aT);
+        M = mod(mod(M, 6.283185) + 6.283185, 6.283185);
+        float E = solveK(M, aE);
+        float sc = 11.0 * pow(aA, 0.55) / aA;           // distScale nén sẵn
+        vec3 p;
+        p.x = aA * (cos(E) - aE) * sc;
+        float yO = aA * sqrt(1.0 - aE * aE) * sin(E) * sc;
+        p.y = yO * cos(aI);
+        p.z = yO * sin(aI);
+        vCol = color;
+        vec4 mv = modelViewMatrix * vec4(p, 1.0);
+        gl_PointSize = uSize * (240.0 / -mv.z);
+        gl_Position = projectionMatrix * mv;
+      }
+    `,
+    fragmentShader: /* glsl */`
+      uniform sampler2D uMap;
+      varying vec3 vCol;
+      void main() {
+        vec4 tex = texture2D(uMap, gl_PointCoord);
+        gl_FragColor = vec4(vCol, 1.0) * tex;
+      }
+    `,
+  });
+  const kuiper = new THREE.Points(kg, kMat);
+  kg.getAttribute("position").setUsage(THREE.StaticDrawUsage);   // vị trí do shader quyết định
   scene.add(kuiper);
-  kuiperBelt = { geo: kg, data: kData, n: N_K };
+  kuiperBelt = { mat: kMat, n: N_K };
 }
 
 // ======================================================================
@@ -945,22 +1001,8 @@ function animate() {
     }
   }
 
-  // ---- Vành đai Kuiper: vị trí Kepler per-object ----
-  if (kuiperBelt && !ST.paused) {
-    const pos = kuiperBelt.geo.attributes.position.array;
-    for (let i = 0; i < kuiperBelt.n; i++) {
-      const d = kuiperBelt.data[i];
-      const M = d.M0 + 2 * Math.PI * (ST.days / d.T);
-      const E = solveKepler(((M % 6.283185) + 6.283185) % 6.283185, d.e);
-      const xO = d.a * (Math.cos(E) - d.e);
-      const yO = d.a * Math.sqrt(1 - d.e * d.e) * Math.sin(E);
-      const s = distScale(d.a) / d.a;
-      pos[i * 3] = xO * s;
-      pos[i * 3 + 1] = yO * Math.cos(d.inc) * s;
-      pos[i * 3 + 2] = yO * Math.sin(d.inc) * s;
-    }
-    kuiperBelt.geo.attributes.position.needsUpdate = true;
-  }
+  // ---- Vành đai Kuiper: GPU-side Kepler (chỉ set uniform thời gian) ----
+  if (kuiperBelt) kuiperBelt.mat.uniforms.uDays.value = ST.days;
 
   // ---- Sao chổi + mưa sao băng ----
   if (cometUpdater) cometUpdater(ST.days);
