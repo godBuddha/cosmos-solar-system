@@ -1766,6 +1766,17 @@ const flyUI = (() => {
 function flyToggle(force) {
   FLY.on = force !== undefined ? force : !FLY.on;
   controls.enabled = !FLY.on;
+  if (!FLY.on) {
+    // thoát free-fly: đồng bộ OrbitControls với camera hiện tại để không bị "giật về"
+    controls.target.copy(camera.position).add(new THREE.Vector3().subVectors(
+      (function(){ const d = new THREE.Vector3(); camera.getWorldDirection(d); return d; })(), 0))
+      ;
+    controls.target.copy(camera.position).add(
+      new THREE.Vector3(-Math.sin(FLY.yaw) * Math.cos(FLY.pitch),
+                        Math.sin(FLY.pitch),
+                        -Math.cos(FLY.yaw) * Math.cos(FLY.pitch)).multiplyScalar(10));
+    controls.update();
+  }
   flyUI.style.display = FLY.on ? "block" : "none";
   if (FLY.on) flyUI.innerHTML = "FREE-FLY — W/S: tới/lùi · A/D: trái/phải · Q/E: xoay · R/Space: lên/xuống · Shift ×5 · F/Esc: thoát · Tốc độ: <input id='flySpeed' type='number' min='1' max='2000' value='" + FLY.speed.toFixed(0) + "' style='width:60px;background:#0a1626;color:#ffd27a;border:1px solid rgba(255,210,122,.4);border-radius:4px;padding:0 4px;font-size:11px'>";
   // hướng nhìn hiện tại làm mốc bay
@@ -1898,7 +1909,10 @@ function animate() {
     camera.lookAt(lookAtPt);
   }
 
-  controls.update();
+  // QUAN TRỌNG: khi free-fly, KHÔNG gọi controls.update() —
+  // OrbitControls nội bộ sẽ ghi đè vị trí camera mỗi frame (nguyên nhân
+  // "camera tự lùi ra, WASD không ăn"). Khi thoát: sync lại state.
+  if (!FLY.on) controls.update();
 
   // ---- Phase 3: camera bám hành tinh theo delta (không set cứng) ----
   if (followTarget) {
