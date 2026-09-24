@@ -1315,6 +1315,7 @@ $s("setBloom").addEventListener("input", e => {
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
 });
 $s("setSave").addEventListener("click", () => {
+  const oldKuiper = loadSettingsKuiper();               // đọc TRƯỚC khi ghi
   const s = {
     bloom: +$s("setBloom").value,
     kuiper: $s("setKuiper").value,
@@ -1323,7 +1324,7 @@ $s("setSave").addEventListener("click", () => {
     aiModel: $s("setAiModel").value.trim(),
   };
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
-  const needReload = String(s.kuiper) !== loadSettingsKuiper();
+  const needReload = String(s.kuiper) !== oldKuiper;    // so với giá trị cũ thật
   $s("settingsModal").classList.remove("open");
   if (needReload) location.reload();                    // Kuiper đổi số hạt cần rebuild geometry
 });
@@ -1345,14 +1346,21 @@ function loadSettingsKuiper() {
 let aiMode = null;   // "server" | "user" | null
 async function detectAI() {
   try {
-    const h = await (await fetch("/api/health", { signal: AbortSignal.timeout(2500) })).json();
-    if (h.ok && !h.setupNeeded) {
-      const me = await fetch("/api/me");
-      if (me.ok) { aiMode = "server"; return; }
+    const r = await fetch("/api/health", { signal: AbortSignal.timeout(2500) });
+    if (r.ok) {
+      const h = await r.json();
+      if (h.ok && !h.setupNeeded) {
+        const me = await fetch("/api/me");
+        if (me.ok) { aiMode = "server"; console.info("AI mode: server"); return; }
+      }
     }
-  } catch {}
+  } catch (e) { /* không có backend (Pages) — bỏ qua */ }
+  // fallback: key user trong Settings (localStorage)
   const s = loadSettings();
   aiMode = (s.aiUrl && s.aiModel) ? "user" : null;
+  // defensive: nếu aiMode vẫn null mà settings có đủ -> ép user mode
+  if (!aiMode && s.aiUrl && s.aiModel) aiMode = "user";
+  console.info("AI mode:", aiMode, "| url:", s.aiUrl || "(trống)", "| model:", s.aiModel || "(trống)");
 }
 function aiOpen() {
   const p = document.getElementById("aiPanel");
