@@ -611,6 +611,23 @@ for (const p of PLANETS) {
   p._orbitLine = line;
 }
 
+// MẶT TRỜI là thiên thể chọn được: đứng yên tại gốc (a=0, animate loop bỏ
+// qua orbitalPosition), không có đường quỹ đạo. a=0 → tìm kiếm hiển thị "0 AU".
+const SUN_DATA = {
+  name: "Sun", a: 0, e: 0, i: 0, T: 1e9, M0: 0, om: 0, node: 0,
+  rot: 25.38, tilt: 7.25, r: 3.2, dwarf: false,
+  info: { mass: 333000, temp: 5772, moons: 8, dia: 1391400 },
+};
+{
+  const lbl = document.createElement("div");
+  lbl.textContent = "Sun";
+  lbl.style.cssText = "font:11px ui-sans-serif; color:#ffd27a; text-shadow:0 0 6px rgba(0,20,50,.9); pointer-events:none;";
+  const sunLblObj = new CSS2DObject(lbl);
+  sunLblObj.position.set(0, SUN_DATA.r + 1.6, 0);
+  sun.add(sunLblObj);
+  planetObjs.push({ data: SUN_DATA, grp: sun, spin: sun, mesh: sun, lblObj: sunLblObj });
+}
+
 // ======================================================================
 //  PHASE 2a: MOONS — mặt trăng cho Trái Đất / Jupiter / Saturn
 // ======================================================================
@@ -1100,8 +1117,12 @@ const I18N = {
   vi: {
     shareCopied: "Đã copy link chia sẻ!", aiBtn: "Hỏi AI", aiTitle: "Trợ lý AI",
     aiReadyServer: "Sẵn sàng — AI gateway server đã cấu hình. Hỏi bất kỳ điều gì về thiên thể!", aiReadyUser: "Sẵn sàng — dùng API key của bạn (Settings). Hỏi bất kỳ điều gì!", aiNone: "Chưa cấu hình AI. Vào ⚙️ Settings nhập Base URL + Model (và API key nếu dùng cloud).",
-    names: { Mercury:"Sao Thủy", Venus:"Sao Kim", Earth:"Trái Đất", Mars:"Sao Hỏa", Jupiter:"Sao Mộc", Saturn:"Sao Thổ", Uranus:"Sao Thiên Vương", Neptune:"Sao Hải Vương", Ceres:"Ceres", Pluto:"Sao Diêm Vương", Eris:"Eris" },
+    names: { Sun:"Mặt Trời", Mercury:"Sao Thủy", Venus:"Sao Kim", Earth:"Trái Đất", Mars:"Sao Hỏa", Jupiter:"Sao Mộc", Saturn:"Sao Thổ", Uranus:"Sao Thiên Vương", Neptune:"Sao Hải Vương", Ceres:"Ceres", Pluto:"Sao Diêm Vương", Eris:"Eris" },
     sec1: "Tổng quan", sec2: "Quỹ đạo", sec3: "Tự quay",
+    secSun2: "Cấu trúc & Vật lý",
+    spectral: "Loại quang phổ", lum: "Độ phát sáng", coreT: "Nhiệt độ lõi",
+    comp: "Thành phần", sunAge: "Tuổi", sunAgeVal: "≈ 4,6 tỷ năm",
+    sunDesc: "Mặt Trời — ngôi sao lùn vàng loại G2V ở trung tâm hệ, chiếm 99,86% khối lượng toàn hệ. Hợp nhất ~600 triệu tấn hydro mỗi giây; ánh sáng mất ~8 phút 20 giây tới Trái Đất.",
     note: "tỷ lệ nghệ thuật, quỹ đạo Kepler thật",
     hint: "Kéo: xoay · Lăn: zoom · Click hành tinh: xem tên",
     orbits: b => "Đường quỹ đạo: " + (b ? "BẬT" : "TẮT"),
@@ -1117,8 +1138,12 @@ const I18N = {
   en: {
     shareCopied: "Share link copied!", aiBtn: "Ask AI", aiTitle: "AI Assistant",
     aiReadyServer: "Ready — server AI gateway configured. Ask anything about the bodies!", aiReadyUser: "Ready — using your API key (Settings). Ask anything!", aiNone: "AI not configured. Open ⚙️ Settings and enter Base URL + Model (plus API key for cloud).",
-    names: { Mercury:"Mercury", Venus:"Venus", Earth:"Earth", Mars:"Mars", Jupiter:"Jupiter", Saturn:"Saturn", Uranus:"Uranus", Neptune:"Neptune", Ceres:"Ceres", Pluto:"Pluto", Eris:"Eris" },
+    names: { Sun:"Sun", Mercury:"Mercury", Venus:"Venus", Earth:"Earth", Mars:"Mars", Jupiter:"Jupiter", Saturn:"Saturn", Uranus:"Uranus", Neptune:"Neptune", Ceres:"Ceres", Pluto:"Pluto", Eris:"Eris" },
     sec1: "Overview", sec2: "Orbit", sec3: "Rotation",
+    secSun2: "Structure & Physics",
+    spectral: "Spectral type", lum: "Luminosity", coreT: "Core temp",
+    comp: "Composition", sunAge: "Age", sunAgeVal: "≈ 4.6 billion yr",
+    sunDesc: "The Sun — a G2V yellow dwarf at the center of the system, holding 99.86% of its total mass. Fuses ~600 million tonnes of hydrogen per second; light takes ~8 min 20 s to reach Earth.",
     note: "artistic scale, true Kepler orbits",
     hint: "Drag: rotate · Scroll: zoom · Click a planet for info",
     orbits: b => "Orbits: " + (b ? "ON" : "OFF"),
@@ -1134,8 +1159,12 @@ const I18N = {
   zh: {
     shareCopied: "分享链接已复制！", aiBtn: "问AI", aiTitle: "AI助手",
     aiReadyServer: "就绪——服务器AI网关已配置。随意提问！", aiReadyUser: "就绪——使用你的API密钥（设置）。随意提问！", aiNone: "未配置AI。打开⚙️设置输入Base URL + Model（云服务还需API密钥）。",
-    names: { Mercury:"水星", Venus:"金星", Earth:"地球", Mars:"火星", Jupiter:"木星", Saturn:"土星", Uranus:"天王星", Neptune:"海王星", Ceres:"谷神星", Pluto:"冥王星", Eris:"阋神星" },
+    names: { Sun:"太阳", Mercury:"水星", Venus:"金星", Earth:"地球", Mars:"火星", Jupiter:"木星", Saturn:"土星", Uranus:"天王星", Neptune:"海王星", Ceres:"谷神星", Pluto:"冥王星", Eris:"阋神星" },
     sec1: "概述", sec2: "轨道", sec3: "自转",
+    secSun2: "结构与物理",
+    spectral: "光谱型", lum: "光度", coreT: "核心温度",
+    comp: "成分", sunAge: "年龄", sunAgeVal: "≈ 46亿年",
+    sunDesc: "太阳——系统中心的G2V黄矮星，占系统总质量的99.86%。每秒聚变约6亿吨氢；光到达地球约需8分20秒。",
     note: "艺术比例，真实开普勒轨道",
     hint: "拖动：旋转 · 滚轮：缩放 · 点击行星查看信息",
     orbits: b => "轨道线：" + (b ? "开" : "关"),
@@ -1183,10 +1212,26 @@ function selectPlanet(o) {
   followTarget = o;
   const t = T();
   const d = o.data.info;
+  const isSun = o.data.name === "Sun";
   const bodyId = o.data.name.toLowerCase();
-  const descText = (CATALOG_DESC[bodyId] || {})[LANG] || "";  document.getElementById("ipName").textContent = t.names[o.data.name] || o.data.name;
+  const descText = isSun ? t.sunDesc : (CATALOG_DESC[bodyId] || {})[LANG] || "";  document.getElementById("ipName").textContent = t.names[o.data.name] || o.data.name;
   document.getElementById("ipNameEn").textContent = o.data.name + (o.data.dwarf ? " " + t.dwarf : "");
-  const secs = {
+  const secs = isSun ? {
+    1: `<h4>${t.sec1}</h4>
+        <div class="row"><span>${t.mass}</span><b>${d.mass.toLocaleString("vi-VN")} ${t.earthU}</b></div>
+        <div class="row"><span>${t.dia}</span><b>${d.dia.toLocaleString("vi-VN")} km</b></div>
+        <div class="row"><span>${t.temp}</span><b>${d.temp.toLocaleString("vi-VN")} K</b></div>
+        <div class="row"><span>${t.spectral}</span><b>G2V</b></div>
+        <div style="margin-top:6px; opacity:.85">${descText}</div>`,
+    2: `<h4>${t.secSun2}</h4>
+        <div class="row"><span>${t.lum}</span><b>3.828×10<sup>26</sup> W</b></div>
+        <div class="row"><span>${t.coreT}</span><b>15.7M K</b></div>
+        <div class="row"><span>${t.comp}</span><b>H 73% · He 25%</b></div>
+        <div class="row"><span>${t.sunAge}</span><b>${t.sunAgeVal}</b></div>`,
+    3: `<h4>${t.sec3}</h4>
+        <div class="row"><span>Rot</span><b>${o.data.rot} ${t.days}</b></div>
+        <div class="row"><span>Tilt</span><b>${o.data.tilt}°</b></div>`,
+  } : {
     1: `<h4>${t.sec1}</h4>
         <div class="row"><span>${t.mass}</span><b>${d.mass} ${t.earthU}</b></div>
         <div class="row"><span>${t.dia}</span><b>${d.dia.toLocaleString("vi-VN")} km</b></div>
@@ -1208,7 +1253,7 @@ function selectPlanet(o) {
   toc.innerHTML = "";
   Object.keys(secs).forEach((k, i) => {
     const btn = document.createElement("button");
-    btn.textContent = [t.sec1, t.sec2, t.sec3][i];
+    btn.textContent = [t.sec1, isSun ? t.secSun2 : t.sec2, t.sec3][i];
     btn.addEventListener("click", () => {
       document.getElementById("ipsec" + k).scrollIntoView({ behavior: "smooth" });
       toc.querySelectorAll("button").forEach(b => b.classList.remove("active"));
@@ -1314,7 +1359,7 @@ function doSearch(q) {
   q = q.trim().toLowerCase();
   if (!q) { searchResults.style.display = "none"; return; }
   const t = T();
-  const matches = PLANETS.filter(o => {
+  const matches = PLANETS.concat([SUN_DATA]).filter(o => {
     const en = o.name.toLowerCase();
     const vi = (t.names[o.name] || "").toLowerCase();
     const zh = t.names[o.name] || "";
@@ -1981,8 +2026,10 @@ function animate() {
     const daysPerSec = Math.pow(10, ST.speedExp);
     ST.days += daysPerSec * dt;
     for (const o of planetObjs) {
-      const pos = orbitalPosition(o.data, ST.days);
-      o.grp.position.set(pos.x, pos.y, pos.z);
+      if (o.data.a > 0) {                      // Mặt Trời (a=0) đứng yên tại gốc
+        const pos = orbitalPosition(o.data, ST.days);
+        o.grp.position.set(pos.x, pos.y, pos.z);
+      }
       // tự quay: rot = chu kỳ tự quay (ngày), âm = quay ngược (Venus, Uranus)
       o.spin.rotation.y = 2 * Math.PI * ST.days / o.data.rot;
     }
