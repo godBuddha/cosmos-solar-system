@@ -56,6 +56,54 @@
   }
   #infopanel .close-x:hover { color:#ffd27a; }
   #date { color:#ffd27a; }
+  /* ===== G2: search bar ===== */
+  #searchbox {
+    position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:20;
+    background:rgba(4,10,22,.8); border:1px solid rgba(120,170,230,.3);
+    border-radius:10px; padding:6px 10px; backdrop-filter:blur(8px);
+  }
+  #searchbox input {
+    background:#0a1626; border:1px solid rgba(120,170,230,.3); color:#cfe2ff;
+    border-radius:7px; padding:5px 10px; width:210px; font-size:13px; outline:none;
+  }
+  #searchbox input:focus { border-color:#ffd27a; }
+  #searchResults {
+    position:absolute; top:100%; left:0; right:0; margin-top:4px;
+    background:rgba(4,10,22,.95); border:1px solid rgba(120,170,230,.3);
+    border-radius:8px; max-height:260px; overflow-y:auto; display:none;
+  }
+  #searchResults div { padding:7px 12px; cursor:pointer; font-size:13px; color:#cfe2ff; }
+  #searchResults div:hover { background:#1b3358; color:#ffd27a; }
+  #searchResults .sr-sub { opacity:.55; font-size:11px; margin-left:6px; }
+  /* ===== G2: settings modal ===== */
+  #settingsModal {
+    position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:50;
+    display:none; align-items:center; justify-content:center;
+  }
+  #settingsModal.open { display:flex; }
+  #settingsCard {
+    background:#0a1424; border:1px solid rgba(120,170,230,.35); border-radius:14px;
+    padding:20px; width:min(440px, 92vw); max-height:85vh; overflow-y:auto;
+    color:#cfe2ff; font:13px/1.7 ui-sans-serif,system-ui,sans-serif;
+  }
+  #settingsCard h3 { color:#ffd27a; margin:0 0 12px; font-size:15px; }
+  #settingsCard h4 { color:#8cbeeb; margin:14px 0 6px; font-size:12.5px; }
+  #settingsCard label { display:block; margin:6px 0 2px; opacity:.85; font-size:12px; }
+  #settingsCard input, #settingsCard select {
+    width:100%; box-sizing:border-box; background:#0a1626; color:#cfe2ff;
+    border:1px solid rgba(120,170,230,.3); border-radius:7px; padding:6px 9px; font-size:13px;
+  }
+  #settingsCard .srow { display:flex; justify-content:space-between; align-items:center; margin:4px 0; }
+  #settingsCard .btnrow { margin-top:16px; text-align:right; }
+  /* ===== G2: speed presets ===== */
+  #speedPresets { margin-top:2px; }
+  #speedPresets button {
+    background:#12233f; color:#9fc3e8; border:1px solid rgba(120,170,230,.3);
+    border-radius:6px; padding:2px 7px; margin:2px 2px 0 0; cursor:pointer; font-size:11px;
+  }
+  #speedPresets button:hover { background:#1b3358; color:#ffd27a; }
+  #btnSettings { background:#12233f; color:#cfe2ff; border:1px solid rgba(120,170,230,.35);
+    border-radius:7px; padding:4px 10px; margin:4px 4px 0 0; cursor:pointer; font-size:12.5px; }
   /* ===== MOBILE (<=768px): panel trái full-width bottom-sheet, panel phải gọn ===== */
   @media (max-width: 768px) {
     #infopanel {
@@ -86,6 +134,39 @@
   <div id="ipToc"></div>
   <div id="ipBody"></div>
 </div>
+<div id="searchbox">
+  <input id="searchInput" type="text" placeholder="🔍 Tìm thiên thể..." autocomplete="off">
+  <div id="searchResults"></div>
+</div>
+
+<div id="settingsModal">
+  <div id="settingsCard">
+    <h3>⚙️ <span class="s-title">Cài đặt</span></h3>
+    <h4 class="s-perf">Hiệu năng</h4>
+    <div class="srow"><span class="s-bloom">Bloom glow</span>
+      <input type="range" id="setBloom" min="0" max="2.5" step="0.05" style="width:150px"></div>
+    <div class="srow"><span class="s-kuiper">Số hạt vành Kuiper</span>
+      <select id="setKuiper" style="width:110px">
+        <option value="10000">10.000</option>
+        <option value="25000">25.000</option>
+        <option value="50000">50.000</option>
+        <option value="100000">100.000</option>
+      </select></div>
+    <p style="opacity:.6; font-size:11px" class="s-reload">Số hạt Kuiper áp dụng sau khi tải lại trang.</p>
+    <h4 class="s-ai">AI (OpenAI-compatible)</h4>
+    <label class="s-aiurl">Base URL</label>
+    <input id="setAiUrl" placeholder="http://localhost:11434/v1">
+    <label class="s-aikey">API Key (lưu máy bạn, không gửi đi đâu)</label>
+    <input id="setAiKey" type="password" placeholder="sk-...">
+    <label class="s-aimodel">Model</label>
+    <input id="setAiModel" placeholder="llama3 / gpt-4o-mini / ...">
+    <div class="btnrow">
+      <button id="setClose" style="background:#12233f;color:#cfe2ff;border:1px solid rgba(120,170,230,.35);border-radius:7px;padding:6px 14px;cursor:pointer">✕ <span class="s-close">Đóng</span></button>
+      <button id="setSave" style="background:#1b3358;color:#ffd27a;border:1px solid rgba(255,210,122,.4);border-radius:7px;padding:6px 14px;cursor:pointer">💾 <span class="s-save">Lưu</span></button>
+    </div>
+  </div>
+</div>
+
 <div id="panel">
   <button id="lang" style="float:right; margin-left:6px">🌐 VI</button>
   Tốc độ <input type="range" id="speed" min="-2" max="3" step="0.05" value="0.7">
@@ -94,7 +175,9 @@
   <button id="orbits"></button>
   <button id="labels"></button>
   <button id="tour"></button>
-  <button id="ambient"></button><br>
+  <button id="ambient"></button>
+  <button id="btnSettings">⚙️</button><br>
+  <div id="speedPresets"></div>
   <span class="t-date">Ngày mô phỏng:</span> <span id="date">0</span>
 </div>
 
@@ -740,7 +823,9 @@ let meteorUpdater = null;
 //  nghiêng lan tỏa dày hơn mặt phẳng hoàng đạo (đúng đặc trưng Belt)
 // ======================================================================
 {
-  const N_K = 50000;
+  const N_K = parseInt(localStorage.getItem("cosmos_settings")
+    ? (JSON.parse(localStorage.getItem("cosmos_settings")).kuiper ?? "50000")
+    : "50000", 10);
   const kPos = new Float32Array(N_K * 3), kCol = new Float32Array(N_K * 3);
   const kData = [];
   let s = 733331;
@@ -1076,6 +1161,143 @@ $("ambient").addEventListener("click", () => {
   $("ambient").textContent = T().audio(!on);
 });
 
+// ======================================================================
+//  G2: SEARCH — tìm thiên thể đa ngôn ngữ, bay camera tới
+// ======================================================================
+const searchInput = document.getElementById("searchInput");
+const searchResults = document.getElementById("searchResults");
+
+function doSearch(q) {
+  q = q.trim().toLowerCase();
+  if (!q) { searchResults.style.display = "none"; return; }
+  const t = T();
+  const matches = PLANETS.filter(o => {
+    const en = o.name.toLowerCase();
+    const vi = (t.names[o.name] || "").toLowerCase();
+    const zh = t.names[o.name] || "";
+    return en.includes(q) || vi.includes(q) || zh.includes(q) ||
+           en.replace(/\s/g, "").includes(q.replace(/\s/g, ""));
+  });
+  searchResults.innerHTML = "";
+  if (!matches.length) {
+    searchResults.innerHTML = '<div style="opacity:.5">∅</div>';
+  } else {
+    for (const m of matches) {
+      const div = document.createElement("div");
+      div.innerHTML = (t.names[m.name] || m.name) +
+        '<span class="sr-sub">' + m.name + (m.dwarf ? " " + t.dwarf : "") + " · " + m.a + " AU</span>";
+      div.addEventListener("click", () => {
+        searchResults.style.display = "none";
+        searchInput.value = "";
+        flyToBody(m);
+      });
+      searchResults.appendChild(div);
+    }
+  }
+  searchResults.style.display = "block";
+}
+searchInput.addEventListener("input", () => doSearch(searchInput.value));
+searchInput.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    const first = searchResults.querySelector("div");
+    if (first && first.textContent !== "∅") first.click();
+  }
+});
+document.addEventListener("click", e => {
+  if (!document.getElementById("searchbox").contains(e.target))
+    searchResults.style.display = "none";
+});
+
+// fly-to: tái dùng cơ chế tour (approach + dwell) cho 1 thiên thể bất kỳ
+let flyTarget = null;
+function flyToBody(o) {
+  ST.tourOn = false;
+  document.getElementById("tour").textContent = T().tour(false);
+  // object trong PLANETS (catalog) không có mesh — map qua scene object thật
+  const sceneObj = planetObjs.find(po => po.data.name === o.name);
+  if (!sceneObj) return;
+  flyTarget = { obj: sceneObj, phase: "approach", timer: 0 };
+  selectPlanet(sceneObj);               // mở info panel luôn
+}
+
+// ======================================================================
+//  G2: SPEED PRESETS — nút nhanh cho tốc độ mô phỏng
+// ======================================================================
+const PRESETS = [
+  { label: "Thực", v: -1.44 },          // ~0.036 ngày/s ≈ thời gian thực (1s=1s)
+  { label: "1h/s", v: -1.62 },          // 0.024 ngày/s
+  { label: "1d/s", v: 0.0 },            // 1 ngày/s
+  { label: "1mo/s", v: 1.48 },          // ~30 ngày/s
+  { label: "1y/s", v: 2.56 },           // ~365 ngày/s
+];
+const presetBox = document.getElementById("speedPresets");
+function renderPresets() {
+  presetBox.innerHTML = "";
+  for (const pr of PRESETS) {
+    const btn = document.createElement("button");
+    btn.textContent = pr.label;
+    btn.addEventListener("click", () => {
+      ST.speedExp = pr.v;
+      const slider = document.getElementById("speed");
+      if (slider) slider.value = pr.v;
+    });
+    presetBox.appendChild(btn);
+  }
+}
+renderPresets();
+
+// ======================================================================
+//  G2: SETTINGS — hiệu năng + AI key (localStorage, không hard-code)
+// ======================================================================
+const $s = id => document.getElementById(id);
+const SETTINGS_KEY = "cosmos_settings";
+function loadSettings() {
+  try { return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; }
+  catch { return {}; }
+}
+function applySettingsUI() {
+  const s = loadSettings();
+  $s("setBloom").value = s.bloom ?? 1.0;
+  $s("setKuiper").value = s.kuiper ?? "50000";
+  $s("setAiUrl").value = s.aiUrl ?? "";
+  $s("setAiKey").value = s.aiKey ?? "";
+  $s("setAiModel").value = s.aiModel ?? "";
+}
+$s("btnSettings").addEventListener("click", () => { applySettingsUI(); $s("settingsModal").classList.add("open"); });
+$s("setClose").addEventListener("click", () => $s("settingsModal").classList.remove("open"));
+$s("settingsModal").addEventListener("click", e => {
+  if (e.target === $s("settingsModal")) $s("settingsModal").classList.remove("open");
+});
+$s("setBloom").addEventListener("input", e => {
+  bloomPass.strength = +e.target.value;                 // realtime
+  const s = loadSettings(); s.bloom = +e.target.value;
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+});
+$s("setSave").addEventListener("click", () => {
+  const s = {
+    bloom: +$s("setBloom").value,
+    kuiper: $s("setKuiper").value,
+    aiUrl: $s("setAiUrl").value.trim(),
+    aiKey: $s("setAiKey").value.trim(),                  // localStorage máy user — không vào repo
+    aiModel: $s("setAiModel").value.trim(),
+  };
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+  const needReload = String(s.kuiper) !== loadSettingsKuiper();
+  $s("settingsModal").classList.remove("open");
+  if (needReload) location.reload();                    // Kuiper đổi số hạt cần rebuild geometry
+});
+function loadSettingsKuiper() {
+  const s = loadSettings();
+  return String(s.kuiper ?? "50000");
+}
+// áp bloom đã lưu lúc mở trang
+(() => {
+  const s = loadSettings();
+  if (s.bloom != null) bloomPass.strength = s.bloom;
+})();
+// Kuiper: đọc setting khi build (gắn vào biến CONFIG nội bộ qua window)
+// (N_K đọc từ localStorage ngay đầu khối Kuiper — xem patch riêng)
+
 const clock = new THREE.Clock();
 function animate() {
   requestAnimationFrame(animate);
@@ -1115,6 +1337,22 @@ function animate() {
     controls.target.add(delta);
     camera.position.add(delta);
   }
+  // ---- G2: fly-to từ search ----
+  if (flyTarget) {
+    const o = flyTarget.obj;
+    const p = o.grp.position;
+    const offset = o.data.r * 6 + 2.5;
+    const desired = new THREE.Vector3(p.x + offset, p.y + offset * 0.55, p.z + offset * 0.8);
+    flyTarget.timer += dt;
+    camera.position.lerp(desired, 1 - Math.exp(-2.0 * dt));
+    controls.target.lerp(p, 1 - Math.exp(-2.6 * dt));
+    if (flyTarget.phase === "approach" &&
+        camera.position.distanceTo(desired) < 0.6 && flyTarget.timer > 1.6) {
+      flyTarget.phase = "dwell"; flyTarget.timer = 0;
+    }
+    if (flyTarget.phase === "dwell" && flyTarget.timer > 3.0) flyTarget = null;
+  }
+
   // ---- Tour tự động: camera bay giữa các hành tinh ----
   if (ST.tourOn && planetObjs.length) {
     const target = planetObjs[ST.tourIdx % planetObjs.length];

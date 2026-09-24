@@ -90,6 +90,126 @@
   "dia": 2326.0
  },
  {
+  "id": "gonggong",
+  "names": {
+   "en": "Gonggong",
+   "vi": "Gonggong",
+   "zh": "共工星"
+  },
+  "desc": {
+   "vi": "Đỏ đậm nhất hệ ngoài mặt trời; quỹ đạo lệch tâm cao (e=0.50); tên thần nước Trung Hoa.",
+   "en": "The reddest object in the outer solar system; highly eccentric orbit (e=0.50); named for the Chinese water god.",
+   "zh": "太阳系外最红的天体；高偏心轨道（e=0.50）；以中国水神命名。"
+  },
+  "a": 67.5,
+  "e": 0.5,
+  "i": 30.7,
+  "T": 203800.0,
+  "rot": 0.93,
+  "tilt": 0.0,
+  "r": 0.24,
+  "col": "#b06858",
+  "col2": "#7a463c",
+  "M0": 100.0,
+  "om": 207.0,
+  "node": 337.0,
+  "dwarf": true,
+  "mass": 4.3e-05,
+  "temp": 30.0,
+  "moons": 1,
+  "dia": 1230.0
+ },
+ {
+  "id": "haumea",
+  "names": {
+   "en": "Haumea",
+   "vi": "Haumea",
+   "zh": "妊神星"
+  },
+  "desc": {
+   "vi": "Hình elip dẹt đặc biệt do tự quay cực nhanh (~4 giờ) — có vành và 2 mặt trăng.",
+   "en": "Uniquely elongated ellipsoid from extreme ~4-hour rotation — has a ring and 2 moons.",
+   "zh": "因约4小时的极快自转呈独特椭球形——拥有行星环和2颗卫星。"
+  },
+  "a": 43.1,
+  "e": 0.195,
+  "i": 28.2,
+  "T": 103660.0,
+  "rot": 0.163,
+  "tilt": 126.0,
+  "r": 0.3,
+  "col": "#d8dde2",
+  "col2": "#a0a8b0",
+  "M0": 218.0,
+  "om": 239.0,
+  "node": 122.0,
+  "dwarf": true,
+  "mass": 0.00022,
+  "temp": 43.0,
+  "moons": 2,
+  "dia": 1632.0
+ },
+ {
+  "id": "hygiea",
+  "names": {
+   "en": "Hygiea",
+   "vi": "Hygiea",
+   "zh": "健神星"
+  },
+  "desc": {
+   "vi": "Tiểu hành tinh lớn thứ 4; bề mặt carbon tối. Có thể đủ điều kiện hành tinh lùn nếu hình dạng cầu được xác nhận.",
+   "en": "4th largest asteroid; dark carbonaceous surface. May qualify as a dwarf planet if its spherical shape is confirmed.",
+   "zh": "第四大小行星；表面富含碳呈暗色。若球形获确认或可列为矮行星。"
+  },
+  "a": 3.14,
+  "e": 0.112,
+  "i": 3.8,
+  "T": 2030.0,
+  "rot": 0.575,
+  "tilt": 60.0,
+  "r": 0.16,
+  "col": "#6e6a63",
+  "col2": "#4a4741",
+  "M0": 140.0,
+  "om": 312.0,
+  "node": 283.0,
+  "dwarf": false,
+  "mass": 2.8e-05,
+  "temp": 160.0,
+  "moons": 0,
+  "dia": 434.0
+ },
+ {
+  "id": "juno",
+  "names": {
+   "en": "Juno",
+   "vi": "Juno",
+   "zh": "婚神星"
+  },
+  "desc": {
+   "vi": "Tiểu hành tinh thứ 3 được phát hiện (1804); lớn thứ 10 vành đai chính, giàu đá silicat sáng.",
+   "en": "3rd asteroid discovered (1804); 10th largest in the main belt, bright stony S-type.",
+   "zh": "第三颗被发现的小行星（1804年）；主带第十大，明亮的S型硅酸盐。"
+  },
+  "a": 2.67,
+  "e": 0.257,
+  "i": 13.0,
+  "T": 1593.0,
+  "rot": 0.3,
+  "tilt": 52.0,
+  "r": 0.11,
+  "col": "#a89a88",
+  "col2": "#7a7060",
+  "M0": 95.0,
+  "om": 248.0,
+  "node": 170.0,
+  "dwarf": false,
+  "mass": 6.3e-06,
+  "temp": 163.0,
+  "moons": 0,
+  "dia": 247.0
+ },
+ {
   "id": "jupiter",
   "names": {
    "en": "Jupiter",
@@ -118,6 +238,36 @@
   "temp": 165.0,
   "moons": 95,
   "dia": 142984.0
+ },
+ {
+  "id": "makemake",
+  "names": {
+   "en": "Makemake",
+   "vi": "Makemake",
+   "zh": "鸟神星"
+  },
+  "desc": {
+   "vi": "Hành tinh lùn vành Kuiper thứ 2 về độ sáng, bề mặt methan băng đỏ; tên thần sáng tạo của người Rapa Nui.",
+   "en": "2nd-brightest Kuiper dwarf planet, reddish methane-ice surface; named for the Rapa Nui creator god.",
+   "zh": "柯伊伯带第二亮的矮行星，表面覆红色甲烷冰；以拉帕努伊创造之神命名。"
+  },
+  "a": 45.4,
+  "e": 0.159,
+  "i": 29.0,
+  "T": 111845.0,
+  "rot": 0.95,
+  "tilt": 29.0,
+  "r": 0.36,
+  "col": "#c8a888",
+  "col2": "#94786a",
+  "M0": 52.0,
+  "om": 296.0,
+  "node": 79.4,
+  "dwarf": true,
+  "mass": 0.00012,
+  "temp": 40.0,
+  "moons": 1,
+  "dia": 1430.0
  },
  {
   "id": "mars",
@@ -210,6 +360,66 @@
   "dia": 49528.0
  },
  {
+  "id": "orcus",
+  "names": {
+   "en": "Orcus",
+   "vi": "Orcus",
+   "zh": "奥库斯"
+  },
+  "desc": {
+   "vi": "'Phản Pluto' — cùng cộng hưởng 3:2 với Neptune nhưng perihelion lệch pha ngược; bề mặt kết tinh băng nước cho thấy hoạt động địa chất.",
+   "en": "'Anti-Pluto' — same 3:2 resonance with Neptune but opposite perihelion phase; crystalline water ice hints at cryovolcanism.",
+   "zh": "'反冥王星'——与海王星同处3:2共振但近日点相位相反；结晶水冰暗示冰火山活动。"
+  },
+  "a": 39.4,
+  "e": 0.226,
+  "i": 20.6,
+  "T": 90370.0,
+  "rot": 0.42,
+  "tilt": 10.0,
+  "r": 0.2,
+  "col": "#aab4be",
+  "col2": "#7a848e",
+  "M0": 76.0,
+  "om": 72.0,
+  "node": 269.0,
+  "dwarf": true,
+  "mass": 2.6e-05,
+  "temp": 44.0,
+  "moons": 1,
+  "dia": 910.0
+ },
+ {
+  "id": "pallas",
+  "names": {
+   "en": "Pallas",
+   "vi": "Pallas",
+   "zh": "智神星"
+  },
+  "desc": {
+   "vi": "Nghiêng quỹ đạo cực lớn (34.8°) — một trong những tiểu hành tinh đầu tiên được phát hiện (1802).",
+   "en": "Extremely inclined orbit (34.8°) — one of the first asteroids discovered (1802).",
+   "zh": "轨道倾角极大（34.8度）——最早发现的小行星之一（1802年）。"
+  },
+  "a": 2.77,
+  "e": 0.231,
+  "i": 34.8,
+  "T": 1686.0,
+  "rot": 0.326,
+  "tilt": 84.0,
+  "r": 0.17,
+  "col": "#9aa0a8",
+  "col2": "#6e747c",
+  "M0": 250.0,
+  "om": 310.0,
+  "node": 173.0,
+  "dwarf": false,
+  "mass": 3.5e-05,
+  "temp": 164.0,
+  "moons": 0,
+  "dia": 512.0
+ },
+ {
   "id": "pluto",
   "names": {
    "en": "Pluto",
@@ -240,6 +450,36 @@
   "dia": 2377.0
  },
  {
+  "id": "quaoar",
+  "names": {
+   "en": "Quaoar",
+   "vi": "Quaoar",
+   "zh": "创神星"
+  },
+  "desc": {
+   "vi": "Vành mỏng bất thường ở xa hành tinh (7 bán kính) — thách thức lý thuyết hình thành vành hiện có.",
+   "en": "Thin ring surprisingly far out (7 radii) — challenges existing ring-formation theory.",
+   "zh": "拥有距行星7倍半径处的异常细环——挑战现有环形成理论。"
+  },
+  "a": 43.7,
+  "e": 0.039,
+  "i": 8.0,
+  "T": 105495.0,
+  "rot": 0.737,
+  "tilt": 14.0,
+  "r": 0.25,
+  "col": "#b09888",
+  "col2": "#7c6a5e",
+  "M0": 180.0,
+  "om": 147.0,
+  "node": 189.0,
+  "dwarf": true,
+  "mass": 4e-05,
+  "temp": 44.0,
+  "moons": 1,
+  "dia": 1090.0
+ },
+ {
   "id": "saturn",
   "names": {
    "en": "Saturn",
@@ -268,6 +508,36 @@
   "temp": 134.0,
   "moons": 146,
   "dia": 120536.0
+ },
+ {
+  "id": "sedna",
+  "names": {
+   "en": "Sedna",
+   "vi": "Sedna",
+   "zh": "塞德娜"
+  },
+  "desc": {
+   "vi": "Aphelion ~937 AU — vật thể xa nhất của hệ mặt trời, quỹ đạo kéo ~11.400 năm, manh mối về 'hành tinh thứ 9' giả thuyết.",
+   "en": "Aphelion ~937 AU — the most distant solar system object, an ~11,400-year orbit, a clue to the hypothetical 'Planet Nine'.",
+   "zh": "远日点约937天文单位——太阳系最遥远天体，轨道周期约1.14万年，是'第九行星'假说的线索。"
+  },
+  "a": 506.0,
+  "e": 0.855,
+  "i": 11.9,
+  "T": 4160000.0,
+  "rot": 0.42,
+  "tilt": 0.0,
+  "r": 0.22,
+  "col": "#a85048",
+  "col2": "#6e3630",
+  "M0": 358.0,
+  "om": 71.0,
+  "node": 144.0,
+  "dwarf": true,
+  "mass": 2e-05,
+  "temp": 12.0,
+  "moons": 0,
+  "dia": 995.0
  },
  {
   "id": "uranus",
@@ -328,5 +598,35 @@
   "temp": 737.0,
   "moons": 0,
   "dia": 12104.0
+ },
+ {
+  "id": "vesta",
+  "names": {
+   "en": "Vesta",
+   "vi": "Vesta",
+   "zh": "灶神星"
+  },
+  "desc": {
+   "vi": "Tiểu hành tinh sáng nhất bầu trời, chiếm ~9% khối lượng cả vành đai chính; có lõi kim loại phân tầng như hành tinh thu nhỏ.",
+   "en": "The brightest asteroid in the sky, ~9% of the main belt's mass; differentiated with a metallic core like a protoplanet.",
+   "zh": "天空中最亮的小行星，约占主带总质量的9%；有分异的金属核，如同原行星。"
+  },
+  "a": 2.36,
+  "e": 0.089,
+  "i": 7.1,
+  "T": 1325.0,
+  "rot": 0.223,
+  "tilt": 29.0,
+  "r": 0.18,
+  "col": "#b8ad9e",
+  "col2": "#8a8072",
+  "M0": 339.0,
+  "om": 253.0,
+  "node": 103.8,
+  "dwarf": false,
+  "mass": 4.3e-05,
+  "temp": 180.0,
+  "moons": 0,
+  "dia": 525.0
  }
 ]
