@@ -1,0 +1,38 @@
+# Niobe — Niobe — Niobe
+
+```meta
+id: niobe
+a: 2.754
+e: 0.1771
+i: 23.24
+T: 1670.0
+rot: 0.5
+tilt: 0
+r: 0.124
+col: "#9c8f7f"
+col2: "#696154"
+M0: 43.07
+om: 30.7
+node: 184.3
+dwarf: false
+mass: 1e-09
+temp: 170
+moons: 0
+dia: 127
+```
+
+## Mô tả (VI)
+
+Niobe — tiểu hành tinh số 71 của vành đai chính, được JPL SBDB xếp loại main-belt.
+
+## Description (EN)
+
+Niobe — asteroid number 71 of the main belt (JPL SBDB), spectral class main-belt.
+
+## 描述 (ZH)
+
+Niobe——主带第71号小行星（JPL SBDB），光谱类型 main-belt。
+
+## Nguồn / Sources
+
+- JPL SBDB Query API (elements J2000, được fetch 2026-10)

@@ -1,0 +1,38 @@
+# Flora — Flora — Flora
+
+```meta
+id: flora
+a: 2.202
+e: 0.1562
+i: 5.89
+T: 1190.0
+rot: 0.5
+tilt: 0
+r: 0.144
+col: "#c5b29e"
+col2: "#857968"
+M0: 20.06
+om: 13.6
+node: 66.4
+dwarf: false
+mass: 1e-09
+temp: 170
+moons: 0
+dia: 168
+```
+
+## Mô tả (VI)
+
+Flora — tiểu hành tinh số 8 của vành đai chính, được JPL SBDB xếp loại main-belt.
+
+## Description (EN)
+
+Flora — asteroid number 8 of the main belt (JPL SBDB), spectral class main-belt.
+
+## 描述 (ZH)
+
+Flora——主带第8号小行星（JPL SBDB），光谱类型 main-belt。
+
+## Nguồn / Sources
+
+- JPL SBDB Query API (elements J2000, được fetch 2026-10)

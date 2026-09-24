@@ -1,0 +1,38 @@
+# Frigga — Frigga — Frigga
+
+```meta
+id: frigga
+a: 2.668
+e: 0.1334
+i: 2.42
+T: 1590.0
+rot: 0.5
+tilt: 0
+r: 0.094
+col: "#a99a89"
+col2: "#72695a"
+M0: 148.12
+om: 220.9
+node: 144.1
+dwarf: false
+mass: 1e-09
+temp: 170
+moons: 0
+dia: 68
+```
+
+## Mô tả (VI)
+
+Frigga — tiểu hành tinh số 77 của vành đai chính, được JPL SBDB xếp loại main-belt.
+
+## Description (EN)
+
+Frigga — asteroid number 77 of the main belt (JPL SBDB), spectral class main-belt.
+
+## 描述 (ZH)
+
+Frigga——主带第77号小行星（JPL SBDB），光谱类型 main-belt。
+
+## Nguồn / Sources
+
+- JPL SBDB Query API (elements J2000, được fetch 2026-10)
