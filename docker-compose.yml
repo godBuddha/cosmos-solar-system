@@ -49,6 +49,19 @@ services:
     networks:
       - webnet
 
+  # ====== Cloudflare Tunnel (token trong .env, không commit) ======
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cf-cosmos
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run --token ${CF_TUNNEL_TOKEN:?Thiếu CF_TUNNEL_TOKEN trong .env}
+    depends_on:
+      - cosmos
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - webnet
+
   # ====== bật block này khi có tên miền + Let's Encrypt ======
   # cosmos-proxy:
   #   image: nginx:1.27-alpine

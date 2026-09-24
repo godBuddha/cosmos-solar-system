@@ -5,3 +5,4 @@ __pycache__/
 server/data.json
 server/node_modules
 .env
+backups/

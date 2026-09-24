@@ -283,7 +283,8 @@
   <button id="ambient"></button>
   <button id="btnSettings">⚙️</button>
   <button id="btnAI">🤖 <span class="t-ai">Hỏi AI</span></button>
-  <button id="btnShare">🔗 <span class="t-share">Share</span></button><br>
+  <button id="btnShare">🔗 <span class="t-share">Share</span></button>
+  <button id="btnAdmin">🔑 <span class="t-admin">Admin</span></button><br>
   <div id="speedPresets"></div>
   <span class="t-date">Ngày mô phỏng:</span> <span id="date">0</span>
 </div>
@@ -1821,6 +1822,11 @@ function aiSendNow() {
 document.getElementById("aiSend").addEventListener("click", aiSendNow);
 document.getElementById("aiIn").addEventListener("keydown", e => {
   if (e.key === "Enter") aiSendNow();
+});
+
+// ---- ADMIN: mở trang setup/đăng nhập quản trị ----
+document.getElementById("btnAdmin").addEventListener("click", () => {
+  window.open("/admin.html", "_blank");
 });
 
 // ---- SHARE: copy link góc nhìn hiện tại ----
