@@ -8,6 +8,7 @@ import { solveKepler, orbitalPosition } from "./kepler.mjs";
 import { createScene } from "./scene.mjs";
 import { createBodies } from "./bodies.mjs";
 import { createParticles, toggleGalaxies } from "./particles.mjs";
+import { createProbes } from "./probes.mjs";
 import { ST, initTime } from "./time.mjs";
 import { initI18n, applyLang } from "./i18n.mjs";
 import { initUI, uiState, FLY } from "./ui.mjs";
@@ -21,7 +22,10 @@ const { planetObjs } = createBodies({ scene, sun });
 const { saturnRing, asteroidBelt, kuiperBelt, cometGPU, meteorGPU } =
   createParticles({ scene, planetObjs });
 
-const ui = initUI({ canvas, camera, controls, bloomPass, planetObjs, toggleGalaxies });
+// G4: tàu thăm dò — lộ trình lịch sử (đăng ký vào planetObjs → click/search/AI ăn luôn)
+const { update: updateProbes, renderProbeSections } = createProbes({ scene, planetObjs });
+
+const ui = initUI({ canvas, camera, controls, bloomPass, planetObjs, toggleGalaxies, renderProbeSections });
 initAI({ planetObjs, flyToBody: ui.flyToBody });
 initTime();
 initI18n({ ST, planetObjs, selectPlanet: ui.selectPlanet,
@@ -157,8 +161,7 @@ function animate() {
   if (kuiperBelt) setDaysUniforms(kuiperBelt.mat, ST.days);
 
   // ---- Sao chổi + mưa sao băng ----
-  if (cometGPU) setDaysUniforms(cometGPU.mat, ST.days);
-  // đầu comet: 1 mesh duy nhất — cập nhật CPU (không đáng GPU hóa)
+  if (cometGPU) setDaysUniforms(cometGPU.mat, ST.days);  // đầu comet: 1 mesh duy nhất — cập nhật CPU (không đáng GPU hóa)
   if (cometGPU) {
     const CA = 18, CE = 0.85, CT = 365.25 * Math.pow(18, 1.5);
     const M = 6.283185 * (ST.days / CT);
@@ -170,6 +173,9 @@ function animate() {
     cometGPU.head.position.set(xO * sc, yO * Math.cos(inc), yO * Math.sin(inc));
   }
   if (meteorGPU) meteorGPU.uniforms.uTime.value = clock.elapsedTime;
+
+  // ---- G4: tàu thăm dò — vị trí theo ngày mô phỏng ----
+  updateProbes();
 
   // ---- fade nhãn theo khoảng cách: hành tinh lớn 260, thiên thể nhỏ 45 ----
   // (chính sách đã chốt: 121+ nhãn chỉ hiện khi zoom gần, tránh "rừng nhãn")

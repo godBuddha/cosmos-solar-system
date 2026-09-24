@@ -21,7 +21,7 @@ export function loadSettings() {
   catch { return {}; }
 }
 
-export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggleGalaxies }) {
+export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggleGalaxies, renderProbeSections }) {
 
   // ---- click canvas chọn thiên thể ----
   const raycaster = new THREE.Raycaster();
@@ -75,8 +75,14 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
     document.getElementById("ipNameEn").textContent = o.data.name + (o.data.dwarf ? " " + t.dwarf : "");
     const fmt = n => n.toLocaleString("vi-VN");
     const ipBody = document.getElementById("ipBody");
-    if (isSun) {
-      ipBody.replaceChildren(
+    let sections, tocTitles;
+    if (o.data.probe && renderProbeSections) {
+      // G4: tàu thăm dò — panel riêng (Tổng quan / Hành trình / Hiện trạng)
+      const pb = renderProbeSections(o);
+      sections = pb.sections;
+      tocTitles = pb.tocTitles;
+    } else if (isSun) {
+      sections = [
         sectionEl(1, t.sec1, [
           [t.mass, `${fmt(d.mass)} ${t.earthU}`],
           [t.dia, `${fmt(d.dia)} km`],
@@ -93,9 +99,10 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
           ["Rot", `${o.data.rot} ${t.days}`],
           ["Tilt", `${o.data.tilt}°`],
         ], null),
-      );
+      ];
+      tocTitles = [t.sec1, t.secSun2, t.sec3];
     } else {
-      ipBody.replaceChildren(
+      sections = [
         sectionEl(1, t.sec1, [
           [t.mass, `${d.mass} ${t.earthU}`],
           [t.dia, `${fmt(d.dia)} km`],
@@ -112,15 +119,17 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
           ["Rot", `${Math.abs(o.data.rot)} ${t.days}`],
           ["Tilt", `${o.data.tilt}°`],
         ], null),
-      );
+      ];
+      tocTitles = [t.sec1, t.sec2, t.sec3];
     }
+    ipBody.replaceChildren(...sections);
     const toc = document.getElementById("ipToc");
     toc.replaceChildren();
-    [1, 2, 3].forEach((k, i) => {
+    tocTitles.forEach((title, i) => {
       const btn = document.createElement("button");
-      btn.textContent = [t.sec1, isSun ? t.secSun2 : t.sec2, t.sec3][i];
+      btn.textContent = title;
       btn.addEventListener("click", () => {
-        document.getElementById("ipsec" + k).scrollIntoView({ behavior: "smooth" });
+        document.getElementById("ipsec" + (i + 1)).scrollIntoView({ behavior: "smooth" });
         toc.querySelectorAll("button").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
       });
@@ -299,7 +308,8 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
     q = q.trim().toLowerCase();
     if (!q) { searchResults.style.display = "none"; return; }
     const t = T();
-    const matches = PLANETS.concat([SUN_DATA]).filter(o => {
+    const probeData = planetObjs.filter(o => o.data.probe).map(o => o.data);
+    const matches = PLANETS.concat([SUN_DATA], probeData).filter(o => {
       const en = o.name.toLowerCase();
       const vi = (t.names[o.name] || "").toLowerCase();
       const zh = t.names[o.name] || "";
