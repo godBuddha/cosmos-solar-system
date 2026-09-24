@@ -36,7 +36,7 @@ export function createBodies({ scene, sun }) {
       const cm = new THREE.Mesh(
         new THREE.SphereGeometry(p.r * 1.018, 48, 48),
         new THREE.MeshStandardMaterial({
-          map: clouds, transparent: true, opacity: 0.85,
+          map: clouds, transparent: true, opacity: 0.72,
           depthWrite: false, roughness: 1,
         })
       );

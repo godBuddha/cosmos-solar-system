@@ -72,16 +72,18 @@ function toTexture(ctx) {
   return tex;
 }
 
-// vẽ pixel-perfect qua ImageData: fn(x, y, lat) → [r,g,b] (lat 0=đỉnh 1=đáy)
+// vẽ pixel-perfect qua ImageData: fn(x, y, lat) → [r,g,b] hoặc [r,g,b,a]
+// (lat 0=đỉnh 1=đáy; trả 4 phần tử → alpha riêng — dùng cho lớp mây)
 function paint(ctx, w, h, fn) {
   const img = ctx.createImageData(w, h);
   const d = img.data;
   for (let y = 0; y < h; y++) {
     const lat = y / h;
     for (let x = 0; x < w; x++) {
-      const [r, g, b] = fn(x / w, lat, x, y);
+      const px = fn(x / w, lat, x, y);
       const i = (y * w + x) * 4;
-      d[i] = r; d[i + 1] = g; d[i + 2] = b; d[i + 3] = 255;
+      d[i] = px[0]; d[i + 1] = px[1]; d[i + 2] = px[2];
+      d[i + 3] = px.length > 3 ? px[3] : 255;
     }
   }
   ctx.putImageData(img, 0, 0);
@@ -103,19 +105,19 @@ function crateredSurface({ base, dark, light, craters = 420, maria = true, seed 
     const m = maria ? smooth(0.55, 0.72, fbm(n2, u * 3, lat * 1.5, 3)) * 0.5 : 0;
     return mix(mix(dk, b, cl(f)), lt, m * 0.6);
   });
-  // miệng hố: vòng sáng viền + lòng tối (nhìn nghiêng giả lập bóng)
+  // miệng hố: radial gradient — vành sáng mỏng, lòng tối mềm (không vòng cứng)
   let s = seed * 977;
   const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
   for (let k = 0; k < craters; k++) {
     const x = rnd() * w, y = h * (0.08 + rnd() * 0.84);
-    const r = 1.5 + rnd() * rnd() * 14;
-    const a = 0.10 + rnd() * 0.22;
-    ctx.globalAlpha = a;
-    ctx.strokeStyle = css(lt); ctx.lineWidth = Math.max(1, r * 0.22);
-    ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.stroke();
-    ctx.globalAlpha = a * 0.9;
-    ctx.fillStyle = css(dk);
-    ctx.beginPath(); ctx.arc(x + r * 0.12, y + r * 0.12, r * 0.72, 0, 6.283); ctx.fill();
+    const r = 1.2 + rnd() * rnd() * 9;
+    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, `rgba(${dk[0]},${dk[1]},${dk[2]},${(0.22 + rnd() * 0.25).toFixed(2)})`);
+    g.addColorStop(0.55, `rgba(${dk[0]},${dk[1]},${dk[2]},0.10)`);
+    g.addColorStop(0.78, `rgba(${lt[0]},${lt[1]},${lt[2]},${(0.16 + rnd() * 0.2).toFixed(2)})`);
+    g.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill();
   }
   ctx.globalAlpha = 1;
   return cv;
@@ -220,12 +222,13 @@ export function earthTexture() {
     return mix(c, ice, cl(cap));
   });
   // mây: layer canvas riêng → mesh bán trong suốt quay lệch tốc độ
+  // (threshold thấp để coverage ~35-40% bề mặt như Trái Đất thật)
   const [cv2, ctx2] = makeCanvas();
   const n4 = makeNoise(97);
   paint(ctx2, w, h, (u, lat) => {
     const swirl = fbm(n4, u * 6, lat * 3.2, 5, 2.2, 0.55);
-    const band = 0.72 + 0.28 * Math.sin(lat * Math.PI * 5);
-    const a = smooth(0.58, 0.78, swirl * band) * 230;
+    const band = 0.62 + 0.38 * Math.sin(lat * Math.PI * 5);
+    const a = smooth(0.52, 0.78, swirl * band) * 235;
     return [255, 255, 255, a];
   });
   const surface = toTexture(ctx);
@@ -250,12 +253,16 @@ function plutoTexture() {
     // Cthulhu Macula: dải tối xích đạo phía tây
     const cth = smooth(0.62, 0.5, Math.abs(lat - 0.52) * 3) * smooth(0.72, 0.6, u);
     c = mix(c, dk, cth * 0.7);
-    // trái tim: ellipse trắng ở đông nam (tâm u≈0.68, lat≈0.58)
-    const dx = (u - 0.68) * 1.9, dy = (lat - 0.58) * 4.2;
-    const lobL = smooth(0.42, 0.1, Math.abs(dx + 0.28) - dy * dy * 0.35);
-    const lobR = smooth(0.42, 0.1, Math.abs(dx - 0.28) - dy * dy * 0.35);
-    const heartM = cl(lobL + lobR);
-    return mix(c, heart, heartM * 0.9);
+    // trái tim Tombaugh: 2 thùy tròn tách (lõm giữa) + V co nhọn xuống
+    const dx = (u - 0.67) * 4.2, dy = (lat - 0.55) * 4.2;
+    const rL = Math.hypot(dx + 0.34, dy + 0.20) - 0.26;
+    const rR = Math.hypot(dx - 0.34, dy + 0.20) - 0.26;
+    const tV = cl((dy - 0.02) / 0.80);
+    const halfW = 0.46 * (1 - tV) * (1 - 0.35 * tV) + 0.002;
+    const tri = Math.abs(dx) - halfW;
+    const vPart = dy > 0.02 ? tri : 0.2;
+    const heartM = smooth(0.07, -0.07, Math.min(rL, rR, vPart));
+    return mix(c, heart, heartM);
   });
   return toTexture(ctx);
 }
@@ -375,7 +382,7 @@ reg("Venus", () => venusTexture());
 reg("Jupiter", () => gasTexture({
   palette: ["#c8b090", "#e8dcc0", "#b08860", "#e8d8b8", "#a87850", "#d8c8a8", "#c09870", "#e0d0b0"],
   seed: 201, turb: 1.2,
-  spot: { u: 0.30, lat: 0.62, rx: 0.055, ry: 0.045, color: "#c8503a", ring: "#e8d0b0" },
+  spot: { u: 0.30, lat: 0.62, rx: 0.11, ry: 0.085, color: "#c8503a", ring: "#e8d0b0" },
 }));
 reg("Saturn", () => gasTexture({
   palette: ["#e0c896", "#d8bc88", "#e8d8ac", "#ccb070", "#e4d09c", "#d8c090"],
@@ -388,7 +395,7 @@ reg("Uranus", () => gasTexture({
 reg("Neptune", () => gasTexture({
   palette: ["#3a5cd0", "#5a7ce8", "#2a48b0", "#4a68d8", "#3555c8"],
   seed: 231, turb: 0.8,
-  spot: { u: 0.72, lat: 0.40, rx: 0.05, ry: 0.05, color: "#1a2870", ring: "#6a8af0" },
+  spot: { u: 0.72, lat: 0.40, rx: 0.09, ry: 0.07, color: "#1a2870", ring: "#6a8af0" },
 }));
 reg("Pluto", () => plutoTexture());
 reg("Ceres", () => crateredTexture({ base: "#a8a29a", dark: "#6e6a62", light: "#c4beb4", craters: 300, maria: false, seed: 41, size: 512 }));
