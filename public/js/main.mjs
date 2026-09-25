@@ -66,7 +66,8 @@ function animate() {
         if (ch.userData.cloudDrift) ch.rotation.y = 2 * Math.PI * ST.days / (o.data.rot * 1.04);
       }
     }
-    sunUniforms.uTime.value = ST.days * 0.02;
+    // G5b: uTime = thời gian mô phỏng + realtime cho wobble prominence
+    sunUniforms.uTime.value = ST.days * 0.02 + clock.elapsedTime * 0.25;
     // hiển thị ngày/giờ lịch thực: days -> unix ms -> Date
     const dObj = new Date((ST.days + 2451545.0 - 2440587.5) * 86400000);
     $("date").textContent = dObj.toLocaleString("vi-VN", {
