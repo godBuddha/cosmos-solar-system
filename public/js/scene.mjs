@@ -139,6 +139,19 @@ const sun = new THREE.Mesh(
         float mu = max(dot(normalize(vNormal), normalize(vViewDir)), 0.0);
         float limb = 0.42 + 0.58 * (mu * 0.72 + 0.28 * sqrt(mu));
         col *= limb;
+        // ---- G5c: SOLAR FLARE — bùng phát trắng đột ngột từ vùng vết đen ----
+        // ô bề mặt (cùng frame quay p → dính chặt vùng spot), bucket thời gian
+        // ~16s: mỗi ô có ~20% bucket bùng flare, flash lên nhanh tắt chậm dần.
+        vec3 fcell = floor(p * 3.0);
+        float tb = floor(uTime * 0.06);
+        float fh = hash(fcell + vec3(tb * 0.113, tb * 0.271, uSpotSeed * 0.37));
+        float fph = fract(uTime * 0.06 + fh * 7.31);
+        // LƯU Ý GLSL: pow(x<0, y) undefined → binh phương thủ công thay pow
+        float df = (fph - 0.35) / 0.055;
+        float pulse = step(0.80, fh) * exp(-df * df);
+        // lõi trắng-vàng ngay trong umbra/penumbra + halo cam loang rộng hơn
+        col += vec3(1.00, 0.93, 0.80) * pulse * smoothstep(0.52, 0.63, spotN) * bandMask * 2.2;
+        col += vec3(1.00, 0.42, 0.10) * pulse * smoothstep(0.40, 0.55, spotN) * bandMask * 0.9;
         gl_FragColor = vec4(col * 1.28, 1.0);  // >1 vừa đủ cho bloom
       }
     `,
@@ -258,7 +271,82 @@ const promUni = [
   return m;
 });
 void promUni;
-  return { sunUniforms, sun, corona };
+
+// G5c: CME — khối plasma văng ra ngoài theo hướng NGẪU NHIÊN. GPU Points:
+// mỗi particle thuộc 1 "sự kiện" (blob); hướng + tốc độ + chu kỳ của sự kiện
+// sinh từ hash(chỉ số sự kiện + chỉ số vòng lặp) → mỗi vòng bay hướng khác
+// nhau, nón plasma giãn nở rộng dần theo bán kính như CME thật.
+const CME_EVENTS = 6, CME_PER = 420;
+const cmeGeo = new THREE.BufferGeometry();
+cmeGeo.setAttribute("position",
+  new THREE.BufferAttribute(new Float32Array(CME_EVENTS * CME_PER * 3), 3));
+const cmeEvt = new Float32Array(CME_EVENTS * CME_PER);
+const cmeRnd = new Float32Array(CME_EVENTS * CME_PER);
+for (let i = 0; i < CME_EVENTS * CME_PER; i++) {
+  cmeEvt[i] = Math.floor(i / CME_PER);
+  cmeRnd[i] = (i * 2654435761 >>> 0) / 4294967296;
+}
+cmeGeo.setAttribute("aEvt", new THREE.BufferAttribute(cmeEvt, 1));
+cmeGeo.setAttribute("aRnd", new THREE.BufferAttribute(cmeRnd, 1));
+const cme = new THREE.Points(cmeGeo, new THREE.ShaderMaterial({
+  transparent: true, blending: THREE.AdditiveBlending, depthWrite: false,
+  uniforms: { uTime: sunUniforms.uTime,
+              uColor: { value: new THREE.Color(0xff9a40) } },
+  vertexShader: /* glsl */`
+    attribute float aEvt; attribute float aRnd;
+    uniform float uTime;
+    varying float vFade; varying float vHot;
+    float hh(vec2 s){ return fract(sin(dot(s, vec2(127.1, 311.7))) * 43758.5453); }
+    void main() {
+      float e = aEvt;
+      // tham số sự kiện: chu kỳ + phase từ hash; cyc đổi mỗi vòng → hướng mới
+      float period = 15.0 + hh(vec2(e * 5.37, 1.7)) * 10.0;
+      float start  = hh(vec2(e * 6.11, 2.3)) * period;
+      float cyc = floor((uTime - start) / period);
+      float life = uTime - start - cyc * period;
+      vec3 dir = normalize(vec3(
+        hh(vec2(e * 1.31, cyc * 0.173)) - 0.5,
+        hh(vec2(e * 2.71, cyc * 0.311)) - 0.5,
+        hh(vec2(e * 4.13, cyc * 0.577)) - 0.5) + vec3(0.001));
+      float speed = 2.2 + hh(vec2(e * 7.93, cyc * 0.419)) * 1.2;
+      float r = 3.35 + speed * life;
+      // nón plasma: lệch góc từ trục, rộng dần theo r (giãn nở CME thật)
+      vec3 up = abs(dir.y) < 0.9 ? vec3(0, 1, 0) : vec3(1, 0, 0);
+      vec3 t1 = normalize(cross(dir, up)), t2 = cross(dir, t1);
+      float ang = (aRnd - 0.5) * (0.22 + r * 0.035);
+      float phz = uTime * 0.6 + aRnd * 6.2832;      // xoáy quanh trục
+      vec3 pos = dir * r
+        + (t1 * cos(phz) + t2 * sin(phz)) * ang * r * 0.4
+        + dir * (aRnd - 0.5) * r * 0.28;            // dày theo trục
+      vFade = smoothstep(0.0, 1.4, life)
+            * (1.0 - smoothstep(period * 0.5, period * 0.9, life));
+      vHot = 1.0 - smoothstep(0.0, 7.0, life);      // lõi trắng khi vừa văng
+      vec4 mv = modelViewMatrix * vec4(pos, 1.0);
+      // size base ~1px @1 unit; focal ~433px @ fov55/z=30 → ~7-17px; cap 40
+      gl_PointSize = min((0.5 + aRnd * 0.7) * (1.0 + r * 0.05) * (433.0 / -mv.z), 40.0);
+      gl_Position = projectionMatrix * mv;
+    }
+  `,
+  fragmentShader: /* glsl */`
+    uniform vec3 uColor;
+    varying float vFade; varying float vHot;
+    float h2(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    void main() {
+      vec2 uv = gl_PointCoord * 2.0 - 1.0;
+      float a = smoothstep(1.0, 0.12, length(uv));
+      // kết cấu plasma: vệt nhiễu đổi theo độ nóng (thời gian trong vòng đời)
+      float n = h2(floor(gl_PointCoord * 5.0) + floor(vHot * 6.0) * 17.0);
+      a *= 0.5 + 0.5 * n;
+      a *= vFade;
+      vec3 col = mix(uColor, vec3(1.0, 0.97, 0.90), vHot * 0.85);
+      gl_FragColor = vec4(col * a * 1.7, a);
+    }
+  `,
+}));
+cme.frustumCulled = false;    // vị trí tính trong shader — không cull sai
+scene.add(cme);
+
+  return { sunUniforms, sun, corona, cme };
 }
 
 export function createScene() {
