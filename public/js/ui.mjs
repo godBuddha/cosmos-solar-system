@@ -21,7 +21,7 @@ export function loadSettings() {
   catch { return {}; }
 }
 
-export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggleGalaxies, renderProbeSections, captureFrame }) {
+export function initUI({ canvas, camera, controls, bloomPass, sunFx, planetObjs, toggleGalaxies, renderProbeSections, captureFrame }) {
 
   // ---- click canvas chọn thiên thể ----
   const raycaster = new THREE.Raycaster();
@@ -169,6 +169,18 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
   });
 
   // ---- G2: SETTINGS ----
+  // G5d: mức hiệu ứng hậu kỳ Mặt Trời (god rays + lens flare).
+  // "off" tắt hẳn 2 pass; "low" giữ nhưng giảm cường độ; "high" đầy đủ.
+  function applySunFx(v) {
+    if (!sunFx) return;
+    const on = v !== "off";
+    sunFx.godRays.enabled = on;
+    sunFx.lensFlare.enabled = on;
+    const k = v === "low" ? 0.45 : 1.0;
+    sunFx.godRays.uniforms.uWeight.value = 0.012 * k;
+    sunFx.lensFlare.uniforms.uStrength.value = k;
+  }
+
   function applySettingsUI() {
     const s = loadSettings();
     $s("setBloom").value = s.bloom ?? 1.0;
@@ -180,6 +192,7 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
     $s("setGalaxy").value = s.galaxy ?? "off";
     $s("setUiScale").value = s.uiScale ?? "medium";
     $s("setUiMode").value = s.uiMode ?? "auto";
+    $s("setSunFx").value = s.sunFx ?? "high";
   }
   $s("btnSettings").addEventListener("click", () => { applySettingsUI(); $s("settingsModal").classList.add("open"); });
   $s("setClose").addEventListener("click", () => $s("settingsModal").classList.remove("open"));
@@ -196,6 +209,11 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
     const s = loadSettings(); s.bloomOn = e.target.value;
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
   });
+  $s("setSunFx").addEventListener("change", e => {
+    applySunFx(e.target.value);
+    const s = loadSettings(); s.sunFx = e.target.value;
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+  });
   $s("setSave").addEventListener("click", () => {
     const oldKuiper = loadSettingsKuiper();               // đọc TRƯỚC khi ghi
     const s = {
@@ -208,6 +226,7 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
       galaxy: $s("setGalaxy").value,
       uiScale: $s("setUiScale").value,
       uiMode: $s("setUiMode").value,
+      sunFx: $s("setSunFx").value,
     };
     const galaxyChanged = $s("setGalaxy").value !== (loadSettings().galaxy ?? "off");
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
@@ -217,6 +236,7 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
     document.body.dataset.uimode = s.uiMode;
     $s("settingsModal").classList.remove("open");
     if (galaxyChanged) { toggleGalaxies($s("setGalaxy").value === "on"); }
+    applySunFx(s.sunFx);
     if (needReload) location.reload();                    // Kuiper đổi số hạt cần rebuild geometry
   });
   function loadSettingsKuiper() {
@@ -240,12 +260,14 @@ export function initUI({ canvas, camera, controls, bloomPass, planetObjs, toggle
         || (navigator.deviceMemory && navigator.deviceMemory <= 4);
       if (weakGPU) {
         s.kuiper = "10000";
-        s.bloom = 0.8;
-        console.info("auto-detect: thiết bị yếu — Kuiper 10k, bloom nhẹ");
+        s.bloom = 0.28;
+        s.sunFx = "off";
+        console.info("auto-detect: thiết bị yếu — Kuiper 10k, bloom nhẹ, tắt hiệu ứng Mặt Trời");
       }
     }
     if (s.bloom != null) bloomPass.strength = s.bloom;
     if (s.bloomOn != null) bloomPass.enabled = s.bloomOn === "1";
+    applySunFx(s.sunFx ?? "high");
   })();
 
   // ---- Tour tự động: camera bay qua các hành tinh theo thứ tự ----

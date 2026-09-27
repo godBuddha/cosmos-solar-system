@@ -17,7 +17,7 @@ import { initAI } from "./ai.mjs";
 await loadCatalog();
 
 const { canvas, renderer, scene, camera, controls, composer, bloomPass,
-        labelRenderer, sunUniforms, sun } = createScene();
+        labelRenderer, sunUniforms, sun, sunFx } = createScene();
 const { planetObjs } = createBodies({ scene, sun });
 const { saturnRing, asteroidBelt, kuiperBelt, cometGPU, meteorGPU } =
   createParticles({ scene, planetObjs });
@@ -28,7 +28,7 @@ const { update: updateProbes, renderProbeSections } = createProbes({ scene, plan
 // G4d: chụp ảnh — cờ set từ nút 📷, thực thi ngay sau composer.render()
 // (cùng task → drawing buffer chưa bị xoá, không cần preserveDrawingBuffer)
 let shotPending = false;
-const ui = initUI({ canvas, camera, controls, bloomPass, planetObjs, toggleGalaxies, renderProbeSections,
+const ui = initUI({ canvas, camera, controls, bloomPass, sunFx, planetObjs, toggleGalaxies, renderProbeSections,
                     captureFrame: () => { shotPending = true; } });
 initAI({ planetObjs, flyToBody: ui.flyToBody, setClean: ui.setClean,
          toggleTour: ui.toggleTour, getFollow: () => uiState.followTarget });

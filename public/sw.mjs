@@ -6,7 +6,7 @@
 //  • /api/* luôn đi mạng (auth/AI không bao giờ cache)
 //  • HTML hiện no-cache ở nginx → mỗi lần online luôn dùng bản mới nhất
 // ======================================================================
-const CACHE_VERSION = "cosmos-v1";
+const CACHE_VERSION = "cosmos-v2";
 
 const PRECACHE = [
   "./",
@@ -17,6 +17,8 @@ const PRECACHE = [
   "./js/data.mjs",
   "./js/kepler.mjs",
   "./js/scene.mjs",
+  "./js/sunfx.mjs",
+  "./js/postfx.mjs",
   "./js/bodies.mjs",
   "./js/particles.mjs",
   "./js/probes.mjs",

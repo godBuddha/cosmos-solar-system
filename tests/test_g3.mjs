@@ -113,5 +113,50 @@ ok("CSP có manifest-src 'self'", fs.readFileSync(path.join(ROOT, "nginxconf", "
      fs.readFileSync(path.join(PUB, "js", "bodies.mjs"), "utf8").includes("bodyTexture(p.name)"));
 }
 
+// ---- 9. G5d: tia/loop Mặt Trời + hậu kỳ (tự viết, không ảnh ngoài) ----
+{
+  const sunfx = path.join(PUB, "js", "sunfx.mjs");
+  const postfx = path.join(PUB, "js", "postfx.mjs");
+  ok("G5d: có public/js/sunfx.mjs", fs.existsSync(sunfx));
+  ok("G5d: có public/js/postfx.mjs", fs.existsSync(postfx));
+  const fx = fs.readFileSync(sunfx, "utf8");
+  ok("G5d: sunfx export tia + loop",
+     fx.includes("export function createSunRays") && fx.includes("export function createProminenceLoops"));
+  const pf = fs.readFileSync(postfx, "utf8");
+  ok("G5d: postfx export god rays + lens flare + handle",
+     pf.includes("createGodRaysPass") && pf.includes("createLensFlarePass") && pf.includes("createSunFx"));
+  ok("G5d: hậu kỳ KHÔNG dùng ảnh flare ngoài",
+     !/flare\d*\.(jpg|png)/.test(pf) && !/\.(jpg|png)/.test(pf));
+  // smoothstep(edge0>=edge1) là UNDEFINED trong GLSL — từng gây phủ trắng nửa màn hình
+  const badSmooth = [];
+  for (const [name, txt] of [["scene.mjs", fs.readFileSync(path.join(PUB, "js", "scene.mjs"), "utf8")],
+                             ["sunfx.mjs", fx], ["postfx.mjs", pf]]) {
+    for (const m of txt.matchAll(/smoothstep\(\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)\s*,/g)) {
+      if (parseFloat(m[1]) >= parseFloat(m[2])) badSmooth.push(name + ":" + m[0].trim());
+    }
+  }
+  ok("G5d: không có smoothstep đảo biên (GLSL undefined)", badSmooth.length === 0, badSmooth.join(" | "));
+  // #define phải nằm trên MỘT dòng (hoặc nối dòng bằng dấu chéo ngược). Nếu thiếu
+  // dấu nối, dòng tiếp theo bắt đầu bằng "-0.80" bị parse thành câu lệnh →
+  // "syntax error" và CẢ lớp tia/loop không vẽ gì (lỗi đã gặp ở G5d).
+  // (dùng String.fromCharCode(92) để tránh phải thoát dấu chéo ngược trong JS)
+  const BS = String.fromCharCode(92);
+  const fxLines = fx.split("\n");
+  const multiDefine = fxLines.some((l, i) =>
+    /^\s*#define\b/.test(l) && l.trimEnd().slice(-1) !== BS &&
+    fxLines[i + 1] && /^\s*[-+.\d(]/.test(fxLines[i + 1]));
+  ok("G5d: #define không bị ngắt dòng thiếu dấu nối", !multiDefine);
+  const idx2 = fs.readFileSync(path.join(PUB, "index.html"), "utf8");
+  ok("G5d: Settings có hàng setSunFx", idx2.includes('id="setSunFx"'));
+  const uiTxt = fs.readFileSync(path.join(PUB, "js", "ui.mjs"), "utf8");
+  ok("G5d: ui.mjs áp mức hiệu ứng Mặt Trời", uiTxt.includes("applySunFx"));
+  const sw2 = fs.readFileSync(path.join(PUB, "sw.mjs"), "utf8");
+  ok("G5d: precache có sunfx + postfx",
+     sw2.includes('"./js/sunfx.mjs"') && sw2.includes('"./js/postfx.mjs"'));
+  const sceneTxt = fs.readFileSync(path.join(PUB, "js", "scene.mjs"), "utf8");
+  ok("G5d: createScene dùng createSunFx + trả sunFx",
+     sceneTxt.includes("createSunFx") && /return \{[^}]*sunFx/.test(sceneTxt));
+}
+
 console.log(failed ? `\n${failed} test FAIL` : "\ntất cả test pass");
 process.exit(failed ? 1 : 0);
